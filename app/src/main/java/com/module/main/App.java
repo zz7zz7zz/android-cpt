@@ -11,6 +11,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Initializer.initArouter(this);
+        Initializer.init(this);
     }
 }

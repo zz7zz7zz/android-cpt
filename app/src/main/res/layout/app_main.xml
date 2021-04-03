@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I am just app module container !"
+            android:text="I am from module: app"
             android:layout_marginTop="20dp" />
 
     </LinearLayout>

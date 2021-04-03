@@ -9,6 +9,6 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Initializer.initArouter(this);
+        Initializer.init(this);
     }
 }

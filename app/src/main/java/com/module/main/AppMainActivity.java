@@ -47,6 +47,7 @@ public class AppMainActivity extends AppCompatActivity {
             IModuleProvider provider = (IModuleProvider) ARouter.getInstance().build(modules.get(i)).navigation();
             if(null != provider){
                 providers.add(provider);
+                Log.v("MainActivity","provider "+provider.getClass().getSimpleName() + " id " + provider.hashCode());
             }
         }
 
@@ -55,8 +56,6 @@ public class AppMainActivity extends AppCompatActivity {
         for (int i = 0;i<providers.size();i++){
             
             final IModuleProvider provider = providers.get(i);
-            Log.v("MainActivity","provider "+provider.getClass().getSimpleName());
-
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_container,false);
             ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getModuleName());
             ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(provider.getModuleIconResId());
@@ -66,8 +65,6 @@ public class AppMainActivity extends AppCompatActivity {
                     provider.startMainActivity(AppMainActivity.this);
                 }
             });
-
-
             app_container.addView(view);
         }
 
