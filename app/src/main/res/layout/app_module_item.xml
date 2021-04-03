@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
+    android:background="#888888"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/moudle_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:minWidth="80dp"/>
+
+    <ImageView
+        android:id="@+id/moudle_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+
+    <Button
+        android:id="@+id/moudle_navigation_main"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="跳到对应模块主页"
+        android:layout_marginLeft="20dp"/>
+
+</LinearLayout>

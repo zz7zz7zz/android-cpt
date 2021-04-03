@@ -1,0 +1,93 @@
+static String toArray(libs) {
+    StringBuilder sb = new StringBuilder()
+    libs = libs as String[]
+    sb.append("{")
+    for (int i = 0; i < libs.length; i++) {
+        sb.append("\"")
+        sb.append(libs[i])
+        sb.append("\"")
+        if (i != libs.length - 1) {
+            sb.append(",")
+        }
+    }
+    sb.append("}")
+    return sb.toString()
+}
+
+android {
+
+    flavorDimensions "channel", "product"
+
+    productFlavors {
+        //--------------------------------------------product--------------------------------------------
+        if(PRODUCE_ENABLE_WEIXIN.toBoolean()){
+            weixin {
+                dimension "product"
+
+                def libs = app_modules.get("weixin")
+                buildConfigField "String[]" , "modules", toArray(libs)
+
+                if(!MODULE_AS_APPLICATION.toBoolean()){
+                    dependencies {
+                        for (String module in libs) {
+                            weixinApi project(module)
+                        }
+                    }
+                }
+            }
+        }
+
+        if(PRODUCE_ENABLE_TAOBAO.toBoolean()){
+            taobabo {
+                dimension "product"
+
+                def libs = app_modules.get("taobao")
+                buildConfigField "String[]" , "modules", toArray(libs)
+
+                if(!MODULE_AS_APPLICATION.toBoolean()){
+                    dependencies {
+                        for (String module in libs) {
+                            taobaboApi project(module)
+                        }
+                    }
+                }
+            }
+        }
+
+        if(PRODUCE_ENABLE_TOUTIAO.toBoolean()){
+            toutiao {
+                dimension "product"
+
+                def libs = app_modules.get("toutiao")
+                buildConfigField "String[]" , "modules", toArray(libs)
+
+                if(!MODULE_AS_APPLICATION.toBoolean()){
+                    dependencies {
+                        for (String module in libs) {
+                            toutiaoApi project(module)
+                        }
+                    }
+                }
+            }
+        }
+
+        //--------------------------------------------channel--------------------------------------------
+        if(CHANNEL_ENABLE_GP.toBoolean()){
+            gp {
+                dimension "channel"
+            }
+        }
+
+        if(CHANNEL_ENABLE_HUAWEI_STORE.toBoolean()) {
+            huawei_store {
+                dimension "channel"
+            }
+        }
+
+        if(CHANNEL_ENABLE_YINGYONGBAO.toBoolean()){
+            yyb {
+                dimension "channel"
+            }
+        }
+    }
+}

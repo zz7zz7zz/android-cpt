@@ -1,0 +1,43 @@
+android {
+    flavorDimensions "channel", "product"
+    productFlavors {
+
+        //--------------------------------------------product--------------------------------------------
+        if(PRODUCE_ENABLE_WEIXIN.toBoolean()){
+            weixin {
+                dimension "product"
+            }
+        }
+
+        if(PRODUCE_ENABLE_TAOBAO.toBoolean()){
+            taobabo {
+                dimension "product"
+            }
+        }
+
+        if(PRODUCE_ENABLE_TOUTIAO.toBoolean()){
+            toutiao {
+                dimension "product"
+            }
+        }
+
+        //--------------------------------------------channel--------------------------------------------
+        if(CHANNEL_ENABLE_GP.toBoolean()){
+            gp {
+                dimension "channel"
+            }
+        }
+
+        if(CHANNEL_ENABLE_HUAWEI_STORE.toBoolean()) {
+            huawei_store {
+                dimension "channel"
+            }
+        }
+
+        if(CHANNEL_ENABLE_YINGYONGBAO.toBoolean()){
+            yyb {
+                dimension "channel"
+            }
+        }
+    }
+}
