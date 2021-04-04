@@ -3,6 +3,9 @@ plugins {
 }
 apply from: 'build_flavor.gradle'
 
+static def buildTime() {
+    return new Date().format("yyyy-MM-dd_HH_mm_ss")
+}
 android {
     compileSdkVersion       androidConfig.compileSdkVersion
     buildToolsVersion       androidConfig.buildToolsVersion
@@ -75,6 +78,26 @@ android {
         release2 {
             signingConfig signingConfigs.release2
             matchingFallbacks = ['release','debug']
+        }
+
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                def productName = variant.productFlavors.get(1).name // flavor维度1的名字
+                def channelName = variant.productFlavors.get(0).name // flavor维度2的名字
+                def versionName = variant.versionName
+                def buildType = variant.buildType.name
+
+                if (outputFileName != null && outputFileName.endsWith('.apk')) {
+                    // 输出apk名称为 weixin_1.0_release_2019-10-10_11_59_59.apk
+                    def apkName = "${productName}_${channelName}_${versionName}_${buildType}_${buildTime()}.apk"
+                    outputFileName = apkName
+                }else if (outputFileName != null && outputFileName.endsWith('.aab')){
+                    // 输出aab名称为weixin_1.0_release_2019-10-10_11_59_59.aab
+                    def aabName = "${productName}_${channelName}_${versionName}_${buildType}_${buildTime()}.aab"
+                    outputFileName = aabName
+                }
+            }
         }
 
     }
