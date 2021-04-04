@@ -16,7 +16,7 @@ public class NewsMainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
          super.onCreateView(inflater, container, savedInstanceState);
-        View contentView = (LinearLayout) inflater.inflate(R.layout.news_main, container, true);
+        View contentView = inflater.inflate(R.layout.news_main, container, false);
         return contentView;
     }
 }

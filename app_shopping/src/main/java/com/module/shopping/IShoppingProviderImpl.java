@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,29 +15,38 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.module.router.consts.IShoppingConsts;
 import com.module.router.provider.IShoppingProvider;
 
+import java.lang.ref.WeakReference;
+
 @Route(path = IShoppingConsts.Provider.MAIN, name = "购物服务")
 public class IShoppingProviderImpl implements IShoppingProvider {
 
     private static final String TAG = "IShoppingProviderImpl";
     private Context context;
-
-    @Override
-    public String getGoodInfo() {
-        Log.v(TAG,"getGoodInfo");
-        return null;
-    }
+    private WeakReference<Fragment> fragmentWeakReference;
+    private WeakReference<View> viewWeakReference;
 
     @Override
     public View getTabView(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
-        ((TextView)(view.findViewById(R.id.moudle_name))).setText(getModuleName());
-        ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());
-        return view;
+        if(null == fragmentWeakReference || null == fragmentWeakReference.get()){
+            View view = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
+            ((TextView)(view.findViewById(R.id.moudle_name))).setText(getModuleName());
+            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());
+            viewWeakReference = new WeakReference<>(view);
+        }
+        return viewWeakReference.get();
     }
 
     @Override
     public Fragment getMainFragment() {
-        return new ShoppingMainFragment();
+        if(null == fragmentWeakReference || null == fragmentWeakReference.get()){
+            fragmentWeakReference = new WeakReference<>(new ShoppingMainFragment());
+        }
+        return fragmentWeakReference.get();
+    }
+    @Override
+    public String getGoodInfo() {
+        Log.v(TAG,"getGoodInfo");
+        return null;
     }
 
     @Override
@@ -60,5 +70,20 @@ public class IShoppingProviderImpl implements IShoppingProvider {
         this.context = context;
     }
 
+    @Override
+    public void destroy() {
+        if(null != fragmentWeakReference){
+            fragmentWeakReference.clear();
+            fragmentWeakReference = null;
+        }
+
+        if(null != viewWeakReference){
+            viewWeakReference.clear();
+            viewWeakReference = null;
+        }
+
+        //help gc
+        System.gc();
+    }
 
 }

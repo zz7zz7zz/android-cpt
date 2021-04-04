@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,29 +17,39 @@ import com.module.router.consts.INewsConsts;
 import com.module.router.provider.IIMProvider;
 import com.module.router.provider.INewsProvider;
 
+import java.lang.ref.WeakReference;
+
 @Route(path = INewsConsts.Provider.MAIN, name = "新闻服务")
 public class INewsProviderImpl implements INewsProvider {
 
     private static final String TAG = "INewsProviderImpl";
     private Context context;
+    private WeakReference<Fragment> fragmentWeakReference;
+    private WeakReference<View> viewWeakReference;
+
+    @Override
+    public View getTabView(Context context) {
+        if(null == fragmentWeakReference || null == fragmentWeakReference.get()){
+            View view = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
+            ((TextView)(view.findViewById(R.id.moudle_name))).setText(getModuleName());
+            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());
+            viewWeakReference = new WeakReference<>(view);
+        }
+        return viewWeakReference.get();
+    }
+
+    @Override
+    public Fragment getMainFragment() {
+        if(null == fragmentWeakReference || null == fragmentWeakReference.get()){
+            fragmentWeakReference = new WeakReference<>(new NewsMainFragment());
+        }
+        return fragmentWeakReference.get();
+    }
 
     @Override
     public String getNewsList() {
         Log.v(TAG,"getNewsList");
         return null;
-    }
-
-    @Override
-    public View getTabView(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
-        ((TextView)(view.findViewById(R.id.moudle_name))).setText(getModuleName());
-        ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());
-        return view;
-    }
-
-    @Override
-    public Fragment getMainFragment() {
-        return new NewsMainFragment();
     }
 
     @Override
@@ -62,4 +73,19 @@ public class INewsProviderImpl implements INewsProvider {
         this.context = context;
     }
 
+    @Override
+    public void destroy() {
+        if(null != fragmentWeakReference){
+            fragmentWeakReference.clear();
+            fragmentWeakReference = null;
+        }
+
+        if(null != viewWeakReference){
+            viewWeakReference.clear();
+            viewWeakReference = null;
+        }
+
+        //help gc
+        System.gc();
+    }
 }

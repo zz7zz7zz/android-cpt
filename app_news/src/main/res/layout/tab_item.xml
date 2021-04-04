@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_weight="1.0"
     android:layout_marginTop="5dp"
-
+    android:clickable="true"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -14,7 +14,7 @@
         android:id="@+id/moudle_icon"
         android:layout_width="32dp"
         android:layout_height="32dp"
-
+        android:duplicateParentState="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
 

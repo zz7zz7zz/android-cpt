@@ -1,13 +1,14 @@
 package com.module.main;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,30 +23,45 @@ import com.module.router.provider.IModuleProvider;
 
 import java.util.ArrayList;
 
-public class AppMainActivity extends AppCompatActivity {
+public class AppMainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    public ArrayList<IModuleProvider> providers = new ArrayList<>();
-
+    private ArrayList<IModuleProvider> providers = new ArrayList<>();
+    private IModuleProvider currentProvider = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_main);
 
+        //初始化操作
         initProvider();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        //释放内存操作
+        for (int i = 0;i<providers.size();i++){
+            IModuleProvider provider = providers.get(i);
+            if(null != provider){
+                provider.destroy();
+            }
+        }
+        providers = null;
+        currentProvider = null;
     }
 
     private void initProvider(){
 
-        //默认配置
+        //本地默认配置，也可以根据服务器下发的配置进行展示
         ArrayList<String> modules = new ArrayList<>();
         modules.add("/im/P");
+        modules.add("/video/P");
+        modules.add("/news/P");
         modules.add("/game/P");
         modules.add("/integrate/P");
-        modules.add("/news/P");
         modules.add("/shopping/P");
-        modules.add("/video/P");
 
         //填充Provider
         providers.clear();
@@ -81,11 +97,57 @@ public class AppMainActivity extends AppCompatActivity {
             });
             app_container.addView(view);
 
-            View tabView = provider.getTabView(this);
-            LinearLayoutCompat.LayoutParams layoutParams = new LinearLayoutCompat.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT);
-            app_tabs.addView(tabView,layoutParams);
+            View tabItemView = provider.getTabView(this);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT);
+            tabItemView.setTag(provider);
+            tabItemView.setOnClickListener(this);
+            app_tabs.addView(tabItemView,layoutParams);
         }
 
+        onClick(app_tabs.getChildAt(0));
     }
 
+    @Override
+    public void onClick(View v) {
+
+        IModuleProvider provider =  (IModuleProvider) v.getTag();
+        if(currentProvider == provider){
+            return;
+        }
+
+        Fragment nextShowFragment = provider.getMainFragment();
+        Log.v("MainActivity","nextShowFragment "+nextShowFragment.getClass().getSimpleName() + " id " + nextShowFragment.hashCode());
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction ft          = fragmentManager.beginTransaction();
+
+        //隐藏旧的
+        for (int i = 0; i< providers.size(); i++){
+            Fragment f = providers.get(i).getMainFragment();
+            if(null != f && f.isAdded() && f != nextShowFragment){
+                ft.hide(f);
+            }
+        }
+
+        //添加新的
+        String tag = provider.getModuleName();
+
+        //如果不是同一个fragment,删除旧的
+        Fragment foundFragment = fragmentManager.findFragmentByTag(tag);
+        if(null != foundFragment && foundFragment != nextShowFragment){
+            ft.remove(foundFragment);
+        }
+
+        boolean isAdd  = nextShowFragment.isAdded();
+        if(!isAdd){
+            ft.add(R.id.app_fragments,nextShowFragment,tag).show(nextShowFragment);
+        }else{
+            ft.show(nextShowFragment);
+        }
+
+//            ft.commit();
+        ft.commitAllowingStateLoss();
+
+        currentProvider = provider;
+    }
 }

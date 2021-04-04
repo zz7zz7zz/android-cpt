@@ -16,7 +16,7 @@ public class IntegrateMainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
          super.onCreateView(inflater, container, savedInstanceState);
-        View contentView = (LinearLayout) inflater.inflate(R.layout.integrate_main, container, true);
+        View contentView = inflater.inflate(R.layout.integrate_main, container, false);
         return contentView;
     }
 }

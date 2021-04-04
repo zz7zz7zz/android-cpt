@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,19 +21,28 @@ import java.lang.ref.WeakReference;
 public class IIMProviderImpl implements IIMProvider {
 
     private static final String TAG = "IVideoProviderImpl";
+
     private Context context;
+    private WeakReference<Fragment> fragmentWeakReference;
+    private WeakReference<View> viewWeakReference;
 
     @Override
     public View getTabView(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
-        ((TextView)(view.findViewById(R.id.moudle_name))).setText(getModuleName());
-        ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());
-        return view;
+        if(null == fragmentWeakReference || null == fragmentWeakReference.get()){
+            View view = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
+            ((TextView)(view.findViewById(R.id.moudle_name))).setText(getModuleName());
+            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());
+            viewWeakReference = new WeakReference<>(view);
+        }
+        return viewWeakReference.get();
     }
 
     @Override
     public Fragment getMainFragment() {
-        return new IMMainFragment();
+        if(null == fragmentWeakReference || null == fragmentWeakReference.get()){
+            fragmentWeakReference = new WeakReference<>(new IMMainFragment());
+        }
+        return fragmentWeakReference.get();
     }
 
     @Override
@@ -66,4 +76,19 @@ public class IIMProviderImpl implements IIMProvider {
         this.context = context;
     }
 
+    @Override
+    public void destroy() {
+        if(null != fragmentWeakReference){
+            fragmentWeakReference.clear();
+            fragmentWeakReference = null;
+        }
+
+        if(null != viewWeakReference){
+            viewWeakReference.clear();
+            viewWeakReference = null;
+        }
+
+        //help gc
+        System.gc();
+    }
 }
