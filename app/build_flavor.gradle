@@ -20,11 +20,11 @@ android {
 
     productFlavors {
         //--------------------------------------------product--------------------------------------------
-        if(PRODUCE_ENABLE_WEIXIN.toBoolean()){
+        if(productConfig.weixin.toBoolean()){
             weixin {
                 dimension "product"
 
-                def libs = app_modules.get("weixin")
+                def libs = appModuleConfig.get("weixin")
                 buildConfigField "String[]" , "modules", toArray(libs)
 
                 if(!MODULE_AS_APPLICATION.toBoolean()){
@@ -37,11 +37,11 @@ android {
             }
         }
 
-        if(PRODUCE_ENABLE_TAOBAO.toBoolean()){
-            taobabo {
+        if(productConfig.taobao.toBoolean()){
+            taobao {
                 dimension "product"
 
-                def libs = app_modules.get("taobao")
+                def libs = appModuleConfig.get("taobao")
                 buildConfigField "String[]" , "modules", toArray(libs)
 
                 if(!MODULE_AS_APPLICATION.toBoolean()){
@@ -54,11 +54,11 @@ android {
             }
         }
 
-        if(PRODUCE_ENABLE_TOUTIAO.toBoolean()){
+        if(productConfig.toutiao.toBoolean()){
             toutiao {
                 dimension "product"
 
-                def libs = app_modules.get("toutiao")
+                def libs = appModuleConfig.get("toutiao")
                 buildConfigField "String[]" , "modules", toArray(libs)
 
                 if(!MODULE_AS_APPLICATION.toBoolean()){
@@ -72,20 +72,20 @@ android {
         }
 
         //--------------------------------------------channel--------------------------------------------
-        if(CHANNEL_ENABLE_GP.toBoolean()){
+        if(channelConfig.gp.toBoolean()){
             gp {
                 dimension "channel"
             }
         }
 
-        if(CHANNEL_ENABLE_HUAWEI_STORE.toBoolean()) {
+        if(channelConfig.huawei_store.toBoolean()) {
             huawei_store {
                 dimension "channel"
             }
         }
 
-        if(CHANNEL_ENABLE_YINGYONGBAO.toBoolean()){
-            yyb {
+        if(channelConfig.yingyongbao.toBoolean()){
+            yingyongbao {
                 dimension "channel"
             }
         }

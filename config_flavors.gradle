@@ -3,39 +3,39 @@ android {
     productFlavors {
 
         //--------------------------------------------product--------------------------------------------
-        if(PRODUCE_ENABLE_WEIXIN.toBoolean()){
+        if(productConfig.weixin.toBoolean()){
             weixin {
                 dimension "product"
             }
         }
 
-        if(PRODUCE_ENABLE_TAOBAO.toBoolean()){
-            taobabo {
+        if(productConfig.taobao.toBoolean()){
+            taobao {
                 dimension "product"
             }
         }
 
-        if(PRODUCE_ENABLE_TOUTIAO.toBoolean()){
+        if(productConfig.toutiao.toBoolean()){
             toutiao {
                 dimension "product"
             }
         }
 
         //--------------------------------------------channel--------------------------------------------
-        if(CHANNEL_ENABLE_GP.toBoolean()){
+        if(channelConfig.gp.toBoolean()){
             gp {
                 dimension "channel"
             }
         }
 
-        if(CHANNEL_ENABLE_HUAWEI_STORE.toBoolean()) {
+        if(channelConfig.huawei_store.toBoolean()) {
             huawei_store {
                 dimension "channel"
             }
         }
 
-        if(CHANNEL_ENABLE_YINGYONGBAO.toBoolean()){
-            yyb {
+        if(channelConfig.yingyongbao.toBoolean()){
+            yingyongbao {
                 dimension "channel"
             }
         }

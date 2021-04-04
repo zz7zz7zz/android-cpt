@@ -4,15 +4,17 @@ plugins {
 apply from: 'build_flavor.gradle'
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion BUILD_TOOLS_VERSION as String
+    compileSdkVersion       androidConfig.compileSdkVersion
+    buildToolsVersion       androidConfig.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.module.main"
-        minSdkVersion MIN_SDK_VERSION as int
-        targetSdkVersion TARGET_SDK_VERSION as int
-        versionCode VERSION_CODE as int
-        versionName VERSION_NAME as String
+
+        applicationId       applicationIdConfig.app
+
+        minSdkVersion       androidConfig.minSdkVersion
+        targetSdkVersion    androidConfig.targetSdkVersion
+        versionCode         androidConfig.versionCode
+        versionName         androidConfig.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -31,9 +33,8 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    dependenciesConfig.each {k,v -> implementation v}
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
