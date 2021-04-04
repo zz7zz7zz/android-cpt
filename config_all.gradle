@@ -56,4 +56,39 @@ ext {
         yingyongbao: false
     ]
 
+    //签名蔟配置
+    def keystorePropertiesFile_debug = rootProject.file("./keystores/sign_debug.keystore.properties")
+    def keystoreProperties_debug = new Properties()
+    keystoreProperties_debug.load(new FileInputStream(keystorePropertiesFile_debug))
+
+    def keystorePropertiesFile_release = rootProject.file("./keystores/sign_release.keystore.properties")
+    def keystoreProperties_release = new Properties()
+    keystoreProperties_release.load(new FileInputStream(keystorePropertiesFile_release))
+
+    def keystorePropertiesFile_release2 = rootProject.file("./keystores/sign_release2.keystore.properties")
+    def keystoreProperties_release2 = new Properties()
+    keystoreProperties_release2.load(new FileInputStream(keystorePropertiesFile_release2))
+
+    signConfig = [
+          debug:[
+                  keyAlias      : keystoreProperties_debug['keyAlias'],
+                  keyPassword   : keystoreProperties_debug['keyPassword'],
+                  storeFile     : keystoreProperties_debug['storeFile'],
+                  storePassword : keystoreProperties_debug['storePassword']
+          ],
+          release:[
+                  keyAlias      : keystoreProperties_release['keyAlias'],
+                  keyPassword   : keystoreProperties_release['keyPassword'],
+                  storeFile     : keystoreProperties_release['storeFile'],
+                  storePassword : keystoreProperties_release['storePassword']
+          ],
+          release2:[
+                  keyAlias      : keystoreProperties_release2['keyAlias'],
+                  keyPassword   : keystoreProperties_release2['keyPassword'],
+                  storeFile     : keystoreProperties_release2['storeFile'],
+                  storePassword : keystoreProperties_release2['storePassword']
+          ]
+    ]
+
+
 }

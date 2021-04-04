@@ -19,11 +19,64 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+
+//        signConfig.each {k,v ->
+//            println(k + " : ")
+//            v.each {k1,v1 ->
+//                println(" "+k1 + " " + v1)
+//            }
+//        }
+
+        debug{
+            keyAlias      signConfig.debug.keyAlias
+            keyPassword   signConfig.debug.keyPassword
+            storeFile     file(signConfig.debug.storeFile)
+            storePassword signConfig.debug.storePassword
+        }
+
+        release{
+            keyAlias      signConfig.release.keyAlias
+            keyPassword   signConfig.release.keyPassword
+            storeFile     file(signConfig.release.storeFile)
+            storePassword signConfig.release.storePassword
+        }
+
+        release2{
+            keyAlias      signConfig.release2.keyAlias
+            keyPassword   signConfig.release2.keyPassword
+            storeFile     file(signConfig.release2.storeFile)
+            storePassword signConfig.release2.storePassword
+        }
+    }
+
     buildTypes {
-        release {
+
+        debug {
             minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            // 是否混淆
+            minifyEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            // 是否zip对齐
+            zipAlignEnabled true
+            signingConfig signingConfigs.release
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        release2.initWith(buildTypes.release)
+        release2 {
+            signingConfig signingConfigs.release2
+            matchingFallbacks = ['release','debug']
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
