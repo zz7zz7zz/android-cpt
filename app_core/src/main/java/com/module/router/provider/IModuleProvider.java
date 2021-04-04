@@ -9,8 +9,10 @@ import com.alibaba.android.arouter.facade.template.IProvider;
 
 public interface IModuleProvider extends IProvider {
 
-    //---------------- 销毁 相关 ----------------
-    void destroy();
+    //---------------- 组件进入，组件退出 相关 ----------------
+    void onEnter();
+
+    void onExit();
 
     //---------------- 基础 相关 ----------------
     String getModuleName();

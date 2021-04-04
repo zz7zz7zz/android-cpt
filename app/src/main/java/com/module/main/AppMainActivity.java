@@ -33,8 +33,17 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_main);
 
+        //本地默认配置，也可以根据服务器下发的配置进行展示
+        ArrayList<String> modules = new ArrayList<>();
+        modules.add("/im/P");
+        modules.add("/video/P");
+        modules.add("/news/P");
+        modules.add("/game/P");
+        modules.add("/integrate/P");
+        modules.add("/shopping/P");
         //初始化操作
-        initProvider();
+        initProvider(modules);
+        initView();
     }
 
     @Override
@@ -45,35 +54,28 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         for (int i = 0;i<providers.size();i++){
             IModuleProvider provider = providers.get(i);
             if(null != provider){
-                provider.destroy();
+                provider.onExit();
             }
         }
         providers = null;
         currentProvider = null;
     }
 
-    private void initProvider(){
-
-        //本地默认配置，也可以根据服务器下发的配置进行展示
-        ArrayList<String> modules = new ArrayList<>();
-        modules.add("/im/P");
-        modules.add("/video/P");
-        modules.add("/news/P");
-        modules.add("/game/P");
-        modules.add("/integrate/P");
-        modules.add("/shopping/P");
-
-        //填充Provider
+    //填充Provider
+    private void initProvider(ArrayList<String> modules){
         providers.clear();
         for (int i = 0;i<modules.size();i++){
             IModuleProvider provider = (IModuleProvider) ARouter.getInstance().build(modules.get(i)).navigation();
             if(null != provider){
                 providers.add(provider);
+                provider.onEnter();
                 Log.v("MainActivity","provider "+provider.getClass().getSimpleName() + " id " + provider.hashCode());
             }
         }
+    }
 
-        //填充View
+    //填充UI
+    private void initView(){
         LinearLayout app_container = (LinearLayout) findViewById(R.id.app_container);
         LinearLayout app_tabs = (LinearLayout) findViewById(R.id.app_tabs);
 
@@ -83,7 +85,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         int width = displayMetrics.widthPixels/providers.size();
 
         for (int i = 0;i<providers.size();i++){
-            
+
             final IModuleProvider provider = providers.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_container,false);

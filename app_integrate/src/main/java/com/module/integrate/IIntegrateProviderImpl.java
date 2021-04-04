@@ -72,7 +72,13 @@ public class IIntegrateProviderImpl implements IIntegrateProvider {
     }
 
     @Override
-    public void destroy() {
+    public void onEnter() {
+        Log.v(TAG,"onEnter ");
+    }
+
+    @Override
+    public void onExit() {
+        Log.v(TAG,"onExit ");
         if(null != fragmentWeakReference){
             fragmentWeakReference.clear();
             fragmentWeakReference = null;
