@@ -29,6 +29,10 @@ ext {
             app_news     :  "com.module.news",
             app_shopping :  "com.module.shopping",
             app_video    :  "com.module.video",
+
+            weixin       : "com.module.weixin",
+            taobao       : "com.module.taobao",
+            toutiao      : "com.module.toutiao"
     ]
 
     //App壳工程依赖组件

@@ -23,6 +23,7 @@ android {
         if(productConfig.weixin.toBoolean()){
             weixin {
                 dimension "product"
+                applicationId       applicationIdConfig.weixin
 
                 def libs = appModuleConfig.get("weixin")
                 buildConfigField "String[]" , "modules", toArray(libs)
@@ -40,6 +41,7 @@ android {
         if(productConfig.taobao.toBoolean()){
             taobao {
                 dimension "product"
+                applicationId       applicationIdConfig.taobao
 
                 def libs = appModuleConfig.get("taobao")
                 buildConfigField "String[]" , "modules", toArray(libs)
@@ -57,6 +59,7 @@ android {
         if(productConfig.toutiao.toBoolean()){
             toutiao {
                 dimension "product"
+                applicationId       applicationIdConfig.toutiao
 
                 def libs = appModuleConfig.get("toutiao")
                 buildConfigField "String[]" , "modules", toArray(libs)
