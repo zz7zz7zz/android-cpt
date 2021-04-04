@@ -4,7 +4,7 @@ plugins {
 apply from: 'build_flavor.gradle'
 
 static def buildTime() {
-    return new Date().format("yyyy-MM-dd_HH_mm_ss")
+    return new Date().format("yyyy.MM.dd-HH:mm:ss")
 }
 android {
     compileSdkVersion       androidConfig.compileSdkVersion
@@ -89,11 +89,11 @@ android {
                 def buildType = variant.buildType.name
 
                 if (outputFileName != null && outputFileName.endsWith('.apk')) {
-                    // 输出apk名称为 weixin_1.0_release_2019-10-10_11_59_59.apk
+                    // 输出apk名称为 weixin_gp_1.0_release_2021-01-01_11_59_59.apk
                     def apkName = "${productName}_${channelName}_${versionName}_${buildType}_${buildTime()}.apk"
                     outputFileName = apkName
                 }else if (outputFileName != null && outputFileName.endsWith('.aab')){
-                    // 输出aab名称为weixin_1.0_release_2019-10-10_11_59_59.aab
+                    // 输出aab名称为weixin_gp_1.0_release_2021-01-01_11_59_59.aab
                     def aabName = "${productName}_${channelName}_${versionName}_${buildType}_${buildTime()}.aab"
                     outputFileName = aabName
                 }
