@@ -1,11 +1,17 @@
 package com.module.main;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,9 +59,17 @@ public class AppMainActivity extends AppCompatActivity {
 
         //填充View
         LinearLayout app_container = (LinearLayout) findViewById(R.id.app_container);
+        LinearLayout app_tabs = (LinearLayout) findViewById(R.id.app_tabs);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager manager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        manager.getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels/providers.size();
+
         for (int i = 0;i<providers.size();i++){
             
             final IModuleProvider provider = providers.get(i);
+
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_container,false);
             ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getModuleName());
             ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(provider.getModuleIconResId());
@@ -66,7 +80,12 @@ public class AppMainActivity extends AppCompatActivity {
                 }
             });
             app_container.addView(view);
+
+            View tabView = provider.getTabView(this);
+            LinearLayoutCompat.LayoutParams layoutParams = new LinearLayoutCompat.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT);
+            app_tabs.addView(tabView,layoutParams);
         }
 
     }
+
 }

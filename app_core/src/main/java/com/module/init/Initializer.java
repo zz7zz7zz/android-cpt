@@ -7,11 +7,17 @@ import com.module.appcore.BuildConfig;
 
 public final class Initializer {
 
+    private static boolean isInitialized = false;
     public static void init(Application application){
         initBase(application);
     }
 
     public static void initBase(Application application){
+        if(isInitialized){
+            return;
+        }
+        isInitialized = true;
+
         //初始化ARouter
         if (BuildConfig.DEBUG) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
             ARouter.openLog();     // 打印日志

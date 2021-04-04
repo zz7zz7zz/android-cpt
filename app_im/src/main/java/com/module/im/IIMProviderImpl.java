@@ -3,12 +3,18 @@ package com.module.im;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.module.router.consts.IIMConsts;
 import com.module.router.provider.IIMProvider;
+
+import java.lang.ref.WeakReference;
 
 @Route(path = IIMConsts.Provider.MAIN, name = "聊天服务")
 public class IIMProviderImpl implements IIMProvider {
@@ -17,14 +23,22 @@ public class IIMProviderImpl implements IIMProvider {
     private Context context;
 
     @Override
-    public void startMainActivity(Context context) {
-        Intent mIntent = new Intent(context, IMMainActivity.class);
-        context.startActivity(mIntent);
+    public View getTabView(Context context) {
+        View view = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
+        ((TextView)(view.findViewById(R.id.moudle_name))).setText(getModuleName());
+        ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());
+        return view;
     }
 
     @Override
     public Fragment getMainFragment() {
-        return null;
+        return new IMMainFragment();
+    }
+
+    @Override
+    public void startMainActivity(Context context) {
+        Intent mIntent = new Intent(context, IMMainActivity.class);
+        context.startActivity(mIntent);
     }
 
     @Override

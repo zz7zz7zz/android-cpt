@@ -3,6 +3,10 @@ package com.module.shopping;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,14 +27,22 @@ public class IShoppingProviderImpl implements IShoppingProvider {
     }
 
     @Override
-    public void startMainActivity(Context context) {
-        Intent mIntent = new Intent(context, ShoppingMainActivity.class);
-        context.startActivity(mIntent);
+    public View getTabView(Context context) {
+        View view = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
+        ((TextView)(view.findViewById(R.id.moudle_name))).setText(getModuleName());
+        ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());
+        return view;
     }
 
     @Override
     public Fragment getMainFragment() {
-        return null;
+        return new ShoppingMainFragment();
+    }
+
+    @Override
+    public void startMainActivity(Context context) {
+        Intent mIntent = new Intent(context, ShoppingMainActivity.class);
+        context.startActivity(mIntent);
     }
 
     @Override
