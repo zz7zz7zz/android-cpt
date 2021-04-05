@@ -20,7 +20,7 @@ import java.lang.ref.WeakReference;
 @Route(path = IGameConsts.Provider.MAIN, name = "游戏服务")
 public class IGameProviderImpl implements IGameProvider {
 
-    private static final String TAG = "IVideoProviderImpl";
+    private static final String TAG = "IGameProviderImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;

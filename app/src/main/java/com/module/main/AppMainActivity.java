@@ -18,12 +18,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.launcher.ARouter;
+import com.module.bean.Component;
 import com.module.router.provider.IModuleProvider;
 
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AppMainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    //本地代码自带的组件
+    private static final List<String> allModules = Arrays.asList(com.module.main.BuildConfig.modules);
+
+    //组件配置来自：本地
+    private List<String> localModules = Arrays.asList(":app_im",":app_video",":app_game",":app_integrate");
+
+    //组件配置来自：服务器
+    private List<String> remoteModules = Arrays.asList(":app_video",":app_news",":app_shopping");
 
     private ArrayList<IModuleProvider> providers = new ArrayList<>();
     private IModuleProvider currentProvider = null;
@@ -33,24 +44,32 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_main);
 
-        //本地默认配置，也可以根据服务器下发的配置进行展示
-        ArrayList<String> modules = new ArrayList<>();
-        modules.add("/im/P");
-        modules.add("/video/P");
-        modules.add("/news/P");
-        modules.add("/game/P");
-        modules.add("/integrate/P");
-        modules.add("/shopping/P");
-        //初始化操作
-        initProvider(modules);
-        initView();
+        initAllModels(allModules);
+
+        findViewById(R.id.module_local).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clear();
+                initProvider(localModules);
+                initView();
+            }
+        });
+        findViewById(R.id.module_remote).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clear();
+                initProvider(remoteModules);
+                initView();
+            }
+        });
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        //释放内存操作
+        //组件释放操作
         for (int i = 0;i<providers.size();i++){
             IModuleProvider provider = providers.get(i);
             if(null != provider){
@@ -61,22 +80,81 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         currentProvider = null;
     }
 
-    //填充Provider
-    private void initProvider(ArrayList<String> modules){
-        providers.clear();
+    private void initAllModels(List<String> modules){
+
+        ArrayList<IModuleProvider> allProvider = new ArrayList<>();
         for (int i = 0;i<modules.size();i++){
-            IModuleProvider provider = (IModuleProvider) ARouter.getInstance().build(modules.get(i)).navigation();
+            IModuleProvider provider = Component.getMainProvider(modules.get(i));
             if(null != provider){
-                providers.add(provider);
-                provider.onEnter();
-                Log.v("MainActivity","provider "+provider.getClass().getSimpleName() + " id " + provider.hashCode());
+                allProvider.add(provider);
             }
         }
+
+        LinearLayout app_modules_all = (LinearLayout) findViewById(R.id.app_modules_all);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager manager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        manager.getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels/allProvider.size();
+
+        for (int i = 0;i<allProvider.size();i++){
+
+            final IModuleProvider provider = allProvider.get(i);
+
+            View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_all,false);
+            ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getModuleName());
+            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(provider.getModuleIconResId());
+            ((Button)(view.findViewById(R.id.moudle_navigation_main))).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    provider.startMainActivity(AppMainActivity.this);
+                }
+            });
+            app_modules_all.addView(view);
+
+        }
+    }
+
+    private void clear(){
+        LinearLayout app_modules_valid = (LinearLayout) findViewById(R.id.app_modules_valid);
+        app_modules_valid.removeAllViews();
+
+        LinearLayout app_tabs = (LinearLayout) findViewById(R.id.app_tabs);
+        app_tabs.removeAllViews();
+    }
+
+    //填充Provider
+    private void initProvider(List<String> modules){
+
+        //添加或者重用新的
+        ArrayList<IModuleProvider> newProviders = new ArrayList<>();
+        for (int i = 0;i<modules.size();i++){
+            IModuleProvider provider = Component.getMainProvider(modules.get(i));
+            if(null != provider){
+                newProviders.add(provider);
+                if(!providers.remove(provider)){//说明原来组件不包含
+                    provider.onEnter();
+                    Log.v("MainActivity","provider "+provider.getClass().getSimpleName() + " id " + provider.hashCode());
+                }else{//说明包含，不处理
+                    //doNothing.
+                }
+            }
+        }
+
+        //释放旧的
+        for (int i = 0;i<providers.size();i++){
+            providers.get(i).onExit();
+        }
+        providers.clear();
+
+        //重新赋值
+        providers = newProviders;
     }
 
     //填充UI
     private void initView(){
-        LinearLayout app_container = (LinearLayout) findViewById(R.id.app_container);
+
+        LinearLayout app_modules_valid = (LinearLayout) findViewById(R.id.app_modules_valid);
         LinearLayout app_tabs = (LinearLayout) findViewById(R.id.app_tabs);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -88,7 +166,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
             final IModuleProvider provider = providers.get(i);
 
-            View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_container,false);
+            View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_valid,false);
             ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getModuleName());
             ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(provider.getModuleIconResId());
             ((Button)(view.findViewById(R.id.moudle_navigation_main))).setOnClickListener(new View.OnClickListener() {
@@ -97,7 +175,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
                     provider.startMainActivity(AppMainActivity.this);
                 }
             });
-            app_container.addView(view);
+            app_modules_valid.addView(view);
 
             View tabItemView = provider.getTabView(this);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT);

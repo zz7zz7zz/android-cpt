@@ -11,23 +11,64 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I am from module: app"
+                android:layout_marginTop="5dp" />
+            <Button
+                android:id="@+id/module_local"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本地组件配置"
+                android:layout_marginLeft="1dp"/>
+            <Button
+                android:id="@+id/module_remote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="服务器组件配置"
+                android:layout_marginLeft="1dp"/>
+        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I am from module: app"
+            android:text="程序内置的组件:"
             android:layout_marginTop="5dp" />
+        <LinearLayout
+            android:id="@+id/app_modules_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#123456"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已激活的组件:"
+            android:layout_marginTop="5dp" />
+        <LinearLayout
+            android:id="@+id/app_modules_valid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#123456"/>
 
         <FrameLayout
             android:id="@+id/app_fragments"
             android:layout_width="match_parent"
             android:layout_height="500dp"/>
-
         <LinearLayout
             android:id="@+id/app_tabs"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
             android:background="#999999"/>
+
     </LinearLayout>
 
 </ScrollView>

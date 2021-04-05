@@ -20,7 +20,7 @@ import java.lang.ref.WeakReference;
 @Route(path = IIMConsts.Provider.MAIN, name = "聊天服务")
 public class IIMProviderImpl implements IIMProvider {
 
-    private static final String TAG = "IVideoProviderImpl";
+    private static final String TAG = "IIMProviderImpl";
 
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
