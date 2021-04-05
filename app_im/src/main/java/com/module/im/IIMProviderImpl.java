@@ -28,7 +28,7 @@ public class IIMProviderImpl implements IIMProvider {
 
     @Override
     public View getTabView(Context context) {
-        if(null == fragmentWeakReference || null == fragmentWeakReference.get()){
+        if(null == viewWeakReference || null == viewWeakReference.get()){
             View view = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
             ((TextView)(view.findViewById(R.id.moudle_name))).setText(getModuleName());
             ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());

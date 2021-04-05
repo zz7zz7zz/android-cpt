@@ -111,7 +111,6 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
                 }
             });
             app_modules_all.addView(view);
-
         }
     }
 
@@ -144,6 +143,18 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         //释放旧的
         for (int i = 0;i<providers.size();i++){
             providers.get(i).onExit();
+
+            //--------------同时删除多余的已经初始化的Fragment--------------
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction ft          = fragmentManager.beginTransaction();
+
+            Fragment f = providers.get(i).getMainFragment();
+            ft.remove(f);
+
+//            ft.commit();
+            ft.commitAllowingStateLoss();
+            //--------------同时删除多余的已经初始化的Fragment--------------
+
         }
         providers.clear();
 
