@@ -26,22 +26,25 @@ public class IGameProviderImpl implements IGameProvider {
     private WeakReference<View> viewWeakReference;
 
     @Override
-    public View getTabView(Context context) {
-        if(null == viewWeakReference || null == viewWeakReference.get()){
-            View view = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
-            ((TextView)(view.findViewById(R.id.moudle_name))).setText(getModuleName());
-            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());
-            viewWeakReference = new WeakReference<>(view);
+    public View getModuleTabView(Context context, boolean isCreatedIfNull) {
+        View ret = (null != viewWeakReference) ? viewWeakReference.get() : null;
+        if(null == ret && isCreatedIfNull){
+            ret = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
+            ((TextView)(ret.findViewById(R.id.moudle_name))).setText(getModuleName());
+            ((ImageView)(ret.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());
+            viewWeakReference = new WeakReference<>(ret);
         }
-        return viewWeakReference.get();
+        return ret;
     }
 
     @Override
-    public Fragment getMainFragment() {
-        if(null == fragmentWeakReference || null == fragmentWeakReference.get()){
-            fragmentWeakReference = new WeakReference<>(new GameMainFragment());
+    public Fragment getModuleMainFragment(boolean isCreatedIfNull) {
+        Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
+        if(null == ret && isCreatedIfNull){
+            ret = new GameMainFragment();
+            fragmentWeakReference = new WeakReference<>(ret);
         }
-        return fragmentWeakReference.get();
+        return ret;
     }
 
     @Override
@@ -71,13 +74,13 @@ public class IGameProviderImpl implements IGameProvider {
     }
 
     @Override
-    public void onEnter() {
-        Log.v(TAG,"onEnter ");
+    public void onModuleEnter() {
+        Log.v(TAG,"onModuleEnter ");
     }
 
     @Override
-    public void onExit() {
-        Log.v(TAG,"onExit ");
+    public void onModuleExit() {
+        Log.v(TAG,"onModuleExit ");
         if(null != fragmentWeakReference){
             fragmentWeakReference.clear();
             fragmentWeakReference = null;

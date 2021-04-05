@@ -71,7 +71,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         for (int i = 0;i<providers.size();i++){
             IModuleProvider provider = providers.get(i);
             if(null != provider){
-                provider.onExit();
+                provider.onModuleExit();
             }
         }
         providers = null;
@@ -122,7 +122,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             if(null != provider){
                 newProviders.add(provider);
                 if(!providers.remove(provider)){//说明原来组件不包含
-                    provider.onEnter();
+                    provider.onModuleEnter();
                     Log.v("MainActivity","provider "+provider.getClass().getSimpleName() + " id " + provider.hashCode());
                 }else{//说明包含，不处理
                     //doNothing.
@@ -137,15 +137,17 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction ft          = fragmentManager.beginTransaction();
 
-            Fragment f = providers.get(i).getMainFragment();
-            ft.remove(f);
+            Fragment f = providers.get(i).getModuleMainFragment(false);
+            if(null != f){
+                ft.remove(f);
+            }
 
 //            ft.commit();
             ft.commitAllowingStateLoss();
 
             //--------------同时删除多余的已经初始化的Fragment--------------
 
-            providers.get(i).onExit();
+            providers.get(i).onModuleExit();
         }
         providers.clear();
 
@@ -182,7 +184,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             });
             app_modules_valid.addView(view);
 
-            View tabItemView = provider.getTabView(this);
+            View tabItemView = provider.getModuleTabView(this,true);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT);
             tabItemView.setTag(provider);
             tabItemView.setOnClickListener(this);
@@ -200,7 +202,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-        Fragment nextShowFragment = provider.getMainFragment();
+        Fragment nextShowFragment = provider.getModuleMainFragment(true);
         Log.v("MainActivity","nextShowFragment "+nextShowFragment.getClass().getSimpleName() + " id " + nextShowFragment.hashCode());
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -208,7 +210,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         //隐藏旧的
         for (int i = 0; i< providers.size(); i++){
-            Fragment f = providers.get(i).getMainFragment();
+            Fragment f = providers.get(i).getModuleMainFragment(false);
             if(null != f && f.isAdded() && f != nextShowFragment){
                 ft.hide(f);
             }
