@@ -2,6 +2,8 @@ package com.module.router.consts;
 
 public interface IConsts {
 
+    public static final String MODULE_APP       = "app";
+
     public static final String MODULE_IM       = "im";
     public static final String MODULE_GAME     = "game";
     public static final String MODULE_INTEGERATE = "integrate";
