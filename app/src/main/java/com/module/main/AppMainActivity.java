@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.module.bean.Component;
+import com.module.ProvierFactory;
 import com.module.router.provider.IModuleProvider;
 
 import java.util.List;
@@ -82,7 +82,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         ArrayList<IModuleProvider> allProvider = new ArrayList<>();
         for (int i = 0;i<modules.size();i++){
-            IModuleProvider provider = Component.getMainProvider(modules.get(i));
+            IModuleProvider provider = ProvierFactory.create(modules.get(i));
             if(null != provider){
                 allProvider.add(provider);
             }
@@ -118,7 +118,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         //添加或者重用新的
         ArrayList<IModuleProvider> newProviders = new ArrayList<>();
         for (int i = 0;i<modules.size();i++){
-            IModuleProvider provider = Component.getMainProvider(modules.get(i));
+            IModuleProvider provider = ProvierFactory.create(modules.get(i));
             if(null != provider){
                 newProviders.add(provider);
                 if(!providers.remove(provider)){//说明原来组件不包含
