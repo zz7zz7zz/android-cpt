@@ -49,7 +49,6 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.module_local).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clear();
                 initProvider(localModules);
                 initView();
             }
@@ -57,7 +56,6 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.module_remote).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clear();
                 initProvider(remoteModules);
                 initView();
             }
@@ -114,14 +112,6 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void clear(){
-        LinearLayout app_modules_valid = (LinearLayout) findViewById(R.id.app_modules_valid);
-        app_modules_valid.removeAllViews();
-
-        LinearLayout app_tabs = (LinearLayout) findViewById(R.id.app_tabs);
-        app_tabs.removeAllViews();
-    }
-
     //填充Provider
     private void initProvider(List<String> modules){
 
@@ -142,7 +132,6 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         //释放旧的
         for (int i = 0;i<providers.size();i++){
-            providers.get(i).onExit();
 
             //--------------同时删除多余的已经初始化的Fragment--------------
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -153,8 +142,10 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
 //            ft.commit();
             ft.commitAllowingStateLoss();
+
             //--------------同时删除多余的已经初始化的Fragment--------------
 
+            providers.get(i).onExit();
         }
         providers.clear();
 
@@ -167,6 +158,9 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         LinearLayout app_modules_valid = (LinearLayout) findViewById(R.id.app_modules_valid);
         LinearLayout app_tabs = (LinearLayout) findViewById(R.id.app_tabs);
+
+        app_modules_valid.removeAllViews();
+        app_tabs.removeAllViews();
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager manager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
