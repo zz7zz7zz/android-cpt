@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.module.ProvierFactory;
+import com.module.main.net.NetImpl;
 import com.module.router.provider.IModuleProvider;
 
 import java.util.List;
@@ -27,14 +28,11 @@ import java.util.Arrays;
 
 public class AppMainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    //本地代码自带的组件
+    //本地代码自带的组件(代码打进来的组件)
     private static final List<String> allModules = Arrays.asList(com.module.main.BuildConfig.modules);
 
     //组件配置来自：本地
-    private List<String> localModules = Arrays.asList(":app_im",":app_video",":app_game",":app_integrate");
-
-    //组件配置来自：服务器
-    private List<String> remoteModules = Arrays.asList(":app_video",":app_news",":app_shopping");
+    private List<String> localModules = Arrays.asList(":app_im",":app_video",":app_game",":app_integrate",":app_news");
 
     private ArrayList<IModuleProvider> providers = new ArrayList<>();
     private IModuleProvider currentProvider = null;
@@ -56,8 +54,19 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.module_remote).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initProvider(remoteModules);
-                initView();
+
+                NetImpl.getModules(new NetImpl.ICallback<List<String>>() {
+                    @Override
+                    public void onSuccss(List<String> strings) {
+                        initProvider(strings);
+                        initView();
+                    }
+
+                    @Override
+                    public void onFailed(int err) {
+
+                    }
+                });
             }
         });
 
@@ -115,7 +124,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
     //填充Provider
     private void initProvider(List<String> modules){
 
-        //添加或者重用新的
+        //1.添加或者重用新的
         ArrayList<IModuleProvider> newProviders = new ArrayList<>();
         for (int i = 0;i<modules.size();i++){
             IModuleProvider provider = ProvierFactory.create(modules.get(i));
@@ -130,7 +139,12 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
 
-        //释放旧的
+//新的组件集合为空，则不处理，要不然导致空页面
+//        if(newProviders.size() == 0){
+//            return;
+//        }
+
+        //2.释放旧的
         for (int i = 0;i<providers.size();i++){
 
             //--------------同时删除多余的已经初始化的Fragment--------------
@@ -148,10 +162,15 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             //--------------同时删除多余的已经初始化的Fragment--------------
 
             providers.get(i).onModuleExit();
+
+            //重置当前显示的组件
+            if(currentProvider == providers.get(i)){
+                currentProvider = null;
+            }
         }
         providers.clear();
 
-        //重新赋值
+        //3.重新赋值
         providers = newProviders;
     }
 
@@ -191,13 +210,21 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             app_tabs.addView(tabItemView,layoutParams);
         }
 
-        onClick(app_tabs.getChildAt(0));
+        setVisibleProvider(currentProvider);
     }
 
     @Override
     public void onClick(View v) {
-
         IModuleProvider provider =  (IModuleProvider) v.getTag();
+        setVisibleProvider(provider);
+    }
+
+    public void setVisibleProvider(IModuleProvider provider) {
+        //没有的化默认展示第一个
+        if(null == provider){
+            provider = providers.get(0);
+        }
+
         if(currentProvider == provider){
             return;
         }

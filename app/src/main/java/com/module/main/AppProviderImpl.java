@@ -15,12 +15,16 @@ import com.module.game.GameMainActivity;
 import com.module.game.GameMainFragment;
 import com.module.router.consts.IAppConsts;
 import com.module.router.consts.IGameConsts;
+import com.module.router.provider.IAppProvider;
 import com.module.router.provider.IGameProvider;
 
 import java.lang.ref.WeakReference;
 
+/**
+ * 可能用的到也可能用不到
+ */
 @Route(path = IAppConsts.Provider.MAIN, name = "App壳")
-public class AppProviderImpl implements IGameProvider {
+public class AppProviderImpl implements IAppProvider {
 
     private static final String TAG = "AppProviderImpl";
     private Context context;
