@@ -1,7 +1,9 @@
-package com.module.router.consts;
+package com.module.components.integrate;
 
-public final class IAppConsts {
-    public static final String MODULE = IConsts.MODULE_APP;
+import com.module.components.IConsts;
+
+public final class IIntegrateConsts {
+    public static final String MODULE = IConsts.MODULE_INTEGERATE;
 
     public final class Activity {
         public static final String MAIN = "/"+MODULE+"/A";

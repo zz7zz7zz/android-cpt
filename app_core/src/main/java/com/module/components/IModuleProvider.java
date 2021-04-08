@@ -1,4 +1,4 @@
-package com.module.router.provider;
+package com.module.components;
 
 import android.content.Context;
 import android.view.View;

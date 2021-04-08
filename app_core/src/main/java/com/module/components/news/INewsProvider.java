@@ -1,4 +1,4 @@
-package com.module.router.provider;
+package com.module.components.news;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,24 +7,24 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.module.router.consts.IConsts;
-import com.module.router.consts.IGameConsts;
-import com.module.router.consts.IIMConsts;
+import com.module.components.IConsts;
+import com.module.components.IModuleProvider;
 
-public interface IGameProvider extends IModuleProvider{
+public interface INewsProvider extends IModuleProvider {
 
-    void startGame(String msg);
+    String getNewsList();
 
-    public static IGameProvider get(){
-        IGameProvider ret = (IGameProvider) ARouter.getInstance().build(IGameConsts.Provider.MAIN).navigation();
+    public static INewsProvider get(){
+        INewsProvider ret = (INewsProvider) ARouter.getInstance().build(INewsConsts.Provider.MAIN).navigation();
         return null != ret ? ret : DEFAULT;
     }
 
-    static final String TAG = "IGameProvider";
-    static IGameProvider DEFAULT = new IGameProvider() {
+    static final String TAG = "INewsProvider";
+    static final INewsProvider DEFAULT = new INewsProvider() {
         @Override
-        public void startGame(String msg) {
+        public String getNewsList() {
             Log.e(TAG, IConsts.PROMPT_MODULE_NOT_FOUND);
+            return null;
         }
 
         @Override
@@ -71,4 +71,5 @@ public interface IGameProvider extends IModuleProvider{
             Log.e(TAG, IConsts.PROMPT_MODULE_NOT_FOUND);
         }
     };
+
 }

@@ -2,8 +2,6 @@ package com.module;
 
 import android.app.Application;
 
-import com.module.init.Initializer;
-
 public class BaseApplication extends Application {
 
     @Override

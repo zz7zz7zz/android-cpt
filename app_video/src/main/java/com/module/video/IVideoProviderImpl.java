@@ -5,15 +5,14 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.router.consts.IVideoConsts;
-import com.module.router.provider.IVideoProvider;
+import com.module.components.video.IVideoConsts;
+import com.module.components.video.IVideoProvider;
 
 import java.lang.ref.WeakReference;
 

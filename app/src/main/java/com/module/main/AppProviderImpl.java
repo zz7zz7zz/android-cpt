@@ -1,24 +1,14 @@
 package com.module.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.game.GameMainActivity;
-import com.module.game.GameMainFragment;
-import com.module.router.consts.IAppConsts;
-import com.module.router.consts.IGameConsts;
-import com.module.router.provider.IAppProvider;
-import com.module.router.provider.IGameProvider;
-
-import java.lang.ref.WeakReference;
+import com.module.components.app.IAppConsts;
+import com.module.components.app.IAppProvider;
 
 /**
  * 可能用的到也可能用不到

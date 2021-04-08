@@ -1,4 +1,4 @@
-package com.module.router.provider;
+package com.module.components.integrate;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,24 +7,24 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.module.router.consts.IConsts;
-import com.module.router.consts.IIMConsts;
-import com.module.router.consts.IVideoConsts;
+import com.module.components.IConsts;
+import com.module.components.IModuleProvider;
 
-public interface IVideoProvider extends IModuleProvider {
+public interface IIntegrateProvider extends IModuleProvider {
 
-    void playVideo(Context context, String msg);
+    String getIntegrateTasks();
 
-    public static IVideoProvider get(){
-        IVideoProvider ret = (IVideoProvider) ARouter.getInstance().build(IVideoConsts.Provider.MAIN).navigation();
+    public static IIntegrateProvider get(){
+        IIntegrateProvider ret = (IIntegrateProvider) ARouter.getInstance().build(IIntegrateConsts.Provider.MAIN).navigation();
         return null != ret ? ret : DEFAULT;
     }
 
-    static final String TAG = "IVideoProvider";
-    static IVideoProvider DEFAULT = new IVideoProvider() {
+    static final String TAG = "IIntegrateProvider";
+    static IIntegrateProvider DEFAULT = new IIntegrateProvider() {
         @Override
-        public void playVideo(Context context, String msg) {
+        public String getIntegrateTasks() {
             Log.e(TAG, IConsts.PROMPT_MODULE_NOT_FOUND);
+            return null;
         }
 
         @Override
@@ -71,5 +71,4 @@ public interface IVideoProvider extends IModuleProvider {
             Log.e(TAG, IConsts.PROMPT_MODULE_NOT_FOUND);
         }
     };
-
 }

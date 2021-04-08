@@ -1,9 +1,7 @@
 package debug;
 
-import android.app.Application;
-
 import com.module.BaseApplication;
-import com.module.init.Initializer;
+import com.module.Initializer;
 
 public class App extends BaseApplication {
 

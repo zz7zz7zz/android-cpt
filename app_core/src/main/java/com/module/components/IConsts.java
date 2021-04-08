@@ -1,4 +1,4 @@
-package com.module.router.consts;
+package com.module.components;
 
 public interface IConsts {
 

@@ -5,15 +5,14 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.router.consts.IShoppingConsts;
-import com.module.router.provider.IShoppingProvider;
+import com.module.components.shopping.IShoppingConsts;
+import com.module.components.shopping.IShoppingProvider;
 
 import java.lang.ref.WeakReference;
 

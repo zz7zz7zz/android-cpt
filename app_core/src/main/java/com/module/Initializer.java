@@ -1,4 +1,4 @@
-package com.module.init;
+package com.module;
 
 import android.app.Application;
 

@@ -1,4 +1,4 @@
-package com.module.router.provider;
+package com.module.components.shopping;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,20 +7,26 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.module.router.consts.IAppConsts;
-import com.module.router.consts.IConsts;
-import com.module.router.consts.IIMConsts;
-import com.module.router.consts.IVideoConsts;
+import com.module.components.IConsts;
+import com.module.components.IModuleProvider;
 
-public interface IAppProvider extends IModuleProvider{
+public interface IShoppingProvider extends IModuleProvider {
 
-    public static IAppProvider get(){
-        IAppProvider ret = (IAppProvider) ARouter.getInstance().build(IAppConsts.Provider.MAIN).navigation();
+    String getGoodInfo();
+
+    public static IShoppingProvider get(){
+        IShoppingProvider ret = (IShoppingProvider) ARouter.getInstance().build(IShoppingConsts.Provider.MAIN).navigation();
         return null != ret ? ret : DEFAULT;
     }
 
-    static final String TAG = "IAppProvider";
-    static IAppProvider DEFAULT = new IAppProvider() {
+    static final String TAG = "IShoppingProvider";
+    static IShoppingProvider DEFAULT = new IShoppingProvider() {
+        @Override
+        public String getGoodInfo() {
+            Log.e(TAG, IConsts.PROMPT_MODULE_NOT_FOUND);
+            return null;
+        }
+
         @Override
         public void onModuleEnter() {
             Log.e(TAG, IConsts.PROMPT_MODULE_NOT_FOUND);

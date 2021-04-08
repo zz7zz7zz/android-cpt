@@ -1,8 +1,9 @@
-package com.module.router.consts;
+package com.module.components.app;
 
-public final class IIMConsts {
+import com.module.components.IConsts;
 
-    public static final String MODULE = IConsts.MODULE_IM;
+public final class IAppConsts {
+    public static final String MODULE = IConsts.MODULE_APP;
 
     public final class Activity {
         public static final String MAIN = "/"+MODULE+"/A";

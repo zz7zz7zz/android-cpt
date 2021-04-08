@@ -1,4 +1,4 @@
-package com.module.router.provider;
+package com.module.components.provider;
 
 import org.junit.Test;
 

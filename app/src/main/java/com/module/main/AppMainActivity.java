@@ -18,9 +18,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.module.ProvierFactory;
+import com.module.components.ProvierFactory;
 import com.module.main.net.NetImpl;
-import com.module.router.provider.IModuleProvider;
+import com.module.components.IModuleProvider;
 
 import java.util.List;
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
-package com.module;
+package com.module.components;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.module.router.provider.IModuleProvider;
 
 public class ProvierFactory {
 

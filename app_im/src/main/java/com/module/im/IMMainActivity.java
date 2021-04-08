@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.module.router.provider.IGameProvider;
-import com.module.router.provider.IIntegrateProvider;
-import com.module.router.provider.INewsProvider;
-import com.module.router.provider.IShoppingProvider;
-import com.module.router.provider.IVideoProvider;
+import com.module.components.game.IGameProvider;
+import com.module.components.integrate.IIntegrateProvider;
+import com.module.components.news.INewsProvider;
+import com.module.components.shopping.IShoppingProvider;
+import com.module.components.video.IVideoProvider;
 
 public class IMMainActivity extends AppCompatActivity {
 

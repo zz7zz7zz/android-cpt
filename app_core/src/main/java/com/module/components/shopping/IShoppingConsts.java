@@ -1,7 +1,9 @@
-package com.module.router.consts;
+package com.module.components.shopping;
 
-public final class INewsConsts {
-    public static final String MODULE = IConsts.MODULE_NEWS;
+import com.module.components.IConsts;
+
+public final class IShoppingConsts {
+    public static final String MODULE = IConsts.MODULE_SHOPPING;
 
     public final class Activity {
         public static final String MAIN = "/"+MODULE+"/A";

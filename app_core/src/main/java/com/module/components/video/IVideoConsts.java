@@ -1,7 +1,9 @@
-package com.module.router.consts;
+package com.module.components.video;
 
-public final class IIntegrateConsts {
-    public static final String MODULE = IConsts.MODULE_INTEGERATE;
+import com.module.components.IConsts;
+
+public final class IVideoConsts {
+    public static final String MODULE = IConsts.MODULE_VIDEO;
 
     public final class Activity {
         public static final String MAIN = "/"+MODULE+"/A";
