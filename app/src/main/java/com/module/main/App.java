@@ -44,4 +44,14 @@ public class App extends BaseApplication {
     public int getVersionCode() {
         return BuildConfig.VERSION_CODE;
     }
+
+    @Override
+    public String getChannel() {
+        return BuildConfig.FLAVOR_channel;
+    }
+
+    @Override
+    public String getProduct() {
+        return BuildConfig.FLAVOR_product;
+    }
 }

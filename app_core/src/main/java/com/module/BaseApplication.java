@@ -31,4 +31,8 @@ public abstract class BaseApplication extends Application {
 
     public abstract int getVersionCode();
 
+    public abstract String getChannel();
+
+    public abstract String getProduct();
+
 }
