@@ -1,4 +1,4 @@
-package com.module.video;
+package com.module.news;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,15 +11,15 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.video.IVideoConsts;
-import com.module.components.video.IVideoProvider;
+import com.module.components.news.INewsConsts;
+import com.module.components.news.INewsProvider;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IVideoConsts.Provider.MAIN, name = "视频服务")
-public class IVideoProviderImpl implements IVideoProvider {
+@Route(path = INewsConsts.Provider.MAIN, name = "新闻服务")
+public class NewsProviderImpl implements INewsProvider {
 
-    private static final String TAG = "IVideoProviderImpl";
+    private static final String TAG = "NewsProviderImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;
@@ -40,32 +40,32 @@ public class IVideoProviderImpl implements IVideoProvider {
     public Fragment getModuleMainFragment(boolean isCreatedIfNull) {
         Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
-            ret = new VideoMainFragment();
+            ret = new NewsMainFragment();
             fragmentWeakReference = new WeakReference<>(ret);
         }
         return ret;
     }
 
     @Override
-    public void playVideo(Context context,String msg) {
-        Log.v(TAG,"playVideo " + msg);
+    public String getNewsList() {
+        Log.v(TAG,"getNewsList");
+        return null;
     }
-
 
     @Override
     public void startMainActivity(Context context) {
-        Intent mIntent = new Intent(context, VideoMainActivity.class);
+        Intent mIntent = new Intent(context, NewsMainActivity.class);
         context.startActivity(mIntent);
     }
 
     @Override
     public String getModuleName() {
-        return context.getString(R.string.video_name);
+        return context.getString(R.string.news_name);
     }
 
     @Override
     public int getModuleIconResId() {
-        return R.drawable.video_icon_selector;
+        return R.drawable.news_icon_selector;
     }
 
     @Override

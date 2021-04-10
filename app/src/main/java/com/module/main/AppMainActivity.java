@@ -91,7 +91,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         ArrayList<IModuleProvider> allProvider = new ArrayList<>();
         for (int i = 0;i<modules.size();i++){
-            IModuleProvider provider = ProvierFactory.create(modules.get(i));
+            IModuleProvider provider = ProvierFactory.get(modules.get(i));
             if(null != provider){
                 allProvider.add(provider);
             }
@@ -127,7 +127,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         //1.添加或者重用新的
         ArrayList<IModuleProvider> newProviders = new ArrayList<>();
         for (int i = 0;i<modules.size();i++){
-            IModuleProvider provider = ProvierFactory.create(modules.get(i));
+            IModuleProvider provider = ProvierFactory.get(modules.get(i));
             if(null != provider){
                 newProviders.add(provider);
                 if(!providers.remove(provider)){//说明原来组件不包含

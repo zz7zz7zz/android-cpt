@@ -3,7 +3,7 @@ package com.module.components.shopping;
 import com.module.components.IConsts;
 
 public final class IShoppingConsts {
-    public static final String MODULE = IConsts.MODULE_SHOPPING;
+    public static final String MODULE   = "shopping";
 
     public final class Activity {
         public static final String MAIN = "/"+MODULE+"/A";

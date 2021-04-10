@@ -1,4 +1,4 @@
-package com.module.im;
+package com.module.integrate;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,16 +11,15 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.im.IIMConsts;
-import com.module.components.im.IIMProvider;
+import com.module.components.integrate.IIntegrateConsts;
+import com.module.components.integrate.IIntegrateProvider;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IIMConsts.Provider.MAIN, name = "聊天服务")
-public class IIMProviderImpl implements IIMProvider {
+@Route(path = IIntegrateConsts.Provider.MAIN, name = "积分服务")
+public class IntegrateProviderImpl implements IIntegrateProvider {
 
-    private static final String TAG = "IIMProviderImpl";
-
+    private static final String TAG = "IntegrateProviderImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;
@@ -41,7 +40,7 @@ public class IIMProviderImpl implements IIMProvider {
     public Fragment getModuleMainFragment(boolean isCreatedIfNull) {
         Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
-            ret = new IMMainFragment();
+            ret = new IntegrateMainFragment();
             fragmentWeakReference = new WeakReference<>(ret);
         }
         return ret;
@@ -49,28 +48,24 @@ public class IIMProviderImpl implements IIMProvider {
 
     @Override
     public void startMainActivity(Context context) {
-        Intent mIntent = new Intent(context, IMMainActivity.class);
+        Intent mIntent = new Intent(context, IntegrateMainActivity.class);
         context.startActivity(mIntent);
     }
 
     @Override
-    public String getMessage() {
-        return "I am From Im Module";
-    }
-
-    @Override
-    public void sendMessage(String msg) {
-        Log.v(TAG,"sendMessage " + msg);
-    }
-
-    @Override
     public String getModuleName() {
-        return context.getString(R.string.im_name);
+        return context.getString(R.string.integrate_name);
     }
 
     @Override
     public int getModuleIconResId() {
-        return R.drawable.im_icon_selector;
+        return R.drawable.integrate_icon_selector;
+    }
+
+    @Override
+    public String getIntegrateTasks() {
+        Log.v(TAG,"getIntegrateTasks ");
+        return null;
     }
 
     @Override

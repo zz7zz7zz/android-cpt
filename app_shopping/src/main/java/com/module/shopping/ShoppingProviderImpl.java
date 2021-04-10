@@ -1,4 +1,4 @@
-package com.module.news;
+package com.module.shopping;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,15 +11,15 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.news.INewsConsts;
-import com.module.components.news.INewsProvider;
+import com.module.components.shopping.IShoppingConsts;
+import com.module.components.shopping.IShoppingProvider;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = INewsConsts.Provider.MAIN, name = "新闻服务")
-public class INewsProviderImpl implements INewsProvider {
+@Route(path = IShoppingConsts.Provider.MAIN, name = "购物服务")
+public class ShoppingProviderImpl implements IShoppingProvider {
 
-    private static final String TAG = "INewsProviderImpl";
+    private static final String TAG = "ShoppingProviderImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;
@@ -40,32 +40,32 @@ public class INewsProviderImpl implements INewsProvider {
     public Fragment getModuleMainFragment(boolean isCreatedIfNull) {
         Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
-            ret = new NewsMainFragment();
+            ret = new ShoppingMainFragment();
             fragmentWeakReference = new WeakReference<>(ret);
         }
         return ret;
     }
 
     @Override
-    public String getNewsList() {
-        Log.v(TAG,"getNewsList");
+    public String getGoodInfo() {
+        Log.v(TAG,"getGoodInfo");
         return null;
     }
 
     @Override
     public void startMainActivity(Context context) {
-        Intent mIntent = new Intent(context, NewsMainActivity.class);
+        Intent mIntent = new Intent(context, ShoppingMainActivity.class);
         context.startActivity(mIntent);
     }
 
     @Override
     public String getModuleName() {
-        return context.getString(R.string.news_name);
+        return context.getString(R.string.shopping_name);
     }
 
     @Override
     public int getModuleIconResId() {
-        return R.drawable.news_icon_selector;
+        return R.drawable.shopping_icon_selector;
     }
 
     @Override
@@ -94,4 +94,5 @@ public class INewsProviderImpl implements INewsProvider {
         //help gc
         System.gc();
     }
+
 }

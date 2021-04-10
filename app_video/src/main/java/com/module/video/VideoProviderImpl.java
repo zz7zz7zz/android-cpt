@@ -1,4 +1,4 @@
-package com.module.integrate;
+package com.module.video;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,15 +11,15 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.integrate.IIntegrateConsts;
-import com.module.components.integrate.IIntegrateProvider;
+import com.module.components.video.IVideoConsts;
+import com.module.components.video.IVideoProvider;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IIntegrateConsts.Provider.MAIN, name = "积分服务")
-public class IIntegrateProviderImpl implements IIntegrateProvider {
+@Route(path = IVideoConsts.Provider.MAIN, name = "视频服务")
+public class VideoProviderImpl implements IVideoProvider {
 
-    private static final String TAG = "IIntegrateProviderImpl";
+    private static final String TAG = "VideoProviderImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;
@@ -40,32 +40,32 @@ public class IIntegrateProviderImpl implements IIntegrateProvider {
     public Fragment getModuleMainFragment(boolean isCreatedIfNull) {
         Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
-            ret = new IntegrateMainFragment();
+            ret = new VideoMainFragment();
             fragmentWeakReference = new WeakReference<>(ret);
         }
         return ret;
     }
 
     @Override
+    public void playVideo(Context context,String msg) {
+        Log.v(TAG,"playVideo " + msg);
+    }
+
+
+    @Override
     public void startMainActivity(Context context) {
-        Intent mIntent = new Intent(context, IntegrateMainActivity.class);
+        Intent mIntent = new Intent(context, VideoMainActivity.class);
         context.startActivity(mIntent);
     }
 
     @Override
     public String getModuleName() {
-        return context.getString(R.string.integrate_name);
+        return context.getString(R.string.video_name);
     }
 
     @Override
     public int getModuleIconResId() {
-        return R.drawable.integrate_icon_selector;
-    }
-
-    @Override
-    public String getIntegrateTasks() {
-        Log.v(TAG,"getIntegrateTasks ");
-        return null;
+        return R.drawable.video_icon_selector;
     }
 
     @Override

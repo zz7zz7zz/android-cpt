@@ -3,7 +3,7 @@ package com.module.components.game;
 import com.module.components.IConsts;
 
 public final class IGameConsts {
-    public static final String MODULE = IConsts.MODULE_GAME;
+    public static final String MODULE   = "game";
 
     public final class Activity {
         public static final String MAIN = "/"+MODULE+"/A";

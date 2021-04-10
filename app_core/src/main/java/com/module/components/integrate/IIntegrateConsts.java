@@ -3,7 +3,7 @@ package com.module.components.integrate;
 import com.module.components.IConsts;
 
 public final class IIntegrateConsts {
-    public static final String MODULE = IConsts.MODULE_INTEGERATE;
+    public static final String MODULE   = "integrate";
 
     public final class Activity {
         public static final String MAIN = "/"+MODULE+"/A";

@@ -1,4 +1,4 @@
-package com.module.game;
+package com.module.im;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,15 +11,16 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.game.IGameConsts;
-import com.module.components.game.IGameProvider;
+import com.module.components.im.IIMConsts;
+import com.module.components.im.IIMProvider;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IGameConsts.Provider.MAIN, name = "游戏服务")
-public class IGameProviderImpl implements IGameProvider {
+@Route(path = IIMConsts.Provider.MAIN, name = "聊天服务")
+public class IMProviderImpl implements IIMProvider {
 
-    private static final String TAG = "IGameProviderImpl";
+    private static final String TAG = "IMProviderImpl";
+
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;
@@ -40,7 +41,7 @@ public class IGameProviderImpl implements IGameProvider {
     public Fragment getModuleMainFragment(boolean isCreatedIfNull) {
         Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
-            ret = new GameMainFragment();
+            ret = new IMMainFragment();
             fragmentWeakReference = new WeakReference<>(ret);
         }
         return ret;
@@ -48,23 +49,28 @@ public class IGameProviderImpl implements IGameProvider {
 
     @Override
     public void startMainActivity(Context context) {
-        Intent mIntent = new Intent(context, GameMainActivity.class);
+        Intent mIntent = new Intent(context, IMMainActivity.class);
         context.startActivity(mIntent);
     }
 
     @Override
+    public String getMessage() {
+        return "I am From Im Module";
+    }
+
+    @Override
+    public void sendMessage(String msg) {
+        Log.v(TAG,"sendMessage " + msg);
+    }
+
+    @Override
     public String getModuleName() {
-        return context.getString(R.string.game_name);
+        return context.getString(R.string.im_name);
     }
 
     @Override
     public int getModuleIconResId() {
-        return R.drawable.game_icon_selector;
-    }
-
-    @Override
-    public void startGame(String msg) {
-        Log.v(TAG,"startGame " + msg);
+        return R.drawable.im_icon_selector;
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.module.components.IConsts;
 
 public final class IIMConsts {
 
-    public static final String MODULE = IConsts.MODULE_IM;
+    public static final String MODULE   = "im";
 
     public final class Activity {
         public static final String MAIN = "/"+MODULE+"/A";
