@@ -20,38 +20,31 @@ import android.widget.TextView;
 
 import com.module.components.ProvierFactory;
 import com.module.main.net.NetImpl;
-import com.module.components.IModuleProvider;
+import com.module.components.IComponentsProvider;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AppMainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    //本地代码自带的组件(代码打进来的组件)
-    private static final List<String> allModules = Arrays.asList(com.module.main.BuildConfig.modules);
-
-    //组件配置来自：本地
-    private List<String> localModules = Arrays.asList(":app_im",":app_video",":app_game",":app_integrate",":app_news");
-
-    private ArrayList<IModuleProvider> providers = new ArrayList<>();
-    private IModuleProvider currentProvider = null;
+    private ArrayList<IComponentsProvider> providers = new ArrayList<>();
+    private IComponentsProvider currentProvider = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_main);
 
-        initAllModels(allModules);
+        initAllComponents(ComponentConfig.allComponents);
 
-        findViewById(R.id.module_local).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.components_local).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initProvider(localModules);
+                initProvider(ComponentConfig.localComponents);
                 initView();
             }
         });
-        findViewById(R.id.module_remote).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.components_remote).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -78,7 +71,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         //组件释放操作
         for (int i = 0;i<providers.size();i++){
-            IModuleProvider provider = providers.get(i);
+            IComponentsProvider provider = providers.get(i);
             if(null != provider){
                 provider.onModuleExit();
             }
@@ -87,11 +80,11 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         currentProvider = null;
     }
 
-    private void initAllModels(List<String> modules){
+    private void initAllComponents(List<String> components){
 
-        ArrayList<IModuleProvider> allProvider = new ArrayList<>();
-        for (int i = 0;i<modules.size();i++){
-            IModuleProvider provider = ProvierFactory.get(modules.get(i));
+        ArrayList<IComponentsProvider> allProvider = new ArrayList<>();
+        for (int i = 0;i<components.size();i++){
+            IComponentsProvider provider = ProvierFactory.get(components.get(i));
             if(null != provider){
                 allProvider.add(provider);
             }
@@ -106,7 +99,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         for (int i = 0;i<allProvider.size();i++){
 
-            final IModuleProvider provider = allProvider.get(i);
+            final IComponentsProvider provider = allProvider.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_all,false);
             ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getModuleName());
@@ -125,9 +118,9 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
     private void initProvider(List<String> modules){
 
         //1.添加或者重用新的
-        ArrayList<IModuleProvider> newProviders = new ArrayList<>();
+        ArrayList<IComponentsProvider> newProviders = new ArrayList<>();
         for (int i = 0;i<modules.size();i++){
-            IModuleProvider provider = ProvierFactory.get(modules.get(i));
+            IComponentsProvider provider = ProvierFactory.get(modules.get(i));
             if(null != provider){
                 newProviders.add(provider);
                 if(!providers.remove(provider)){//说明原来组件不包含
@@ -190,7 +183,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         for (int i = 0;i<providers.size();i++){
 
-            final IModuleProvider provider = providers.get(i);
+            final IComponentsProvider provider = providers.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_valid,false);
             ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getModuleName());
@@ -215,11 +208,11 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        IModuleProvider provider =  (IModuleProvider) v.getTag();
+        IComponentsProvider provider =  (IComponentsProvider) v.getTag();
         setVisibleProvider(provider);
     }
 
-    public void setVisibleProvider(IModuleProvider provider) {
+    public void setVisibleProvider(IComponentsProvider provider) {
         //没有的化默认展示第一个
         if(null == provider){
             provider = providers.get(0);

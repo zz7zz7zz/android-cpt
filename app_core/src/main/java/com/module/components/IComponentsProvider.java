@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.template.IProvider;
 
-public interface IModuleProvider extends IProvider {
+public interface IComponentsProvider extends IProvider {
 
     //---------------- 组件进入，组件退出 相关 ----------------
     void     onModuleEnter();

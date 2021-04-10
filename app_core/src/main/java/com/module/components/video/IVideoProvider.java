@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.module.components.IConsts;
-import com.module.components.IModuleProvider;
+import com.module.components.IComponentsProvider;
 
-public interface IVideoProvider extends IModuleProvider {
+public interface IVideoProvider extends IComponentsProvider {
 
     void playVideo(Context context, String msg);
 

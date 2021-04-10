@@ -13,12 +13,12 @@ public class ProvierFactory {
 
     /**
      * 通过组件名（如:app_im）来找到Provider
-     * @param name
+     * @param component
      * @return
      */
-    public static IModuleProvider get(String name){
+    public static IComponentsProvider get(String component){
         //通过module名字转化成provider的路由名称: ":app_im" - > /im/p
-        return (IModuleProvider)ARouter.getInstance().build("/"+name.substring(name.indexOf("_")+1)+"/P").navigation();
+        return (IComponentsProvider)ARouter.getInstance().build("/"+component.substring(component.indexOf("_")+1)+"/P").navigation();
     }
 
     /**
