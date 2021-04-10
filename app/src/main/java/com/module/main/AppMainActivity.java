@@ -90,6 +90,10 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
 
+        if(allProvider.size() == 0){
+            return;
+        }
+
         LinearLayout app_modules_all = (LinearLayout) findViewById(R.id.app_modules_all);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -115,12 +119,12 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     //填充Provider
-    private void initProvider(List<String> modules){
+    private void initProvider(List<String> componets){
 
         //1.添加或者重用新的
         ArrayList<IComponentsProvider> newProviders = new ArrayList<>();
-        for (int i = 0;i<modules.size();i++){
-            IComponentsProvider provider = ProvierFactory.get(modules.get(i));
+        for (int i = 0;i<componets.size();i++){
+            IComponentsProvider provider = ProvierFactory.get(componets.get(i));
             if(null != provider){
                 newProviders.add(provider);
                 if(!providers.remove(provider)){//说明原来组件不包含
@@ -175,6 +179,10 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         app_modules_valid.removeAllViews();
         app_tabs.removeAllViews();
+
+        if(providers.size() == 0){
+            return;
+        }
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager manager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
