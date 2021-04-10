@@ -8,19 +8,27 @@ public abstract class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Initializer.init(this);
-
-
+        Initializer.init(this);is
     }
 
     //--------------------- 组件代码是否包含了 ---------------------
+
+    /**
+     * 组件是否启用（代码包含组件 并且 本地/服务器配置了开启组件）
+     * @param component
+     * @return
+     */
+    public boolean isComponentEnable(String component){
+        return isComponentCodeIn(component) && isComponentConfigured(component);
+    }
+
     /**
      * 打包时，apk是否包含了组件的代码
      */
     public abstract boolean isComponentCodeIn(String component);
 
     /**
-     * 服务器/本地配置是否配置显示相应的组件
+     * 服务器/本地配置是否配置开启相应的组件
      */
     public abstract boolean isComponentConfigured(String component);
 
