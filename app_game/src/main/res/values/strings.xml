@@ -1,3 +1,4 @@
 <resources>
     <string name="game_name">game</string>
+    <string name="component_name">game</string>
 </resources>
