@@ -21,7 +21,7 @@ repositories {
 uploadArchives{
     repositories.mavenDeployer{
         // 配置本地仓库路径，项目根目录下的repository目录中
-        repository(url: uri('../repository'))
+        repository(url: uri('../repository_plugin'))
         pom.groupId = "com.module.plugin"// 唯一标识（通常为模块包名，也可以任意）
         pom.artifactId = "cpt" // 项目名称（通常为类库模块名称，也可以任意）
         pom.version = "0.0.1" // 版本号

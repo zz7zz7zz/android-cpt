@@ -6,7 +6,7 @@ buildscript {
 
         //私有仓库(动态注册Provider)
         maven {
-            url uri('repository')
+            url uri('repository_plugin')
         }
     }
     dependencies {

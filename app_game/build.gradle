@@ -31,7 +31,7 @@ android {
         sourceSets {
             main {
                 // let gradle pack the shared library into apk
-                jniLibs.srcDirs = ['../so_repository']
+                jniLibs.srcDirs = ['../repository_so/signature']
             }
         }
 
