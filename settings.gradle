@@ -1,4 +1,4 @@
-include ':app_core_cpt_gradle_plugin'
+include ':plugin_auto_register_provider'
 include ':lib_widget'
 include ':lib_net'
 include ':lib_analysis'
