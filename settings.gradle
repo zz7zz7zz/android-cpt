@@ -1,3 +1,4 @@
+include ':app_core_cpt_gradle_plugin'
 include ':lib_widget'
 include ':lib_net'
 include ':lib_analysis'

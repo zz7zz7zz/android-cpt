@@ -8,7 +8,7 @@ public abstract class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Initializer.init(this);is
+        Initializer.init(this);
     }
 
     //--------------------- 组件代码是否包含了 ---------------------

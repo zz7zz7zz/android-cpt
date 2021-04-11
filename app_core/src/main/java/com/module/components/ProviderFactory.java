@@ -9,14 +9,14 @@ import com.module.components.news.INewsProvider;
 import com.module.components.shopping.IShoppingProvider;
 import com.module.components.video.IVideoProvider;
 
-public class ProvierFactory {
+public class ProviderFactory {
 
     /**
      * 通过组件名（如:app_im）来找到Provider
      * @param component
      * @return
      */
-    public static IComponentsProvider get(String component){
+    public static IComponentsProvider getComponentByName(String component){
         //通过module名字转化成provider的路由名称: ":app_im" - > /im/p
         return (IComponentsProvider)ARouter.getInstance().build("/"+component.substring(component.indexOf("_")+1)+"/P").navigation();
     }
@@ -27,22 +27,22 @@ public class ProvierFactory {
      * @param <T>
      * @return
      */
-    public static<T> T get(Class<T> clazz){
-        if(clazz.equals(IAppProvider.class)){
-            return (T) IAppProvider.get();
-        }else if(clazz.equals(IGameProvider.class)){
-            return (T) IGameProvider.get();
-        }else if(clazz.equals(IIMProvider.class)){
-            return (T) IIMProvider.get();
-        }else if(clazz.equals(IIntegrateProvider.class)){
-            return (T) IIntegrateProvider.get();
-        }else if(clazz.equals(INewsProvider.class)){
-            return (T) INewsProvider.get();
-        }else if(clazz.equals(IShoppingProvider.class)){
-            return (T) IShoppingProvider.get();
-        }else if(clazz.equals(IVideoProvider.class)){
-            return (T) IVideoProvider.get();
-        }
+    public static<T> T getComponentByClass(Class<T> clazz){
+//        if(clazz.equals(IAppProvider.class)){
+//            return (T) IAppProvider.get();
+//        }else if(clazz.equals(IGameProvider.class)){
+//            return (T) IGameProvider.get();
+//        }else if(clazz.equals(IIMProvider.class)){
+//            return (T) IIMProvider.get();
+//        }else if(clazz.equals(IIntegrateProvider.class)){
+//            return (T) IIntegrateProvider.get();
+//        }else if(clazz.equals(INewsProvider.class)){
+//            return (T) INewsProvider.get();
+//        }else if(clazz.equals(IShoppingProvider.class)){
+//            return (T) IShoppingProvider.get();
+//        }else if(clazz.equals(IVideoProvider.class)){
+//            return (T) IVideoProvider.get();
+//        }
         return null;
     }
 }

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.module.components.ProvierFactory;
+import com.module.components.ProviderFactory;
 import com.module.components.game.IGameProvider;
 import com.module.components.integrate.IIntegrateProvider;
 import com.module.components.news.INewsProvider;
@@ -53,27 +53,27 @@ public class IMMainActivity extends AppCompatActivity {
 
     private void communicateWithOtherComponents2(){
         {
-            IGameProvider provider = ProvierFactory.get(IGameProvider.class);
+            IGameProvider provider = ProviderFactory.getComponentByClass(IGameProvider.class);
             provider.startGame("H H H 2");
         }
 
         {
-            IIntegrateProvider provider = ProvierFactory.get(IIntegrateProvider.class);
+            IIntegrateProvider provider = ProviderFactory.getComponentByClass(IIntegrateProvider.class);
             provider.getIntegrateTasks();
         }
 
         {
-            IShoppingProvider provider = ProvierFactory.get(IShoppingProvider.class);
+            IShoppingProvider provider = ProviderFactory.getComponentByClass(IShoppingProvider.class);
             provider.getGoodInfo();
         }
 
         {
-            INewsProvider provider = ProvierFactory.get(INewsProvider.class);
+            INewsProvider provider = ProviderFactory.getComponentByClass(INewsProvider.class);
             provider.getNewsList();
         }
 
         {
-            IVideoProvider provider = ProvierFactory.get(IVideoProvider.class);
+            IVideoProvider provider = ProviderFactory.getComponentByClass(IVideoProvider.class);
             provider.playVideo(this, "http://www.baidu.com/video");
         }
     }
