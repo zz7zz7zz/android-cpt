@@ -27,6 +27,25 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+
+        sourceSets {
+            main {
+                // let gradle pack the shared library into apk
+                jniLibs.srcDirs = ['../so_repository']
+            }
+        }
+
+//        packagingOptions {
+//            pickFirst 'lib/x86/libsignature.so'
+//            pickFirst 'lib/armeabi-v7a/libsignature.so'
+//
+//            merge 'lib/x86/libsignature.so'
+//            merge 'lib/armeabi-v7a/libsignature.so'
+//
+//          exclude 'lib/x86/libsignature.so'
+//          exclude 'lib/armeabi-v7a/libsignature.so'
+//        }
+
     }
 
     buildTypes {

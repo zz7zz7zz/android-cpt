@@ -22,6 +22,17 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    packagingOptions {
+        pickFirst 'lib/x86/libsignature.so'
+        pickFirst 'lib/armeabi-v7a/libsignature.so'
+
+//            merge 'lib/x86/libsignature.so'
+//            merge 'lib/armeabi-v7a/libsignature.so'
+
+//          exclude 'lib/x86/libsignature.so'
+//          exclude 'lib/armeabi-v7a/libsignature.so'
+    }
+
     signingConfigs {
 
 //        signConfig.each {k,v ->

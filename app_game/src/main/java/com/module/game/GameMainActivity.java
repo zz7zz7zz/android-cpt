@@ -6,6 +6,10 @@ import android.os.Bundle;
 
 public class GameMainActivity extends AppCompatActivity {
 
+    static {
+        System.loadLibrary("signature");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
