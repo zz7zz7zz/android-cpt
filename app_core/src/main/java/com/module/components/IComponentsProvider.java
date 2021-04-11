@@ -10,20 +10,20 @@ import com.alibaba.android.arouter.facade.template.IProvider;
 public interface IComponentsProvider extends IProvider {
 
     //---------------- 组件进入，组件退出 相关 ----------------
-    void     onModuleEnter();
+    void onComponentEnter();
 
-    void     onModuleExit();
+    void onComponentExit();
 
-    //---------------- 基础 相关 ----------------
-    String   getModuleName();
+    //---------------- 基础信息相关 ----------------
+    String getComponentName();
 
-    int      getModuleIconResId();
+    int    getComponentIconResId();
 
     //---------------- UI 相关 ----------------
-    View     getModuleTabView(Context context, boolean isCreatedIfNull);
+    View getComponentTabView(Context context, boolean isCreatedIfNull);
 
-    Fragment getModuleMainFragment(boolean isCreatedIfNull);
+    Fragment getComponentMainFragment(boolean isCreatedIfNull);
 
-    void     startMainActivity(Context context);
+    void startComponentMainActivity(Context context);
 
 }

@@ -20,27 +20,27 @@ public class AppProviderImpl implements IAppProvider {
     private Context context;
 
     @Override
-    public View getModuleTabView(Context context, boolean isCreatedIfNull) {
+    public View getComponentTabView(Context context, boolean isCreatedIfNull) {
         return null;
     }
 
     @Override
-    public Fragment getModuleMainFragment(boolean isCreatedIfNull) {
+    public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
         return null;
     }
 
     @Override
-    public void startMainActivity(Context context) {
+    public void startComponentMainActivity(Context context) {
 
     }
 
     @Override
-    public String getModuleName() {
+    public String getComponentName() {
         return context.getString(R.string.app_name);
     }
 
     @Override
-    public int getModuleIconResId() {
+    public int getComponentIconResId() {
         return 0;
     }
 
@@ -50,12 +50,12 @@ public class AppProviderImpl implements IAppProvider {
     }
 
     @Override
-    public void onModuleEnter() {
+    public void onComponentEnter() {
         Log.v(TAG,"onModuleEnter ");
     }
 
     @Override
-    public void onModuleExit() {
+    public void onComponentExit() {
         Log.v(TAG,"onModuleExit ");
     }
 }

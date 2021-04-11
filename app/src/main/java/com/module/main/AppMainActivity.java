@@ -73,7 +73,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         for (int i = 0;i<providers.size();i++){
             IComponentsProvider provider = providers.get(i);
             if(null != provider){
-                provider.onModuleExit();
+                provider.onComponentExit();
             }
         }
         providers = null;
@@ -106,12 +106,12 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             final IComponentsProvider provider = allProvider.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_all,false);
-            ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getModuleName());
-            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(provider.getModuleIconResId());
+            ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getComponentName());
+            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(provider.getComponentIconResId());
             ((Button)(view.findViewById(R.id.moudle_navigation_main))).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    provider.startMainActivity(AppMainActivity.this);
+                    provider.startComponentMainActivity(AppMainActivity.this);
                 }
             });
             app_modules_all.addView(view);
@@ -128,7 +128,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             if(null != provider){
                 newProviders.add(provider);
                 if(!providers.remove(provider)){//说明原来组件不包含
-                    provider.onModuleEnter();
+                    provider.onComponentEnter();
                     Log.v("MainActivity","provider "+provider.getClass().getSimpleName() + " id " + provider.hashCode());
                 }else{//说明包含，不处理
                     //doNothing.
@@ -148,7 +148,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction ft          = fragmentManager.beginTransaction();
 
-            Fragment f = providers.get(i).getModuleMainFragment(false);
+            Fragment f = providers.get(i).getComponentMainFragment(false);
             if(null != f){
                 ft.remove(f);
             }
@@ -158,7 +158,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
             //--------------同时删除多余的已经初始化的Fragment--------------
 
-            providers.get(i).onModuleExit();
+            providers.get(i).onComponentExit();
 
             //重置当前显示的组件
             if(currentProvider == providers.get(i)){
@@ -194,17 +194,17 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             final IComponentsProvider provider = providers.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_valid,false);
-            ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getModuleName());
-            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(provider.getModuleIconResId());
+            ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getComponentName());
+            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(provider.getComponentIconResId());
             ((Button)(view.findViewById(R.id.moudle_navigation_main))).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    provider.startMainActivity(AppMainActivity.this);
+                    provider.startComponentMainActivity(AppMainActivity.this);
                 }
             });
             app_modules_valid.addView(view);
 
-            View tabItemView = provider.getModuleTabView(this,true);
+            View tabItemView = provider.getComponentTabView(this,true);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT);
             tabItemView.setTag(provider);
             tabItemView.setOnClickListener(this);
@@ -230,7 +230,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-        Fragment nextShowFragment = provider.getModuleMainFragment(true);
+        Fragment nextShowFragment = provider.getComponentMainFragment(true);
         Log.v("MainActivity","nextShowFragment "+nextShowFragment.getClass().getSimpleName() + " id " + nextShowFragment.hashCode());
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -238,14 +238,14 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         //隐藏旧的
         for (int i = 0; i< providers.size(); i++){
-            Fragment f = providers.get(i).getModuleMainFragment(false);
+            Fragment f = providers.get(i).getComponentMainFragment(false);
             if(null != f && f.isAdded() && f != nextShowFragment){
                 ft.hide(f);
             }
         }
 
         //添加新的
-        String tag = provider.getModuleName();
+        String tag = provider.getComponentName();
 
         //如果不是同一个fragment,删除旧的
         Fragment foundFragment = fragmentManager.findFragmentByTag(tag);

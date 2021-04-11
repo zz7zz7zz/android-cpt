@@ -25,19 +25,19 @@ public class GameProviderImpl implements IGameProvider {
     private WeakReference<View> viewWeakReference;
 
     @Override
-    public View getModuleTabView(Context context, boolean isCreatedIfNull) {
+    public View getComponentTabView(Context context, boolean isCreatedIfNull) {
         View ret = (null != viewWeakReference) ? viewWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
             ret = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
-            ((TextView)(ret.findViewById(R.id.moudle_name))).setText(getModuleName());
-            ((ImageView)(ret.findViewById(R.id.moudle_icon))).setBackgroundResource(getModuleIconResId());
+            ((TextView)(ret.findViewById(R.id.moudle_name))).setText(getComponentName());
+            ((ImageView)(ret.findViewById(R.id.moudle_icon))).setBackgroundResource(getComponentIconResId());
             viewWeakReference = new WeakReference<>(ret);
         }
         return ret;
     }
 
     @Override
-    public Fragment getModuleMainFragment(boolean isCreatedIfNull) {
+    public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
         Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
             ret = new GameMainFragment();
@@ -47,18 +47,18 @@ public class GameProviderImpl implements IGameProvider {
     }
 
     @Override
-    public void startMainActivity(Context context) {
+    public void startComponentMainActivity(Context context) {
         Intent mIntent = new Intent(context, GameMainActivity.class);
         context.startActivity(mIntent);
     }
 
     @Override
-    public String getModuleName() {
+    public String getComponentName() {
         return context.getString(R.string.game_name);
     }
 
     @Override
-    public int getModuleIconResId() {
+    public int getComponentIconResId() {
         return R.drawable.game_icon_selector;
     }
 
@@ -73,12 +73,12 @@ public class GameProviderImpl implements IGameProvider {
     }
 
     @Override
-    public void onModuleEnter() {
+    public void onComponentEnter() {
         Log.v(TAG,"onModuleEnter ");
     }
 
     @Override
-    public void onModuleExit() {
+    public void onComponentExit() {
         Log.v(TAG,"onModuleExit ");
         if(null != fragmentWeakReference){
             fragmentWeakReference.clear();
