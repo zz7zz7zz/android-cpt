@@ -3,6 +3,7 @@ package com.module.im;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.module.components.ProviderFactory;
 import com.module.components.game.IGameProvider;
@@ -26,10 +27,15 @@ public class IMMainActivity extends AppCompatActivity {
 
         communicateWithOtherComponents();
 
+        communicateWithOtherComponents1();
+
         communicateWithOtherComponents2();
     }
 
     private void communicateWithOtherComponents(){
+
+        Log.v("IMMainActivity","from get()");
+
         {
             IGameProvider provider = IGameProvider.get();
             provider.startGame("H H H");
@@ -56,10 +62,48 @@ public class IMMainActivity extends AppCompatActivity {
         }
     }
 
+    private void communicateWithOtherComponents1(){
+
+        Log.v("IMMainActivity","from getComponentByName()");
+
+        {
+            IGameProvider provider = (IGameProvider) ProviderFactory.getComponentByName(":app_game");
+            if(null != provider)
+                provider.startGame("H H H-1");
+        }
+
+        {
+            IIntegrateProvider provider = (IIntegrateProvider) ProviderFactory.getComponentByName(":app_integrate");
+            if(null != provider)
+                provider.getIntegrateTasks();
+        }
+
+        {
+            IShoppingProvider provider = (IShoppingProvider) ProviderFactory.getComponentByName(":app_shopping");
+            if(null != provider)
+                provider.getGoodInfo();
+        }
+
+        {
+            INewsProvider provider = (INewsProvider) ProviderFactory.getComponentByName(":app_news");
+            if(null != provider)
+                provider.getNewsList();
+        }
+
+        {
+            IVideoProvider provider = (IVideoProvider) ProviderFactory.getComponentByName(":app_video");
+            if(null != provider)
+                provider.playVideo(this, "http://www.baidu.com/video");
+        }
+    }
+
     private void communicateWithOtherComponents2(){
+
+        Log.v("IMMainActivity","from getComponentByClass()");
+
         {
             IGameProvider provider = ProviderFactory.getComponentByClass(IGameProvider.class);
-            provider.startGame("H H H 2");
+            provider.startGame("H H H-2");
         }
 
         {
