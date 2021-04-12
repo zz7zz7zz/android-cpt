@@ -24,47 +24,14 @@ public class IMMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.im_main);
 
-
-        communicateWithOtherComponents();
-
         communicateWithOtherComponents1();
 
         communicateWithOtherComponents2();
     }
 
-    private void communicateWithOtherComponents(){
-
-        Log.v("IMMainActivity","from get()");
-
-        {
-            IGameProvider provider = IGameProvider.get();
-            provider.startGame("H H H");
-        }
-
-        {
-            IIntegrateProvider provider = IIntegrateProvider.get();
-            provider.getIntegrateTasks();
-        }
-
-        {
-            IShoppingProvider provider = IShoppingProvider.get();
-            provider.getGoodInfo();
-        }
-
-        {
-            INewsProvider provider = INewsProvider.get();
-            provider.getNewsList();
-        }
-
-        {
-            IVideoProvider provider = IVideoProvider.get();
-            provider.playVideo(this, "http://www.baidu.com/video");
-        }
-    }
-
     private void communicateWithOtherComponents1(){
 
-        Log.v("IMMainActivity","from getComponentByName()");
+        Log.v("IMMainActivity","----------from getComponentByName()----------");
 
         {
             IGameProvider provider = (IGameProvider) ProviderFactory.getComponentByName(":app_game");
@@ -99,7 +66,7 @@ public class IMMainActivity extends AppCompatActivity {
 
     private void communicateWithOtherComponents2(){
 
-        Log.v("IMMainActivity","from getComponentByClass()");
+        Log.v("IMMainActivity","----------from communicateWithOtherComponents2()----------");
 
         {
             IGameProvider provider = ProviderFactory.getComponentByClass(IGameProvider.class);

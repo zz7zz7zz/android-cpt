@@ -8,15 +8,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.shopping.IShoppingConsts;
 import com.module.components.shopping.IShoppingProvider;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IShoppingConsts.Provider.MAIN, name = "购物服务")
+@Route(path = IShoppingProvider.Provider.MAIN, name = IShoppingProvider.MODULE)
 public class ShoppingProviderImpl implements IShoppingProvider {
 
     private static final String TAG = "ShoppingProviderImpl";

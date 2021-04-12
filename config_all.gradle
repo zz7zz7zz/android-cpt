@@ -37,7 +37,7 @@ ext {
 
     //App壳工程依赖组件
     appModuleConfig = [
-        weixin: [':app_im',':app_video',':app_game',':app_news',':app_integrate',':app_shopping'],
+        weixin: [':app_im',':app_video',':app_news',':app_integrate'],
         taobao:  [':app_im',':app_shopping'],
         toutiao:  [':app_news',':app_integrate',':app_video']
     ]

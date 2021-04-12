@@ -12,12 +12,19 @@ import com.module.components.IComponentsProvider;
 
 public interface IAppProvider extends IComponentsProvider {
 
-    public static IAppProvider get(){
-        IAppProvider ret = (IAppProvider) ARouter.getInstance().build(IAppConsts.Provider.MAIN).navigation();
-        return null != ret ? ret : DEFAULT;
-    }
-
+    //---------------------------------------------------
     static final String TAG = "IAppProvider";
+
+    //---------------------------------------------------
+    public static final String MODULE   = "app";
+
+    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+
+    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+
+    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    //---------------------------------------------------
+
     static IAppProvider DEFAULT = new IAppProvider() {
         @Override
         public void onComponentEnter() {

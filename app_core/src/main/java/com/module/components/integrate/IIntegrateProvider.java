@@ -12,14 +12,20 @@ import com.module.components.IComponentsProvider;
 
 public interface IIntegrateProvider extends IComponentsProvider {
 
-    String getIntegrateTasks();
-
-    public static IIntegrateProvider get(){
-        IIntegrateProvider ret = (IIntegrateProvider) ARouter.getInstance().build(IIntegrateConsts.Provider.MAIN).navigation();
-        return null != ret ? ret : DEFAULT;
-    }
+    //---------------------------------------------------
 
     static final String TAG = "IIntegrateProvider";
+
+    //---------------------------------------------------
+    public static final String MODULE   = "integrate";
+
+    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+
+    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+
+    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    //---------------------------------------------------
+
     static IIntegrateProvider DEFAULT = new IIntegrateProvider() {
         @Override
         public String getIntegrateTasks() {
@@ -71,4 +77,7 @@ public interface IIntegrateProvider extends IComponentsProvider {
             
         }
     };
+
+    //---------------------------------------------------
+    String getIntegrateTasks();
 }

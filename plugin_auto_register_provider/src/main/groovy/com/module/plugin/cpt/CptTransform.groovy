@@ -67,6 +67,9 @@ class CptTransform extends Transform {
             // scan class files
             it.directoryInputs.each {
 
+                pool.insertClassPath(it.file.absolutePath)
+                pool.insertClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/c734ae58d954bef0f67be11fa375b6b1/jetified-arouter-api-1.5.1/jars/classes.jar")
+
                 File dest = transformInvocation.outputProvider.getContentLocation(it.name, it.contentTypes, it.scopes, Format.DIRECTORY)
                 String root = it.file.absolutePath
                 if (!root.endsWith(File.separator))

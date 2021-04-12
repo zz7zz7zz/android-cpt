@@ -12,14 +12,19 @@ import com.module.components.IComponentsProvider;
 
 public interface IVideoProvider extends IComponentsProvider {
 
-    void playVideo(Context context, String msg);
-
-    public static IVideoProvider get(){
-        IVideoProvider ret = (IVideoProvider) ARouter.getInstance().build(IVideoConsts.Provider.MAIN).navigation();
-        return null != ret ? ret : DEFAULT;
-    }
+    //---------------------------------------------------
 
     static final String TAG = "IVideoProvider";
+
+    //---------------------------------------------------
+    public static final String MODULE   = "video";
+
+    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+
+    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+
+    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    //---------------------------------------------------
     static IVideoProvider DEFAULT = new IVideoProvider() {
         @Override
         public void playVideo(Context context, String msg) {
@@ -69,6 +74,10 @@ public interface IVideoProvider extends IComponentsProvider {
         public void init(Context context) {
             
         }
+
+
     };
 
+    //---------------------------------------------------
+    void playVideo(Context context, String msg);
 }

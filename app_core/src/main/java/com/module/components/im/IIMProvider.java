@@ -12,16 +12,20 @@ import com.module.components.IComponentsProvider;
 
 public interface IIMProvider extends IComponentsProvider {
 
-    String getMessage();
-
-    void sendMessage(String msg);
-
-    public static IIMProvider get(){
-        IIMProvider ret = (IIMProvider) ARouter.getInstance().build(IIMConsts.Provider.MAIN).navigation();
-        return null != ret ? ret : DEFAULT;
-    }
+    //---------------------------------------------------
 
     static final String TAG = "IIMProvider";
+
+    //---------------------------------------------------
+    public static final String MODULE   = "im";
+
+    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+
+    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+
+    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    //---------------------------------------------------
+
     static IIMProvider DEFAULT = new IIMProvider() {
         @Override
         public String getMessage() {
@@ -78,4 +82,9 @@ public interface IIMProvider extends IComponentsProvider {
             
         }
     };
+
+    //---------------------------------------------------
+    String getMessage();
+
+    void sendMessage(String msg);
 }

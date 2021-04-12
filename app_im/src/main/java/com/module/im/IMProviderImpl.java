@@ -11,12 +11,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.im.IIMConsts;
 import com.module.components.im.IIMProvider;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IIMConsts.Provider.MAIN, name = "聊天服务")
+@Route(path = IIMProvider.PROVIDER_MAIN, name = IIMProvider.MODULE)
 public class IMProviderImpl implements IIMProvider {
 
     private static final String TAG = "IMProviderImpl";

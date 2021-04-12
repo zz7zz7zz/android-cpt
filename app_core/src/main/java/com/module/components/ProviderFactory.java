@@ -29,19 +29,26 @@ public class ProviderFactory {
      */
     public static<T> T getComponentByClass(Class<T> clazz){
 //        if(clazz.equals(IAppProvider.class)){
-//            return (T) IAppProvider.get();
+//            T ret = (T) ARouter.getInstance().build(IAppProvider.PROVIDER_MAIN).navigation();
+//            return null != ret ? ret : IAppProvider.DEFAULT;
 //        }else if(clazz.equals(IGameProvider.class)){
-//            return (T) IGameProvider.get();
+//            T ret = (T) ARouter.getInstance().build(IGameProvider.PROVIDER_MAIN).navigation();
+//            return null != ret ? ret : IGameProvider.DEFAULT;
 //        }else if(clazz.equals(IIMProvider.class)){
-//            return (T) IIMProvider.get();
+//            T ret = (T) ARouter.getInstance().build(IIMProvider.PROVIDER_MAIN).navigation();
+//            return null != ret ? ret : IIMProvider.DEFAULT;
 //        }else if(clazz.equals(IIntegrateProvider.class)){
-//            return (T) IIntegrateProvider.get();
+//            T ret = (T) ARouter.getInstance().build(IIntegrateProvider.PROVIDER_MAIN).navigation();
+//            return null != ret ? ret : IIntegrateProvider.DEFAULT;
 //        }else if(clazz.equals(INewsProvider.class)){
-//            return (T) INewsProvider.get();
+//            T ret = (T) ARouter.getInstance().build(INewsProvider.PROVIDER_MAIN).navigation();
+//            return null != ret ? ret : INewsProvider.DEFAULT;
 //        }else if(clazz.equals(IShoppingProvider.class)){
-//            return (T) IShoppingProvider.get();
+//            T ret = (T) ARouter.getInstance().build(IShoppingProvider.PROVIDER_MAIN).navigation();
+//            return null != ret ? ret : IShoppingProvider.DEFAULT;
 //        }else if(clazz.equals(IVideoProvider.class)){
-//            return (T) IVideoProvider.get();
+//            T ret = (T) ARouter.getInstance().build(IVideoProvider.PROVIDER_MAIN).navigation();
+//            return null != ret ? ret : IVideoProvider.DEFAULT;
 //        }
         return null;
     }

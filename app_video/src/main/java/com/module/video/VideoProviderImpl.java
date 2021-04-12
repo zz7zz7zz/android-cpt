@@ -11,12 +11,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.video.IVideoConsts;
 import com.module.components.video.IVideoProvider;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IVideoConsts.Provider.MAIN, name = "视频服务")
+@Route(path = IVideoProvider.PROVIDER_MAIN, name = IVideoProvider.MODULE)
 public class VideoProviderImpl implements IVideoProvider {
 
     private static final String TAG = "VideoProviderImpl";

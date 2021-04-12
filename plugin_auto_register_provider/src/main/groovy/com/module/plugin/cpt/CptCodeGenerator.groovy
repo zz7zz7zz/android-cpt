@@ -47,8 +47,10 @@ class CptCodeGenerator {
                         sb.append("else ")
                     }
                     sb.append(String.format("if(clazz.equals(%s.class)){\n" +
-                              "     return /*(T)*/ %s.get();\n" +
-                            "}",name,name))
+                            "     %s ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(%s.PROVIDER_MAIN).navigation();\n" +
+                                 "return null != ret ? ret : %s.DEFAULT;\n"+
+                            "}",name,,name,name,name))
+
                     isFrist = false;
                 }
 println(sb.toString())

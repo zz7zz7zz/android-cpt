@@ -7,13 +7,12 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.app.IAppConsts;
 import com.module.components.app.IAppProvider;
 
 /**
  * 可能用的到也可能用不到
  */
-@Route(path = IAppConsts.Provider.MAIN, name = "App壳")
+@Route(path = IAppProvider.PROVIDER_MAIN, name = IAppProvider.MODULE)
 public class AppProviderImpl implements IAppProvider {
 
     private static final String TAG = "AppProviderImpl";

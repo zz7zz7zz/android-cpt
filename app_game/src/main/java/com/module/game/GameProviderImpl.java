@@ -8,15 +8,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.game.IGameConsts;
 import com.module.components.game.IGameProvider;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IGameConsts.Provider.MAIN, name = "游戏服务")
+@Route(path = IGameProvider.Provider.MAIN, name = IGameProvider.MODULE)
 public class GameProviderImpl implements IGameProvider {
 
     private static final String TAG = "GameProviderImpl";

@@ -11,12 +11,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.news.INewsConsts;
 import com.module.components.news.INewsProvider;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = INewsConsts.Provider.MAIN, name = "新闻服务")
+@Route(path = INewsProvider.PROVIDER_MAIN, name = INewsProvider.MODULE)
 public class NewsProviderImpl implements INewsProvider {
 
     private static final String TAG = "NewsProviderImpl";

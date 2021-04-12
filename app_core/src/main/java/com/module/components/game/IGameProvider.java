@@ -12,14 +12,19 @@ import com.module.components.IComponentsProvider;
 
 public interface IGameProvider extends IComponentsProvider {
 
-    void startGame(String msg);
-
-    public static IGameProvider get(){
-        IGameProvider ret = (IGameProvider) ARouter.getInstance().build(IGameConsts.Provider.MAIN).navigation();
-        return null != ret ? ret : DEFAULT;
-    }
-
+    //---------------------------------------------------
     static final String TAG = "IGameProvider";
+
+    //---------------------------------------------------
+    public static final String MODULE   = "game";
+
+    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+
+    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+
+    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    //---------------------------------------------------
+
     static IGameProvider DEFAULT = new IGameProvider() {
         @Override
         public void startGame(String msg) {
@@ -70,6 +75,9 @@ public interface IGameProvider extends IComponentsProvider {
             
         }
     };
+
+    //---------------------------------------------------
+    void startGame(String msg);
 
       //方法一：使用匿名对象，每个对象手动添加代码
 

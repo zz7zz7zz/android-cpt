@@ -12,14 +12,20 @@ import com.module.components.IComponentsProvider;
 
 public interface IShoppingProvider extends IComponentsProvider {
 
-    String getGoodInfo();
-
-    public static IShoppingProvider get(){
-        IShoppingProvider ret = (IShoppingProvider) ARouter.getInstance().build(IShoppingConsts.Provider.MAIN).navigation();
-        return null != ret ? ret : DEFAULT;
-    }
+    //---------------------------------------------------
 
     static final String TAG = "IShoppingProvider";
+
+    //---------------------------------------------------
+    public static final String MODULE   = "shopping";
+
+    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+
+    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+
+    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    //---------------------------------------------------
+
     static IShoppingProvider DEFAULT = new IShoppingProvider() {
         @Override
         public String getGoodInfo() {
@@ -71,4 +77,7 @@ public interface IShoppingProvider extends IComponentsProvider {
             
         }
     };
+
+    //---------------------------------------------------
+    String getGoodInfo();
 }

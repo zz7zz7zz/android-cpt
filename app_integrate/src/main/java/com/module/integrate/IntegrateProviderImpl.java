@@ -11,12 +11,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.integrate.IIntegrateConsts;
 import com.module.components.integrate.IIntegrateProvider;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IIntegrateConsts.Provider.MAIN, name = "积分服务")
+@Route(path = IIntegrateProvider.PROVIDER_MAIN, name = IIntegrateProvider.MODULE)
 public class IntegrateProviderImpl implements IIntegrateProvider {
 
     private static final String TAG = "IntegrateProviderImpl";

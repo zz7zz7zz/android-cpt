@@ -12,14 +12,20 @@ import com.module.components.IComponentsProvider;
 
 public interface INewsProvider extends IComponentsProvider {
 
-    String getNewsList();
-
-    public static INewsProvider get(){
-        INewsProvider ret = (INewsProvider) ARouter.getInstance().build(INewsConsts.Provider.MAIN).navigation();
-        return null != ret ? ret : DEFAULT;
-    }
+    //---------------------------------------------------
 
     static final String TAG = "INewsProvider";
+
+    //---------------------------------------------------
+    public static final String MODULE   = "news";
+
+    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+
+    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+
+    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    //---------------------------------------------------
+
     static final INewsProvider DEFAULT = new INewsProvider() {
         @Override
         public String getNewsList() {
@@ -71,5 +77,10 @@ public interface INewsProvider extends IComponentsProvider {
             
         }
     };
+
+    //---------------------------------------------------
+    String getNewsList();
+
+
 
 }
