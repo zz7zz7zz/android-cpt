@@ -70,4 +70,62 @@ public interface IGameProvider extends IComponentsProvider {
             Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
         }
     };
+
+      //使用动态代理打日志
+//    public static IGameProvider get(){
+//        IGameProvider ret = (IGameProvider) ARouter.getInstance().build(IGameConsts.Provider.MAIN).navigation();
+//        return null != ret ? ret : DefaultComponentProxy.get(TAG,DEFAULT);
+//    }
+//
+//    static final String TAG = "IGameProvider";
+//    static IGameProvider DEFAULT = new IGameProvider() {
+//        @Override
+//        public void startGame(String msg) {
+//
+//        }
+//
+//        @Override
+//        public void onComponentEnter() {
+//
+//        }
+//
+//        @Override
+//        public void onComponentExit() {
+//
+//        }
+//
+//        @Override
+//        public String getComponentName() {
+//
+//            return null;
+//        }
+//
+//        @Override
+//        public int getComponentIconResId() {
+//
+//            return 0;
+//        }
+//
+//        @Override
+//        public View getComponentTabView(Context context, boolean isCreatedIfNull) {
+//
+//            return null;
+//        }
+//
+//        @Override
+//        public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
+//
+//            return null;
+//        }
+//
+//        @Override
+//        public void startComponentMainActivity(Context context) {
+//
+//        }
+//
+//        @Override
+//        public void init(Context context) {
+//
+//        }
+//    };
 }
