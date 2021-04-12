@@ -6,6 +6,9 @@ import com.android.utils.FileUtils
 import com.module.plugin.cpt.util.ScanSetting
 import com.module.plugin.cpt.util.ScanUtil
 import javassist.ClassPool
+import javassist.CtClass
+import javassist.CtMethod
+import javassist.Modifier
 import org.gradle.api.Project
 
 class CptTransform extends Transform {
@@ -88,6 +91,17 @@ class CptTransform extends Transform {
 //                        println("it.file.absolutePath "+it.file.absolutePath);
 //                        println("dest.absolutePath "+dest.absolutePath);
                     }
+
+                    if(file.isFile() && ScanUtil.shouldProcessClasswithLog(path)){
+                        //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
+                        pool.appendClassPath(project.android.bootClasspath[0].toString())
+                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
+
+                        def preFileName = it.file.absolutePath
+                        //println("-----preFileName----- " + file.absolutePath)
+                        pool.insertClassPath(preFileName)
+                        findTarget(file,preFileName)
+                    }
                 }
 
                 // copy to dest
@@ -122,5 +136,84 @@ class CptTransform extends Transform {
         }
         println("----------------------Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
 
+    }
+
+
+    void findTarget(File dir,String fileName){
+        if(dir.isDirectory()){
+            dir.listFiles().each {
+                findTarget(it,fileName)
+            }
+        }else{
+            modify(dir,fileName)
+        }
+    }
+
+    void modify(File dir,String fileName){
+
+        def filePath = dir.absolutePath
+        if(!filePath.endsWith(".class")){
+            return
+        }
+
+        if(filePath.contains('R$') || filePath.contains('R.class') || filePath.contains('BuildConfig.class')){
+            return
+        }
+
+
+        def className = filePath.replace(fileName,"")
+                .replace("\\",".")
+                .replace("/",".")
+        def name = className.replace(".class","").substring(1)
+
+        println("-----start----- ")
+        println("filePath " + filePath)
+        println("fileName " + fileName)
+        println("name " + name)
+        println("-----end----- ")
+
+//        if(name.contains("com.open.test")){
+            //修改类，插入代码
+            CtClass ctClass = pool.get(name)
+
+            addCode(ctClass,fileName)
+
+//        }
+
+    }
+
+    void addCode(CtClass ctClass,String fileName){
+        //报异常：javassist.CannotCompileException: no method body
+
+        if(ctClass.isInterface()){
+            return
+        }
+
+        if(ctClass.getName().contains("PatchProxy")){
+            return
+        }
+
+        println("class "+ctClass)
+        println("className "+ctClass.getName())
+
+        CtMethod[] ctMethods = ctClass.getDeclaredMethods()
+        for (method in ctMethods){
+            println("method "+method.getName())
+            //空函数或者抽象函数
+//            if(method.isEmpty()){
+//                continue
+//            }
+
+            //Native方法
+            if (Modifier.isNative(method.getModifiers())){
+                continue
+            }
+
+            method.insertBefore("android.util.Log.e(TAG, com.module.components.IConsts.PROMPT_COMPONENT_NOT_FOUND);")
+
+        }
+
+        ctClass.writeFile(fileName)
+        ctClass.detach()
     }
 }

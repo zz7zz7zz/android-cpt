@@ -13,6 +13,10 @@ class ScanUtil {
         return entryName != null && entryName.startsWith(ScanSetting.FLITER_CLASS_NAME_START) && entryName.endsWith(ScanSetting.FLITER_CLASS_NAME_END) && !entryName.endsWith('$'+ScanSetting.FLITER_CLASS_NAME_END)
     }
 
+    static boolean shouldProcessClasswithLog(String entryName) {
+        return entryName != null  && entryName.endsWith('Provider\$1.class')
+    }
+
     static void scanClass(File file) {
         scanClass(new FileInputStream(file))
     }

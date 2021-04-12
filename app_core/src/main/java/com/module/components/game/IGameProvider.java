@@ -23,55 +23,55 @@ public interface IGameProvider extends IComponentsProvider {
     static IGameProvider DEFAULT = new IGameProvider() {
         @Override
         public void startGame(String msg) {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
         }
 
         @Override
         public void onComponentEnter() {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
         }
 
         @Override
         public void onComponentExit() {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
         }
 
         @Override
         public String getComponentName() {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
             return null;
         }
 
         @Override
         public int getComponentIconResId() {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
             return 0;
         }
 
         @Override
         public View getComponentTabView(Context context, boolean isCreatedIfNull) {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
             return null;
         }
 
         @Override
         public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
             return null;
         }
 
         @Override
         public void startComponentMainActivity(Context context) {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
         }
 
         @Override
         public void init(Context context) {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
         }
     };
 
-      //方法一：使用匿名对象
+      //方法一：使用匿名对象，每个对象手动添加代码
 
       //方法二：使用动态代理打日志
 //    public static IGameProvider get(){

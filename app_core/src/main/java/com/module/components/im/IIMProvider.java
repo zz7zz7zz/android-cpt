@@ -25,57 +25,57 @@ public interface IIMProvider extends IComponentsProvider {
     static IIMProvider DEFAULT = new IIMProvider() {
         @Override
         public String getMessage() {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
             return null;
         }
 
         @Override
         public void sendMessage(String msg) {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
         }
 
         @Override
         public void onComponentEnter() {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
         }
 
         @Override
         public void onComponentExit() {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
         }
 
         @Override
         public String getComponentName() {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
             return null;
         }
 
         @Override
         public int getComponentIconResId() {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
             return 0;
         }
 
         @Override
         public View getComponentTabView(Context context, boolean isCreatedIfNull) {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
             return null;
         }
 
         @Override
         public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
             return null;
         }
 
         @Override
         public void startComponentMainActivity(Context context) {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
         }
 
         @Override
         public void init(Context context) {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            
         }
     };
 }
