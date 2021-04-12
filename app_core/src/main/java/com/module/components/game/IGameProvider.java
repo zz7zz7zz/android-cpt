@@ -71,7 +71,9 @@ public interface IGameProvider extends IComponentsProvider {
         }
     };
 
-      //使用动态代理打日志
+      //方法一：使用匿名对象
+
+      //方法二：使用动态代理打日志
 //    public static IGameProvider get(){
 //        IGameProvider ret = (IGameProvider) ARouter.getInstance().build(IGameConsts.Provider.MAIN).navigation();
 //        return null != ret ? ret : DefaultComponentProxy.get(TAG,DEFAULT);
@@ -128,4 +130,7 @@ public interface IGameProvider extends IComponentsProvider {
 //
 //        }
 //    };
+
+    //方法三：使用javassist 对匿名类进行处理
+
 }

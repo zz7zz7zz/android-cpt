@@ -103,9 +103,6 @@ class CptTransform extends Transform {
                 if (ext.classList.isEmpty()) {
                     println("No class implements found for interface:" + ext.interfaceName)
                 } else {
-                    ext.classList.each {
-                        println(it)
-                    }
 
                     //将当前路径加入类池,不然找不到这个类
                     pool.appendClassPath(providerFactoryParentPath)
@@ -113,8 +110,13 @@ class CptTransform extends Transform {
                     pool.appendClassPath(project.android.bootClasspath[0].toString())
 
                     CptCodeGenerator.insertCodeTo(ext,providerFactoryParentPath)
-
                     FileUtils.copyFile(providerFactoryClass, destProviderFactoryClassFile)
+
+                    ext.classList.each {
+                        println(it)
+//                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
+//                        CptCodeGenerator.insertLogCodeTo(it,providerFactoryParentPath)
+                    }
                 }
             }
         }
