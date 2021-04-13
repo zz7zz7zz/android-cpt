@@ -4,7 +4,7 @@ buildscript {
         google()
         jcenter()
 
-        //私有仓库(动态注册Provider)
+        //私有仓库(动态注册ComponentService)
         maven {
             url uri('repository_plugin')
         }

@@ -11,7 +11,7 @@ public interface IShoppingService extends IComponentService {
 
     //---------------------------------------------------
 
-    static final String TAG = "IShoppingProvider";
+    static final String TAG = "IShoppingSerivce";
 
     //---------------------------------------------------
     public static final String MODULE   = "shopping";

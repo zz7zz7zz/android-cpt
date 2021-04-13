@@ -10,7 +10,7 @@ import com.module.components.IComponentService;
 public interface IGameService extends IComponentService {
 
     //---------------------------------------------------
-    static final String TAG = "IGameProvider";
+    static final String TAG = "IGameSerivce";
 
     //---------------------------------------------------
     public static final String MODULE   = "game";
@@ -79,13 +79,13 @@ public interface IGameService extends IComponentService {
       //方法一：使用匿名对象，每个对象手动添加代码
 
       //方法二：使用动态代理打日志
-//    public static IGameProvider get(){
-//        IGameProvider ret = (IGameProvider) ARouter.getInstance().build(IGameConsts.Provider.MAIN).navigation();
+//    public static IGameService get(){
+//        IGameService ret = (IGameService) ARouter.getInstance().build(IGameConsts.Provider.MAIN).navigation();
 //        return null != ret ? ret : DefaultComponentProxy.get(TAG,DEFAULT);
 //    }
 //
-//    static final String TAG = "IGameProvider";
-//    static IGameProvider DEFAULT = new IGameProvider() {
+//    static final String TAG = "IGameService";
+//    static IGameService DEFAULT = new IGameService() {
 //        @Override
 //        public void startGame(String msg) {
 //

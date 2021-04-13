@@ -11,7 +11,7 @@ public interface INewsService extends IComponentService {
 
     //---------------------------------------------------
 
-    static final String TAG = "INewsProvider";
+    static final String TAG = "INewsSerivce";
 
     //---------------------------------------------------
     public static final String MODULE   = "news";

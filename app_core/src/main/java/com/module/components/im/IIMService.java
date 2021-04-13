@@ -11,7 +11,7 @@ public interface IIMService extends IComponentService {
 
     //---------------------------------------------------
 
-    static final String TAG = "IIMProvider";
+    static final String TAG = "IIMSerivce";
 
     //---------------------------------------------------
     public static final String MODULE   = "im";

@@ -28,8 +28,8 @@ import java.util.ArrayList;
 
 public class AppMainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ArrayList<IComponentService> providers = new ArrayList<>();
-    private IComponentService currentProvider = null;
+    private ArrayList<IComponentService> services = new ArrayList<>();
+    private IComponentService currentService = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.components_local).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initProvider(ComponentConfig.localComponents);
+                initServices(ComponentConfig.localComponents);
                 initView();
             }
         });
@@ -52,7 +52,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
                 NetImpl.getModules(new NetImpl.ICallback<List<String>>() {
                     @Override
                     public void onSuccss(List<String> strings) {
-                        initProvider(strings);
+                        initServices(strings);
                         initView();
                     }
 
@@ -71,27 +71,27 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         super.onDestroy();
 
         //组件释放操作
-        for (int i = 0;i<providers.size();i++){
-            IComponentService provider = providers.get(i);
+        for (int i = 0; i< services.size(); i++){
+            IComponentService provider = services.get(i);
             if(null != provider){
                 provider.onComponentExit();
             }
         }
-        providers = null;
-        currentProvider = null;
+        services = null;
+        currentService = null;
     }
 
     private void initAllComponents(List<String> components){
 
-        ArrayList<IComponentService> allProvider = new ArrayList<>();
+        ArrayList<IComponentService> allComponentSerices = new ArrayList<>();
         for (int i = 0;i<components.size();i++){
-            IComponentService provider = ComponentServiceManager.getComponentByName(components.get(i));
-            if(null != provider){
-                allProvider.add(provider);
+            IComponentService service = ComponentServiceManager.getComponentByName(components.get(i));
+            if(null != service){
+                allComponentSerices.add(service);
             }
         }
 
-        if(allProvider.size() == 0){
+        if(allComponentSerices.size() == 0){
             return;
         }
 
@@ -100,37 +100,37 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager manager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         manager.getDefaultDisplay().getMetrics(displayMetrics);
-        int width = displayMetrics.widthPixels/allProvider.size();
+        int width = displayMetrics.widthPixels/allComponentSerices.size();
 
-        for (int i = 0;i<allProvider.size();i++){
+        for (int i = 0;i<allComponentSerices.size();i++){
 
-            final IComponentService provider = allProvider.get(i);
+            final IComponentService service = allComponentSerices.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_all,false);
-            ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getComponentName());
-            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(provider.getComponentIconResId());
+            ((TextView)(view.findViewById(R.id.moudle_name))).setText(service.getComponentName());
+            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(service.getComponentIconResId());
             ((Button)(view.findViewById(R.id.moudle_navigation_main))).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    provider.startComponentMainActivity(AppMainActivity.this);
+                    service.startComponentMainActivity(AppMainActivity.this);
                 }
             });
             app_modules_all.addView(view);
         }
     }
 
-    //填充Provider
-    private void initProvider(List<String> componets){
+    //填充组件Service
+    private void initServices(List<String> componets){
 
         //1.添加或者重用新的
-        ArrayList<IComponentService> newProviders = new ArrayList<>();
+        ArrayList<IComponentService> newServices = new ArrayList<>();
         for (int i = 0;i<componets.size();i++){
-            IComponentService provider = ComponentServiceManager.getComponentByName(componets.get(i));
-            if(null != provider){
-                newProviders.add(provider);
-                if(!providers.remove(provider)){//说明原来组件不包含
-                    provider.onComponentEnter();
-                    Log.v("MainActivity","provider "+provider.getClass().getSimpleName() + " id " + provider.hashCode());
+            IComponentService service = ComponentServiceManager.getComponentByName(componets.get(i));
+            if(null != service){
+                newServices.add(service);
+                if(!services.remove(service)){//说明原来组件不包含
+                    service.onComponentEnter();
+                    Log.v("MainActivity","Service "+service.getClass().getSimpleName() + " id " + service.hashCode());
                 }else{//说明包含，不处理
                     //doNothing.
                 }
@@ -138,18 +138,18 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         }
 
 //新的组件集合为空，则不处理，要不然导致空页面
-//        if(newProviders.size() == 0){
+//        if(newServices.size() == 0){
 //            return;
 //        }
 
         //2.释放旧的
-        for (int i = 0;i<providers.size();i++){
+        for (int i = 0; i< services.size(); i++){
 
             //--------------同时删除多余的已经初始化的Fragment--------------
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction ft          = fragmentManager.beginTransaction();
 
-            Fragment f = providers.get(i).getComponentMainFragment(false);
+            Fragment f = services.get(i).getComponentMainFragment(false);
             if(null != f){
                 ft.remove(f);
             }
@@ -159,17 +159,17 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
             //--------------同时删除多余的已经初始化的Fragment--------------
 
-            providers.get(i).onComponentExit();
+            services.get(i).onComponentExit();
 
             //重置当前显示的组件
-            if(currentProvider == providers.get(i)){
-                currentProvider = null;
+            if(currentService == services.get(i)){
+                currentService = null;
             }
         }
-        providers.clear();
+        services.clear();
 
         //3.重新赋值
-        providers = newProviders;
+        services = newServices;
     }
 
     //填充UI
@@ -181,72 +181,72 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         app_modules_valid.removeAllViews();
         app_tabs.removeAllViews();
 
-        if(providers.size() == 0){
+        if(services.size() == 0){
             return;
         }
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager manager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         manager.getDefaultDisplay().getMetrics(displayMetrics);
-        int width = displayMetrics.widthPixels/providers.size();
+        int width = displayMetrics.widthPixels/ services.size();
 
-        for (int i = 0;i<providers.size();i++){
+        for (int i = 0; i< services.size(); i++){
 
-            final IComponentService provider = providers.get(i);
+            final IComponentService service = services.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_valid,false);
-            ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getComponentName());
-            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(provider.getComponentIconResId());
+            ((TextView)(view.findViewById(R.id.moudle_name))).setText(service.getComponentName());
+            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(service.getComponentIconResId());
             ((Button)(view.findViewById(R.id.moudle_navigation_main))).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    provider.startComponentMainActivity(AppMainActivity.this);
+                    service.startComponentMainActivity(AppMainActivity.this);
                 }
             });
             app_modules_valid.addView(view);
 
-            View tabItemView = provider.getComponentTabView(this,true);
+            View tabItemView = service.getComponentTabView(this,true);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT);
-            tabItemView.setTag(provider);
+            tabItemView.setTag(service);
             tabItemView.setOnClickListener(this);
             app_tabs.addView(tabItemView,layoutParams);
         }
 
-        setVisibleProvider(currentProvider);
+        setVisibleService(currentService);
     }
 
     @Override
     public void onClick(View v) {
         IComponentService provider =  (IComponentService) v.getTag();
-        setVisibleProvider(provider);
+        setVisibleService(provider);
     }
 
-    public void setVisibleProvider(IComponentService provider) {
+    public void setVisibleService(IComponentService service) {
         //没有的化默认展示第一个
-        if(null == provider){
-            provider = providers.get(0);
+        if(null == service){
+            service = services.get(0);
         }
 
-        if(currentProvider == provider){
+        if(currentService == service){
             return;
         }
 
-        Fragment nextShowFragment = provider.getComponentMainFragment(true);
+        Fragment nextShowFragment = service.getComponentMainFragment(true);
         Log.v("MainActivity","nextShowFragment "+nextShowFragment.getClass().getSimpleName() + " id " + nextShowFragment.hashCode());
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft          = fragmentManager.beginTransaction();
 
         //隐藏旧的
-        for (int i = 0; i< providers.size(); i++){
-            Fragment f = providers.get(i).getComponentMainFragment(false);
+        for (int i = 0; i< services.size(); i++){
+            Fragment f = services.get(i).getComponentMainFragment(false);
             if(null != f && f.isAdded() && f != nextShowFragment){
                 ft.hide(f);
             }
         }
 
         //添加新的
-        String tag = provider.getComponentName();
+        String tag = service.getComponentName();
 
         //如果不是同一个fragment,删除旧的
         Fragment foundFragment = fragmentManager.findFragmentByTag(tag);
@@ -264,6 +264,6 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 //            ft.commit();
         ft.commitAllowingStateLoss();
 
-        currentProvider = provider;
+        currentService = service;
     }
 }

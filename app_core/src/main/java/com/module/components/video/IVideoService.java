@@ -11,7 +11,7 @@ public interface IVideoService extends IComponentService {
 
     //---------------------------------------------------
 
-    static final String TAG = "IVideoProvider";
+    static final String TAG = "IVideoSerivce";
 
     //---------------------------------------------------
     public static final String MODULE   = "video";

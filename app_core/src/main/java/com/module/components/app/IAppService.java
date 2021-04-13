@@ -10,7 +10,7 @@ import com.module.components.IComponentService;
 public interface IAppService extends IComponentService {
 
     //---------------------------------------------------
-    static final String TAG = "IAppProvider";
+    static final String TAG = "IAppSerivce";
 
     //---------------------------------------------------
     public static final String MODULE   = "app";

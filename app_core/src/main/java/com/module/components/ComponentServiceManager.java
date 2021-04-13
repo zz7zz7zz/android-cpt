@@ -5,7 +5,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 public class ComponentServiceManager {
 
     /**
-     * 通过组件名（如:app_im）来找到Provider
+     * 通过组件名（如:app_im）来找到组件Service
      * @param component
      * @return
      */
@@ -15,7 +15,7 @@ public class ComponentServiceManager {
     }
 
     /**
-     * 通过服务类名来找到Provider
+     * 通过服务类名来找到组件Service , 未找到会有一个空实现的默认服务
      * @param clazz
      * @param <T>
      * @return

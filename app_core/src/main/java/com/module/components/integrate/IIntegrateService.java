@@ -11,7 +11,7 @@ public interface IIntegrateService extends IComponentService {
 
     //---------------------------------------------------
 
-    static final String TAG = "IIntegrateProvider";
+    static final String TAG = "IIntegrateSerivce";
 
     //---------------------------------------------------
     public static final String MODULE   = "integrate";
