@@ -9,7 +9,7 @@ import com.module.components.news.INewsProvider;
 import com.module.components.shopping.IShoppingProvider;
 import com.module.components.video.IVideoProvider;
 
-public class ProviderFactory {
+public class ProviderManager {
 
     /**
      * 通过组件名（如:app_im）来找到Provider

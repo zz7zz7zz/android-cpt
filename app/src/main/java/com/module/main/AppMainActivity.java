@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.module.components.ProviderFactory;
+import com.module.components.ProviderManager;
 import com.module.main.net.NetImpl;
 import com.module.components.IComponentsProvider;
 
@@ -84,7 +84,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         ArrayList<IComponentsProvider> allProvider = new ArrayList<>();
         for (int i = 0;i<components.size();i++){
-            IComponentsProvider provider = ProviderFactory.getComponentByName(components.get(i));
+            IComponentsProvider provider = ProviderManager.getComponentByName(components.get(i));
             if(null != provider){
                 allProvider.add(provider);
             }
@@ -124,7 +124,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         //1.添加或者重用新的
         ArrayList<IComponentsProvider> newProviders = new ArrayList<>();
         for (int i = 0;i<componets.size();i++){
-            IComponentsProvider provider = ProviderFactory.getComponentByName(componets.get(i));
+            IComponentsProvider provider = ProviderManager.getComponentByName(componets.get(i));
             if(null != provider){
                 newProviders.add(provider);
                 if(!providers.remove(provider)){//说明原来组件不包含

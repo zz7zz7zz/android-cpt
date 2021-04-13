@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.module.components.ProviderFactory;
+import com.module.components.ProviderManager;
 import com.module.components.game.IGameProvider;
 import com.module.components.integrate.IIntegrateProvider;
 import com.module.components.news.INewsProvider;
@@ -34,31 +34,31 @@ public class IMMainActivity extends AppCompatActivity {
         Log.v("IMMainActivity","----------from getComponentByName()----------");
 
         {
-            IGameProvider provider = (IGameProvider) ProviderFactory.getComponentByName(":app_game");
+            IGameProvider provider = (IGameProvider) ProviderManager.getComponentByName(":app_game");
             if(null != provider)
                 provider.startGame("H H H-1");
         }
 
         {
-            IIntegrateProvider provider = (IIntegrateProvider) ProviderFactory.getComponentByName(":app_integrate");
+            IIntegrateProvider provider = (IIntegrateProvider) ProviderManager.getComponentByName(":app_integrate");
             if(null != provider)
                 provider.getIntegrateTasks();
         }
 
         {
-            IShoppingProvider provider = (IShoppingProvider) ProviderFactory.getComponentByName(":app_shopping");
+            IShoppingProvider provider = (IShoppingProvider) ProviderManager.getComponentByName(":app_shopping");
             if(null != provider)
                 provider.getGoodInfo();
         }
 
         {
-            INewsProvider provider = (INewsProvider) ProviderFactory.getComponentByName(":app_news");
+            INewsProvider provider = (INewsProvider) ProviderManager.getComponentByName(":app_news");
             if(null != provider)
                 provider.getNewsList();
         }
 
         {
-            IVideoProvider provider = (IVideoProvider) ProviderFactory.getComponentByName(":app_video");
+            IVideoProvider provider = (IVideoProvider) ProviderManager.getComponentByName(":app_video");
             if(null != provider)
                 provider.playVideo(this, "http://www.baidu.com/video");
         }
@@ -69,27 +69,27 @@ public class IMMainActivity extends AppCompatActivity {
         Log.v("IMMainActivity","----------from communicateWithOtherComponents2()----------");
 
         {
-            IGameProvider provider = ProviderFactory.getComponentByClass(IGameProvider.class);
+            IGameProvider provider = ProviderManager.getComponentByClass(IGameProvider.class);
             provider.startGame("H H H-2");
         }
 
         {
-            IIntegrateProvider provider = ProviderFactory.getComponentByClass(IIntegrateProvider.class);
+            IIntegrateProvider provider = ProviderManager.getComponentByClass(IIntegrateProvider.class);
             provider.getIntegrateTasks();
         }
 
         {
-            IShoppingProvider provider = ProviderFactory.getComponentByClass(IShoppingProvider.class);
+            IShoppingProvider provider = ProviderManager.getComponentByClass(IShoppingProvider.class);
             provider.getGoodInfo();
         }
 
         {
-            INewsProvider provider = ProviderFactory.getComponentByClass(INewsProvider.class);
+            INewsProvider provider = ProviderManager.getComponentByClass(INewsProvider.class);
             provider.getNewsList();
         }
 
         {
-            IVideoProvider provider = ProviderFactory.getComponentByClass(IVideoProvider.class);
+            IVideoProvider provider = ProviderManager.getComponentByClass(IVideoProvider.class);
             provider.playVideo(this, "http://www.baidu.com/video");
         }
     }
