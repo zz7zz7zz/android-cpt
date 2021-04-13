@@ -3,6 +3,7 @@ package com.module.plugin.cpt
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.android.utils.FileUtils
+import com.module.plugin.cpt.bean.CptJarPathConfig
 import com.module.plugin.cpt.util.ScanSetting
 import com.module.plugin.cpt.util.ScanUtil
 import javassist.ClassPool
@@ -16,6 +17,8 @@ class CptTransform extends Transform {
     def project
 
     def pool = ClassPool.default
+
+    static CptJarPathConfig cptJarPathConfig
 
     static ArrayList<ScanSetting> registerList
     static File providerFactoryClass
@@ -73,7 +76,8 @@ class CptTransform extends Transform {
             it.directoryInputs.each {
 
                 pool.insertClassPath(it.file.absolutePath)
-                pool.insertClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/c734ae58d954bef0f67be11fa375b6b1/jetified-arouter-api-1.5.1/jars/classes.jar")
+//                pool.insertClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/c734ae58d954bef0f67be11fa375b6b1/jetified-arouter-api-1.5.1/jars/classes.jar")
+                pool.insertClassPath(cptJarPathConfig.arouterPath)
 
                 File dest = transformInvocation.outputProvider.getContentLocation(it.name, it.contentTypes, it.scopes, Format.DIRECTORY)
                 String root = it.file.absolutePath
@@ -103,7 +107,8 @@ class CptTransform extends Transform {
                     if(file.isFile() && ScanUtil.shouldProcessClasswithLog(path)){
                         //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
                         pool.appendClassPath(project.android.bootClasspath[0].toString())
-                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
+//                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
+                        pool.insertClassPath(cptJarPathConfig.fragmentPath)
 
                         def preFileName = it.file.absolutePath
                         //println("-----preFileName----- " + file.absolutePath)
@@ -120,7 +125,7 @@ class CptTransform extends Transform {
         println("----------------------Scan code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
         if (providerFactoryClass) {
             registerList.each { ext ->
-                println('Insert register code to file ' + providerFactoryClass.absolutePath)
+//                println('Insert register code to file ' + providerFactoryClass.absolutePath)
 
                 if (ext.classList.isEmpty()) {
                     println("No class implements found for interface:" + ext.interfaceName)
@@ -174,11 +179,11 @@ class CptTransform extends Transform {
                 .replace("/",".")
         def name = className.replace(".class","").substring(1)
 
-        println("-----start----- ")
-        println("filePath " + filePath)
-        println("fileName " + fileName)
-        println("name " + name)
-        println("-----end----- ")
+//        println("-----start----- ")
+//        println("filePath " + filePath)
+//        println("fileName " + fileName)
+//        println("name " + name)
+//        println("-----end----- ")
 
 //        if(name.contains("com.open.test")){
             //修改类，插入代码
@@ -201,12 +206,12 @@ class CptTransform extends Transform {
             return
         }
 
-        println("class "+ctClass)
-        println("className "+ctClass.getName())
+//        println("class "+ctClass)
+//        println("className "+ctClass.getName())
 
         CtMethod[] ctMethods = ctClass.getDeclaredMethods()
         for (method in ctMethods){
-            println("method "+method.getName())
+//            println("method "+method.getName())
             //空函数或者抽象函数
 //            if(method.isEmpty()){
 //                continue
