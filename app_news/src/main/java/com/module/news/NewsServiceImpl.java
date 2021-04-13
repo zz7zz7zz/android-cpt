@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
 @Route(path = INewsService.PROVIDER_MAIN, name = INewsService.MODULE)
 public class NewsServiceImpl implements INewsService {
 
-    private static final String TAG = "NewsProviderImpl";
+    private static final String TAG = "NewsServiceImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;

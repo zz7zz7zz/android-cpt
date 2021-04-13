@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
 @Route(path = IVideoService.PROVIDER_MAIN, name = IVideoService.MODULE)
 public class VideoServiceImpl implements IVideoService {
 
-    private static final String TAG = "VideoProviderImpl";
+    private static final String TAG = "VideoServiceImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;

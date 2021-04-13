@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
 @Route(path = IShoppingService.PROVIDER_MAIN, name = IShoppingService.MODULE)
 public class ShoppingServiceImpl implements IShoppingService {
 
-    private static final String TAG = "ShoppingProviderImpl";
+    private static final String TAG = "ShoppingServiceImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;

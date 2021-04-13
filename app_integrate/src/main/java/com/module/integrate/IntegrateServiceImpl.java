@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
 @Route(path = IIntegrateService.PROVIDER_MAIN, name = IIntegrateService.MODULE)
 public class IntegrateServiceImpl implements IIntegrateService {
 
-    private static final String TAG = "IntegrateProviderImpl";
+    private static final String TAG = "IntegrateServiceImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;

@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.module.components.ComponentServiceManager;
+import com.module.main.config.ComponentConfig;
 import com.module.main.net.NetImpl;
 import com.module.components.IComponentService;
 

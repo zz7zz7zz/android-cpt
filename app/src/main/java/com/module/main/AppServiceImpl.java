@@ -13,9 +13,9 @@ import com.module.components.app.IAppService;
  * 可能用的到也可能用不到
  */
 @Route(path = IAppService.PROVIDER_MAIN, name = IAppService.MODULE)
-public class AppProviderImpl implements IAppService {
+public class AppServiceImpl implements IAppService {
 
-    private static final String TAG = "AppProviderImpl";
+    private static final String TAG = "AppServiceImpl";
     private Context context;
 
     @Override

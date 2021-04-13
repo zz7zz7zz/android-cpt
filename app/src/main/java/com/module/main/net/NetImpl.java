@@ -3,7 +3,7 @@ package com.module.main.net;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.module.main.ComponentConfig;
+import com.module.main.config.ComponentConfig;
 
 import java.util.List;
 import java.util.Arrays;

@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
 @Route(path = IIMService.PROVIDER_MAIN, name = IIMService.MODULE)
 public class IMServiceImpl implements IIMService {
 
-    private static final String TAG = "IMProviderImpl";
+    private static final String TAG = "IMServiceImpl";
 
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;

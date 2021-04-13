@@ -1,4 +1,4 @@
-package com.module.main;
+package com.module.main.config;
 
 import java.util.Arrays;
 import java.util.List;

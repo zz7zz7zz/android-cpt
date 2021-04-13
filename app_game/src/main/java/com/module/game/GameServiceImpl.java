@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
 @Route(path = IGameService.PROVIDER_MAIN, name = IGameService.MODULE)
 public class GameServiceImpl implements IGameService {
 
-    private static final String TAG = "GameProviderImpl";
+    private static final String TAG = "GameServiceImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;

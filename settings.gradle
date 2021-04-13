@@ -1,4 +1,4 @@
-include ':plugin_auto_register_provider'
+include ':plugin_cpt_service_register'
 include ':lib_widget'
 include ':lib_net'
 include ':lib_analysis'
