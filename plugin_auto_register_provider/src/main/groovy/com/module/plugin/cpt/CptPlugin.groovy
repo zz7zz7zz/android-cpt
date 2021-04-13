@@ -10,6 +10,9 @@ class CptPlugin implements Plugin<Project>{
     @Override
     void apply(Project project) {
         print("--------CptPlugin--------")
+//        def cptJarPathConfig = project.extensions.create("cptJarPathConfig", CptJarPathConfig)
+//        println("CptPlugin cptJarPathConfig "+cptJarPathConfig.toString());
+//        println("CptPlugin cptJarPathConfig.arouterPath "+cptJarPathConfig.arouterPath)
 
         def library = project.extensions.getByType(LibraryExtension.class)
         def transform = new CptTransform(project)
