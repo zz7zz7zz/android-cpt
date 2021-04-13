@@ -44,53 +44,123 @@ android {
 //            }
 //        }
 
-        debug{
-            keyAlias      signConfig.debug.keyAlias
-            keyPassword   signConfig.debug.keyPassword
-            storeFile     file(signConfig.debug.storeFile)
-            storePassword signConfig.debug.storePassword
+//        debug{
+//            keyAlias      signConfig.debug.keyAlias
+//            keyPassword   signConfig.debug.keyPassword
+//            storeFile     file(signConfig.debug.storeFile)
+//            storePassword signConfig.debug.storePassword
+//        }
+//
+//        release{
+//            keyAlias      signConfig.release.keyAlias
+//            keyPassword   signConfig.release.keyPassword
+//            storeFile     file(signConfig.release.storeFile)
+//            storePassword signConfig.release.storePassword
+//        }
+//
+//        release2{
+//            keyAlias      signConfig.release2.keyAlias
+//            keyPassword   signConfig.release2.keyPassword
+//            storeFile     file(signConfig.release2.storeFile)
+//            storePassword signConfig.release2.storePassword
+//        }
+
+        println(" ----- debug ----- " + signEnableConfig.debug)
+        println(" ----- release ----- " + signEnableConfig.release)
+        println(" ----- release2 ----- " + signEnableConfig.release2)
+
+        if(signEnableConfig.debug){
+            debug{
+                keyAlias      signConfig.debug.keyAlias
+                keyPassword   signConfig.debug.keyPassword
+                storeFile     file(signConfig.debug.storeFile)
+                storePassword signConfig.debug.storePassword
+            }
         }
 
-        release{
-            keyAlias      signConfig.release.keyAlias
-            keyPassword   signConfig.release.keyPassword
-            storeFile     file(signConfig.release.storeFile)
-            storePassword signConfig.release.storePassword
+        if(signEnableConfig.release){
+            release{
+                keyAlias      signConfig.release.keyAlias
+                keyPassword   signConfig.release.keyPassword
+                storeFile     file(signConfig.release.storeFile)
+                storePassword signConfig.release.storePassword
+            }
         }
 
-        release2{
-            keyAlias      signConfig.release2.keyAlias
-            keyPassword   signConfig.release2.keyPassword
-            storeFile     file(signConfig.release2.storeFile)
-            storePassword signConfig.release2.storePassword
+        if(signEnableConfig.release2){
+            release2{
+                keyAlias      signConfig.release2.keyAlias
+                keyPassword   signConfig.release2.keyPassword
+                storeFile     file(signConfig.release2.storeFile)
+                storePassword signConfig.release2.storePassword
+            }
         }
     }
 
     buildTypes {
 
-        debug {
-            minifyEnabled false
-            shrinkResources false
-            zipAlignEnabled false
-            signingConfig signingConfigs.debug
+//        debug {
+//            minifyEnabled false
+//            shrinkResources false
+//            zipAlignEnabled false
+//            signingConfig signingConfigs.debug
+//        }
+//
+//        release {
+//            // 是否混淆
+//            minifyEnabled true
+//            // 移除无用的resource文件
+//            shrinkResources true
+//            // 是否zip对齐
+//            zipAlignEnabled true
+//            signingConfig signingConfigs.release
+//
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+//
+//        release2.initWith(buildTypes.release)
+//        release2 {
+//            signingConfig signingConfigs.release2
+//            matchingFallbacks = ['release','debug']
+//        }
+
+        if(signEnableConfig.debug){
+            debug {
+                minifyEnabled false
+                shrinkResources false
+                zipAlignEnabled false
+                signingConfig signingConfigs.debug
+            }
         }
 
-        release {
-            // 是否混淆
-            minifyEnabled true
-            // 移除无用的resource文件
-            shrinkResources true
-            // 是否zip对齐
-            zipAlignEnabled true
-            signingConfig signingConfigs.release
+        if(signEnableConfig.release){
+            release {
+                // 是否混淆
+                minifyEnabled true
+                // 移除无用的resource文件
+                shrinkResources true
+                // 是否zip对齐
+                zipAlignEnabled true
+                signingConfig signingConfigs.release
+                matchingFallbacks = ['release','debug']
 
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
         }
 
-        release2.initWith(buildTypes.release)
-        release2 {
-            signingConfig signingConfigs.release2
-            matchingFallbacks = ['release','debug']
+        if(signEnableConfig.release2){
+            release2 {
+                // 是否混淆
+                minifyEnabled true
+                // 移除无用的resource文件
+                shrinkResources true
+                // 是否zip对齐
+                zipAlignEnabled true
+                signingConfig signingConfigs.release2
+                matchingFallbacks = ['release','debug']
+
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
         }
 
 

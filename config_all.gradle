@@ -92,5 +92,11 @@ ext {
           ]
     ]
 
+    signEnableConfig = [
+            debug: true,
+            release: false,
+            release2: false
+    ]
+
 
 }
