@@ -1,22 +1,20 @@
-package com.module.components.app;
+package com.module.components.im;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.module.components.IConsts;
-import com.module.components.IComponentsProvider;
+import com.module.components.IComponentService;
 
-public interface IAppProvider extends IComponentsProvider {
+public interface IIMService extends IComponentService {
 
     //---------------------------------------------------
-    static final String TAG = "IAppProvider";
+
+    static final String TAG = "IIMProvider";
 
     //---------------------------------------------------
-    public static final String MODULE   = "app";
+    public static final String MODULE   = "im";
 
     public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
 
@@ -25,7 +23,18 @@ public interface IAppProvider extends IComponentsProvider {
     public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
     //---------------------------------------------------
 
-    static IAppProvider DEFAULT = new IAppProvider() {
+    static IIMService DEFAULT = new IIMService() {
+        @Override
+        public String getMessage() {
+            
+            return null;
+        }
+
+        @Override
+        public void sendMessage(String msg) {
+            
+        }
+
         @Override
         public void onComponentEnter() {
             
@@ -70,4 +79,9 @@ public interface IAppProvider extends IComponentsProvider {
             
         }
     };
+
+    //---------------------------------------------------
+    String getMessage();
+
+    void sendMessage(String msg);
 }

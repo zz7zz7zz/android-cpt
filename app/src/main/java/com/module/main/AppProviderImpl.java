@@ -7,13 +7,13 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.app.IAppProvider;
+import com.module.components.app.IAppService;
 
 /**
  * 可能用的到也可能用不到
  */
-@Route(path = IAppProvider.PROVIDER_MAIN, name = IAppProvider.MODULE)
-public class AppProviderImpl implements IAppProvider {
+@Route(path = IAppService.PROVIDER_MAIN, name = IAppService.MODULE)
+public class AppProviderImpl implements IAppService {
 
     private static final String TAG = "AppProviderImpl";
     private Context context;

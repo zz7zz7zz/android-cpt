@@ -1,23 +1,20 @@
-package com.module.components.integrate;
+package com.module.components.shopping;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.module.components.IConsts;
-import com.module.components.IComponentsProvider;
+import com.module.components.IComponentService;
 
-public interface IIntegrateProvider extends IComponentsProvider {
+public interface IShoppingService extends IComponentService {
 
     //---------------------------------------------------
 
-    static final String TAG = "IIntegrateProvider";
+    static final String TAG = "IShoppingProvider";
 
     //---------------------------------------------------
-    public static final String MODULE   = "integrate";
+    public static final String MODULE   = "shopping";
 
     public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
 
@@ -26,9 +23,9 @@ public interface IIntegrateProvider extends IComponentsProvider {
     public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
     //---------------------------------------------------
 
-    static IIntegrateProvider DEFAULT = new IIntegrateProvider() {
+    static IShoppingService DEFAULT = new IShoppingService() {
         @Override
-        public String getIntegrateTasks() {
+        public String getGoodInfo() {
             
             return null;
         }
@@ -79,5 +76,5 @@ public interface IIntegrateProvider extends IComponentsProvider {
     };
 
     //---------------------------------------------------
-    String getIntegrateTasks();
+    String getGoodInfo();
 }

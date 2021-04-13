@@ -1,4 +1,4 @@
-package com.module.game;
+package com.module.shopping;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,14 +11,14 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.game.IGameProvider;
+import com.module.components.shopping.IShoppingService;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IGameProvider.PROVIDER_MAIN, name = IGameProvider.MODULE)
-public class GameProviderImpl implements IGameProvider {
+@Route(path = IShoppingService.PROVIDER_MAIN, name = IShoppingService.MODULE)
+public class ShoppingServiceImpl implements IShoppingService {
 
-    private static final String TAG = "GameProviderImpl";
+    private static final String TAG = "ShoppingProviderImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;
@@ -39,31 +39,32 @@ public class GameProviderImpl implements IGameProvider {
     public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
         Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
-            ret = new GameMainFragment();
+            ret = new ShoppingMainFragment();
             fragmentWeakReference = new WeakReference<>(ret);
         }
         return ret;
     }
 
     @Override
+    public String getGoodInfo() {
+        Log.v(TAG,"getGoodInfo");
+        return null;
+    }
+
+    @Override
     public void startComponentMainActivity(Context context) {
-        Intent mIntent = new Intent(context, GameMainActivity.class);
+        Intent mIntent = new Intent(context, ShoppingMainActivity.class);
         context.startActivity(mIntent);
     }
 
     @Override
     public String getComponentName() {
-        return context.getString(R.string.game_name);
+        return context.getString(R.string.shopping_name);
     }
 
     @Override
     public int getComponentIconResId() {
-        return R.drawable.game_icon_selector;
-    }
-
-    @Override
-    public void startGame(String msg) {
-        Log.v(TAG,"startGame " + msg);
+        return R.drawable.shopping_icon_selector;
     }
 
     @Override
@@ -92,4 +93,5 @@ public class GameProviderImpl implements IGameProvider {
         //help gc
         System.gc();
     }
+
 }

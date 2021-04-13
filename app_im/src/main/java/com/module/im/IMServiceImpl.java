@@ -1,4 +1,4 @@
-package com.module.news;
+package com.module.im;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,14 +11,15 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.news.INewsProvider;
+import com.module.components.im.IIMService;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = INewsProvider.PROVIDER_MAIN, name = INewsProvider.MODULE)
-public class NewsProviderImpl implements INewsProvider {
+@Route(path = IIMService.PROVIDER_MAIN, name = IIMService.MODULE)
+public class IMServiceImpl implements IIMService {
 
-    private static final String TAG = "NewsProviderImpl";
+    private static final String TAG = "IMProviderImpl";
+
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;
@@ -39,32 +40,36 @@ public class NewsProviderImpl implements INewsProvider {
     public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
         Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
-            ret = new NewsMainFragment();
+            ret = new IMMainFragment();
             fragmentWeakReference = new WeakReference<>(ret);
         }
         return ret;
     }
 
     @Override
-    public String getNewsList() {
-        Log.v(TAG,"getNewsList");
-        return null;
-    }
-
-    @Override
     public void startComponentMainActivity(Context context) {
-        Intent mIntent = new Intent(context, NewsMainActivity.class);
+        Intent mIntent = new Intent(context, IMMainActivity.class);
         context.startActivity(mIntent);
     }
 
     @Override
+    public String getMessage() {
+        return "I am From Im Module";
+    }
+
+    @Override
+    public void sendMessage(String msg) {
+        Log.v(TAG,"sendMessage " + msg);
+    }
+
+    @Override
     public String getComponentName() {
-        return context.getString(R.string.news_name);
+        return context.getString(R.string.im_name);
     }
 
     @Override
     public int getComponentIconResId() {
-        return R.drawable.news_icon_selector;
+        return R.drawable.im_icon_selector;
     }
 
     @Override

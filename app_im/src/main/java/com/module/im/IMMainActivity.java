@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.module.components.ProviderManager;
-import com.module.components.game.IGameProvider;
-import com.module.components.integrate.IIntegrateProvider;
-import com.module.components.news.INewsProvider;
-import com.module.components.shopping.IShoppingProvider;
-import com.module.components.video.IVideoProvider;
+import com.module.components.ComponentServiceManager;
+import com.module.components.game.IGameService;
+import com.module.components.integrate.IIntegrateService;
+import com.module.components.news.INewsService;
+import com.module.components.shopping.IShoppingService;
+import com.module.components.video.IVideoService;
 
 public class IMMainActivity extends AppCompatActivity {
 
@@ -34,31 +34,31 @@ public class IMMainActivity extends AppCompatActivity {
         Log.v("IMMainActivity","----------from getComponentByName()----------");
 
         {
-            IGameProvider provider = (IGameProvider) ProviderManager.getComponentByName(":app_game");
+            IGameService provider = (IGameService) ComponentServiceManager.getComponentByName(":app_game");
             if(null != provider)
                 provider.startGame("H H H-1");
         }
 
         {
-            IIntegrateProvider provider = (IIntegrateProvider) ProviderManager.getComponentByName(":app_integrate");
+            IIntegrateService provider = (IIntegrateService) ComponentServiceManager.getComponentByName(":app_integrate");
             if(null != provider)
                 provider.getIntegrateTasks();
         }
 
         {
-            IShoppingProvider provider = (IShoppingProvider) ProviderManager.getComponentByName(":app_shopping");
+            IShoppingService provider = (IShoppingService) ComponentServiceManager.getComponentByName(":app_shopping");
             if(null != provider)
                 provider.getGoodInfo();
         }
 
         {
-            INewsProvider provider = (INewsProvider) ProviderManager.getComponentByName(":app_news");
+            INewsService provider = (INewsService) ComponentServiceManager.getComponentByName(":app_news");
             if(null != provider)
                 provider.getNewsList();
         }
 
         {
-            IVideoProvider provider = (IVideoProvider) ProviderManager.getComponentByName(":app_video");
+            IVideoService provider = (IVideoService) ComponentServiceManager.getComponentByName(":app_video");
             if(null != provider)
                 provider.playVideo(this, "http://www.baidu.com/video");
         }
@@ -69,27 +69,27 @@ public class IMMainActivity extends AppCompatActivity {
         Log.v("IMMainActivity","----------from communicateWithOtherComponents2()----------");
 
         {
-            IGameProvider provider = ProviderManager.getComponentByClass(IGameProvider.class);
+            IGameService provider = ComponentServiceManager.getComponentByClass(IGameService.class);
             provider.startGame("H H H-2");
         }
 
         {
-            IIntegrateProvider provider = ProviderManager.getComponentByClass(IIntegrateProvider.class);
+            IIntegrateService provider = ComponentServiceManager.getComponentByClass(IIntegrateService.class);
             provider.getIntegrateTasks();
         }
 
         {
-            IShoppingProvider provider = ProviderManager.getComponentByClass(IShoppingProvider.class);
+            IShoppingService provider = ComponentServiceManager.getComponentByClass(IShoppingService.class);
             provider.getGoodInfo();
         }
 
         {
-            INewsProvider provider = ProviderManager.getComponentByClass(INewsProvider.class);
+            INewsService provider = ComponentServiceManager.getComponentByClass(INewsService.class);
             provider.getNewsList();
         }
 
         {
-            IVideoProvider provider = ProviderManager.getComponentByClass(IVideoProvider.class);
+            IVideoService provider = ComponentServiceManager.getComponentByClass(IVideoService.class);
             provider.playVideo(this, "http://www.baidu.com/video");
         }
     }

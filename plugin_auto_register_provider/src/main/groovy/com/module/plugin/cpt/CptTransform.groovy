@@ -21,7 +21,7 @@ class CptTransform extends Transform {
     static File providerFactoryClass
     static String providerFactoryParentPath
 
-    static File destProviderManagerClassFile
+    static File destComponentServiceManagerClassFile
 
     CptTransform(Project project) {
         this.project = project
@@ -87,7 +87,7 @@ class CptTransform extends Transform {
                         // After the scan is complete, we will generate register code into this file
                         providerFactoryClass = file
                         providerFactoryParentPath = it.file.absolutePath;
-                        destProviderManagerClassFile = new File(dest.absolutePath+File.separator+path);
+                        destComponentServiceManagerClassFile = new File(dest.absolutePath+File.separator+path);
 
 //                        println("fileContainsInitClass path "+path);
 //                        println("file.absolutePath "+file.absolutePath);
@@ -127,7 +127,7 @@ class CptTransform extends Transform {
                     pool.appendClassPath(project.android.bootClasspath[0].toString())
 
                     CptCodeGenerator.insertCodeTo(ext,providerFactoryParentPath)
-                    FileUtils.copyFile(providerFactoryClass, destProviderManagerClassFile)
+                    FileUtils.copyFile(providerFactoryClass, destComponentServiceManagerClassFile)
 
                     ext.classList.each {
                         println(it)

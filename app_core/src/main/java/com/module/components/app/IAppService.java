@@ -1,23 +1,19 @@
-package com.module.components.shopping;
+package com.module.components.app;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.module.components.IConsts;
-import com.module.components.IComponentsProvider;
+import com.module.components.IComponentService;
 
-public interface IShoppingProvider extends IComponentsProvider {
+public interface IAppService extends IComponentService {
 
     //---------------------------------------------------
-
-    static final String TAG = "IShoppingProvider";
+    static final String TAG = "IAppProvider";
 
     //---------------------------------------------------
-    public static final String MODULE   = "shopping";
+    public static final String MODULE   = "app";
 
     public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
 
@@ -26,13 +22,7 @@ public interface IShoppingProvider extends IComponentsProvider {
     public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
     //---------------------------------------------------
 
-    static IShoppingProvider DEFAULT = new IShoppingProvider() {
-        @Override
-        public String getGoodInfo() {
-            
-            return null;
-        }
-
+    static IAppService DEFAULT = new IAppService() {
         @Override
         public void onComponentEnter() {
             
@@ -77,7 +67,4 @@ public interface IShoppingProvider extends IComponentsProvider {
             
         }
     };
-
-    //---------------------------------------------------
-    String getGoodInfo();
 }

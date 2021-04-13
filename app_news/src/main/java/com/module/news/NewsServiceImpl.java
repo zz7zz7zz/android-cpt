@@ -1,4 +1,4 @@
-package com.module.integrate;
+package com.module.news;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,14 +11,14 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.integrate.IIntegrateProvider;
+import com.module.components.news.INewsService;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IIntegrateProvider.PROVIDER_MAIN, name = IIntegrateProvider.MODULE)
-public class IntegrateProviderImpl implements IIntegrateProvider {
+@Route(path = INewsService.PROVIDER_MAIN, name = INewsService.MODULE)
+public class NewsServiceImpl implements INewsService {
 
-    private static final String TAG = "IntegrateProviderImpl";
+    private static final String TAG = "NewsProviderImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;
@@ -39,32 +39,32 @@ public class IntegrateProviderImpl implements IIntegrateProvider {
     public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
         Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
-            ret = new IntegrateMainFragment();
+            ret = new NewsMainFragment();
             fragmentWeakReference = new WeakReference<>(ret);
         }
         return ret;
     }
 
     @Override
+    public String getNewsList() {
+        Log.v(TAG,"getNewsList");
+        return null;
+    }
+
+    @Override
     public void startComponentMainActivity(Context context) {
-        Intent mIntent = new Intent(context, IntegrateMainActivity.class);
+        Intent mIntent = new Intent(context, NewsMainActivity.class);
         context.startActivity(mIntent);
     }
 
     @Override
     public String getComponentName() {
-        return context.getString(R.string.integrate_name);
+        return context.getString(R.string.news_name);
     }
 
     @Override
     public int getComponentIconResId() {
-        return R.drawable.integrate_icon_selector;
-    }
-
-    @Override
-    public String getIntegrateTasks() {
-        Log.v(TAG,"getIntegrateTasks ");
-        return null;
+        return R.drawable.news_icon_selector;
     }
 
     @Override

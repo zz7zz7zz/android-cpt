@@ -1,23 +1,20 @@
-package com.module.components.im;
+package com.module.components.video;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.module.components.IConsts;
-import com.module.components.IComponentsProvider;
+import com.module.components.IComponentService;
 
-public interface IIMProvider extends IComponentsProvider {
+public interface IVideoService extends IComponentService {
 
     //---------------------------------------------------
 
-    static final String TAG = "IIMProvider";
+    static final String TAG = "IVideoProvider";
 
     //---------------------------------------------------
-    public static final String MODULE   = "im";
+    public static final String MODULE   = "video";
 
     public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
 
@@ -25,16 +22,9 @@ public interface IIMProvider extends IComponentsProvider {
 
     public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
     //---------------------------------------------------
-
-    static IIMProvider DEFAULT = new IIMProvider() {
+    static IVideoService DEFAULT = new IVideoService() {
         @Override
-        public String getMessage() {
-            
-            return null;
-        }
-
-        @Override
-        public void sendMessage(String msg) {
+        public void playVideo(Context context, String msg) {
             
         }
 
@@ -81,10 +71,10 @@ public interface IIMProvider extends IComponentsProvider {
         public void init(Context context) {
             
         }
+
+
     };
 
     //---------------------------------------------------
-    String getMessage();
-
-    void sendMessage(String msg);
+    void playVideo(Context context, String msg);
 }

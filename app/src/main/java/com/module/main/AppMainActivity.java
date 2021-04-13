@@ -18,17 +18,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.module.components.ProviderManager;
+import com.module.components.ComponentServiceManager;
 import com.module.main.net.NetImpl;
-import com.module.components.IComponentsProvider;
+import com.module.components.IComponentService;
 
 import java.util.List;
 import java.util.ArrayList;
 
 public class AppMainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ArrayList<IComponentsProvider> providers = new ArrayList<>();
-    private IComponentsProvider currentProvider = null;
+    private ArrayList<IComponentService> providers = new ArrayList<>();
+    private IComponentService currentProvider = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         //组件释放操作
         for (int i = 0;i<providers.size();i++){
-            IComponentsProvider provider = providers.get(i);
+            IComponentService provider = providers.get(i);
             if(null != provider){
                 provider.onComponentExit();
             }
@@ -82,9 +82,9 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
     private void initAllComponents(List<String> components){
 
-        ArrayList<IComponentsProvider> allProvider = new ArrayList<>();
+        ArrayList<IComponentService> allProvider = new ArrayList<>();
         for (int i = 0;i<components.size();i++){
-            IComponentsProvider provider = ProviderManager.getComponentByName(components.get(i));
+            IComponentService provider = ComponentServiceManager.getComponentByName(components.get(i));
             if(null != provider){
                 allProvider.add(provider);
             }
@@ -103,7 +103,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         for (int i = 0;i<allProvider.size();i++){
 
-            final IComponentsProvider provider = allProvider.get(i);
+            final IComponentService provider = allProvider.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_all,false);
             ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getComponentName());
@@ -122,9 +122,9 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
     private void initProvider(List<String> componets){
 
         //1.添加或者重用新的
-        ArrayList<IComponentsProvider> newProviders = new ArrayList<>();
+        ArrayList<IComponentService> newProviders = new ArrayList<>();
         for (int i = 0;i<componets.size();i++){
-            IComponentsProvider provider = ProviderManager.getComponentByName(componets.get(i));
+            IComponentService provider = ComponentServiceManager.getComponentByName(componets.get(i));
             if(null != provider){
                 newProviders.add(provider);
                 if(!providers.remove(provider)){//说明原来组件不包含
@@ -191,7 +191,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         for (int i = 0;i<providers.size();i++){
 
-            final IComponentsProvider provider = providers.get(i);
+            final IComponentService provider = providers.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_valid,false);
             ((TextView)(view.findViewById(R.id.moudle_name))).setText(provider.getComponentName());
@@ -216,11 +216,11 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        IComponentsProvider provider =  (IComponentsProvider) v.getTag();
+        IComponentService provider =  (IComponentService) v.getTag();
         setVisibleProvider(provider);
     }
 
-    public void setVisibleProvider(IComponentsProvider provider) {
+    public void setVisibleProvider(IComponentService provider) {
         //没有的化默认展示第一个
         if(null == provider){
             provider = providers.get(0);

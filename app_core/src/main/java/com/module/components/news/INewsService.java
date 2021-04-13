@@ -1,16 +1,13 @@
 package com.module.components.news;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.module.components.IConsts;
-import com.module.components.IComponentsProvider;
+import com.module.components.IComponentService;
 
-public interface INewsProvider extends IComponentsProvider {
+public interface INewsService extends IComponentService {
 
     //---------------------------------------------------
 
@@ -26,7 +23,7 @@ public interface INewsProvider extends IComponentsProvider {
     public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
     //---------------------------------------------------
 
-    static final INewsProvider DEFAULT = new INewsProvider() {
+    static final INewsService DEFAULT = new INewsService() {
         @Override
         public String getNewsList() {
             

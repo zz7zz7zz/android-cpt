@@ -15,7 +15,7 @@ class CptPlugin implements Plugin<Project>{
         def transform = new CptTransform(project)
 
         ArrayList<ScanSetting> list = new ArrayList<>(1)
-        list.add(new ScanSetting('IComponentsProvider'))
+        list.add(new ScanSetting('IComponentService'))
         CptTransform.registerList = list
 
         library.registerTransform(transform)

@@ -1,23 +1,20 @@
-package com.module.components.video;
+package com.module.components.integrate;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.module.components.IConsts;
-import com.module.components.IComponentsProvider;
+import com.module.components.IComponentService;
 
-public interface IVideoProvider extends IComponentsProvider {
+public interface IIntegrateService extends IComponentService {
 
     //---------------------------------------------------
 
-    static final String TAG = "IVideoProvider";
+    static final String TAG = "IIntegrateProvider";
 
     //---------------------------------------------------
-    public static final String MODULE   = "video";
+    public static final String MODULE   = "integrate";
 
     public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
 
@@ -25,10 +22,12 @@ public interface IVideoProvider extends IComponentsProvider {
 
     public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
     //---------------------------------------------------
-    static IVideoProvider DEFAULT = new IVideoProvider() {
+
+    static IIntegrateService DEFAULT = new IIntegrateService() {
         @Override
-        public void playVideo(Context context, String msg) {
+        public String getIntegrateTasks() {
             
+            return null;
         }
 
         @Override
@@ -74,10 +73,8 @@ public interface IVideoProvider extends IComponentsProvider {
         public void init(Context context) {
             
         }
-
-
     };
 
     //---------------------------------------------------
-    void playVideo(Context context, String msg);
+    String getIntegrateTasks();
 }

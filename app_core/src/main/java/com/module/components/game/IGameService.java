@@ -1,16 +1,13 @@
 package com.module.components.game;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.module.components.IConsts;
-import com.module.components.IComponentsProvider;
+import com.module.components.IComponentService;
 
-public interface IGameProvider extends IComponentsProvider {
+public interface IGameService extends IComponentService {
 
     //---------------------------------------------------
     static final String TAG = "IGameProvider";
@@ -25,7 +22,7 @@ public interface IGameProvider extends IComponentsProvider {
     public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
     //---------------------------------------------------
 
-    static IGameProvider DEFAULT = new IGameProvider() {
+    static IGameService DEFAULT = new IGameService() {
         @Override
         public void startGame(String msg) {
             

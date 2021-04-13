@@ -1,4 +1,4 @@
-package com.module.shopping;
+package com.module.video;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,14 +11,14 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.shopping.IShoppingProvider;
+import com.module.components.video.IVideoService;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IShoppingProvider.PROVIDER_MAIN, name = IShoppingProvider.MODULE)
-public class ShoppingProviderImpl implements IShoppingProvider {
+@Route(path = IVideoService.PROVIDER_MAIN, name = IVideoService.MODULE)
+public class VideoServiceImpl implements IVideoService {
 
-    private static final String TAG = "ShoppingProviderImpl";
+    private static final String TAG = "VideoProviderImpl";
     private Context context;
     private WeakReference<Fragment> fragmentWeakReference;
     private WeakReference<View> viewWeakReference;
@@ -39,32 +39,32 @@ public class ShoppingProviderImpl implements IShoppingProvider {
     public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
         Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
-            ret = new ShoppingMainFragment();
+            ret = new VideoMainFragment();
             fragmentWeakReference = new WeakReference<>(ret);
         }
         return ret;
     }
 
     @Override
-    public String getGoodInfo() {
-        Log.v(TAG,"getGoodInfo");
-        return null;
+    public void playVideo(Context context,String msg) {
+        Log.v(TAG,"playVideo " + msg);
     }
+
 
     @Override
     public void startComponentMainActivity(Context context) {
-        Intent mIntent = new Intent(context, ShoppingMainActivity.class);
+        Intent mIntent = new Intent(context, VideoMainActivity.class);
         context.startActivity(mIntent);
     }
 
     @Override
     public String getComponentName() {
-        return context.getString(R.string.shopping_name);
+        return context.getString(R.string.video_name);
     }
 
     @Override
     public int getComponentIconResId() {
-        return R.drawable.shopping_icon_selector;
+        return R.drawable.video_icon_selector;
     }
 
     @Override
@@ -93,5 +93,4 @@ public class ShoppingProviderImpl implements IShoppingProvider {
         //help gc
         System.gc();
     }
-
 }

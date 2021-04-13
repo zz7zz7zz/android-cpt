@@ -14,7 +14,7 @@ class ScanUtil {
     }
 
     static boolean shouldProcessClasswithLog(String entryName) {
-        return entryName != null  && entryName.endsWith('Provider\$1.class')
+        return entryName != null  && entryName.endsWith('Service\$1.class')
     }
 
     static void scanClass(File file) {

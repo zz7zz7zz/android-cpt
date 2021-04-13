@@ -2,7 +2,6 @@ package com.module.utils;
 
 import android.util.Log;
 
-import com.module.components.IComponentsProvider;
 import com.module.components.IConsts;
 
 import java.lang.reflect.InvocationHandler;
