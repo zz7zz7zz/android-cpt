@@ -30,3 +30,5 @@
 1.本地代码productConfig中只开启一个产品(只有一个产品设置为true)，更改不要提交到git
 
 2.本地代码productConfig中只开启一个渠道(只有一个渠道设置为true)，更改不要提交到git
+
+2.本地代码signEnableConfig中只开启一个签名(只有一个签名设置为true,但是默认好像有debug和release)，更改不要提交到git
