@@ -40,15 +40,21 @@ public final class ComponentServiceManager {
     }
 
     /**
-     * 通过服务类名来找到组件Service , 未找到会有一个空实现的默认服务
+     * 通过服务类名来找到组件Service
      * @param clazz 服务类名，如IIMService.class
-     * @param <T>
-     * @return
+     * @return 找到返回；未找到返回null
      */
     public static<T> T getComponentByClass(Class<T> clazz){
-        return getComponentByClass(clazz,true);
+        return getComponentByClass(clazz,false);
     }
 
+    /**
+     * 通过服务类名来找到组件Service
+     * @param clazz clazz 服务类名，如IIMService.class
+     * @param isCreatedDefault 在未找到服务的情况下，是否返回一个空实现的服务
+     * @param <T>
+     * @return 找到返回；未找到，如果isCreatedDefault true,返回默认空实现服务，isCreatedDefault false，返回null
+     */
     public static<T> T getComponentByClass(Class<T> clazz, boolean isCreatedDefault){
 //        if(com.module.components.video.IVideoService.class.equals(clazz)){
 //            com.module.components.video.IVideoService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.components.video.IVideoService.PROVIDER_MAIN).navigation();
