@@ -1,33 +1,38 @@
-package com.module.components.news;
+package com.module.service.im;
 
 import android.content.Context;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.components.IComponentService;
+import com.module.service.IService;
 
-public interface INewsService extends IComponentService {
-
-    //---------------------------------------------------
-
-    static final String TAG = "INewsSerivce";
+public interface IIMService extends IService {
 
     //---------------------------------------------------
-    public static final String MODULE   = ":app_news";
 
-    public static final String ACTIVITY_MAIN = "/app_news/A";
+    static final String TAG = "IIMSerivce";
 
-    public static final String FRAGMENT_MAIN = "/app_news/F";
+    //---------------------------------------------------
+    public static final String MODULE   = ":app_im";
 
-    public static final String PROVIDER_MAIN = "/app_news/P";
+    public static final String ACTIVITY_MAIN = "/app_im/A";
+
+    public static final String FRAGMENT_MAIN = "/app_im/F";
+
+    public static final String PROVIDER_MAIN = "/app_im/P";
     //---------------------------------------------------
 
-    static final INewsService DEFAULT = new INewsService() {
+    static IIMService DEFAULT = new IIMService() {
         @Override
-        public String getNewsList() {
+        public String getMessage() {
             
             return null;
+        }
+
+        @Override
+        public void sendMessage(String msg) {
+            
         }
 
         @Override
@@ -76,8 +81,7 @@ public interface INewsService extends IComponentService {
     };
 
     //---------------------------------------------------
-    String getNewsList();
+    String getMessage();
 
-
-
+    void sendMessage(String msg);
 }

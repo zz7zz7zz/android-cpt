@@ -54,7 +54,7 @@ class CptTransform extends Transform {
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         super.transform(transformInvocation)
 
-        println("----------------------Scan / Generate code start----------------------")
+//        println("----------------------Scan / Generate code start----------------------")
 
 //        def cptJarPathConfig = project.extensions.create("cptJarPathConfig", CptJarPathConfig)
 //        println("Transform cptJarPathConfig "+cptJarPathConfig.toString());
@@ -122,7 +122,7 @@ class CptTransform extends Transform {
             }
         }
 
-        println("----------------------Scan code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
+//        println("----------------------Scan code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
         if (providerFactoryClass) {
             registerList.each { ext ->
 //                println('Insert register code to file ' + providerFactoryClass.absolutePath)
@@ -139,15 +139,15 @@ class CptTransform extends Transform {
                     CptCodeGenerator.insertCodeTo(ext,providerFactoryParentPath)
                     FileUtils.copyFile(providerFactoryClass, destComponentServiceManagerClassFile)
 
-                    ext.classList.each {
-                        println(it)
+//                    ext.classList.each {
+//                        println(it)
 //                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
 //                        CptCodeGenerator.insertLogCodeTo(it,providerFactoryParentPath)
-                    }
+//                    }
                 }
             }
         }
-        println("----------------------Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
+//        println("----------------------Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
 
     }
 
@@ -202,9 +202,9 @@ class CptTransform extends Transform {
             return
         }
 
-        if(ctClass.getName().contains("PatchProxy")){
-            return
-        }
+//        if(ctClass.getName().contains("PatchProxy")){
+//            return
+//        }
 
 //        println("class "+ctClass)
 //        println("className "+ctClass.getName())
@@ -222,7 +222,7 @@ class CptTransform extends Transform {
                 continue
             }
 
-            method.insertBefore("android.util.Log.e(TAG, com.module.components.IConsts.PROMPT_COMPONENT_NOT_FOUND);")
+            method.insertBefore("android.util.Log.e(TAG, com.module.service.IConsts.PROMPT_COMPONENT_NOT_FOUND);")
 
         }
 

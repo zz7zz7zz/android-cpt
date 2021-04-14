@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.im.IIMService;
+import com.module.service.im.IIMService;
 
 import java.lang.ref.WeakReference;
 

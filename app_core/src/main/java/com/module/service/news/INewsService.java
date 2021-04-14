@@ -1,31 +1,31 @@
-package com.module.components.integrate;
+package com.module.service.news;
 
 import android.content.Context;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.components.IComponentService;
+import com.module.service.IService;
 
-public interface IIntegrateService extends IComponentService {
-
-    //---------------------------------------------------
-
-    static final String TAG = "IIntegrateSerivce";
+public interface INewsService extends IService {
 
     //---------------------------------------------------
-    public static final String MODULE   = ":app_integrate";
 
-    public static final String ACTIVITY_MAIN = "/app_integrate/A";
+    static final String TAG = "INewsSerivce";
 
-    public static final String FRAGMENT_MAIN = "/app_integrate/F";
+    //---------------------------------------------------
+    public static final String MODULE   = ":app_news";
 
-    public static final String PROVIDER_MAIN = "/app_integrate/P";
+    public static final String ACTIVITY_MAIN = "/app_news/A";
+
+    public static final String FRAGMENT_MAIN = "/app_news/F";
+
+    public static final String PROVIDER_MAIN = "/app_news/P";
     //---------------------------------------------------
 
-    static IIntegrateService DEFAULT = new IIntegrateService() {
+    static final INewsService DEFAULT = new INewsService() {
         @Override
-        public String getIntegrateTasks() {
+        public String getNewsList() {
             
             return null;
         }
@@ -76,5 +76,8 @@ public interface IIntegrateService extends IComponentService {
     };
 
     //---------------------------------------------------
-    String getIntegrateTasks();
+    String getNewsList();
+
+
+
 }

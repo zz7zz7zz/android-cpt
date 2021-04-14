@@ -1,4 +1,4 @@
-package com.module.components;
+package com.module.service;
 
 public interface IConsts {
 

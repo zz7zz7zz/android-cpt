@@ -44,7 +44,7 @@ class CptCodeGenerator {
                     name = name.replaceAll("/", ".")
                     sb.append(String.format("map.put(%s.MODULE,%s.class);\n",name,,name))
                 }
-println(sb.toString())
+//println(sb.toString())
                 method.insertBefore(sb.toString())
             } else if(ScanSetting.GENERATE_TO_METHOD_NAME_GETCOMPONENTBYCLASS.equals(method.getName()) && method.getParameterTypes().length == 2){
                 boolean isFrist = true;
@@ -61,7 +61,7 @@ println(sb.toString())
 
                     isFrist = false;
                 }
-println(sb.toString())
+//println(sb.toString())
                 method.insertBefore(sb.toString())
             }
 

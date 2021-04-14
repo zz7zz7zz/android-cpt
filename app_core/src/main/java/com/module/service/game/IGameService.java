@@ -1,13 +1,13 @@
-package com.module.components.game;
+package com.module.service.game;
 
 import android.content.Context;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.components.IComponentService;
+import com.module.service.IService;
 
-public interface IGameService extends IComponentService {
+public interface IGameService extends IService {
 
     //---------------------------------------------------
     static final String TAG = "IGameSerivce";

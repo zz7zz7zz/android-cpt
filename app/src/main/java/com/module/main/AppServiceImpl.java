@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.components.app.IAppService;
+import com.module.service.app.IAppService;
 
 /**
  * 可能用的到也可能用不到

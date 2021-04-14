@@ -1,33 +1,28 @@
-package com.module.components.video;
+package com.module.service.app;
 
 import android.content.Context;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.components.IComponentService;
+import com.module.service.IService;
 
-public interface IVideoService extends IComponentService {
-
-    //---------------------------------------------------
-
-    static final String TAG = "IVideoSerivce";
+public interface IAppService extends IService {
 
     //---------------------------------------------------
-    public static final String MODULE   = ":app_video";
+    static final String TAG = "IAppSerivce";
 
-    public static final String ACTIVITY_MAIN = "/app_video/A";
-
-    public static final String FRAGMENT_MAIN = "/app_video/F";
-
-    public static final String PROVIDER_MAIN = "/app_video/P";
     //---------------------------------------------------
-    static IVideoService DEFAULT = new IVideoService() {
-        @Override
-        public void playVideo(Context context, String msg) {
-            
-        }
+    public static final String MODULE   = ":app";
 
+    public static final String ACTIVITY_MAIN = "/app/A";
+
+    public static final String FRAGMENT_MAIN = "/app/F";
+
+    public static final String PROVIDER_MAIN = "/app/P";
+    //---------------------------------------------------
+
+    static IAppService DEFAULT = new IAppService() {
         @Override
         public void onComponentEnter() {
             
@@ -71,10 +66,5 @@ public interface IVideoService extends IComponentService {
         public void init(Context context) {
             
         }
-
-
     };
-
-    //---------------------------------------------------
-    void playVideo(Context context, String msg);
 }

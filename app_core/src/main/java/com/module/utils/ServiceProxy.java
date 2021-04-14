@@ -2,14 +2,14 @@ package com.module.utils;
 
 import android.util.Log;
 
-import com.module.components.IConsts;
+import com.module.service.IConsts;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 
-public class DefaultComponentProxy {
+public class ServiceProxy {
 
     //key:被代理对象; value: 封装代理的对象
     private static HashMap<Object,Object> map = new HashMap<>();

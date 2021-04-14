@@ -1,38 +1,33 @@
-package com.module.components.im;
+package com.module.service.shopping;
 
 import android.content.Context;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.components.IComponentService;
+import com.module.service.IService;
 
-public interface IIMService extends IComponentService {
-
-    //---------------------------------------------------
-
-    static final String TAG = "IIMSerivce";
+public interface IShoppingService extends IService {
 
     //---------------------------------------------------
-    public static final String MODULE   = ":app_im";
 
-    public static final String ACTIVITY_MAIN = "/app_im/A";
+    static final String TAG = "IShoppingSerivce";
 
-    public static final String FRAGMENT_MAIN = "/app_im/F";
+    //---------------------------------------------------
+    public static final String MODULE   = ":app_shopping";
 
-    public static final String PROVIDER_MAIN = "/app_im/P";
+    public static final String ACTIVITY_MAIN = "/app_shopping/A";
+
+    public static final String FRAGMENT_MAIN = "/app_shopping/F";
+
+    public static final String PROVIDER_MAIN = "/app_shopping/P";
     //---------------------------------------------------
 
-    static IIMService DEFAULT = new IIMService() {
+    static IShoppingService DEFAULT = new IShoppingService() {
         @Override
-        public String getMessage() {
+        public String getGoodInfo() {
             
             return null;
-        }
-
-        @Override
-        public void sendMessage(String msg) {
-            
         }
 
         @Override
@@ -81,7 +76,5 @@ public interface IIMService extends IComponentService {
     };
 
     //---------------------------------------------------
-    String getMessage();
-
-    void sendMessage(String msg);
+    String getGoodInfo();
 }

@@ -1,4 +1,4 @@
-package com.module.components;
+package com.module.service;
 
 import android.content.Context;
 import android.view.View;
@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.template.IProvider;
 
-public interface IComponentService extends IProvider {
+public interface IService extends IProvider {
 
     //---------------- 组件进入，组件退出 相关 ----------------
     void onComponentEnter();

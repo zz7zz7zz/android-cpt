@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.module.components.ComponentServiceManager;
-import com.module.components.game.IGameService;
-import com.module.components.integrate.IIntegrateService;
-import com.module.components.news.INewsService;
-import com.module.components.shopping.IShoppingService;
-import com.module.components.video.IVideoService;
+import com.module.service.ServiceManager;
+import com.module.service.game.IGameService;
+import com.module.service.integrate.IIntegrateService;
+import com.module.service.news.INewsService;
+import com.module.service.shopping.IShoppingService;
+import com.module.service.video.IVideoService;
 
 public class IMMainActivity extends AppCompatActivity {
 
@@ -31,38 +31,38 @@ public class IMMainActivity extends AppCompatActivity {
 
     private void communicateWithOtherComponents1(){
 
-        Log.v("IMMainActivity","----------from getComponentByName()----------");
+        Log.v("IMMainActivity","----------from getService(componentName)----------");
 
         {
-            IGameService provider = (IGameService) ComponentServiceManager.getComponentByName(":app_game");
+            IGameService provider = (IGameService) ServiceManager.getService(":app_game");
             if(null != provider){
                 provider.startGame("H H H-1");
             }
         }
 
         {
-            IIntegrateService provider = (IIntegrateService) ComponentServiceManager.getComponentByName(":app_integrate");
+            IIntegrateService provider = (IIntegrateService) ServiceManager.getService(":app_integrate");
             if(null != provider){
                 provider.getIntegrateTasks();
             }
         }
 
         {
-            IShoppingService provider = (IShoppingService) ComponentServiceManager.getComponentByName(":app_shopping");
+            IShoppingService provider = (IShoppingService) ServiceManager.getService(":app_shopping");
             if(null != provider){
                 provider.getGoodInfo();
             }
         }
 
         {
-            INewsService provider = (INewsService) ComponentServiceManager.getComponentByName(":app_news");
+            INewsService provider = (INewsService) ServiceManager.getService(":app_news");
             if(null != provider){
                 provider.getNewsList();
             }
         }
 
         {
-            IVideoService provider = (IVideoService) ComponentServiceManager.getComponentByName(":app_video");
+            IVideoService provider = (IVideoService) ServiceManager.getService(":app_video");
             if(null != provider){
                 provider.playVideo(this, "http://www.baidu.com/video");
             }
@@ -71,38 +71,38 @@ public class IMMainActivity extends AppCompatActivity {
 
     private void communicateWithOtherComponents2(){
 
-        Log.v("IMMainActivity","----------from communicateWithOtherComponents2()----------");
+        Log.v("IMMainActivity","----------from getService(IxxxService.class)----------");
 
         {
-            IGameService provider = ComponentServiceManager.getComponentByClass(IGameService.class);
+            IGameService provider = ServiceManager.getService(IGameService.class);
             if(null != provider){
                 provider.startGame("H H H-2");
             }
         }
 
         {
-            IIntegrateService provider = ComponentServiceManager.getComponentByClass(IIntegrateService.class);
+            IIntegrateService provider = ServiceManager.getService(IIntegrateService.class);
             if(null != provider){
                 provider.getIntegrateTasks();
             }
         }
 
         {
-            IShoppingService provider = ComponentServiceManager.getComponentByClass(IShoppingService.class);
+            IShoppingService provider = ServiceManager.getService(IShoppingService.class);
             if(null != provider){
                 provider.getGoodInfo();
             }
         }
 
         {
-            INewsService provider = ComponentServiceManager.getComponentByClass(INewsService.class);
+            INewsService provider = ServiceManager.getService(INewsService.class);
             if(null != provider){
                 provider.getNewsList();
             }
         }
 
         {
-            IVideoService provider = ComponentServiceManager.getComponentByClass(IVideoService.class);
+            IVideoService provider = ServiceManager.getService(IVideoService.class);
             if(null != provider){
                 provider.playVideo(this, "http://www.baidu.com/video");
             }

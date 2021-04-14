@@ -1,31 +1,31 @@
-package com.module.components.shopping;
+package com.module.service.integrate;
 
 import android.content.Context;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.components.IComponentService;
+import com.module.service.IService;
 
-public interface IShoppingService extends IComponentService {
-
-    //---------------------------------------------------
-
-    static final String TAG = "IShoppingSerivce";
+public interface IIntegrateService extends IService {
 
     //---------------------------------------------------
-    public static final String MODULE   = ":app_shopping";
 
-    public static final String ACTIVITY_MAIN = "/app_shopping/A";
+    static final String TAG = "IIntegrateSerivce";
 
-    public static final String FRAGMENT_MAIN = "/app_shopping/F";
+    //---------------------------------------------------
+    public static final String MODULE   = ":app_integrate";
 
-    public static final String PROVIDER_MAIN = "/app_shopping/P";
+    public static final String ACTIVITY_MAIN = "/app_integrate/A";
+
+    public static final String FRAGMENT_MAIN = "/app_integrate/F";
+
+    public static final String PROVIDER_MAIN = "/app_integrate/P";
     //---------------------------------------------------
 
-    static IShoppingService DEFAULT = new IShoppingService() {
+    static IIntegrateService DEFAULT = new IIntegrateService() {
         @Override
-        public String getGoodInfo() {
+        public String getIntegrateTasks() {
             
             return null;
         }
@@ -76,5 +76,5 @@ public interface IShoppingService extends IComponentService {
     };
 
     //---------------------------------------------------
-    String getGoodInfo();
+    String getIntegrateTasks();
 }

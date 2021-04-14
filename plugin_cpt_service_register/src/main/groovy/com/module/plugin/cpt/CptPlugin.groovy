@@ -10,13 +10,13 @@ class CptPlugin implements Plugin<Project>{
 
     @Override
     void apply(Project project) {
-        println("--------CptPlugin--------")
+//        println("--------CptPlugin--------")
 
         def library = project.extensions.getByType(LibraryExtension.class)
         def transform = new CptTransform(project)
 
         ArrayList<ScanSetting> list = new ArrayList<>(1)
-        list.add(new ScanSetting('IComponentService'))
+        list.add(new ScanSetting('IService'))
         CptTransform.registerList = list
 
         library.registerTransform(transform)
@@ -26,9 +26,9 @@ class CptPlugin implements Plugin<Project>{
         project.afterEvaluate {
 
             CptTransform.cptJarPathConfig = extension;
-            println("CptPlugin extension "+CptTransform.cptJarPathConfig.toString());
-            println("CptPlugin extension.arouterPath "+CptTransform.cptJarPathConfig.arouterPath)
-            println("CptPlugin extension.fragmentPath "+CptTransform.cptJarPathConfig.fragmentPath)
+//            println("CptPlugin extension "+CptTransform.cptJarPathConfig.toString());
+//            println("CptPlugin extension.arouterPath "+CptTransform.cptJarPathConfig.arouterPath)
+//            println("CptPlugin extension.fragmentPath "+CptTransform.cptJarPathConfig.fragmentPath)
         }
     }
 }

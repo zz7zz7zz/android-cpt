@@ -18,18 +18,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.module.components.ComponentServiceManager;
+import com.module.service.ServiceManager;
 import com.module.main.config.ComponentConfig;
 import com.module.main.net.NetImpl;
-import com.module.components.IComponentService;
+import com.module.service.IService;
 
 import java.util.List;
 import java.util.ArrayList;
 
 public class AppMainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ArrayList<IComponentService> services = new ArrayList<>();
-    private IComponentService currentService = null;
+    private ArrayList<IService> services = new ArrayList<>();
+    private IService currentService = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +72,9 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         //组件释放操作
         for (int i = 0; i< services.size(); i++){
-            IComponentService provider = services.get(i);
-            if(null != provider){
-                provider.onComponentExit();
+            IService service = services.get(i);
+            if(null != service){
+                service.onComponentExit();
             }
         }
         services = null;
@@ -83,9 +83,9 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
     private void initAllComponents(List<String> components){
 
-        ArrayList<IComponentService> allComponentSerices = new ArrayList<>();
+        ArrayList<IService> allComponentSerices = new ArrayList<>();
         for (int i = 0;i<components.size();i++){
-            IComponentService service = ComponentServiceManager.getComponentByName(components.get(i));
+            IService service = ServiceManager.getService(components.get(i));
             if(null != service){
                 allComponentSerices.add(service);
             }
@@ -104,7 +104,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         for (int i = 0;i<allComponentSerices.size();i++){
 
-            final IComponentService service = allComponentSerices.get(i);
+            final IService service = allComponentSerices.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_all,false);
             ((TextView)(view.findViewById(R.id.moudle_name))).setText(service.getComponentName());
@@ -123,9 +123,9 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
     private void initServices(List<String> componets){
 
         //1.添加或者重用新的
-        ArrayList<IComponentService> newServices = new ArrayList<>();
+        ArrayList<IService> newServices = new ArrayList<>();
         for (int i = 0;i<componets.size();i++){
-            IComponentService service = ComponentServiceManager.getComponentByName(componets.get(i));
+            IService service = ServiceManager.getService(componets.get(i));
             if(null != service){
                 newServices.add(service);
                 if(!services.remove(service)){//说明原来组件不包含
@@ -192,7 +192,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         for (int i = 0; i< services.size(); i++){
 
-            final IComponentService service = services.get(i);
+            final IService service = services.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_valid,false);
             ((TextView)(view.findViewById(R.id.moudle_name))).setText(service.getComponentName());
@@ -217,11 +217,11 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        IComponentService provider =  (IComponentService) v.getTag();
-        setVisibleService(provider);
+        IService service =  (IService) v.getTag();
+        setVisibleService(service);
     }
 
-    public void setVisibleService(IComponentService service) {
+    public void setVisibleService(IService service) {
         //没有的化默认展示第一个
         if(null == service){
             service = services.get(0);
