@@ -46,27 +46,31 @@ public final class ComponentServiceManager {
      * @return
      */
     public static<T> T getComponentByClass(Class<T> clazz){
+        return getComponentByClass(clazz,true);
+    }
+
+    public static<T> T getComponentByClass(Class<T> clazz, boolean isCreatedDefault){
 //        if(com.module.components.video.IVideoService.class.equals(clazz)){
 //            com.module.components.video.IVideoService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.components.video.IVideoService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : com.module.components.video.IVideoService.DEFAULT;
+//            return null != ret ? ret : (isCreatedDefault ? com.module.components.video.IVideoService.DEFAULT : null);
 //        }else if(com.module.components.shopping.IShoppingService.class.equals(clazz)){
 //            com.module.components.shopping.IShoppingService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.components.shopping.IShoppingService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : com.module.components.shopping.IShoppingService.DEFAULT;
+//            return null != ret ? ret : (isCreatedDefault ? com.module.components.shopping.IShoppingService.DEFAULT : null);
 //        }else if(com.module.components.app.IAppService.class.equals(clazz)){
 //            com.module.components.app.IAppService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.components.app.IAppService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : com.module.components.app.IAppService.DEFAULT;
+//            return null != ret ? ret : (isCreatedDefault ? com.module.components.app.IAppService.DEFAULT : null);
 //        }else if(com.module.components.integrate.IIntegrateService.class.equals(clazz)){
 //            com.module.components.integrate.IIntegrateService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.components.integrate.IIntegrateService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : com.module.components.integrate.IIntegrateService.DEFAULT;
+//            return null != ret ? ret : (isCreatedDefault ? com.module.components.integrate.IIntegrateService.DEFAULT : null);
 //        }else if(com.module.components.game.IGameService.class.equals(clazz)){
 //            com.module.components.game.IGameService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.components.game.IGameService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : com.module.components.game.IGameService.DEFAULT;
+//            return null != ret ? ret : (isCreatedDefault ? com.module.components.game.IGameService.DEFAULT : null);
 //        }else if(com.module.components.news.INewsService.class.equals(clazz)){
 //            com.module.components.news.INewsService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.components.news.INewsService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : com.module.components.news.INewsService.DEFAULT;
+//            return null != ret ? ret : (isCreatedDefault ? com.module.components.news.INewsService.DEFAULT : null);
 //        }else if(com.module.components.im.IIMService.class.equals(clazz)){
 //            com.module.components.im.IIMService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.components.im.IIMService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : com.module.components.im.IIMService.DEFAULT;
+//            return null != ret ? ret : (isCreatedDefault ? com.module.components.im.IIMService.DEFAULT : null);
 //        }
         return null;
     }

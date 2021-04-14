@@ -46,7 +46,7 @@ class CptCodeGenerator {
                 }
 println(sb.toString())
                 method.insertBefore(sb.toString())
-            } else if(ScanSetting.GENERATE_TO_METHOD_NAME_GETCOMPONENTBYCLASS.equals(method.getName())){
+            } else if(ScanSetting.GENERATE_TO_METHOD_NAME_GETCOMPONENTBYCLASS.equals(method.getName()) && method.getParameterTypes().length == 2){
                 boolean isFrist = true;
                 StringBuilder sb = new StringBuilder();
                 setting.classList.each { name ->
@@ -56,7 +56,7 @@ println(sb.toString())
                     }
                     sb.append(String.format("if(%s.class.equals(clazz)){\n" +
                             "     %s ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(%s.PROVIDER_MAIN).navigation();\n" +
-                                 "return null != ret ? ret : %s.DEFAULT;\n"+
+                                 "return null != ret ? ret : (isCreatedDefault ? %s.DEFAULT : null);\n"+
                             "}",name,,name,name,name))
 
                     isFrist = false;
