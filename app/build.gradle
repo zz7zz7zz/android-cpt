@@ -65,9 +65,9 @@ android {
 //            storePassword signConfig.release2.storePassword
 //        }
 
-        println(" ----- debug ----- " + signEnableConfig.debug)
-        println(" ----- release ----- " + signEnableConfig.release)
-        println(" ----- release2 ----- " + signEnableConfig.release2)
+//        println(" ----- debug ----- " + signEnableConfig.debug)
+//        println(" ----- release ----- " + signEnableConfig.release)
+//        println(" ----- release2 ----- " + signEnableConfig.release2)
 
         if(signEnableConfig.debug){
             debug{

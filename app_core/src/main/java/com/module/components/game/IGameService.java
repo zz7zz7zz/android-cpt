@@ -13,13 +13,13 @@ public interface IGameService extends IComponentService {
     static final String TAG = "IGameSerivce";
 
     //---------------------------------------------------
-    public static final String MODULE   = "game";
+    public static final String MODULE   = ":app_game";
 
-    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+    public static final String ACTIVITY_MAIN = "/app_game/A";
 
-    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+    public static final String FRAGMENT_MAIN = "/app_game/F";
 
-    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    public static final String PROVIDER_MAIN = "/app_game/P";
     //---------------------------------------------------
 
     static IGameService DEFAULT = new IGameService() {

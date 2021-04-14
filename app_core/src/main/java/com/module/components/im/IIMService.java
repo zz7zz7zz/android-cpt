@@ -14,13 +14,13 @@ public interface IIMService extends IComponentService {
     static final String TAG = "IIMSerivce";
 
     //---------------------------------------------------
-    public static final String MODULE   = "im";
+    public static final String MODULE   = ":app_im";
 
-    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+    public static final String ACTIVITY_MAIN = "/app_im/A";
 
-    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+    public static final String FRAGMENT_MAIN = "/app_im/F";
 
-    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    public static final String PROVIDER_MAIN = "/app_im/P";
     //---------------------------------------------------
 
     static IIMService DEFAULT = new IIMService() {

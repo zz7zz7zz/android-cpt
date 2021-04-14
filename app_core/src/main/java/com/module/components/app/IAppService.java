@@ -13,13 +13,13 @@ public interface IAppService extends IComponentService {
     static final String TAG = "IAppSerivce";
 
     //---------------------------------------------------
-    public static final String MODULE   = "app";
+    public static final String MODULE   = ":app";
 
-    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+    public static final String ACTIVITY_MAIN = "/app/A";
 
-    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+    public static final String FRAGMENT_MAIN = "/app/F";
 
-    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    public static final String PROVIDER_MAIN = "/app/P";
     //---------------------------------------------------
 
     static IAppService DEFAULT = new IAppService() {

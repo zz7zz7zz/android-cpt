@@ -28,17 +28,25 @@ class CptCodeGenerator {
         for (method in ctMethods){
 
             //空函数或者抽象函数
-            if(method.isEmpty()){
-                continue
-            }
+//            if(method.isEmpty()){
+//                continue
+//            }
 
             //Native方法
             if (Modifier.isNative(method.getModifiers())){
                 continue
             }
 
-//println("method " + method.getName())
-            if(ScanSetting.GENERATE_TO_METHOD_NAME.equals(method.getName())){
+//println("method " + method.getName() + " method.getParameterTypes.length " + method.getParameterTypes().length)
+            if(ScanSetting.GENERATE_TO_METHOD_NAME_REGISTER.equals(method.getName()) && method.getParameterTypes().length == 0){
+                StringBuilder sb = new StringBuilder();
+                setting.classList.each { name ->
+                    name = name.replaceAll("/", ".")
+                    sb.append(String.format("map.put(%s.MODULE,%s.class);\n",name,,name))
+                }
+println(sb.toString())
+                method.insertBefore(sb.toString())
+            } else if(ScanSetting.GENERATE_TO_METHOD_NAME_GETCOMPONENTBYCLASS.equals(method.getName())){
                 boolean isFrist = true;
                 StringBuilder sb = new StringBuilder();
                 setting.classList.each { name ->
@@ -46,7 +54,7 @@ class CptCodeGenerator {
                     if(!isFrist){
                         sb.append("else ")
                     }
-                    sb.append(String.format("if(clazz.equals(%s.class)){\n" +
+                    sb.append(String.format("if(%s.class.equals(clazz)){\n" +
                             "     %s ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(%s.PROVIDER_MAIN).navigation();\n" +
                                  "return null != ret ? ret : %s.DEFAULT;\n"+
                             "}",name,,name,name,name))

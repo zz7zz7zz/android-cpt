@@ -14,13 +14,13 @@ public interface IShoppingService extends IComponentService {
     static final String TAG = "IShoppingSerivce";
 
     //---------------------------------------------------
-    public static final String MODULE   = "shopping";
+    public static final String MODULE   = ":app_shopping";
 
-    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+    public static final String ACTIVITY_MAIN = "/app_shopping/A";
 
-    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+    public static final String FRAGMENT_MAIN = "/app_shopping/F";
 
-    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    public static final String PROVIDER_MAIN = "/app_shopping/P";
     //---------------------------------------------------
 
     static IShoppingService DEFAULT = new IShoppingService() {

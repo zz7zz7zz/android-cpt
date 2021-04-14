@@ -14,13 +14,13 @@ public interface INewsService extends IComponentService {
     static final String TAG = "INewsSerivce";
 
     //---------------------------------------------------
-    public static final String MODULE   = "news";
+    public static final String MODULE   = ":app_news";
 
-    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+    public static final String ACTIVITY_MAIN = "/app_news/A";
 
-    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+    public static final String FRAGMENT_MAIN = "/app_news/F";
 
-    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    public static final String PROVIDER_MAIN = "/app_news/P";
     //---------------------------------------------------
 
     static final INewsService DEFAULT = new INewsService() {

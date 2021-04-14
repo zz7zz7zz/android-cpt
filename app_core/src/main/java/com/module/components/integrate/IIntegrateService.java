@@ -14,13 +14,13 @@ public interface IIntegrateService extends IComponentService {
     static final String TAG = "IIntegrateSerivce";
 
     //---------------------------------------------------
-    public static final String MODULE   = "integrate";
+    public static final String MODULE   = ":app_integrate";
 
-    public static final String ACTIVITY_MAIN = "/"+MODULE+"/A";
+    public static final String ACTIVITY_MAIN = "/app_integrate/A";
 
-    public static final String FRAGMENT_MAIN = "/"+MODULE+"/F";
+    public static final String FRAGMENT_MAIN = "/app_integrate/F";
 
-    public static final String PROVIDER_MAIN = "/"+MODULE+"/P";
+    public static final String PROVIDER_MAIN = "/app_integrate/P";
     //---------------------------------------------------
 
     static IIntegrateService DEFAULT = new IIntegrateService() {

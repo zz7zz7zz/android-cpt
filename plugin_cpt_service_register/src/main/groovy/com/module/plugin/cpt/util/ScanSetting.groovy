@@ -7,7 +7,8 @@ class ScanSetting {
 
     //往哪个类的哪个方法，添加什么方法/添加其它方法体
     static final String GENERATE_TO_CLASS_FILE_NAME = 'com/module/components/ComponentServiceManager.class'
-    static final String GENERATE_TO_METHOD_NAME = 'getComponentByClass'
+    static final String GENERATE_TO_METHOD_NAME_REGISTER = 'register'
+    static final String GENERATE_TO_METHOD_NAME_GETCOMPONENTBYCLASS = 'getComponentByClass'
 
     private static final INTERFACE_PACKAGE_NAME = 'com/module/components/'
 
