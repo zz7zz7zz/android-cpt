@@ -45,7 +45,7 @@ public final class ComponentServiceManager {
      * @return 找到返回；未找到返回null
      */
     public static<T> T getComponentByClass(Class<T> clazz){
-        return getComponentByClass(clazz,false);
+        return getComponentByClass(clazz,true);
     }
 
     /**
