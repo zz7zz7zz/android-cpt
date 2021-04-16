@@ -1,4 +1,4 @@
-package com.module.pay.service;
+package com.lib.pay.service;
 
 public class PayOrder {
 

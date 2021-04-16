@@ -1,12 +1,12 @@
-package com.module.pay.huawei;
+package com.lib.pay.huawei;
 
 
 import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.module.pay.service.IPayConsts;
-import com.module.pay.service.IPayService;
+import com.lib.pay.service.IPayConsts;
+import com.lib.pay.service.IPayService;
 
 
 @Route(path = IPayConsts.PAY_HUAWEI, name = IPayConsts.PAY_HUAWEI)

@@ -1,4 +1,4 @@
-package com.module.pay.ali;
+package com.lib.pay.ali;
 
 import org.junit.Test;
 

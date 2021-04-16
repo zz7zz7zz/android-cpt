@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.module.pay.Pay;
-import com.module.pay.service.IPayResult;
-import com.module.pay.service.PayOrder;
+import com.lib.pay.Pay;
+import com.lib.pay.service.IPayResult;
+import com.lib.pay.service.PayOrder;
 import com.module.service.ServiceManager;
 import com.module.service.game.IGameService;
 import com.module.service.integrate.IIntegrateService;

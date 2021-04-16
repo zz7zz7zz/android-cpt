@@ -1,4 +1,4 @@
-package com.module.pay.wechat;
+package com.lib.pay.wechat;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.module.pay.wechat.test", appContext.getPackageName());
+        assertEquals("com.lib.pay.wechat.test", appContext.getPackageName());
     }
 }

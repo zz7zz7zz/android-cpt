@@ -1,4 +1,4 @@
-package com.module.pay.google;
+package com.lib.pay.google;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.module.pay.ali;
+package com.lib.pay.ali;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.module.pay.alipay.test", appContext.getPackageName());
+        assertEquals("com.lib.pay.alipay.test", appContext.getPackageName());
     }
 }

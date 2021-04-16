@@ -1,4 +1,4 @@
-package com.module.pay.huawei;
+package com.lib.pay.huawei;
 
 import org.junit.Test;
 

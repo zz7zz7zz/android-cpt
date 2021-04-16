@@ -1,4 +1,4 @@
-package com.module.pay.service;
+package com.lib.pay.service;
 
 import android.text.TextUtils;
 

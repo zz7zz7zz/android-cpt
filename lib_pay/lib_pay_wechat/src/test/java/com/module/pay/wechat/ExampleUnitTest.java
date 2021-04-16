@@ -1,4 +1,4 @@
-package com.module.pay.wechat;
+package com.lib.pay.wechat;
 
 import org.junit.Test;
 
