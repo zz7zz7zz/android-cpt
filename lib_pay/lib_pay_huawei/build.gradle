@@ -1,7 +1,5 @@
-if(MODULE_AS_APPLICATION.toBoolean()){
-    apply plugin: 'com.android.application'
-}else {
-    apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
 }
 
 android {
@@ -10,41 +8,19 @@ android {
 
     defaultConfig {
 
-        if(MODULE_AS_APPLICATION.toBoolean()){
-            applicationId       applicationIdConfig.app_im
-        }
-
         minSdkVersion       androidConfig.minSdkVersion
         targetSdkVersion    androidConfig.targetSdkVersion
         versionCode         androidConfig.versionCode
         versionName         androidConfig.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
 
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
-
-        sourceSets {
-            main {
-                // let gradle pack the shared library into apk
-                jniLibs.srcDirs = ['../repository_so/signature']
-            }
-        }
-
-//        packagingOptions {
-//            pickFirst 'lib/x86/libsignature.so'
-//            pickFirst 'lib/armeabi-v7a/libsignature.so'
-//
-//            merge 'lib/x86/libsignature.so'
-//            merge 'lib/armeabi-v7a/libsignature.so'
-//
-//          exclude 'lib/x86/libsignature.so'
-//          exclude 'lib/armeabi-v7a/libsignature.so'
-//        }
-
     }
 
     buildTypes {
@@ -53,39 +29,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    sourceSets{
-        main{
-            if(MODULE_AS_APPLICATION.toBoolean()){
-                manifest.srcFile 'src/main/debug/AndroidManifest_debug.xml'
-            }else{
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-
-                java{
-                    exclude '**/debug/**'
-                }
-            }
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    resourcePrefix 'im_'
 }
 
 dependencies {
 
-    dependenciesConfig.each { k, v -> implementation v}
+    dependenciesConfig.each {k,v -> implementation v}
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    //基类库
-    implementation project(':app_core')
 
     //ARouter引用
     compile 'com.alibaba:arouter-api:1.5.1'

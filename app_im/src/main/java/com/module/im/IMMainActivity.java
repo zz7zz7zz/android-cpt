@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.module.pay.Pay;
+import com.module.pay.service.IPayResult;
+import com.module.pay.service.PayOrder;
 import com.module.service.ServiceManager;
 import com.module.service.game.IGameService;
 import com.module.service.integrate.IIntegrateService;
@@ -12,9 +15,9 @@ import com.module.service.news.INewsService;
 import com.module.service.shopping.IShoppingService;
 import com.module.service.video.IVideoService;
 
-public class IMMainActivity extends AppCompatActivity {
+public class IMMainActivity extends AppCompatActivity implements IPayResult {
 
-
+    private static final String TAG = "IMMainActivity";
     static {
         System.loadLibrary("signature");
     }
@@ -27,6 +30,8 @@ public class IMMainActivity extends AppCompatActivity {
         communicateWithOtherComponents1();
 
         communicateWithOtherComponents2();
+
+        pay();
     }
 
     private void communicateWithOtherComponents1(){
@@ -107,5 +112,23 @@ public class IMMainActivity extends AppCompatActivity {
                 provider.playVideo(this, "http://www.baidu.com/video");
             }
         }
+    }
+
+
+    private void pay(){
+        Pay.getInstance().pay("/pay/ali", new PayOrder("sku.coin.100"), this);
+        Pay.getInstance().pay("/pay/wechat", new PayOrder("sku.coin.100"), this);
+        Pay.getInstance().pay("/pay/google", new PayOrder("sku.coin.100"), this);
+        Pay.getInstance().pay("/pay/huawei", new PayOrder("sku.coin.100"), this);
+    }
+
+    @Override
+    public void onPaySuccess() {
+        Log.v(TAG,"onPaySuccess");
+    }
+
+    @Override
+    public void onPayFailed(int errCode, String errMessage) {
+        Log.v(TAG,String.format("onPayFailed errCode %d errMessage %s ",errCode,errMessage));
     }
 }
