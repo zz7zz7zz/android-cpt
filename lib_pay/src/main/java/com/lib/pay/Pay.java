@@ -1,9 +1,9 @@
 package com.lib.pay;
 
-import com.lib.pay.service.IPayResult;
-import com.lib.pay.service.IPayService;
-import com.lib.pay.service.PayOrder;
-import com.lib.pay.service.PayServiceManager;
+import com.lib.pay.core.service.IPayResult;
+import com.lib.pay.core.service.IPayService;
+import com.lib.pay.core.service.PayOrder;
+import com.lib.pay.core.service.PayServiceManager;
 
 public class Pay {
 

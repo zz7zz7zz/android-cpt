@@ -21,6 +21,8 @@ android {
         versionCode         androidConfig.versionCode
         versionName         androidConfig.versionName
 
+        multiDexEnabled     true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -145,6 +147,7 @@ android {
                 matchingFallbacks = ['release','debug']
 
                 proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                multiDexKeepProguard file('multidex-config.pro')
             }
         }
 
@@ -160,6 +163,7 @@ android {
                 matchingFallbacks = ['release','debug']
 
                 proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+                multiDexKeepProguard file('multidex-config.pro')
             }
         }
 

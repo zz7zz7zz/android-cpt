@@ -5,8 +5,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.lib.pay.service.IPayConsts;
-import com.lib.pay.service.IPayService;
+import com.lib.pay.core.service.IPayConsts;
+import com.lib.pay.core.service.IPayService;
 
 
 @Route(path = IPayConsts.PAY_WECHAT, name = IPayConsts.PAY_WECHAT)
