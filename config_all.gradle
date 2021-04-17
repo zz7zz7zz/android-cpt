@@ -1,3 +1,7 @@
+def getBuildTime() {
+    return new Date().format("yyyy.MM.dd_HH.mm.ss")
+}
+
 ext {
 
     //开发阶段 MODULE_AS_APPLICATION true，组件可作为Application单独运行
@@ -17,12 +21,12 @@ ext {
 
     //#配置二：第三方依赖库配置
     dependenciesConfig = [
-
+            //1.基础库
             "appcompat"           : 'androidx.appcompat:appcompat:1.1.0',
             "material"            : 'com.google.android.material:material:1.1.0',
             "constraintlayout"    : 'androidx.constraintlayout:constraintlayout:1.1.3',
 
-            "multidex"            : 'androidx.multidex:multidex:2.0.1'
+            "multidex"            : 'androidx.multidex:multidex:2.0.1',
     ]
 
     //#配置三：applicationId配置
@@ -101,5 +105,5 @@ ext {
             release2: false
     ]
 
-
+    getBuildTime = this.&getBuildTime
 }
