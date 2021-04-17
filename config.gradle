@@ -39,9 +39,9 @@ ext {
             app_shopping :  "com.module.shopping",
             app_video    :  "com.module.video",
 
-            weixin       : "com.module.weixin",
-            taobao       : "com.module.taobao",
-            toutiao      : "com.module.toutiao"
+            weixin       : "com.tencent.mm.demo",
+            taobao       : "com.alibaba.taobao.demo",
+            toutiao      : "com.bytedance.toutiao.demo"
     ]
 
     //#配置四：App壳工程依赖组件
