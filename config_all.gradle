@@ -4,9 +4,9 @@ def getBuildTime() {
 
 ext {
 
-    //开发阶段 MODULE_AS_APPLICATION true，组件可作为Application单独运行
-    //发布阶段 MODULE_AS_APPLICATION false，组件作为Library被App工程所依赖
-    MODULE_AS_APPLICATION = false
+    //开发阶段 isModuleApplication true，组件可作为Application单独运行
+    //发布阶段 isModuleApplication false，组件作为Library被App工程所依赖
+    isModuleApplication = false
 
     //#配置一 ：--------编译版本相关--------
     androidConfig = [

@@ -28,7 +28,7 @@ android {
                 def libs = appModuleConfig.get("weixin")
                 buildConfigField "String[]" , "modules", toArray(libs)
 
-                if(!MODULE_AS_APPLICATION.toBoolean()){
+                if(!isModuleApplication.toBoolean()){
                     dependencies {
                         for (String module in libs) {
                             weixinApi project(module)
@@ -46,7 +46,7 @@ android {
                 def libs = appModuleConfig.get("taobao")
                 buildConfigField "String[]" , "modules", toArray(libs)
 
-                if(!MODULE_AS_APPLICATION.toBoolean()){
+                if(!isModuleApplication.toBoolean()){
                     dependencies {
                         for (String module in libs) {
                             taobaboApi project(module)
@@ -64,7 +64,7 @@ android {
                 def libs = appModuleConfig.get("toutiao")
                 buildConfigField "String[]" , "modules", toArray(libs)
 
-                if(!MODULE_AS_APPLICATION.toBoolean()){
+                if(!isModuleApplication.toBoolean()){
                     dependencies {
                         for (String module in libs) {
                             toutiaoApi project(module)

@@ -21,7 +21,7 @@
 4.AndroidManifest.xml文件 Application，Library 区分，去除测试代码以及其它资源文件
 
 5.Library在build.gradle文件中不能有applicationId
-  根据 MODULE_AS_APPLICATION 属性区分
+  根据 isModuleApplication 属性区分
   
 6.App壳工程配置业务组件
 

@@ -1,4 +1,4 @@
-if(MODULE_AS_APPLICATION.toBoolean()){
+if(isModuleApplication.toBoolean()){
     apply plugin: 'com.android.application'
 }else {
     apply plugin: 'com.android.library'
@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
 
-        if(MODULE_AS_APPLICATION.toBoolean()){
+        if(isModuleApplication.toBoolean()){
             applicationId       applicationIdConfig.app_news
         }
 
@@ -38,7 +38,7 @@ android {
 
     sourceSets{
         main{
-            if(MODULE_AS_APPLICATION.toBoolean()){
+            if(isModuleApplication.toBoolean()){
                 manifest.srcFile 'src/main/debug/AndroidManifest_debug.xml'
             }else{
                 manifest.srcFile 'src/main/AndroidManifest.xml'
