@@ -26,9 +26,6 @@ class CptPlugin implements Plugin<Project>{
         project.afterEvaluate {
 
             CptTransform.cptJarPathConfig = extension;
-//            println("CptPlugin extension "+CptTransform.cptJarPathConfig.toString());
-//            println("CptPlugin extension.arouterPath "+CptTransform.cptJarPathConfig.arouterPath)
-//            println("CptPlugin extension.fragmentPath "+CptTransform.cptJarPathConfig.fragmentPath)
         }
     }
 }

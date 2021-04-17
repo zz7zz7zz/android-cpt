@@ -56,10 +56,6 @@ class CptTransform extends Transform {
 
 //        println("----------------------Scan / Generate code start----------------------")
 
-//        def cptJarPathConfig = project.extensions.create("cptJarPathConfig", CptJarPathConfig)
-//        println("Transform cptJarPathConfig "+cptJarPathConfig.toString());
-//        println("Transform cptJarPathConfig.arouterPath "+cptJarPathConfig.arouterPath)
-
         long startTime = System.currentTimeMillis()
         boolean leftSlash = File.separator == '/'
 
