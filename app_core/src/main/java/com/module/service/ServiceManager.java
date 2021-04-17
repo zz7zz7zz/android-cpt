@@ -53,7 +53,7 @@ public final class ServiceManager {
      * @param <T>
      * @return 找到返回；未找到，如果isCreatedDefault true,返回默认空实现服务，isCreatedDefault false，返回null
      */
-    public static<T> T getService(Class<T> clazz, boolean isCreatedDefault){
+    public static<T> T getService(Class<? extends T> clazz, boolean isCreatedDefault){
 //        if(com.module.service.video.IVideoService.class.equals(clazz)){
 //            com.module.service.video.IVideoService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.service.video.IVideoService.PROVIDER_MAIN).navigation();
 //            return null != ret ? ret : (isCreatedDefault ? com.module.service.video.IVideoService.DEFAULT : null);
