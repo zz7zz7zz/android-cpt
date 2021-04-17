@@ -130,6 +130,6 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
 
     @Override
     public void onPayFailed(int errCode, String errMessage) {
-        Log.v(TAG,String.format("onPayFailed errCode %d errMessage %s ",errCode,errMessage));
+        Log.e(TAG,String.format("onPayFailed errCode %d errMessage %s ",errCode,errMessage));
     }
 }

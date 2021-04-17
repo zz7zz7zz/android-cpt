@@ -51,6 +51,13 @@ ext {
         toutiao:  [':app_news',':app_integrate',':app_video']
     ]
 
+    //支付库组件的依赖配置
+    libPayConfig = [
+            weixin: [':lib_pay:lib_pay_impl_wechat'],
+            taobao: [':lib_pay:lib_pay_impl_ali'],
+            defaultCfg: [':lib_pay:lib_pay_impl_wechat',':lib_pay:lib_pay_impl_google',':lib_pay:lib_pay_impl_huawei',':lib_pay:lib_pay_impl_ali']
+    ]
+
     //#配置五：产品蔟
     productConfig = [
         weixin: true,
