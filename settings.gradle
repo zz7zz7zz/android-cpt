@@ -1,22 +1,31 @@
+//-----1.app壳：组件容器-----
+include ':app'
 
-include ':plugin_cpt_service_register'
-include ':lib_widget'
+//-----2.app业务层：业务组件-----
+include ':app_im'
+include ':app_video'
+include ':app_game'
+include ':app_news'
+include ':app_shopping'
+include ':app_integrate'
+
+//-----3.app业务基础库：组件依赖库，可以被1，2依赖-----
+include ':app_core'
+
+//-----4.库层：库组件以及子库组件----
+include ':lib_pay:lib_pay'
+include ':lib_pay:lib_pay_core'
+include ':lib_pay:lib_pay_impl_wechat'
+include ':lib_pay:lib_pay_impl_google'
+include ':lib_pay:lib_pay_impl_huawei'
+include ':lib_pay:lib_pay_impl_ali'
 include ':lib_net'
 include ':lib_analysis'
 include ':lib_player'
 include ':lib_ad'
-include ':lib_pay'
-include ':lib_pay:lib_pay_core'
-include ':lib_pay:lib_pay_wechat'
-include ':lib_pay:lib_pay_google'
-include ':lib_pay:lib_pay_huawei'
-include ':lib_pay:lib_pay_ali'
-include ':app_core'
-include ':app_shopping'
-include ':app_game'
-include ':app_news'
-include ':app_integrate'
-include ':app_video'
-include ':app_im'
-include ':app'
+include ':lib_widget'
+
+//-----5.插件层----
+include ':plugin_cpt_service_register'
+
 rootProject.name = "android-cpt"

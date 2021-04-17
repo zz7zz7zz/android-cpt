@@ -48,8 +48,8 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 
     api project(path: ':lib_pay:lib_pay_core')
-    implementation project(path: ':lib_pay:lib_pay_wechat')
-    implementation project(path: ':lib_pay:lib_pay_google')
-    implementation project(path: ':lib_pay:lib_pay_huawei')
-    implementation project(path: ':lib_pay:lib_pay_ali')
+    implementation project(path: ':lib_pay:lib_pay_impl_wechat')
+    implementation project(path: ':lib_pay:lib_pay_impl_google')
+    implementation project(path: ':lib_pay:lib_pay_impl_huawei')
+    implementation project(path: ':lib_pay:lib_pay_impl_ali')
 }
