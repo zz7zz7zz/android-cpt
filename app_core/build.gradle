@@ -54,6 +54,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //ARouter引用
-    api 'com.alibaba:arouter-api:1.5.1'
+    compile 'com.alibaba:arouter-api:1.5.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 }
