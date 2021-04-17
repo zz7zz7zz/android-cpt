@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
 }
 
+apply plugin: 'com.alibaba.arouter'
 apply plugin: 'com.module.plugin.cpt'
 
 cptJarPathConfig{

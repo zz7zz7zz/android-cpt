@@ -3,6 +3,7 @@ if(MODULE_AS_APPLICATION.toBoolean()){
 }else {
     apply plugin: 'com.android.library'
 }
+apply plugin: 'com.alibaba.arouter'
 
 android {
     compileSdkVersion       androidConfig.compileSdkVersion

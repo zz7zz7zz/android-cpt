@@ -1,9 +1,8 @@
-import java.time.Clock
-
 plugins {
     id 'com.android.application'
 }
 apply from: 'build_flavor.gradle'
+apply plugin: 'com.alibaba.arouter'
 
 android {
     compileSdkVersion       androidConfig.compileSdkVersion
@@ -208,6 +207,7 @@ dependencies {
 
 
 //--------------------------------- 统计编译时长 ---------------------------------
+import java.time.Clock
 class Clock {
     long startTimeInMs
 
