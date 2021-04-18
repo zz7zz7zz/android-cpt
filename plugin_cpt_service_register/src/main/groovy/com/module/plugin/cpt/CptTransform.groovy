@@ -26,6 +26,8 @@ class CptTransform extends Transform {
 
     static File destComponentServiceManagerClassFile
 
+    def isApp
+
     CptTransform(Project project) {
         this.project = project
     }
@@ -42,7 +44,7 @@ class CptTransform extends Transform {
 
     @Override
     Set<? super QualifiedContent.Scope> getScopes() {
-        return TransformManager.PROJECT_ONLY
+        return this.isApp ? TransformManager.SCOPE_FULL_PROJECT : TransformManager.PROJECT_ONLY
     }
 
     @Override
@@ -64,8 +66,16 @@ class CptTransform extends Transform {
 
                 pool.insertClassPath(it.file.absolutePath)
 
+                println("----------jarInputs------------ " + it.file.absolutePath)
+                File src = it.file
                 def dest = transformInvocation.outputProvider.getContentLocation(it.name,it.contentTypes,it.scopes,Format.JAR)
-                FileUtils.copyFile(it.file,dest)
+
+                //scan jar file to find classes
+                if (ScanUtil.shouldProcessPreDexJar(src.absolutePath)) {
+                    ScanUtil.scanJar(src, dest)
+                }
+
+                FileUtils.copyFile(src,dest)
             }
 
             // scan class files
@@ -85,13 +95,13 @@ class CptTransform extends Transform {
                         path = path.replaceAll("\\\\", "/")
                     }
 
+//                    println("path "+path + " isFile " + file.isFile() + " process " + ScanUtil.shouldProcessClass(path));
                     if(file.isFile() && ScanUtil.shouldProcessClass(path)){
-//                        println("path "+path + " isFile " + file.isFile() + " process " + ScanUtil.shouldProcessClass(path));
                         ScanUtil.scanClass(file)
                     }else if(file.isFile() && ScanUtil.shouldServiceImpl(path)){
-//                        println("path "+path + " isFile " + file.isFile() + " process " + ScanUtil.shouldProcessClass(path));
                         ScanUtil.scanClass(file)
                     }else if (ScanSetting.GENERATE_TO_CLASS_FILE_NAME == path) {
+//                        println("----------scanJar providerFactoryClass ------------ " + file.absolutePath)
                         // After the scan is complete, we will generate register code into this file
                         providerFactoryClass = file
                         providerFactoryParentPath = it.file.absolutePath;
