@@ -1,81 +1,110 @@
 package com.module.service;
 
 import android.text.TextUtils;
+import android.util.Log;
+
+import com.module.BaseApplication;
 
 import java.util.HashMap;
 
 public final class ServiceManager {
 
-    private static final HashMap<String,Class> map  = new HashMap<>();
+    private static final HashMap<String, ServiceInfo> nameService = new HashMap<>();//元数据集合,组件名为key
+    private static final HashMap<Class, ServiceInfo> classService = new HashMap<>();//元数据集合,组件类为key
+
+    private static final HashMap<Class, Object> sMap = new HashMap<>();//实例对象
 
     static {
-        register();
+        loadServiceToMap();
+
+        Log.v("ServiceManager","------------- static start ------------");
+        for (ServiceInfo info: classService.values()) {
+            Log.v("ServiceManager",info.toString());
+        }
+        Log.v("ServiceManager","------------- static end ------------");
     }
 
-//    public static void register(String component, Class clazz){
-//        map.put(component,clazz);
-//    }
+    private static void loadServiceToMap(){
+        registerService(":app_video","com.module.service.video.IVideoService","com.module.video.VideoServiceImpl");
+        registerService(":app_shopping","com.module.service.shopping.IShoppingService","com.module.shopping.ShoppingServiceImpl");
+        registerService(":app_integrate","com.module.service.integrate.IIntegrateService","com.module.integrate.IntegrateServiceImpl");
+        registerService(":app_game","com.module.service.game.IGameService","com.module.game.GameServiceImpl");
+        registerService(":app_news","com.module.service.news.INewsService","com.module.news.NewsServiceImpl");
+        registerService(":app_im","com.module.service.im.IIMService","com.module.im.IMServiceImpl");
+        registerService(":app","com.module.service.app.IAppService","com.module.main.AppServiceImpl");
+    }
 
-    private static void register(){
-//        map.put(com.module.service.video.IVideoService.MODULE,com.module.service.video.IVideoService.class);
-//        map.put(com.module.service.shopping.IShoppingService.MODULE,com.module.service.shopping.IShoppingService.class);
-//        map.put(com.module.service.app.IAppService.MODULE,com.module.service.app.IAppService.class);
-//        map.put(com.module.service.integrate.IIntegrateService.MODULE,com.module.service.integrate.IIntegrateService.class);
-//        map.put(com.module.service.game.IGameService.MODULE,com.module.service.game.IGameService.class);
-//        map.put(com.module.service.news.INewsService.MODULE,com.module.service.news.INewsService.class);
-//        map.put(com.module.service.im.IIMService.MODULE,com.module.service.im.IIMService.class);
-//        Log.v("ComponentServiceManager","---------- componetSize " + map.size());
+    private static void registerService(String name,String serviceName,String serviceImplName){
+        ServiceInfo serviceInfo = new ServiceInfo(name,serviceName,serviceImplName);
+        nameService.put(name,serviceInfo);
+        classService.put(serviceInfo.getService(),serviceInfo);
+    }
+
+    private static<T> T createDefault(Class<? extends T> clazz){
+        if(com.module.service.video.IVideoService.class.equals(clazz)){
+              return (T)com.module.service.video.IVideoService.DEFAULT;
+        }else if(com.module.service.shopping.IShoppingService.class.equals(clazz)){
+              return (T)com.module.service.shopping.IShoppingService.DEFAULT;
+        }else if(com.module.service.app.IAppService.class.equals(clazz)){
+              return (T)com.module.service.app.IAppService.DEFAULT;
+        }else if(com.module.service.integrate.IIntegrateService.class.equals(clazz)){
+              return (T)com.module.service.integrate.IIntegrateService.DEFAULT;
+        }else if(com.module.service.game.IGameService.class.equals(clazz)){
+              return (T)com.module.service.game.IGameService.DEFAULT;
+        }else if(com.module.service.news.INewsService.class.equals(clazz)){
+              return (T)com.module.service.news.INewsService.DEFAULT;
+        }else if(com.module.service.im.IIMService.class.equals(clazz)){
+              return (T)com.module.service.im.IIMService.DEFAULT;
+        }
+        return null;
     }
 
 
-    /**
-     * 通过组件名来找到组件Service
-     * @param component 组件名，如:app_im
-     * @return
-     */
     public static IService getService(String component){
-        return !TextUtils.isEmpty(component) ? (IService) getService(map.get(component)) : null;
+        return getService(component,true);
     }
 
-    /**
-     * 通过服务类名来找到组件Service
-     * @param clazz 服务类名，如IIMService.class
-     * @return 找到返回；未找到返回null
-     */
-    public static<T> T getService(Class<T> clazz){
+    public static IService getService(String component, boolean isCreatedDefault){
+        ServiceInfo serviceInfo = nameService.get(component);
+        if(null != serviceInfo){
+            return !TextUtils.isEmpty(component) ? (IService) getService(serviceInfo.getService(),isCreatedDefault) : null;
+        }
+        return null;
+    }
+
+
+    public static<T> T getService(Class<? extends T> clazz){
         return getService(clazz,true);
     }
 
-    /**
-     * 通过服务类名来找到组件Service
-     * @param clazz clazz 服务类名，如IIMService.class
-     * @param isCreatedDefault 在未找到服务的情况下，是否返回一个空实现的服务
-     * @param <T>
-     * @return 找到返回；未找到，如果isCreatedDefault true,返回默认空实现服务，isCreatedDefault false，返回null
-     */
+
     public static<T> T getService(Class<? extends T> clazz, boolean isCreatedDefault){
-//        if(com.module.service.video.IVideoService.class.equals(clazz)){
-//            com.module.service.video.IVideoService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.service.video.IVideoService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : (isCreatedDefault ? com.module.service.video.IVideoService.DEFAULT : null);
-//        }else if(com.module.service.shopping.IShoppingService.class.equals(clazz)){
-//            com.module.service.shopping.IShoppingService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.service.shopping.IShoppingService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : (isCreatedDefault ? com.module.service.shopping.IShoppingService.DEFAULT : null);
-//        }else if(com.module.service.app.IAppService.class.equals(clazz)){
-//            com.module.service.app.IAppService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.service.app.IAppService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : (isCreatedDefault ? com.module.service.app.IAppService.DEFAULT : null);
-//        }else if(com.module.service.integrate.IIntegrateService.class.equals(clazz)){
-//            com.module.service.integrate.IIntegrateService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.service.integrate.IIntegrateService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : (isCreatedDefault ? com.module.service.integrate.IIntegrateService.DEFAULT : null);
-//        }else if(com.module.service.game.IGameService.class.equals(clazz)){
-//            com.module.service.game.IGameService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.service.game.IGameService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : (isCreatedDefault ? com.module.service.game.IGameService.DEFAULT : null);
-//        }else if(com.module.service.news.INewsService.class.equals(clazz)){
-//            com.module.service.news.INewsService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.service.news.INewsService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : (isCreatedDefault ? com.module.service.news.INewsService.DEFAULT : null);
-//        }else if(com.module.service.im.IIMService.class.equals(clazz)){
-//            com.module.service.im.IIMService ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(com.module.service.im.IIMService.PROVIDER_MAIN).navigation();
-//            return null != ret ? ret : (isCreatedDefault ? com.module.service.im.IIMService.DEFAULT : null);
-//        }
+        try{
+            T ret = (T)sMap.get(clazz);
+            if(null == ret){
+
+                ServiceInfo serviceInfo = classService.get(clazz);
+                if(null != serviceInfo){
+                    Class serviceImplClass = serviceInfo.getServiceImpl();
+                    if(null != serviceImplClass){
+                        ret = (T)serviceImplClass.getConstructor().newInstance();
+                    }
+                }
+
+                if(null == ret && isCreatedDefault){
+                    ret = (T)createDefault(clazz);
+                }
+
+                ((IService)(ret)).init(BaseApplication.getInstance());
+            }
+
+            if(null != ret){
+                sMap.put(clazz,ret);
+            }
+            return ret;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 }

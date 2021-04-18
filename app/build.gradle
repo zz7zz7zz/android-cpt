@@ -4,6 +4,12 @@ plugins {
 apply from: 'build_flavor.gradle'
 apply plugin: 'com.alibaba.arouter'
 
+//apply plugin: 'com.module.plugin.cpt'
+//cptJarPathConfig{
+//    arouterPath = cpt_service_register_config.arouterPath
+//    fragmentPath = cpt_service_register_config.fragmentPath
+//}
+
 android {
     compileSdkVersion       androidConfig.compileSdkVersion
     buildToolsVersion       androidConfig.buildToolsVersion

@@ -15,7 +15,6 @@ import com.module.service.game.IGameService;
 
 import java.lang.ref.WeakReference;
 
-@Route(path = IGameService.PROVIDER_MAIN, name = IGameService.MODULE)
 public class GameServiceImpl implements IGameService {
 
     private static final String TAG = "GameServiceImpl";
@@ -28,15 +27,15 @@ public class GameServiceImpl implements IGameService {
         View ret = (null != viewWeakReference) ? viewWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
             ret = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
-            ((TextView)(ret.findViewById(R.id.moudle_name))).setText(getComponentName());
-            ((ImageView)(ret.findViewById(R.id.moudle_icon))).setBackgroundResource(getComponentIconResId());
+            ((TextView)(ret.findViewById(R.id.moudle_name))).setText(getComponentName(context));
+            ((ImageView)(ret.findViewById(R.id.moudle_icon))).setBackgroundResource(getComponentIconResId(context));
             viewWeakReference = new WeakReference<>(ret);
         }
         return ret;
     }
 
     @Override
-    public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
+    public Fragment getComponentMainFragment(Context context,boolean isCreatedIfNull) {
         Fragment ret = (null != fragmentWeakReference) ? fragmentWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
             ret = new GameMainFragment();
@@ -52,12 +51,12 @@ public class GameServiceImpl implements IGameService {
     }
 
     @Override
-    public String getComponentName() {
+    public String getComponentName(Context context) {
         return context.getString(R.string.game_name);
     }
 
     @Override
-    public int getComponentIconResId() {
+    public int getComponentIconResId(Context context) {
         return R.drawable.game_icon_selector;
     }
 
@@ -72,12 +71,12 @@ public class GameServiceImpl implements IGameService {
     }
 
     @Override
-    public void onComponentEnter() {
+    public void onComponentEnter(Context context) {
         Log.v(TAG,"onModuleEnter ");
     }
 
     @Override
-    public void onComponentExit() {
+    public void onComponentExit(Context context) {
         Log.v(TAG,"onModuleExit ");
         if(null != fragmentWeakReference){
             fragmentWeakReference.clear();

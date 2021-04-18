@@ -12,7 +12,6 @@ import com.module.service.app.IAppService;
 /**
  * 可能用的到也可能用不到
  */
-@Route(path = IAppService.PROVIDER_MAIN, name = IAppService.MODULE)
 public class AppServiceImpl implements IAppService {
 
     private static final String TAG = "AppServiceImpl";
@@ -24,7 +23,7 @@ public class AppServiceImpl implements IAppService {
     }
 
     @Override
-    public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
+    public Fragment getComponentMainFragment(Context context, boolean isCreatedIfNull) {
         return null;
     }
 
@@ -34,12 +33,12 @@ public class AppServiceImpl implements IAppService {
     }
 
     @Override
-    public String getComponentName() {
+    public String getComponentName(Context context) {
         return context.getString(R.string.app_name);
     }
 
     @Override
-    public int getComponentIconResId() {
+    public int getComponentIconResId(Context context) {
         return 0;
     }
 
@@ -49,12 +48,12 @@ public class AppServiceImpl implements IAppService {
     }
 
     @Override
-    public void onComponentEnter() {
+    public void onComponentEnter(Context context) {
         Log.v(TAG,"onModuleEnter ");
     }
 
     @Override
-    public void onComponentExit() {
+    public void onComponentExit(Context context) {
         Log.v(TAG,"onModuleExit ");
     }
 }

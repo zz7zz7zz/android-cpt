@@ -26,6 +26,8 @@ class CptTransform extends Transform {
 
     static File destComponentServiceManagerClassFile
 
+    static File fileContainsInitClass
+
     def isApp
 
     CptTransform(Project project) {
@@ -145,14 +147,16 @@ class CptTransform extends Transform {
                     //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
                     pool.appendClassPath(project.android.bootClasspath[0].toString())
 
-                    CptCodeGenerator.insertCodeTo(ext,providerFactoryParentPath)
-                    FileUtils.copyFile(providerFactoryClass, destComponentServiceManagerClassFile)
+//                    CptCodeGenerator.insertCodeTo(ext,providerFactoryParentPath)
+//                    FileUtils.copyFile(providerFactoryClass, destComponentServiceManagerClassFile)
 
                     ext.serviceList.each {
                         println("service: "+it + " serviceImpl: "+ext.serviceImplMap.get(it))
 //                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
 //                        CptCodeGenerator.insertLogCodeTo(it,providerFactoryParentPath)
                     }
+
+                    RegisterCodeGenerator.insertInitCodeTo(ext)
                 }
             }
         }

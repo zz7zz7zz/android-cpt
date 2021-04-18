@@ -74,7 +74,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         for (int i = 0; i< services.size(); i++){
             IService service = services.get(i);
             if(null != service){
-                service.onComponentExit();
+                service.onComponentExit(getApplicationContext());
             }
         }
         services = null;
@@ -107,8 +107,8 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             final IService service = allComponentSerices.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_all,false);
-            ((TextView)(view.findViewById(R.id.moudle_name))).setText(service.getComponentName());
-            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(service.getComponentIconResId());
+            ((TextView)(view.findViewById(R.id.moudle_name))).setText(service.getComponentName(getApplicationContext()));
+            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(service.getComponentIconResId(getApplicationContext()));
             ((Button)(view.findViewById(R.id.moudle_navigation_main))).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -129,7 +129,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             if(null != service){
                 newServices.add(service);
                 if(!services.remove(service)){//说明原来组件不包含
-                    service.onComponentEnter();
+                    service.onComponentEnter(getApplicationContext());
                     Log.v("MainActivity","Service "+service.getClass().getSimpleName() + " id " + service.hashCode());
                 }else{//说明包含，不处理
                     //doNothing.
@@ -149,7 +149,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction ft          = fragmentManager.beginTransaction();
 
-            Fragment f = services.get(i).getComponentMainFragment(false);
+            Fragment f = services.get(i).getComponentMainFragment(getApplicationContext(),false);
             if(null != f){
                 ft.remove(f);
             }
@@ -159,7 +159,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
             //--------------同时删除多余的已经初始化的Fragment--------------
 
-            services.get(i).onComponentExit();
+            services.get(i).onComponentExit(getApplicationContext());
 
             //重置当前显示的组件
             if(currentService == services.get(i)){
@@ -195,8 +195,8 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             final IService service = services.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_valid,false);
-            ((TextView)(view.findViewById(R.id.moudle_name))).setText(service.getComponentName());
-            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(service.getComponentIconResId());
+            ((TextView)(view.findViewById(R.id.moudle_name))).setText(service.getComponentName(getApplicationContext()));
+            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(service.getComponentIconResId(getApplicationContext()));
             ((Button)(view.findViewById(R.id.moudle_navigation_main))).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -231,7 +231,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-        Fragment nextShowFragment = service.getComponentMainFragment(true);
+        Fragment nextShowFragment = service.getComponentMainFragment(getApplicationContext(),true);
         Log.v("MainActivity","nextShowFragment "+nextShowFragment.getClass().getSimpleName() + " id " + nextShowFragment.hashCode());
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -239,14 +239,14 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         //隐藏旧的
         for (int i = 0; i< services.size(); i++){
-            Fragment f = services.get(i).getComponentMainFragment(false);
+            Fragment f = services.get(i).getComponentMainFragment(getApplicationContext(),false);
             if(null != f && f.isAdded() && f != nextShowFragment){
                 ft.hide(f);
             }
         }
 
         //添加新的
-        String tag = service.getComponentName();
+        String tag = service.getComponentName(getApplicationContext());
 
         //如果不是同一个fragment,删除旧的
         Fragment foundFragment = fragmentManager.findFragmentByTag(tag);

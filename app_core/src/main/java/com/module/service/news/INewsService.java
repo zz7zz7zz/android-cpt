@@ -26,52 +26,47 @@ public interface INewsService extends IService {
     static final INewsService DEFAULT = new INewsService() {
         @Override
         public String getNewsList() {
-            
             return null;
         }
 
         @Override
-        public void onComponentEnter() {
-            
+        public void onComponentEnter(Context context) {
+
         }
 
         @Override
-        public void onComponentExit() {
-            
+        public void onComponentExit(Context context) {
+
         }
 
         @Override
-        public String getComponentName() {
-            
+        public String getComponentName(Context context) {
             return null;
         }
 
         @Override
-        public int getComponentIconResId() {
-            
+        public int getComponentIconResId(Context context) {
             return 0;
         }
 
         @Override
         public View getComponentTabView(Context context, boolean isCreatedIfNull) {
-            
             return null;
         }
 
         @Override
-        public Fragment getComponentMainFragment(boolean isCreatedIfNull) {
-            
+        public Fragment getComponentMainFragment(Context context, boolean isCreatedIfNull) {
             return null;
         }
 
         @Override
         public void startComponentMainActivity(Context context) {
-            
+
         }
 
         @Override
         public void init(Context context) {
-            
+
         }
     };
 

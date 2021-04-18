@@ -35,6 +35,7 @@ class ScanUtil {
                     // mark this jar file contains LogisticsCenter.class
                     // After the scan is complete, we will generate register code into this file
                     CptTransform.providerFactoryClass = destFile
+                    CptTransform.fileContainsInitClass= destFile
                     println("----------scanJar providerFactoryClass ------------ " + (null != destFile ? destFile.absolutePath : " null"))
                 }
             }

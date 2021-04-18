@@ -14,6 +14,11 @@ class ScanSetting {
 
     private static final INTERFACE_PACKAGE_NAME = 'com/module/service/'
 
+//    static final String GENERATE_TO_METHOD_NAME = 'registerService'
+    static final String GENERATE_TO_METHOD_NAME = 'loadServiceToMap'
+    static final String GENERATE_TO_CLASS_NAME= 'com/module/service/ServiceManager'
+    static final String REGISTER_METHOD_NAME = 'registerService'
+
     String interfaceName = ''
     File fileContainsInitClass
 

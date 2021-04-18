@@ -7,6 +7,7 @@ import androidx.multidex.MultiDex;
 
 public abstract class BaseApplication extends Application {
 
+    private static BaseApplication INS = null;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -18,7 +19,13 @@ public abstract class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        INS = this;
         Initializer.init(this);
+    }
+
+
+    public static Application getInstance(){
+        return INS;
     }
 
     //--------------------- 组件代码是否包含了 ---------------------
