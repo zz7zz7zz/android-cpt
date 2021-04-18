@@ -1,6 +1,9 @@
 package com.module.plugin.cpt
 
+import com.android.build.gradle.AppExtension
+import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.LibraryExtension
+import com.android.build.gradle.LibraryPlugin
 import com.module.plugin.cpt.bean.CptJarPathConfig
 import com.module.plugin.cpt.util.ScanSetting
 import org.gradle.api.Plugin
@@ -12,7 +15,15 @@ class CptPlugin implements Plugin<Project>{
     void apply(Project project) {
 //        println("--------CptPlugin--------")
 
-        def library = project.extensions.getByType(LibraryExtension.class)
+//        boolean isApp = project.getPlugins.hasPlugin(AppPlugin.class);
+//        boolean isLibrary = project.getPlugins.hasPlugin("com.android.library");
+
+        def isApp = project.plugins.withType(AppPlugin)
+        def isLibrary = project.plugins.withType(LibraryPlugin)
+//        println("isApp " + isApp + " isLibrary " + isLibrary)
+
+        //App工程 还是 Library工程
+        def library = isApp ? project.extensions.getByType(AppExtension.class) : project.extensions.getByType(LibraryExtension.class)
         def transform = new CptTransform(project)
 
         ArrayList<ScanSetting> list = new ArrayList<>(1)
