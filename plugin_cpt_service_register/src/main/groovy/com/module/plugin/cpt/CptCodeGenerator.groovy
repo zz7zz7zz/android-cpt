@@ -2,7 +2,6 @@ package com.module.plugin.cpt
 
 import javassist.*
 import com.module.plugin.cpt.util.ScanSetting
-import javassist.CtClass;
 
 class CptCodeGenerator {
 
@@ -40,16 +39,16 @@ class CptCodeGenerator {
 //println("method " + method.getName() + " method.getParameterTypes.length " + method.getParameterTypes().length)
             if(ScanSetting.GENERATE_TO_METHOD_NAME_REGISTER.equals(method.getName()) && method.getParameterTypes().length == 0){
                 StringBuilder sb = new StringBuilder();
-                setting.classList.each { name ->
+                setting.serviceList.each { name ->
                     name = name.replaceAll("/", ".")
-                    sb.append(String.format("map.put(%s.MODULE,%s.class);\n",name,,name))
+                    sb.append(String.format("map.put(%s.MODULE,%s.class);\n",name,name))
                 }
 //println(sb.toString())
                 method.insertBefore(sb.toString())
             } else if(ScanSetting.GENERATE_TO_METHOD_NAME_GETCOMPONENTBYCLASS.equals(method.getName()) && method.getParameterTypes().length == 2){
                 boolean isFrist = true;
                 StringBuilder sb = new StringBuilder();
-                setting.classList.each { name ->
+                setting.serviceList.each { name ->
                     name = name.replaceAll("/", ".")
                     if(!isFrist){
                         sb.append("else ")
@@ -57,7 +56,7 @@ class CptCodeGenerator {
                     sb.append(String.format("if(%s.class.equals(clazz)){\n" +
                             "     %s ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(%s.PROVIDER_MAIN).navigation();\n" +
                                  "return null != ret ? ret : (isCreatedDefault ? %s.DEFAULT : null);\n"+
-                            "}",name,,name,name,name))
+                            "}",name,name,name,name))
 
                     isFrist = false;
                 }

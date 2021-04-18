@@ -88,6 +88,9 @@ class CptTransform extends Transform {
                     if(file.isFile() && ScanUtil.shouldProcessClass(path)){
 //                        println("path "+path + " isFile " + file.isFile() + " process " + ScanUtil.shouldProcessClass(path));
                         ScanUtil.scanClass(file)
+                    }else if(file.isFile() && ScanUtil.shouldServiceImpl(path)){
+//                        println("path "+path + " isFile " + file.isFile() + " process " + ScanUtil.shouldProcessClass(path));
+                        ScanUtil.scanClass(file)
                     }else if (ScanSetting.GENERATE_TO_CLASS_FILE_NAME == path) {
                         // After the scan is complete, we will generate register code into this file
                         providerFactoryClass = file
@@ -123,7 +126,7 @@ class CptTransform extends Transform {
             registerList.each { ext ->
 //                println('Insert register code to file ' + providerFactoryClass.absolutePath)
 
-                if (ext.classList.isEmpty()) {
+                if (ext.serviceList.isEmpty()) {
                     println("No class implements found for interface:" + ext.interfaceName)
                 } else {
 
@@ -135,11 +138,11 @@ class CptTransform extends Transform {
                     CptCodeGenerator.insertCodeTo(ext,providerFactoryParentPath)
                     FileUtils.copyFile(providerFactoryClass, destComponentServiceManagerClassFile)
 
-//                    ext.classList.each {
-//                        println(it)
+                    ext.serviceList.each {
+                        println("service: "+it + " serviceImpl: "+ext.serviceImplMap.get(it))
 //                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
 //                        CptCodeGenerator.insertLogCodeTo(it,providerFactoryParentPath)
-//                    }
+                    }
                 }
             }
         }

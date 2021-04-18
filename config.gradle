@@ -110,5 +110,10 @@ ext {
             release2: false
     ]
 
+    //编译相关:
     getBuildTime = this.&getBuildTime
+    cpt_service_register_config = [
+        arouterPath  : "/Users/long/.gradle/caches/transforms-2/files-2.1/c734ae58d954bef0f67be11fa375b6b1/jetified-arouter-api-1.5.1/jars/classes.jar",
+        fragmentPath : "/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar"
+    ]
 }

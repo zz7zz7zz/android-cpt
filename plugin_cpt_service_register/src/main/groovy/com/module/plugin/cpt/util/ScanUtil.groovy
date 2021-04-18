@@ -13,6 +13,10 @@ class ScanUtil {
         return entryName != null && entryName.startsWith(ScanSetting.FLITER_CLASS_NAME_START) && entryName.endsWith(ScanSetting.FLITER_CLASS_NAME_END) && !entryName.endsWith('$'+ScanSetting.FLITER_CLASS_NAME_END)
     }
 
+    static boolean shouldServiceImpl(String entryName) {
+        return entryName != null && entryName.endsWith(ScanSetting.FLITER_CLASS_NAME_SERVICE_IMPL_END)
+    }
+
     static boolean shouldProcessClasswithLog(String entryName) {
         return entryName != null  && entryName.endsWith('Service\$1.class')
     }
@@ -41,11 +45,15 @@ class ScanUtil {
             CptTransform.registerList.each { ext ->
                 if (ext.interfaceName && interfaces != null) {
                     interfaces.each { itName ->
+//println("ScanClassVisitor cmpInterface "+ext.interfaceName + " interface " + itName + " name " + name)
                         if (itName == ext.interfaceName) {
                             //fix repeated inject init code when Multi-channel packaging
-                            if (!ext.classList.contains(name)) {
-//                                println("----"+ext.interfaceName + " name " + name)
-                                ext.classList.add(name)
+                            if (!ext.serviceList.contains(name)) {
+                                ext.serviceList.add(name)
+                            }
+                        }else{
+                            if(ext.serviceList.contains(itName)){
+                                ext.serviceImplMap.put(itName,name)
                             }
                         }
                     }
