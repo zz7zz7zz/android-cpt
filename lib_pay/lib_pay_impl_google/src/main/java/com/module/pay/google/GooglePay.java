@@ -9,7 +9,6 @@ import com.lib.pay.core.service.IPayConsts;
 import com.lib.pay.core.service.IPayService;
 
 
-@Route(path = IPayConsts.PAY_GOOGLE, name = IPayConsts.PAY_GOOGLE)
 public class GooglePay implements IPayService {
 
     private static final String TAG = "GooglePay";

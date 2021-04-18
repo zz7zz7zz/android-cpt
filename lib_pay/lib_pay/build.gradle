@@ -44,10 +44,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    //ARouter引用
-    compile 'com.alibaba:arouter-api:1.5.1'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
-
     api project(path: ':lib_pay:lib_pay_core')
 
     //库组件的动态配置

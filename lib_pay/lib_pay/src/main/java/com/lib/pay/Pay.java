@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.lib.pay.core.service.IPayResult;
 import com.lib.pay.core.service.IPayService;
 import com.lib.pay.core.service.PayOrder;
+import com.lib.pay.core.service.PayServiceManager;
 
 public class Pay {
 
@@ -25,17 +26,13 @@ public class Pay {
     }
 
     public void pay(String payType, PayOrder payOrder, IPayResult listener) {
-        IPayService service = getService(payType);
+        IPayService service = PayServiceManager.getService(payType);
         if(null != service){
             service.pay(payOrder.sku);
             listener.onPaySuccess();
         }else{
             listener.onPayFailed(-1,"Service 未找到");
         }
-    }
-
-    public static IPayService getService(String component){
-        return !TextUtils.isEmpty(component) ? (IPayService) com.alibaba.android.arouter.launcher.ARouter.getInstance().build(component).navigation() : null;
     }
 
 }

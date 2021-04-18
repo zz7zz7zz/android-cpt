@@ -9,7 +9,6 @@ import com.lib.pay.core.service.IPayConsts;
 import com.lib.pay.core.service.IPayService;
 
 
-@Route(path = IPayConsts.PAY_HUAWEI, name = IPayConsts.PAY_HUAWEI)
 public class HuaweiPay implements IPayService {
 
     private static final String TAG = "HuaweiPay";
