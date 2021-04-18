@@ -25,7 +25,7 @@ public final class PayServiceManager {
         registerService("ali","com.lib.pay.ali.AliPay");
         registerService("wechat","com.lib.pay.wechat.WechatPay");
         registerService("huawei","com.lib.pay.huawei.HuaweiPay");
-        registerService("google","com.lib.pay.wechat.GooglePay");
+        registerService("google","com.lib.pay.google.GooglePay");
     }
 
     private static void registerService(String name,String serviceImplName){
