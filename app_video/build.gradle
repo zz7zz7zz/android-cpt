@@ -70,6 +70,6 @@ dependencies {
     implementation project(':app_core')
 
     //ARouter引用
-    compile 'com.alibaba:arouter-api:1.5.1'
+//    compile 'com.alibaba:arouter-api:1.5.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 }

@@ -125,11 +125,11 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
 
     @Override
     public void onPaySuccess() {
-        Log.v(TAG,"onPaySuccess");
+        Log.v(TAG,"------------- onPaySuccess -------------");
     }
 
     @Override
     public void onPayFailed(int errCode, String errMessage) {
-        Log.e(TAG,String.format("onPayFailed errCode %d errMessage %s ",errCode,errMessage));
+        Log.e(TAG,String.format("------------- onPayFailed errCode %d errMessage %s ",errCode,errMessage));
     }
 }

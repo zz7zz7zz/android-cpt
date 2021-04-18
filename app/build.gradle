@@ -20,6 +20,12 @@ android {
         multiDexEnabled     true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     packagingOptions {
@@ -200,6 +206,8 @@ dependencies {
 
     //基类库
     implementation project(':app_core')
+
+    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 }
 
 
