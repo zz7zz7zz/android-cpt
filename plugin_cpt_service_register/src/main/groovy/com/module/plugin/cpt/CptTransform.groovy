@@ -3,7 +3,7 @@ package com.module.plugin.cpt
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.android.utils.FileUtils
-import com.module.plugin.cpt.bean.CptJarPathConfig
+import com.module.plugin.cpt.bean.CptConfig
 import com.module.plugin.cpt.util.ScanSetting
 import com.module.plugin.cpt.util.ScanUtil
 import javassist.ClassPool
@@ -19,7 +19,7 @@ class CptTransform extends Transform {
 
     def pool = ClassPool.default
 
-    static CptJarPathConfig cptJarPathConfig
+    static CptConfig cptConfig
 
     static ArrayList<ScanSetting> registerList
     static File providerFactoryClass
@@ -99,7 +99,7 @@ class CptTransform extends Transform {
 
                 pool.insertClassPath(directoryInput.file.absolutePath)
 //                pool.insertClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/c734ae58d954bef0f67be11fa375b6b1/jetified-arouter-api-1.5.1/jars/classes.jar")
-                pool.insertClassPath(cptJarPathConfig.arouterPath)
+//                pool.insertClassPath(cptConfig.arouterPath)
 
 
                 File dest = transformInvocation.outputProvider.getContentLocation(directoryInput.name, directoryInput.contentTypes, directoryInput.scopes, Format.DIRECTORY)
@@ -145,7 +145,7 @@ class CptTransform extends Transform {
 //                        //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
 //                        pool.appendClassPath(project.android.bootClasspath[0].toString())
 ////                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
-//                        pool.insertClassPath(cptJarPathConfig.fragmentPath)
+//                        pool.insertClassPath(cptConfig.fragmentPath)
 //
 //                        def preFileName = directoryInput.file.absolutePath
 //                        //println("-----preFileName----- " + file.absolutePath)
@@ -171,7 +171,7 @@ class CptTransform extends Transform {
 //                    RegisterCodeGenerator.insertInitCodeTo(ext)
 //                    RegisterCodeGenerator2.insertInitCodeTo(ext, fileContainsInitClass.parent+"/999.jar")
 
-                    RegisterCodeGenerator2.insertInitCodeToApp(ext, providerFactoryParentPath)
+                    RegisterCodeGenerator2.insertInitCodeToApp(ext, providerFactoryParentPath,cptConfig)
                     FileUtils.copyFile(providerFactoryClass, destComponentServiceManagerClassFile)
                 }
             }

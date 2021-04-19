@@ -4,8 +4,7 @@ import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.LibraryPlugin
-import com.android.build.gradle.internal.pipeline.TransformManager
-import com.module.plugin.cpt.bean.CptJarPathConfig
+import com.module.plugin.cpt.bean.CptConfig
 import com.module.plugin.cpt.util.ScanSetting
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -41,10 +40,10 @@ class CptPlugin implements Plugin<Project>{
         library.registerTransform(transform)
 
         // 通过Extension的方式传递将要被注入的自定义代码
-        CptJarPathConfig extension = project.extensions.create("cptJarPathConfig", CptJarPathConfig)
+        CptConfig extension = project.extensions.create("cptConfig", CptConfig)
         project.afterEvaluate {
-
-            CptTransform.cptJarPathConfig = extension;
+            CptTransform.cptConfig = extension;
+            println(extension.toString())
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.module.plugin.cpt
 
+import com.module.plugin.cpt.bean.CptConfig
 import com.module.plugin.cpt.util.ScanSetting
 import javassist.CtMember
 import org.apache.commons.io.IOUtils
@@ -126,7 +127,7 @@ class RegisterCodeGenerator2 {
 
 
     //3.动态生成方法，动态插入
-    static void insertInitCodeToApp(ScanSetting registerSetting,String fileName) {
+    static void insertInitCodeToApp(ScanSetting registerSetting, String fileName, CptConfig cptConfig) {
         if (registerSetting != null && !registerSetting.serviceList.isEmpty()) {
             RegisterCodeGenerator2 processor = new RegisterCodeGenerator2(registerSetting)
             File file = CptTransform.fileContainsInitClass
@@ -134,7 +135,7 @@ class RegisterCodeGenerator2 {
 
                 try {
                     ClassPool.getDefault().insertClassPath(CptTransform.fileContainsInitClass.absolutePath);
-                    def className = registerSetting.GENERATE_TO_CLASS_FILE_NAME2.replace("\\",".").replace("/",".").replace(".class","")
+                    def className = cptConfig.applicationName.replace("\\",".").replace("/",".").replace(".class","")
                     CtClass c2 = ClassPool.getDefault().getCtClass(className);
                     if (c2.isFrozen()){
                         c2.defrost()
