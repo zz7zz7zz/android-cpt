@@ -9,22 +9,19 @@ import java.util.HashMap;
 
 public final class ServiceManager {
 
-    private static final HashMap<String, ServiceInfo> nameService = new HashMap<>();//元数据集合,组件名为key
-    private static final HashMap<Class, ServiceInfo> classService = new HashMap<>();//元数据集合,组件类为key
+    private static final HashMap<String, ServiceInfo> nameService = new HashMap<>();//元数据集合,组件名为模块名
+    private static final HashMap<Class, ServiceInfo> classService = new HashMap<>();//元数据集合,组件类为服务类名
+    private static boolean registerByPlugin;
 
     private static final HashMap<Class, Object> sMap = new HashMap<>();//实例对象
 
-    static {
-        loadServiceToMap();
-
-        Log.v("ServiceManager","------------- static start ------------");
-        for (ServiceInfo info: classService.values()) {
-            Log.v("ServiceManager",info.toString());
-        }
-        Log.v("ServiceManager","------------- static end ------------");
-    }
 
     private static void loadServiceToMap(){
+        registerByPlugin = false;
+    }
+
+    //没有使用插件的情况下，才用反射的方法
+    private static void degradeLoadServiceToMap(){
         registerService(":app_video","com.module.service.video.IVideoService","com.module.video.VideoServiceImpl");
         registerService(":app_shopping","com.module.service.shopping.IShoppingService","com.module.shopping.ShoppingServiceImpl");
         registerService(":app_integrate","com.module.service.integrate.IIntegrateService","com.module.integrate.IntegrateServiceImpl");
@@ -36,6 +33,12 @@ public final class ServiceManager {
 
     private static void registerService(String name,String serviceName,String serviceImplName){
         ServiceInfo serviceInfo = new ServiceInfo(name,serviceName,serviceImplName);
+        nameService.put(name,serviceInfo);
+        classService.put(serviceInfo.getService(),serviceInfo);
+    }
+
+    public static void registerService(String name,Class clz,Class clz2){
+        ServiceInfo serviceInfo = new ServiceInfo(name,clz,clz2);
         nameService.put(name,serviceInfo);
         classService.put(serviceInfo.getService(),serviceInfo);
     }
@@ -60,6 +63,21 @@ public final class ServiceManager {
     }
 
 
+    public static void init(){
+        loadServiceToMap();
+
+        Log.v("ServiceManager","registerByPlugin " + registerByPlugin + " nameService.size " + nameService.size());
+        if(!registerByPlugin || nameService.size() == 0){
+            degradeLoadServiceToMap();
+        }
+
+        Log.v("ServiceManager","------------- init start ------------");
+        for (ServiceInfo info: classService.values()) {
+            Log.v("ServiceManager",info.toString());
+        }
+        Log.v("ServiceManager","------------- init end ------------");
+    }
+
     public static IService getService(String component){
         return getService(component,true);
     }
@@ -72,11 +90,9 @@ public final class ServiceManager {
         return null;
     }
 
-
     public static<T> T getService(Class<? extends T> clazz){
         return getService(clazz,true);
     }
-
 
     public static<T> T getService(Class<? extends T> clazz, boolean isCreatedDefault){
         try{

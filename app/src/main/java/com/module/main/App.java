@@ -10,6 +10,12 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        onInitComponentService();
+    }
+
+    //do not remove this method, it will auto generator registerService by plugin
+    private void onInitComponentService(){
+
     }
 
     @Override

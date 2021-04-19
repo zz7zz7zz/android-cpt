@@ -5,6 +5,8 @@ import android.content.Context;
 
 import androidx.multidex.MultiDex;
 
+import com.module.service.ServiceManager;
+
 public abstract class BaseApplication extends Application {
 
     private static BaseApplication INS = null;
@@ -20,6 +22,7 @@ public abstract class BaseApplication extends Application {
         super.onCreate();
 
         INS = this;
+        ServiceManager.init();
         Initializer.init(this);
     }
 

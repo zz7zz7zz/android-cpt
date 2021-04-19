@@ -10,6 +10,7 @@ import javassist.ClassPool
 import javassist.CtClass
 import javassist.CtMethod
 import javassist.Modifier
+import org.apache.commons.codec.digest.DigestUtils
 import org.gradle.api.Project
 
 class CptTransform extends Transform {
@@ -58,21 +59,34 @@ class CptTransform extends Transform {
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         super.transform(transformInvocation)
 
-//        println("----------------------Scan / Generate code start----------------------")
+        println("----------------------Scan / Generate code start----------------------")
+
+        ScanService.scanAllClasses(transformInvocation,pool)
 
         long startTime = System.currentTimeMillis()
         boolean leftSlash = File.separator == '/'
 
-        transformInvocation.inputs.each {
-            it.jarInputs.each {
+        transformInvocation.inputs.each { TransformInput input ->
 
-                pool.insertClassPath(it.file.absolutePath)
+            input.jarInputs.each { JarInput jarInput ->
 
-                println("----------jarInputs------------ " + it.file.absolutePath)
-                File src = it.file
-                def dest = transformInvocation.outputProvider.getContentLocation(it.name,it.contentTypes,it.scopes,Format.JAR)
+                pool.insertClassPath(jarInput.file.absolutePath)
 
-                //scan jar file to find classes
+//                println("ScanService jarInputs------------ " + jarInput.file.absolutePath)
+
+                String destName = jarInput.name
+                // rename jar files
+                def hexName = DigestUtils.md5Hex(jarInput.file.absolutePath)
+                if (destName.endsWith(".jar")) {
+                    destName = destName.substring(0, destName.length() - 4)
+                }
+                // input file
+                File src = jarInput.file
+                // output file
+                File dest = transformInvocation.outputProvider.getContentLocation(destName + "_" + hexName, jarInput.contentTypes, jarInput.scopes, Format.JAR)
+
+
+//                //scan jar file to find classes
                 if (ScanUtil.shouldProcessPreDexJar(src.absolutePath)) {
                     ScanUtil.scanJar(src, dest)
                 }
@@ -81,86 +95,111 @@ class CptTransform extends Transform {
             }
 
             // scan class files
-            it.directoryInputs.each {
+            input.directoryInputs.each { DirectoryInput directoryInput ->
 
-                pool.insertClassPath(it.file.absolutePath)
+                pool.insertClassPath(directoryInput.file.absolutePath)
 //                pool.insertClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/c734ae58d954bef0f67be11fa375b6b1/jetified-arouter-api-1.5.1/jars/classes.jar")
                 pool.insertClassPath(cptJarPathConfig.arouterPath)
 
-                File dest = transformInvocation.outputProvider.getContentLocation(it.name, it.contentTypes, it.scopes, Format.DIRECTORY)
-                String root = it.file.absolutePath
+
+                File dest = transformInvocation.outputProvider.getContentLocation(directoryInput.name, directoryInput.contentTypes, directoryInput.scopes, Format.DIRECTORY)
+                String root = directoryInput.file.absolutePath
                 if (!root.endsWith(File.separator))
                     root += File.separator
-                it.file.eachFileRecurse { File file ->
+                directoryInput.file.eachFileRecurse { File file ->
                     def path = file.absolutePath.replace(root, '')
                     if (!leftSlash) {
                         path = path.replaceAll("\\\\", "/")
                     }
+//                    if(file.isFile() && ScanUtil.shouldProcessClass(path)){
+//                        ScanUtil.scanClass(file)
+//                    }else if(file.isFile() && ScanUtil.shouldServiceImpl(path)){
+//                        ScanUtil.scanClass(file)
+//                    }
+//
+//                    if (ScanSetting.GENERATE_TO_CLASS_FILE_NAME == path) {
+////                        println("----------scanJar providerFactoryClass ------------ " + file.absolutePath)
+//                        // After the scan is complete, we will generate register code into this file
+//                        providerFactoryClass = file
+//                        providerFactoryParentPath = directoryInput.file.absolutePath;
+//                        destComponentServiceManagerClassFile = new File(dest.absolutePath+File.separator+path);
+//
+////                        println("fileContainsInitClass path "+path);
+////                        println("file.absolutePath "+file.absolutePath);
+////                        println("it.file.absolutePath "+it.file.absolutePath);
+////                        println("dest.absolutePath "+dest.absolutePath);
+//                    }
 
-//                    println("path "+path + " isFile " + file.isFile() + " process " + ScanUtil.shouldProcessClass(path));
-                    if(file.isFile() && ScanUtil.shouldProcessClass(path)){
-                        ScanUtil.scanClass(file)
-                    }else if(file.isFile() && ScanUtil.shouldServiceImpl(path)){
-                        ScanUtil.scanClass(file)
-                    }else if (ScanSetting.GENERATE_TO_CLASS_FILE_NAME == path) {
-//                        println("----------scanJar providerFactoryClass ------------ " + file.absolutePath)
-                        // After the scan is complete, we will generate register code into this file
-                        providerFactoryClass = file
-                        providerFactoryParentPath = it.file.absolutePath;
-                        destComponentServiceManagerClassFile = new File(dest.absolutePath+File.separator+path);
+                     if (ScanSetting.GENERATE_TO_CLASS_FILE_NAME2 == path) {
+                            providerFactoryClass = file
+                            providerFactoryParentPath = directoryInput.file.absolutePath;
+                            destComponentServiceManagerClassFile = new File(dest.absolutePath+File.separator+path);
 
-//                        println("fileContainsInitClass path "+path);
-//                        println("file.absolutePath "+file.absolutePath);
-//                        println("it.file.absolutePath "+it.file.absolutePath);
-//                        println("dest.absolutePath "+dest.absolutePath);
-                    }
-
-                    if(file.isFile() && ScanUtil.shouldProcessClasswithLog(path)){
-                        //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
-                        pool.appendClassPath(project.android.bootClasspath[0].toString())
-//                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
-                        pool.insertClassPath(cptJarPathConfig.fragmentPath)
-
-                        def preFileName = it.file.absolutePath
-                        //println("-----preFileName----- " + file.absolutePath)
-                        pool.insertClassPath(preFileName)
-                        findTarget(file,preFileName)
-                    }
+                            println("path "+path);
+                            println("providerFactoryClass.absolutePath "+providerFactoryClass.absolutePath);
+                            println("providerFactoryParentPath "+providerFactoryParentPath);
+                            println("ddestComponentServiceManagerClassFile.absolutePath "+destComponentServiceManagerClassFile.absolutePath);
+                     }
+//                    //在默认实现类中各个方法打印日志
+//                    if(file.isFile() && ScanUtil.shouldProcessClasswithLog(path)){
+//                        //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
+//                        pool.appendClassPath(project.android.bootClasspath[0].toString())
+////                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
+//                        pool.insertClassPath(cptJarPathConfig.fragmentPath)
+//
+//                        def preFileName = directoryInput.file.absolutePath
+//                        //println("-----preFileName----- " + file.absolutePath)
+//                        pool.insertClassPath(preFileName)
+//                        findTarget(file,preFileName)
+//                    }
                 }
 
                 // copy to dest
-                FileUtils.copyDirectory(it.file, dest)
+                FileUtils.copyDirectory(directoryInput.file, dest)
             }
         }
 
-//        println("----------------------Scan code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
-        if (providerFactoryClass) {
+        println("----------------------Scan code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
+//javassist 修改jar包有点问题；现在改为app_core也参与编译，在library中直接修改文件
+        if (fileContainsInitClass) {
             registerList.each { ext ->
-//                println('Insert register code to file ' + providerFactoryClass.absolutePath)
-
+                println('Insert register code to file ' + fileContainsInitClass.absolutePath)
+                println('Insert register code to file ' + fileContainsInitClass.parent)
                 if (ext.serviceList.isEmpty()) {
                     println("No class implements found for interface:" + ext.interfaceName)
                 } else {
+//                    RegisterCodeGenerator.insertInitCodeTo(ext)
+//                    RegisterCodeGenerator2.insertInitCodeTo(ext, fileContainsInitClass.parent+"/999.jar")
 
-                    //将当前路径加入类池,不然找不到这个类
-                    pool.appendClassPath(providerFactoryParentPath)
-                    //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
-                    pool.appendClassPath(project.android.bootClasspath[0].toString())
-
-//                    CptCodeGenerator.insertCodeTo(ext,providerFactoryParentPath)
-//                    FileUtils.copyFile(providerFactoryClass, destComponentServiceManagerClassFile)
-
-                    ext.serviceList.each {
-                        println("service: "+it + " serviceImpl: "+ext.serviceImplMap.get(it))
-//                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
-//                        CptCodeGenerator.insertLogCodeTo(it,providerFactoryParentPath)
-                    }
-
-                    RegisterCodeGenerator.insertInitCodeTo(ext)
+                    RegisterCodeGenerator2.insertInitCodeToApp(ext, providerFactoryParentPath)
+                    FileUtils.copyFile(providerFactoryClass, destComponentServiceManagerClassFile)
                 }
             }
         }
-//        println("----------------------Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
+
+//        if (fileContainsInitClass) {
+//            registerList.each { ext ->
+//                println('Insert register code to file ' + fileContainsInitClass.absolutePath)
+//                println('Insert register code to file ' + fileContainsInitClass.parent)
+//                if (ext.serviceList.isEmpty()) {
+//                    println("No class implements found for interface:" + ext.interfaceName)
+//                } else {
+//                    if(!isApp){
+//                        //将当前路径加入类池,不然找不到这个类
+//                        pool.appendClassPath(providerFactoryParentPath)
+//                        //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
+//                        pool.appendClassPath(project.android.bootClasspath[0].toString())
+//
+//                        CptCodeGenerator.insertCodeTo(ext,providerFactoryParentPath)
+//                        FileUtils.copyFile(providerFactoryClass, destComponentServiceManagerClassFile)
+//                    }
+//                }
+//            }
+//        }
+
+
+
+        println("----------------------Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms" + " isApp" + isApp)
 
     }
 

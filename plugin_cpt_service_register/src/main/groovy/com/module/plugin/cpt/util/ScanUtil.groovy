@@ -14,7 +14,7 @@ class ScanUtil {
 
     //-------------------处理jar文件---------------------
     static boolean shouldProcessPreDexJar(String path) {
-        println("----------shouldProcessPreDexJar------------ " + path)
+//        println("----------shouldProcessPreDexJar------------ " + path)
         return !path.contains("com.android.support") && !path.contains("/android/m2repository")
     }
 
@@ -27,7 +27,7 @@ class ScanUtil {
                 JarEntry jarEntry = (JarEntry) enumeration.nextElement()
                 String entryName = jarEntry.getName()
                 if (ScanUtil.shouldProcessClass(entryName) || ScanUtil.shouldServiceImpl(entryName)) {
-                    println("----------scanJar shouldProcessClass ------------ " + (entryName))
+//                    println("----------scanJar shouldProcessClass ------------ " + (entryName))
                     InputStream inputStream = file.getInputStream(jarEntry)
                     scanClass(inputStream)
                     inputStream.close()
@@ -36,7 +36,8 @@ class ScanUtil {
                     // After the scan is complete, we will generate register code into this file
                     CptTransform.providerFactoryClass = destFile
                     CptTransform.fileContainsInitClass= destFile
-                    println("----------scanJar providerFactoryClass ------------ " + (null != destFile ? destFile.absolutePath : " null"))
+                    println("----------scanJar jarFile ------------ " + (null != jarFile ? jarFile.absolutePath : " null"))
+                    println("----------scanJar fileContainsInitClass ------------ " + (null != destFile ? destFile.absolutePath : " null"))
                 }
             }
             file.close()
@@ -57,7 +58,7 @@ class ScanUtil {
     }
 
     static void scanClass(File file) {
-//        println("----------scanClass------------")
+        println("----------scanClass------------")
         scanClass(new FileInputStream(file))
     }
 
@@ -88,9 +89,7 @@ println("ScanClassVisitor cmpInterface "+ext.interfaceName + " interface " + itN
                                 ext.serviceList.add(name)
                             }
                         }else{
-                            if(ext.serviceList.contains(itName)){
-                                ext.serviceImplMap.put(itName,name)
-                            }
+                            ext.allMap.put(itName,name);
                         }
                     }
                 }

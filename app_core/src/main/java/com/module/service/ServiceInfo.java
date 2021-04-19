@@ -1,8 +1,9 @@
 package com.module.service;
 
-public class ServiceInfo {
 
-        private String name;         //服务名称　
+public final class ServiceInfo {
+
+        private String  name;         //服务名称　
         private String  serviceName;
         private String  serviceImplName;
 
@@ -22,6 +23,15 @@ public class ServiceInfo {
                 }
         }
 
+        public ServiceInfo(String name, Class service, Class serviceImpl) {
+                this.name = name;
+                this.service = service;
+                this.serviceImpl = serviceImpl;
+
+                this.serviceName = service.getName();
+                this.serviceImplName = serviceImpl.getName();
+        }
+
         public String getName() {
                 return name;
         }
@@ -38,6 +48,8 @@ public class ServiceInfo {
         public String toString() {
                 return "ServiceInfo{" +
                         "name='" + name + '\'' +
+                        ", serviceName='" + serviceName + '\'' +
+                        ", serviceImplName='" + serviceImplName + '\'' +
                         ", service=" + service +
                         ", serviceImpl=" + serviceImpl +
                         '}';
