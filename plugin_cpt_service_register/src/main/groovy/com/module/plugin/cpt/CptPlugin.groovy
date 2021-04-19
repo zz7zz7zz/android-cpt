@@ -43,7 +43,7 @@ class CptPlugin implements Plugin<Project>{
         CptConfig extension = project.extensions.create("cptConfig", CptConfig)
         project.afterEvaluate {
             CptTransform.cptConfig = extension;
-            println(extension.toString())
+//            println(extension.toString())
         }
     }
 }

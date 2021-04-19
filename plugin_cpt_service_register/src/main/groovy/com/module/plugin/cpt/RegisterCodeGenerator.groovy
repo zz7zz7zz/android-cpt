@@ -121,15 +121,22 @@ class RegisterCodeGenerator {
 
                     if(null != serviceImpl){
 
-//                        mv.visitLdcInsn(":im")//类名
-//                        mv.visitLdcInsn(service)//类名
-//                        mv.visitLdcInsn(serviceImpl)//类名
-//                        // generate invoke register method into LogisticsCenter.loadRouterMap()
-//                        mv.visitMethodInsn(Opcodes.INVOKESTATIC
-//                                , ScanSetting.GENERATE_TO_CLASS_NAME
-//                                , ScanSetting.REGISTER_METHOD_NAME
-//                                , "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
-//                                , false)
+                        mv.visitLdcInsn(":app_im")//类名
+
+                        println("RegisterCodeGenerator serviceClass "+Type.getType('L'+service+';'))
+                        println("RegisterCodeGenerator serviceImplClass "+Type.getType('L'+serviceImpl+';'))
+
+                        println("RegisterCodeGenerator serviceClass 2  "+Type.getObjectType(service))
+                        println("RegisterCodeGenerator serviceImplClass 2  "+Type.getObjectType(serviceImpl))
+
+                        mv.visitLdcInsn(Type.getType('L'+service+';'))//类名
+                        mv.visitLdcInsn(Type.getType('L'+serviceImpl+';'))//类名
+                        // generate invoke register method into LogisticsCenter.loadRouterMap()
+                        mv.visitMethodInsn(Opcodes.INVOKESTATIC
+                                , ScanSetting.GENERATE_TO_CLASS_NAME
+                                , "registerService"
+                                , "(Ljava/lang/String;Ljava/lang/Class;Ljava/lang/Class;)V"
+                                , false)
                     }
 
                 }
