@@ -8,11 +8,6 @@ import com.module.main.config.ComponentConfig;
 public class App extends BaseApplication {
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
-    @Override
     public boolean isComponentCodeIn(String component) {
         if(!TextUtils.isEmpty(component)){
             for (String cpt : BuildConfig.modules){
