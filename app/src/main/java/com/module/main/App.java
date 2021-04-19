@@ -14,6 +14,7 @@ public class App extends BaseApplication {
     }
 
     //do not remove this method, it will auto generator registerService by plugin
+    //In particular, do not add code manually
     private void onInitComponentService(){
 
     }
