@@ -22,7 +22,8 @@ class ScanSetting {
     static final String GENERATE_TO_CLASS_FILE_NAME2 = 'com/module/main/App.class'
 //    static final String REGISTER_METHOD_NAME2 = 'onCreate'
     static final String REGISTER_METHOD_NAME2 = 'onInitComponentService'
-
+    static final String REGISTER_METHOD_NAME3 = 'onCreate'
+    static final String ADD_METHOD_NAME = 'auto_register_service_2021_04_15'
     String interfaceName = ''
     File fileContainsInitClass
 
