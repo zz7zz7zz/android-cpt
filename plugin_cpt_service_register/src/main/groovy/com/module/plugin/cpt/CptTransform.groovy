@@ -133,7 +133,7 @@ class CptTransform extends Transform {
 //                    }
 
                     if(isApp){
-                        if (ScanSetting.GENERATE_TO_CLASS_FILE_NAME2 == path) {
+                        if (cptConfig.applicationName == path) {
                             providerFactoryClass = file
                             providerFactoryParentPath = directoryInput.file.absolutePath;
                             destComponentServiceManagerClassFile = new File(dest.absolutePath+File.separator+path);
