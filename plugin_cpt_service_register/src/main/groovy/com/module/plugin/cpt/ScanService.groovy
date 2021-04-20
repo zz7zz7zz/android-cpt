@@ -4,25 +4,22 @@ import com.android.build.api.transform.DirectoryInput
 import com.android.build.api.transform.Format
 import com.android.build.api.transform.JarInput
 import com.android.build.api.transform.TransformInvocation
-import com.android.utils.FileUtils
-import com.module.plugin.cpt.util.ScanSetting
 import com.module.plugin.cpt.util.ScanUtil
 import javassist.ClassPool
 import org.apache.commons.codec.digest.DigestUtils
 
-import java.util.jar.JarEntry
-import java.util.jar.JarFile;
-
 class ScanService {
 
     static void scanAllClasses(TransformInvocation transformInvocation, ClassPool classPool){
-
+        println("----------------------ScanService scanAllClasses start----------------------")
         boolean leftSlash = File.separator == '/'
+
+//        transformInvocation.outputProvider.deleteAll()
 
         transformInvocation.inputs.each {
             it.jarInputs.each { JarInput jarInput ->
 
-//                println("ScanService jarInputs------------ " + jarInput.file.absolutePath)
+                println("ScanService jarInputs------------ " + jarInput.file.absolutePath)
 
                 String destName = jarInput.name
                 // rename jar files
@@ -43,11 +40,13 @@ class ScanService {
 
             it.directoryInputs.each { DirectoryInput directoryInput ->
 
-//                println("ScanService directoryInput------------ " + directoryInput.file.absolutePath)
+                println("ScanService directoryInput------------ " + directoryInput.file.absolutePath)
 
+                File dest = transformInvocation.outputProvider.getContentLocation(directoryInput.name, directoryInput.contentTypes, directoryInput.scopes, Format.DIRECTORY)
                 String root = directoryInput.file.absolutePath
                 if (!root.endsWith(File.separator))
                     root += File.separator
+
                 directoryInput.file.eachFileRecurse { File file ->
                     def path = file.absolutePath.replace(root, '')
                     if (!leftSlash) {
@@ -58,11 +57,22 @@ class ScanService {
                     }else if(file.isFile() && ScanUtil.shouldServiceImpl(path)){
                         ScanUtil.scanClass(file)
                     }
+
+                    def className = path.replace("\\",".").replace("/",".").replace(".class","")
+                    if (TransformApp.cptConfig.applicationName == className) {
+                        TransformApp.oldAppFile = file
+                        TransformApp.oldAppFileParentPath = directoryInput.file.absolutePath;
+                        TransformApp.newAppFile = new File(dest.absolutePath+File.separator+path);
+
+                        println("oldAppFile.absolutePath "+TransformApp.oldAppFile.absolutePath)
+                        println("oldAppFileParentPath "+TransformApp.oldAppFileParentPath)
+                        println("newAppFile.absolutePath "+TransformApp.newAppFile.absolutePath)
+                    }
                 }
             }
         }
 
-        CptTransform.registerList.each { ext->
+        TransformApp.registerList.each { ext->
 
             println("---------------- serviceList ----------------")
             ext.serviceList.each {
@@ -81,8 +91,8 @@ class ScanService {
             }
         }
 
-        println("---------------- fileContainsInitClass ----------------" + (null != CptTransform.fileContainsInitClass ? CptTransform.fileContainsInitClass.absolutePath : null))
+        println("---------------- fileContainsInitClass ----------------" + (null != TransformApp.fileContainsInitClass ? TransformApp.fileContainsInitClass.absolutePath : null))
 
-
+        println("----------------------ScanService scanAllClasses end----------------------")
     }
 }

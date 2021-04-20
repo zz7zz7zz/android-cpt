@@ -3,7 +3,7 @@ package com.module.plugin.cpt
 import javassist.*
 import com.module.plugin.cpt.util.ScanSetting
 
-class CptCodeGenerator {
+class RegisterCodeGeneratorLibrary0 {
 
     static def pool = ClassPool.default
 

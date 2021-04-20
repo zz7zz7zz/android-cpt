@@ -10,18 +10,18 @@ import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
 import java.util.zip.ZipEntry
 
-class RegisterCodeGenerator {
+class RegisterCodeGeneratorApp0 {
 
     ScanSetting extension
 
-    private RegisterCodeGenerator(ScanSetting extension) {
+    private RegisterCodeGeneratorApp0(ScanSetting extension) {
         this.extension = extension
     }
 
     static void insertInitCodeTo(ScanSetting registerSetting) {
         if (registerSetting != null && !registerSetting.serviceList.isEmpty()) {
-            RegisterCodeGenerator processor = new RegisterCodeGenerator(registerSetting)
-            File file = CptTransform.fileContainsInitClass
+            RegisterCodeGeneratorApp0 processor = new RegisterCodeGeneratorApp0(registerSetting)
+            File file = TransformApp.fileContainsInitClass
             if (null != file && file.getName().endsWith('.jar'))
                 processor.insertInitCodeIntoJarFile(file)
         }

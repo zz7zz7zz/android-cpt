@@ -1,7 +1,6 @@
 package com.module.plugin.cpt.util
 
-import com.module.plugin.cpt.CptTransform;
-
+import com.module.plugin.cpt.TransformApp;
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.ClassWriter
@@ -34,8 +33,8 @@ class ScanUtil {
                 } else if (ScanSetting.GENERATE_TO_CLASS_FILE_NAME == entryName) {
                     // mark this jar file contains LogisticsCenter.class
                     // After the scan is complete, we will generate register code into this file
-                    CptTransform.providerFactoryClass = destFile
-                    CptTransform.fileContainsInitClass= destFile
+                    TransformApp.fileContainsInitClass= destFile
+
                     println("----------scanJar jarFile ------------ " + (null != jarFile ? jarFile.absolutePath : " null"))
                     println("----------scanJar fileContainsInitClass ------------ " + (null != destFile ? destFile.absolutePath : " null"))
                 }
@@ -53,7 +52,7 @@ class ScanUtil {
         return entryName != null && entryName.endsWith(ScanSetting.FLITER_CLASS_NAME_SERVICE_IMPL_END)
     }
 
-    static boolean shouldProcessClasswithLog(String entryName) {
+    static boolean shouldProcessClassWithLog(String entryName) {
         return entryName != null  && entryName.endsWith('Service\$1.class')
     }
 
@@ -79,7 +78,7 @@ class ScanUtil {
         void visit(int version, int access, String name, String signature,
                    String superName, String[] interfaces) {
             super.visit(version, access, name, signature, superName, interfaces)
-            CptTransform.registerList.each { ext ->
+            TransformApp.registerList.each { ext ->
                 if (ext.interfaceName && interfaces != null) {
                     interfaces.each { itName ->
 println("ScanClassVisitor cmpInterface "+ext.interfaceName + " interface " + itName + " name " + name)
