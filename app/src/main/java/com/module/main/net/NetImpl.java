@@ -12,7 +12,7 @@ public class NetImpl {
 
     public interface ICallback<T>{
 
-        void onSuccss(T t);
+        void onSuccess(T t);
 
         void onFailed(int err);
 
@@ -28,7 +28,7 @@ public class NetImpl {
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            callback.onSuccss(ComponentConfig.getServerComponents());
+                            callback.onSuccess(ComponentConfig.getServerComponents());
                         }
                     });
                 }catch (Exception e){

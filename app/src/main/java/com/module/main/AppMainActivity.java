@@ -51,7 +51,7 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
                 NetImpl.getModules(new NetImpl.ICallback<List<String>>() {
                     @Override
-                    public void onSuccss(List<String> strings) {
+                    public void onSuccess(List<String> strings) {
                         initServices(strings);
                         initView();
                     }
