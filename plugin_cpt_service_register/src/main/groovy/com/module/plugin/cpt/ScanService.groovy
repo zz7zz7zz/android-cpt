@@ -19,7 +19,7 @@ class ScanService {
         transformInvocation.inputs.each {
             it.jarInputs.each { JarInput jarInput ->
 
-                println("ScanService jarInputs------------ " + jarInput.file.absolutePath)
+//                println("ScanService jarInputs------------ " + jarInput.file.absolutePath)
 
                 String destName = jarInput.name
                 // rename jar files
@@ -40,7 +40,7 @@ class ScanService {
 
             it.directoryInputs.each { DirectoryInput directoryInput ->
 
-                println("ScanService directoryInput------------ " + directoryInput.file.absolutePath)
+//                println("ScanService directoryInput------------ " + directoryInput.file.absolutePath)
 
                 File dest = transformInvocation.outputProvider.getContentLocation(directoryInput.name, directoryInput.contentTypes, directoryInput.scopes, Format.DIRECTORY)
                 String root = directoryInput.file.absolutePath
@@ -64,9 +64,9 @@ class ScanService {
                         TransformApp.oldAppFileParentPath = directoryInput.file.absolutePath;
                         TransformApp.newAppFile = new File(dest.absolutePath+File.separator+path);
 
-                        println("oldAppFile.absolutePath "+TransformApp.oldAppFile.absolutePath)
-                        println("oldAppFileParentPath "+TransformApp.oldAppFileParentPath)
-                        println("newAppFile.absolutePath "+TransformApp.newAppFile.absolutePath)
+//                        println("oldAppFile.absolutePath "+TransformApp.oldAppFile.absolutePath)
+//                        println("oldAppFileParentPath "+TransformApp.oldAppFileParentPath)
+//                        println("newAppFile.absolutePath "+TransformApp.newAppFile.absolutePath)
                     }
                 }
             }

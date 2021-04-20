@@ -112,7 +112,7 @@ class TransformLibrary extends Transform {
 
         println("----------------------TransformLibrary Scan code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
 
-        println("----------------------TransformLibrary Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms" + " isApp" + isApp)
+        println("----------------------TransformLibrary Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
 
     }
 

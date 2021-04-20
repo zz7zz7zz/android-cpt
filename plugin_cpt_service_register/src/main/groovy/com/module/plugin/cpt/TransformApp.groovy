@@ -125,6 +125,6 @@ class TransformApp extends Transform {
             }
         }
 
-        println("----------------------TransformApp Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms" + " isApp" + isApp)
+        println("----------------------TransformApp Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
     }
 }

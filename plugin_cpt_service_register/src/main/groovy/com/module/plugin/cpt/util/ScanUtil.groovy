@@ -35,8 +35,8 @@ class ScanUtil {
                     // After the scan is complete, we will generate register code into this file
                     TransformApp.fileContainsInitClass= destFile
 
-                    println("----------scanJar jarFile ------------ " + (null != jarFile ? jarFile.absolutePath : " null"))
-                    println("----------scanJar fileContainsInitClass ------------ " + (null != destFile ? destFile.absolutePath : " null"))
+//                    println("----------scanJar jarFile ------------ " + (null != jarFile ? jarFile.absolutePath : " null"))
+//                    println("----------scanJar fileContainsInitClass ------------ " + (null != destFile ? destFile.absolutePath : " null"))
                 }
             }
             file.close()
@@ -57,7 +57,7 @@ class ScanUtil {
     }
 
     static void scanClass(File file) {
-        println("----------scanClass------------")
+//        println("----------scanClass------------")
         scanClass(new FileInputStream(file))
     }
 
@@ -81,7 +81,7 @@ class ScanUtil {
             TransformApp.registerList.each { ext ->
                 if (ext.interfaceName && interfaces != null) {
                     interfaces.each { itName ->
-println("ScanClassVisitor cmpInterface "+ext.interfaceName + " interface " + itName + " name " + name)
+//println("ScanClassVisitor cmpInterface "+ext.interfaceName + " interface " + itName + " name " + name)
                         if (itName == ext.interfaceName) {
                             //fix repeated inject init code when Multi-channel packaging
                             if (!ext.serviceList.contains(name)) {

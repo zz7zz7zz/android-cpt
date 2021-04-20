@@ -214,9 +214,9 @@ class RegisterCodeGeneratorApp {
                     for (CtMethod c : ms) {
                         if (c.getName().equals(addMethodName)) {
                             c2.removeMethod(c)
-                            println("remove method " + addMethodName + " success ")
+//                            println("remove method " + addMethodName + " success ")
                         }else if (c.getName().equals(onCreateMethodName)) {
-                            println("onCreate method " + onCreateMethodName + " found  ")
+//                            println("onCreate method " + onCreateMethodName + " found  ")
                             onCreateMethod = c
                         }
                     }
@@ -239,19 +239,19 @@ class RegisterCodeGeneratorApp {
                             def cls2  = v.replaceAll("/", ".")
                             sb.append(String.format("com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n",cls1,cls1,cls2))
                         }else{
-                            println("Service or ServiceImpl not found " + k)
+//                            println("Service or ServiceImpl not found " + k)
                         }
                     }
 //                            sb.append("registerByPlugin = true;")
                     sb.append("}")
                     c2.addMethod(CtMethod.make(sb.toString(), c2))
-                    println("code:\n"+sb.toString())
+//                    println("code:\n"+sb.toString())
 
                     //增加调用
                     sb.delete(0,sb.length())
                     sb.append(addMethodName+"();")
                     onCreateMethod.insertBefore(sb.toString())
-                    println("code2 :\n"+sb.toString())
+//                    println("code2 :\n"+sb.toString())
 
                     c2.writeFile(fileName)
 //                    c2.writeFile()
