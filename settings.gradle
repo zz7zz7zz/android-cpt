@@ -13,17 +13,29 @@ include ':app_integrate'
 include ':app_core'
 
 //-----4.库层：库组件以及子库组件----
+//4.1支付
 include ':lib_pay:lib_pay'
 include ':lib_pay:lib_pay_core'
 include ':lib_pay:lib_pay_impl_wechat'
 include ':lib_pay:lib_pay_impl_google'
 include ':lib_pay:lib_pay_impl_huawei'
 include ':lib_pay:lib_pay_impl_ali'
-include ':lib_net'
-include ':lib_analysis'
-include ':lib_player'
+//4.2多媒体处理相关
+include ':lib_multimedia:lib_image'
+include ':lib_multimedia:lib_audio'
+include ':lib_multimedia:lib_video'
+
+//4.3广告
 include ':lib_ad'
+
+//4.4网络，数据库，工具类，自定义控件类
+include ':lib_network'
+include ':lib_database'
+include ':lib_util'
 include ':lib_widget'
+
+//4.5数据分析
+include ':lib_analysis'
 
 //-----5.插件层----
 include ':plugin_cpt_service_register'
