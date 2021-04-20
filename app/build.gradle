@@ -6,7 +6,7 @@ apply plugin: 'com.alibaba.arouter'
 
 apply plugin: 'com.module.plugin.cpt'
 cptConfig{
-    applicationName = "com.module.main.App"
+    applicationName = cpt_service_register_config.applicationName
 }
 
 android {
