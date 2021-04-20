@@ -2,8 +2,6 @@ plugins {
     id 'com.android.library'
 }
 
-apply plugin: 'com.alibaba.arouter'
-
 //apply plugin: 'com.module.plugin.cpt'
 //cptConfig{
 //    applicationName = ""
@@ -59,6 +57,6 @@ dependencies {
     api 'androidx.multidex:multidex:2.0.1'
 
     //ARouter引用
-    compile 'com.alibaba:arouter-api:1.5.1'
+//    compile 'com.alibaba:arouter-api:1.5.1'
 //    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 }

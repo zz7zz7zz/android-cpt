@@ -212,7 +212,7 @@ dependencies {
     //基类库
     implementation project(':app_core')
 
-    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
+//    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 }
 
 

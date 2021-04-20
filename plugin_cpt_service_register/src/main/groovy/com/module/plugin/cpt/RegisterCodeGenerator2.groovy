@@ -237,9 +237,13 @@ class RegisterCodeGenerator2 {
                     StringBuilder sb = new StringBuilder();
                     sb.append("private void "+addMethodName+"() {")
                     registerSetting.serviceImplMap.each { k,v ->
-                        def cls1  = k.replaceAll("/", ".")
-                        def cls2  = v.replaceAll("/", ".")
-                        sb.append(String.format("com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n",cls1,cls1,cls2))
+                        if(null != k && null != v){
+                            def cls1  = k.replaceAll("/", ".")
+                            def cls2  = v.replaceAll("/", ".")
+                            sb.append(String.format("com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n",cls1,cls1,cls2))
+                        }else{
+                            println("Service or ServiceImpl not found " + k)
+                        }
                     }
 //                            sb.append("registerByPlugin = true;")
                     sb.append("}")

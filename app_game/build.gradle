@@ -3,7 +3,6 @@ if(isModuleApplication.toBoolean()){
 }else {
     apply plugin: 'com.android.library'
 }
-apply plugin: 'com.alibaba.arouter'
 
 android {
     compileSdkVersion       androidConfig.compileSdkVersion
@@ -90,5 +89,5 @@ dependencies {
 
     //ARouter引用
 //    compile 'com.alibaba:arouter-api:1.5.1'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
+//    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 }
