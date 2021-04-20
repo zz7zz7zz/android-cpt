@@ -60,8 +60,9 @@ class CptTransform extends Transform {
         super.transform(transformInvocation)
 
         println("----------------------Scan / Generate code start----------------------")
-
-        ScanService.scanAllClasses(transformInvocation,pool)
+        if(isApp){
+            ScanService.scanAllClasses(transformInvocation,pool)
+        }
 
         long startTime = System.currentTimeMillis()
         boolean leftSlash = File.separator == '/'
@@ -85,10 +86,11 @@ class CptTransform extends Transform {
                 // output file
                 File dest = transformInvocation.outputProvider.getContentLocation(destName + "_" + hexName, jarInput.contentTypes, jarInput.scopes, Format.JAR)
 
-
-//                //scan jar file to find classes
-                if (ScanUtil.shouldProcessPreDexJar(src.absolutePath)) {
-                    ScanUtil.scanJar(src, dest)
+                if(isApp){
+                    //                //scan jar file to find classes
+                    if (ScanUtil.shouldProcessPreDexJar(src.absolutePath)) {
+                        ScanUtil.scanJar(src, dest)
+                    }
                 }
 
                 FileUtils.copyFile(src,dest)
@@ -130,7 +132,8 @@ class CptTransform extends Transform {
 ////                        println("dest.absolutePath "+dest.absolutePath);
 //                    }
 
-                     if (ScanSetting.GENERATE_TO_CLASS_FILE_NAME2 == path) {
+                    if(isApp){
+                        if (ScanSetting.GENERATE_TO_CLASS_FILE_NAME2 == path) {
                             providerFactoryClass = file
                             providerFactoryParentPath = directoryInput.file.absolutePath;
                             destComponentServiceManagerClassFile = new File(dest.absolutePath+File.separator+path);
@@ -139,19 +142,22 @@ class CptTransform extends Transform {
                             println("providerFactoryClass.absolutePath "+providerFactoryClass.absolutePath);
                             println("providerFactoryParentPath "+providerFactoryParentPath);
                             println("ddestComponentServiceManagerClassFile.absolutePath "+destComponentServiceManagerClassFile.absolutePath);
-                     }
-//                    //在默认实现类中各个方法打印日志
-//                    if(file.isFile() && ScanUtil.shouldProcessClasswithLog(path)){
-//                        //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
-//                        pool.appendClassPath(project.android.bootClasspath[0].toString())
-////                        pool.appendClassPath("/Users/long/.gradle/caches/transforms-2/files-2.1/220da564e9915000fbdc9d39834da3cf/fragment-1.1.0/jars/classes.jar")
-//                        pool.insertClassPath(cptConfig.fragmentPath)
-//
-//                        def preFileName = directoryInput.file.absolutePath
-//                        //println("-----preFileName----- " + file.absolutePath)
-//                        pool.insertClassPath(preFileName)
-//                        findTarget(file,preFileName)
-//                    }
+                        }
+                    }
+
+                    if(!isApp){
+                        //                    //在默认实现类中各个方法打印日志
+                        if(file.isFile() && ScanUtil.shouldProcessClasswithLog(path)){
+                            //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
+                            pool.appendClassPath(project.android.bootClasspath[0].toString())
+                            pool.insertClassPath(cptConfig.fragmentPath)
+
+                            def preFileName = directoryInput.file.absolutePath
+                            //println("-----preFileName----- " + file.absolutePath)
+                            pool.insertClassPath(preFileName)
+                            findTarget(file,preFileName)
+                        }
+                    }
                 }
 
                 // copy to dest
@@ -161,18 +167,20 @@ class CptTransform extends Transform {
 
         println("----------------------Scan code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
 //javassist 修改jar包有点问题；现在改为app_core也参与编译，在library中直接修改文件
-        if (fileContainsInitClass) {
-            registerList.each { ext ->
-                println('Insert register code to file ' + fileContainsInitClass.absolutePath)
-                println('Insert register code to file ' + fileContainsInitClass.parent)
-                if (ext.serviceList.isEmpty()) {
-                    println("No class implements found for interface:" + ext.interfaceName)
-                } else {
+        if(isApp){
+            if (fileContainsInitClass) {
+                registerList.each { ext ->
+                    println('Insert register code to file ' + fileContainsInitClass.absolutePath)
+                    println('Insert register code to file ' + fileContainsInitClass.parent)
+                    if (ext.serviceList.isEmpty()) {
+                        println("No class implements found for interface:" + ext.interfaceName)
+                    } else {
 //                    RegisterCodeGenerator.insertInitCodeTo(ext)
 //                    RegisterCodeGenerator2.insertInitCodeTo(ext, fileContainsInitClass.parent+"/999.jar")
 
-                    RegisterCodeGenerator2.insertInitCodeToApp(ext, providerFactoryParentPath,cptConfig)
-                    FileUtils.copyFile(providerFactoryClass, destComponentServiceManagerClassFile)
+                        RegisterCodeGenerator2.insertInitCodeToApp(ext, providerFactoryParentPath,cptConfig)
+                        FileUtils.copyFile(providerFactoryClass, destComponentServiceManagerClassFile)
+                    }
                 }
             }
         }
@@ -247,7 +255,7 @@ class CptTransform extends Transform {
 
     }
 
-    void addCode(CtClass ctClass,String fileName){
+    static void addCode(CtClass ctClass,String fileName){
         //报异常：javassist.CannotCompileException: no method body
 
         if(ctClass.isInterface()){

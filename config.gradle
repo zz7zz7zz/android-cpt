@@ -113,6 +113,9 @@ ext {
     //编译相关:
     getBuildTime = this.&getBuildTime
     cpt_service_register_config = [
-        applicationName : "com.module.main.App"
+        applicationName : "com.module.main.App",
+        arouterPath  : "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\f1674164c82aa217d8cac640a2909c9c\\jetified-arouter-api-1.5.1\\jars\\classes.jar",
+        fragmentPath : "‪C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\63e5032bc435217e4b01be5bd6e26747\\fragment-1.1.0\\jars\\classes.jar".substring(1)
     ]
+
 }
