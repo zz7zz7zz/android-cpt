@@ -2,8 +2,6 @@ package com.module.utils;
 
 import android.util.Log;
 
-import com.module.service.IConsts;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -41,6 +39,12 @@ public class ServiceProxy {
     }
 
 
+    public static final String PROMPT_COMPONENT_NOT_FOUND = "Serivce 未找到，可能的原因是: \n" +
+            "1.没有将组件代码打包进Apk中; \n" +
+            "2.已实现对外提供服务类，但没有添加注解,如 @Route(path = \"xxx\", name = \"yyy\");\n" +
+            "3.未实现对外提供服务类; \n"+
+            "4.本地组件配置/服务器组件配置，未启用组件; \n";
+
     private static final class InvocationHandlerImp implements InvocationHandler {
 
         private String TAG ;
@@ -53,7 +57,7 @@ public class ServiceProxy {
 
         @Override
         public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
-            Log.e(TAG, IConsts.PROMPT_COMPONENT_NOT_FOUND);
+            Log.e(TAG, PROMPT_COMPONENT_NOT_FOUND);
             return method.invoke(target,objects);
         }
 

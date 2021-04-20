@@ -2,12 +2,12 @@ plugins {
     id 'com.android.library'
 }
 
-//apply plugin: 'com.module.plugin.cpt'
-//cptConfig{
-//    applicationName = ""
-//    arouterPath =cpt_service_register_config.arouterPath
-//    fragmentPath =cpt_service_register_config.fragmentPath
-//}
+apply plugin: 'com.module.plugin.cpt'
+cptConfig{
+    applicationName = ""
+    arouterPath =cpt_service_register_config.arouterPath
+    fragmentPath =cpt_service_register_config.fragmentPath
+}
 
 android {
     compileSdkVersion       androidConfig.compileSdkVersion

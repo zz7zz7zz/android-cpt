@@ -187,7 +187,9 @@ class TransformLibrary extends Transform {
                 continue
             }
 
-            method.insertBefore("android.util.Log.e(TAG, com.module.service.IConsts.PROMPT_COMPONENT_NOT_FOUND);")
+            String PROMPT_COMPONENT_NOT_FOUND = "\"Serivce 未找到，可能的原因是:  1.没有将组件代码打包进Apk中; 2.已实现对外提供服务类，但没有添加注解,如 @Route(path = xxx, name = yyy); 3.未实现对外提供服务类; 4.本地组件配置/服务器组件配置，未启用组件\""
+            String code = String.format("android.util.Log.e(TAG, %s);",PROMPT_COMPONENT_NOT_FOUND)
+            method.insertBefore(code)
 
         }
 
