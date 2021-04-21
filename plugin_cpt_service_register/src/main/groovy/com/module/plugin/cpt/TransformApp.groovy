@@ -117,15 +117,21 @@ class TransformApp extends Transform {
             if (ext.serviceList.isEmpty()) {
                 println("No class implements found for interface:" + ext.interfaceName)
             } else {
-                    //已成功
-                    RegisterCodeGeneratorApp0.insertInitCodeTo(ext)
+                //方案一：
+                //已成功(Asm方案：在ServiceManager的registerService方法中注入服务)
+                //该实现方案可以把ServiceManager的registerService方法定义为公有的
+                //该实现方案可以把ServiceManager的registerService方法定义为私有的，开发过程中对外不暴露
+                RegisterCodeGeneratorApp0.insertInitCodeTo(ext)
 
-                    //未成功
-//                    RegisterCodeGenerator2.insertInitCodeTo(ext, fileContainsInitClass.parent+"/999.jar")
+                //方案二：
+                //已经成功(Javassist方案: 在App.class中的onCreate()方法中调用另外一个方法auto_register_service_2021_04_15(),该方法被动态加入，该方法中注入服务)
+                //该实现方案可以把ServiceManager的registerService方法定义为公有的
+                //该实现方案可以把ServiceManager的registerService方法定义为私有的，开发过程中对外不暴露，字节码操作时更改为public，但是此时又需要结合asm操作)
+                //RegisterCodeGeneratorApp.insertInitCodeToApp(ext, oldAppFileParentPath,cptConfig)
+                //FileUtils.copyFile(oldAppFile, newAppFile)
 
-                //已经成功
-//                RegisterCodeGeneratorApp.insertInitCodeToApp(ext, oldAppFileParentPath,cptConfig)
-//                FileUtils.copyFile(oldAppFile, newAppFile)
+                //未成功
+                //RegisterCodeGenerator2.insertInitCodeTo(ext, fileContainsInitClass.parent+"/999.jar")
             }
         }
 
