@@ -115,12 +115,13 @@ class RegisterCodeGeneratorApp0 {
 
                     def originalService = it
                     def originalServiceImpl = extension.serviceImplMap.get(it)
+                    def moduleName = extension.serviceModuleNameMap.get(originalService);
                     def service = it.replaceAll("/", ".")
                     def serviceImpl = null != extension.serviceImplMap.get(it) ? extension.serviceImplMap.get(it).replace("/", ".") : "";
 
+                    println("RegisterCodeGenerator moduleName "+moduleName)
                     println("RegisterCodeGenerator originalService "+originalService)
                     println("RegisterCodeGenerator originalServiceImpl "+originalServiceImpl)
-
                     println("RegisterCodeGenerator service "+service)
                     println("RegisterCodeGenerator serviceImpl "+serviceImpl)
 
@@ -156,7 +157,7 @@ class RegisterCodeGeneratorApp0 {
                         println("RegisterCodeGenerator serviceClass 2  "+Type.getObjectType(originalService))
                         println("RegisterCodeGenerator serviceImplClass 2  "+Type.getObjectType(originalServiceImpl))
 
-                        mv.visitLdcInsn(":app_im")
+                        mv.visitLdcInsn(moduleName)
                         mv.visitLdcInsn(Type.getObjectType(originalService))
                         mv.visitLdcInsn(Type.getObjectType(originalServiceImpl))
                         mv.visitMethodInsn(Opcodes.INVOKESTATIC,

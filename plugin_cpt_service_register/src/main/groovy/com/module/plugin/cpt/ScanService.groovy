@@ -76,13 +76,18 @@ class ScanService {
 
             println("---------------- serviceList ----------------")
             ext.serviceList.each {
-                ext.serviceImplMap.put(it,ext.allMap.get(it));
+                ext.serviceImplMap.put(it,ext.allMap.get(it))
                 println("serviceList  "+it)
             }
 
             println("---------------- serviceImplMap ----------------")
             ext.serviceImplMap.each { k,v ->
                 println("serviceImplMap service-serviceImpl "+k + " ---> "+v)
+            }
+
+            println("---------------- serviceModuleNameMap ----------------")
+            ext.serviceModuleNameMap.each { k, v ->
+                println("serviceImplMap service-moduleName "+k + " ---> "+v)
             }
 
             println("---------------- allMap ----------------")

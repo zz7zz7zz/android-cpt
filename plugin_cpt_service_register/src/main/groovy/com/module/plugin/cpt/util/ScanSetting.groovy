@@ -25,13 +25,17 @@ class ScanSetting {
     static final String REGISTER_METHOD_NAME3 = 'onCreate'
     static final String ADD_METHOD_NAME = 'auto_register_service_2021_04_15'
     String interfaceName = ''
+    static final String MODULE_NAME_OF_FIELD = 'MODULE'
     File fileContainsInitClass
 
-    //接口类IxxxService，继承自IService
+    //用户定义的服务接口类IxxxService，继承自IService
     ArrayList<String> serviceList = new ArrayList<>()
 
     //IxxxService具体实现类,IxxxServiceImpl
     HashMap<String,String> serviceImplMap = new HashMap<>()
+
+    //接口类IxxxService具体模块名，MODULE
+    HashMap<String,String> serviceModuleNameMap = new HashMap<>()
 
     HashMap<String,String> allMap = new HashMap<>()
 

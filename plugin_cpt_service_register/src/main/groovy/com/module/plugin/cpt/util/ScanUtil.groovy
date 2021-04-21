@@ -4,6 +4,7 @@ import com.module.plugin.cpt.TransformApp;
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.ClassWriter
+import org.objectweb.asm.FieldVisitor
 import org.objectweb.asm.Opcodes
 
 import java.util.jar.JarEntry
@@ -71,12 +72,14 @@ class ScanUtil {
 
     static class ScanClassVisitor extends ClassVisitor {
 
+        String serviceName
         ScanClassVisitor(int api, ClassVisitor cv) {
             super(api, cv)
         }
 
         void visit(int version, int access, String name, String signature,
                    String superName, String[] interfaces) {
+//println(String.format("ScanClassVisitor visit version %d access %d name %s signature %s superName %s",version,access,name,signature,superName))
             super.visit(version, access, name, signature, superName, interfaces)
             TransformApp.registerList.each { ext ->
                 if (ext.interfaceName && interfaces != null) {
@@ -86,13 +89,28 @@ class ScanUtil {
                             //fix repeated inject init code when Multi-channel packaging
                             if (!ext.serviceList.contains(name)) {
                                 ext.serviceList.add(name)
+                                serviceName = name
                             }
                         }else{
-                            ext.allMap.put(itName,name);
+                            ext.allMap.put(itName,name)
                         }
                     }
                 }
             }
+        }
+
+        @Override
+        FieldVisitor visitField(int access, String name, String descriptor, String signature, Object value) {
+//println(String.format("ScanClassVisitor visitField 1 serviceName %s access %d name %s descriptor %s signature %s value %s",serviceName,access,name,descriptor,signature,value))
+            if(name == ScanSetting.MODULE_NAME_OF_FIELD){
+                if(null != serviceName){
+                    TransformApp.registerList.each { ext ->
+                        ext.serviceModuleNameMap.put(serviceName,value)
+//                        println(String.format("ScanClassVisitor visitField 2 serviceName %s value %s",serviceName,value))
+                    }
+                }
+            }
+            return super.visitField(access, name, descriptor, signature, value)
         }
     }
 }
