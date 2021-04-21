@@ -113,30 +113,59 @@ class RegisterCodeGeneratorApp0 {
             if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
                 extension.serviceList.each { it ->
 
+                    def originalService = it
+                    def originalServiceImpl = extension.serviceImplMap.get(it)
                     def service = it.replaceAll("/", ".")
                     def serviceImpl = null != extension.serviceImplMap.get(it) ? extension.serviceImplMap.get(it).replace("/", ".") : "";
+
+                    println("RegisterCodeGenerator originalService "+originalService)
+                    println("RegisterCodeGenerator originalServiceImpl "+originalServiceImpl)
 
                     println("RegisterCodeGenerator service "+service)
                     println("RegisterCodeGenerator serviceImpl "+serviceImpl)
 
-                    if(null != serviceImpl){
+                    if(null != originalServiceImpl){
 
-                        mv.visitLdcInsn(":app_im")//类名
+                        //此段代码有效----start-----
+//                        mv.visitFieldInsn(Opcodes.GETSTATIC,
+//                                "java/lang/System",
+//                                "out",
+//                                "Ljava/io/PrintStream;");
+//                        mv.visitLdcInsn("RegisterCode : service" + service + " serviceImpl " + serviceImpl);
+//                        // invokes the 'println' method (defined in the PrintStream class)
+//                        mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL,
+//                                "java/io/PrintStream",
+//                                "println",
+//                                "(Ljava/lang/String;)V");
+                        //此段代码有效----end-----
 
-                        println("RegisterCodeGenerator serviceClass "+Type.getType('L'+service+';'))
-                        println("RegisterCodeGenerator serviceImplClass "+Type.getType('L'+serviceImpl+';'))
+                        //ARouter impl
+//                        name = name.replaceAll("/", ".")
+//                        mv.visitLdcInsn(name)//类名
+//                        // generate invoke register method into LogisticsCenter.loadRouterMap()
+//                        mv.visitMethodInsn(Opcodes.INVOKESTATIC
+//                                , ScanSetting.GENERATE_TO_CLASS_NAME
+//                                , ScanSetting.REGISTER_METHOD_NAME
+//                                , "(Ljava/lang/String;)V"
+//                                , false)
 
-                        println("RegisterCodeGenerator serviceClass 2  "+Type.getObjectType(service))
-                        println("RegisterCodeGenerator serviceImplClass 2  "+Type.getObjectType(serviceImpl))
 
-                        mv.visitLdcInsn(Type.getType('L'+service+';'))//类名
-                        mv.visitLdcInsn(Type.getType('L'+serviceImpl+';'))//类名
-                        // generate invoke register method into LogisticsCenter.loadRouterMap()
-                        mv.visitMethodInsn(Opcodes.INVOKESTATIC
-                                , ScanSetting.GENERATE_TO_CLASS_NAME
-                                , "registerService"
-                                , "(Ljava/lang/String;Ljava/lang/Class;Ljava/lang/Class;)V"
-                                , false)
+                        println("RegisterCodeGenerator serviceClass "+Type.getType('L'+originalService+';'))
+                        println("RegisterCodeGenerator serviceImplClass "+Type.getType('L'+originalServiceImpl+';'))
+
+                        println("RegisterCodeGenerator serviceClass 2  "+Type.getObjectType(originalService))
+                        println("RegisterCodeGenerator serviceImplClass 2  "+Type.getObjectType(originalServiceImpl))
+
+                        mv.visitLdcInsn(":app_im")
+                        mv.visitLdcInsn(Type.getObjectType(originalService))
+                        mv.visitLdcInsn(Type.getObjectType(originalServiceImpl))
+                        mv.visitMethodInsn(Opcodes.INVOKESTATIC,
+                                ScanSetting.GENERATE_TO_CLASS_NAME,
+                                "registerService",
+                                 "(Ljava/lang/String;Ljava/lang/Class;Ljava/lang/Class;)V",
+                                false)
+
+
                     }
 
                 }

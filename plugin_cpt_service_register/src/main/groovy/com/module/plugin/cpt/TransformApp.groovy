@@ -117,7 +117,7 @@ class TransformApp extends Transform {
             if (ext.serviceList.isEmpty()) {
                 println("No class implements found for interface:" + ext.interfaceName)
             } else {
-//                    RegisterCodeGenerator.insertInitCodeTo(ext)
+//                    RegisterCodeGeneratorApp0.insertInitCodeTo(ext)
 //                    RegisterCodeGenerator2.insertInitCodeTo(ext, fileContainsInitClass.parent+"/999.jar")
 
                 RegisterCodeGeneratorApp.insertInitCodeToApp(ext, oldAppFileParentPath,cptConfig)
