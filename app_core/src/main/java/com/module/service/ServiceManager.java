@@ -17,6 +17,7 @@ public final class ServiceManager {
 
 
     private static void loadServiceToMap(){
+        registerByPlugin = false;
     }
 
     //没有使用插件的情况下，才用反射的方法
