@@ -108,6 +108,15 @@ class RegisterCodeGeneratorApp0 {
         }
 
         @Override
+        void visitCode() {
+//            super.visitCode()
+            //registerByPlugin 设置为true, 代码暂时有问题
+//            mv.visitVarInsn(Opcodes.ALOAD, 0);
+//            mv.visitLdcInsn(true)
+//            mv.visitFieldInsn(Opcodes.PUTFIELD, ScanSetting.GENERATE_TO_CLASS_NAME, "registerByPlugin", Type.getDescriptor(Boolean.class));
+        }
+
+        @Override
         void visitInsn(int opcode) {
             //generate code before return
             if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {

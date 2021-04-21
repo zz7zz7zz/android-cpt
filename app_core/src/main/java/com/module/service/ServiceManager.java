@@ -11,13 +11,12 @@ public final class ServiceManager {
 
     private static final HashMap<String, ServiceInfo> nameService = new HashMap<>();//元数据集合,组件名为模块名
     private static final HashMap<Class, ServiceInfo> classService = new HashMap<>();//元数据集合,组件类为服务类名
-    private static boolean registerByPlugin;
+    private static boolean registerByPlugin = false;
 
     private static final HashMap<Class, Object> sMap = new HashMap<>();//实例对象
 
 
     private static void loadServiceToMap(){
-        registerByPlugin = false;
     }
 
     //没有使用插件的情况下，才用反射的方法
