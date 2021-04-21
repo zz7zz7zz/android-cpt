@@ -37,7 +37,7 @@ public final class ServiceManager {
         classService.put(serviceInfo.getService(),serviceInfo);
     }
 
-    public static void registerService(String name,Class clz,Class clz2){
+    private static void registerService(String name,Class clz,Class clz2){
         ServiceInfo serviceInfo = new ServiceInfo(name,clz,clz2);
         nameService.put(name,serviceInfo);
         classService.put(serviceInfo.getService(),serviceInfo);
