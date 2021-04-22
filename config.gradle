@@ -110,6 +110,8 @@ ext {
             release2: false
     ]
 
+    ndkAbiFiltersConfig = ["x86", "armeabi-v7a"]
+
     //编译相关:
     getBuildTime = this.&getBuildTime
     cpt_service_register_config = [
