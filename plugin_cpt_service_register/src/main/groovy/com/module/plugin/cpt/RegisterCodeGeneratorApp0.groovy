@@ -115,9 +115,9 @@ class RegisterCodeGeneratorApp0 {
 
                     def originalService = it
                     def originalServiceImpl = extension.serviceImplMap.get(it)
-                    def moduleName = extension.serviceModuleNameMap.get(originalService);
+                    def moduleName = extension.serviceModuleNameMap.get(originalService)
                     def service = it.replaceAll("/", ".")
-                    def serviceImpl = null != extension.serviceImplMap.get(it) ? extension.serviceImplMap.get(it).replace("/", ".") : "";
+                    def serviceImpl = null != extension.serviceImplMap.get(it) ? extension.serviceImplMap.get(it).replace("/", ".") : ""
 
                     println("RegisterCodeGenerator moduleName "+moduleName)
                     println("RegisterCodeGenerator originalService "+originalService)
@@ -172,8 +172,8 @@ class RegisterCodeGeneratorApp0 {
                 }
 
                 //registerByPlugin 设置为true
-                mv.visitInsn(Opcodes.ICONST_1);
-                mv.visitFieldInsn(Opcodes.PUTSTATIC, ScanSetting.GENERATE_TO_CLASS_NAME, "registerByPlugin", "Z");
+                mv.visitInsn(Opcodes.ICONST_1)
+                mv.visitFieldInsn(Opcodes.PUTSTATIC, ScanSetting.GENERATE_TO_CLASS_NAME, "registerByPlugin", "Z")
             }
             super.visitInsn(opcode)
         }
