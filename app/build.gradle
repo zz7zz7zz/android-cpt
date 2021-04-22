@@ -32,6 +32,10 @@ android {
             }
         }
 
+        for (def v : resConfig){
+            resConfigs v
+        }
+
         ndk {
             for (def v : ndkAbiFiltersConfig){
                 abiFilters v

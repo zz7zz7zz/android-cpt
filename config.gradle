@@ -110,6 +110,8 @@ ext {
             release2: false
     ]
 
+    resConfig          = ["zh-rCN"]
+
     ndkAbiFiltersConfig = ["x86", "armeabi-v7a"]
 
     //编译相关:
