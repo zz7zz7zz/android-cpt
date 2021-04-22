@@ -1,7 +1,7 @@
 //-----1 app壳：组件容器-----
 include ':app'
 
-//-----2 app业务层：业务组件、业务-----
+//-----2 app业务层：业务组件-----
 include ':app_im'
 include ':app_video'
 include ':app_game'
