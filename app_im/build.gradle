@@ -27,6 +27,12 @@ android {
             }
         }
 
+        ndk {
+            for (def v : ndkAbiFiltersConfig){
+                abiFilters v
+            }
+        }
+        
         sourceSets {
             main {
                 // let gradle pack the shared library into apk
