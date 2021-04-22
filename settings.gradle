@@ -8,36 +8,34 @@ include ':app_game'
 include ':app_news'
 include ':app_shopping'
 include ':app_integrate'
-
-//-----3.app业务基础库：组件依赖库，可以被1，2依赖-----
+//-----2.1.app组件协议层：可以被1，2依赖-----
 include ':app_core'
+//-----2.2.app业务基础库：可以被1，2依赖-----
+include ':app_base'
 
-//-----4.库层：库组件以及子库组件----
-//4.1支付
+//-----3.库层：库组件以及子库组件----
+//3.1支付
 include ':lib_pay:lib_pay'
 include ':lib_pay:lib_pay_core'
 include ':lib_pay:lib_pay_impl_wechat'
 include ':lib_pay:lib_pay_impl_google'
 include ':lib_pay:lib_pay_impl_huawei'
 include ':lib_pay:lib_pay_impl_ali'
-//4.2多媒体处理相关
+//3.2多媒体处理相关
 include ':lib_multimedia:lib_image'
 include ':lib_multimedia:lib_audio'
 include ':lib_multimedia:lib_video'
-
-//4.3广告
+//3.3广告
 include ':lib_ad'
-
-//4.4网络，数据库，工具类，自定义控件类
+//3.4网络，数据库，工具类，自定义控件类
 include ':lib_network'
 include ':lib_database'
 include ':lib_util'
 include ':lib_widget'
-
-//4.5数据分析
+//3.5数据分析
 include ':lib_analysis'
 
-//-----5.插件层----
+//-----4.插件层----
 include ':plugin_cpt_service_register'
 
 rootProject.name = "android-cpt"
