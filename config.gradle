@@ -42,7 +42,7 @@ ext {
             toutiao      : "com.bytedance.toutiao.demo"
     ]
 
-    //#配置四：App壳工程依赖组件
+    //#配置四：App壳工程依赖的业务组件
     appModuleConfig = [
         weixin: [':app_im',':app_video',':app_game',':app_news',':app_integrate',':app_shopping'],
         taobao:  [':app_im',':app_shopping'],
