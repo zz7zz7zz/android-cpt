@@ -12,18 +12,17 @@
 
 ------------------2.解决的问题------------------
 
-1.要解决资源冲突和模块包名问题
+1.模块包名问题，要解决资源冲突
 
 2.gradle中版本号统一管理
 
 3.Application，Library之间随意切换
 
-4.AndroidManifest.xml文件 Application，Library 区分，去除测试代码以及其它资源文件
+4.AndroidManifest.xml文件根据Application，Library 区分，正式打包去除测试代码以及其它资源文件
 
-5.Library在build.gradle文件中不能有applicationId
-  根据 isModuleApplication 属性区分
+5.Library在build.gradle文件中不能有applicationId，根据 isModuleApplication 属性区分
   
-6.App壳工程配置业务组件
+6.App壳工程可对业务组件进行配置化；聚合库组件可进行配置化
 
 
 ------------------3.加快编译速度------------------
