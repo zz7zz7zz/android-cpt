@@ -43,7 +43,7 @@ cptConfig{
 //    registerToClass = 'com/module/main/App.class'
 //    registerToClassMethod = "onCreate"
 //    registerToClassMethodAdd = "auto_register_service_2021_04_15"
-//    registerToClassMethodCode = "com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);"
+//    registerToClassMethodCode = "com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n"
 
 }
 

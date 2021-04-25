@@ -55,7 +55,7 @@ class TransformApp extends Transform {
         println("----------------------TransformApp Scan / Generate code start----------------------")
 
         //1.扫描一遍jar和class文件，找到Service和ServiceImpl
-        ScanService.scanServiceAndServiceImpl(transformInvocation)
+        ScanService.scanServiceAndServiceImpl(transformInvocation,cptConfig)
 
         //        transformInvocation.outputProvider.deleteAll()
 

@@ -4,13 +4,14 @@ import com.android.build.api.transform.DirectoryInput
 import com.android.build.api.transform.Format
 import com.android.build.api.transform.JarInput
 import com.android.build.api.transform.TransformInvocation
+import com.module.plugin.cpt.bean.CptConfig
 import com.module.plugin.cpt.util.ScanUtil
 import org.apache.commons.codec.digest.DigestUtils
 
 class ScanService {
 
-    static void scanServiceAndServiceImpl(TransformInvocation transformInvocation){
-        println("----------------------ScanService scanAllClasses start----------------------")
+    static void scanServiceAndServiceImpl(TransformInvocation transformInvocation, CptConfig cptConfig){
+        println("----------------------ScanService scanServiceAndServiceImpl start----------------------")
         long startTime = System.currentTimeMillis()
         //        transformInvocation.outputProvider.deleteAll()
         boolean leftSlash = File.separator == '/'
@@ -40,6 +41,8 @@ class ScanService {
 
 //                println("ScanService directoryInput------------ " + directoryInput.file.absolutePath)
 
+                def registerToClass = cptConfig.registerToClass.replace("\\",".").replace("/",".").replace(".class","")
+
                 File dest = transformInvocation.outputProvider.getContentLocation(directoryInput.name, directoryInput.contentTypes, directoryInput.scopes, Format.DIRECTORY)
                 String root = directoryInput.file.absolutePath
                 if (!root.endsWith(File.separator))
@@ -57,7 +60,7 @@ class ScanService {
                     }
 
                     def className = path.replace("\\",".").replace("/",".").replace(".class","")
-                    if (TransformApp.cptConfig.registerToClass == className) {
+                    if (registerToClass == className) {
                         TransformApp.oldRegisterClassFile = file
                         TransformApp.oldRegisterClassFileParentPath = directoryInput.file.absolutePath;
                         TransformApp.newRegisterClassFile = new File(dest.absolutePath+File.separator+path);
@@ -96,6 +99,6 @@ class ScanService {
 
         println("---------------- initCodeToClassFile ----------------" + (null != TransformApp.initCodeToClassFile ? TransformApp.initCodeToClassFile.absolutePath : null))
 
-        println("----------------------ScanService scanAllClasses end----------------------"  + (System.currentTimeMillis() - startTime) + "ms")
+        println("----------------------ScanService scanServiceAndServiceImpl end----------------------"  + (System.currentTimeMillis() - startTime) + "ms")
     }
 }
