@@ -42,7 +42,7 @@ class Plugin implements org.gradle.api.Plugin<Project> {
             CptConfig extension = project.extensions.create("cptConfig", CptConfig)
             project.afterEvaluate {
                 TransformApp.cptConfig = extension
-                println(extension.toString())
+//                println(extension.toString())
             }
         }else{
             def library = project.extensions.getByType(LibraryExtension.class)
@@ -59,7 +59,7 @@ class Plugin implements org.gradle.api.Plugin<Project> {
             CptConfig extension = project.extensions.create("cptConfig", CptConfig)
             project.afterEvaluate {
                 TransformLibrary.cptConfig = extension
-                println(extension.toString())
+//                println(extension.toString())
             }
         }
 
