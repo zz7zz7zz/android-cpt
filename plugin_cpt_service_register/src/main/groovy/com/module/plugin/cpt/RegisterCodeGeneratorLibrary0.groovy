@@ -37,7 +37,7 @@ class RegisterCodeGeneratorLibrary0 {
             }
 
 //println("method " + method.getName() + " method.getParameterTypes.length " + method.getParameterTypes().length)
-            if(ScanSetting.GENERATE_TO_METHOD_NAME_REGISTER.equals(method.getName()) && method.getParameterTypes().length == 0){
+            if("register".equals(method.getName()) && method.getParameterTypes().length == 0){
                 StringBuilder sb = new StringBuilder();
                 setting.serviceList.each { name ->
                     name = name.replaceAll("/", ".")
@@ -45,7 +45,7 @@ class RegisterCodeGeneratorLibrary0 {
                 }
 //println(sb.toString())
                 method.insertBefore(sb.toString())
-            } else if(ScanSetting.GENERATE_TO_METHOD_NAME_GETCOMPONENTBYCLASS.equals(method.getName()) && method.getParameterTypes().length == 2){
+            } else if("getService".equals(method.getName()) && method.getParameterTypes().length == 2){
                 boolean isFrist = true;
                 StringBuilder sb = new StringBuilder();
                 setting.serviceList.each { name ->

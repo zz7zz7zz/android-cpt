@@ -23,7 +23,7 @@ class RegisterCodeGeneratorApp1 {
 //
 //                try {
 //                    ClassPool.getDefault().insertClassPath(TransformApp.fileContainsInitClass.absolutePath);
-//                    def className = registerSetting.GENERATE_TO_CLASS_FILE_NAME2.replace("\\",".").replace("/",".").replace(".class","")
+//                    def className = "com/module/main/App.class".replace("\\",".").replace("/",".").replace(".class","")
 //                    CtClass c2 = ClassPool.getDefault().getCtClass(className);
 //                    if (c2.isFrozen()){
 //                        c2.defrost()
@@ -38,7 +38,7 @@ class RegisterCodeGeneratorApp1 {
 //                        }
 //
 //                        if(c.isEmpty()){//增量编译使用插件时，每次都会插入，所以这里判断一下；但是当如果有插件增加或者删除时，需要clean一下才行，但是这种情况下也就几次，也能接受
-//                            if (c.getName().equals(registerSetting.REGISTER_METHOD_NAME2) && ps.length == 0) {
+//                            if (c.getName().equals("onInitComponentService") && ps.length == 0) {
 //
 //                                StringBuilder sb = new StringBuilder();
 //                                registerSetting.serviceImplMap.each { k,v ->
@@ -72,7 +72,7 @@ class RegisterCodeGeneratorApp1 {
 //
 //                try {
 //                    ClassPool.getDefault().insertClassPath(TransformApp.fileContainsInitClass.absolutePath);
-//                    def className = registerSetting.GENERATE_TO_CLASS_FILE_NAME2.replace("\\",".").replace("/",".").replace(".class","")
+//                    def className = "com/module/main/App.class".replace("\\",".").replace("/",".").replace(".class","")
 //                    CtClass c2 = ClassPool.getDefault().getCtClass(className);
 //                    if (c2.isFrozen()){
 //                        c2.defrost()
@@ -86,7 +86,7 @@ class RegisterCodeGeneratorApp1 {
 //                            System.out.println(" ctClass getName \t" + cx.getName());
 //                        }
 //
-//                        if (c.getName().equals(registerSetting.REGISTER_METHOD_NAME2) && ps.length == 0) {
+//                        if (c.getName().equals("onInitComponentService") && ps.length == 0) {
 //
 //                            StringBuilder sb = new StringBuilder();
 //                            sb.append("{")
@@ -134,7 +134,7 @@ class RegisterCodeGeneratorApp1 {
 //                    CtMethod[] ms = c2.getDeclaredMethods();
 //
 //                    //删除旧的方法
-//                    String addMethodName = registerSetting.ADD_METHOD_NAME
+//                    String addMethodName = "auto_register_service_2021_04_15"
 //                    for (CtMethod c : ms) {
 //                        if (c.getName().equals(addMethodName)) {
 //                            c2.removeMethod(c)
