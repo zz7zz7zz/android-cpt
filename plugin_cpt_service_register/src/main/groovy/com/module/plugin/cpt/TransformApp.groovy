@@ -126,8 +126,8 @@ class TransformApp extends Transform {
                 //已经成功(Javassist方案: 在App.class中的onCreate()方法中调用另外一个方法auto_register_service_2021_04_15(),该方法被动态加入，该方法中注入服务)
                 //该实现方案可以把ServiceManager的registerService方法定义为公有的
                 //该实现方案可以把ServiceManager的registerService方法定义为私有的，开发过程中对外不暴露，字节码操作时更改为public，但是此时又需要结合asm操作)
-                //RegisterCodeGeneratorApp1.insertInitCodeToApp(ext, oldAppFileParentPath,cptConfig)
-                //FileUtils.copyFile(oldAppFile, newAppFile)
+                //RegisterCodeGeneratorApp1.insertInitCodeToApp(ext, oldRegisterClassFileParentPath,cptConfig)
+                //FileUtils.copyFile(oldRegisterClassFile, newRegisterClassFile)
 
                 //未成功
                 //RegisterCodeGenerator2.insertInitCodeTo(ext, initCodeToClassFile.parent+"/999.jar")

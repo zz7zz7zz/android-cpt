@@ -150,7 +150,7 @@ class RegisterCodeGeneratorApp1 {
 //                            System.out.println(" ctClass getName \t" + cx.getName());
 //                        }
 //
-//                        if (c.getName().equals(registerSetting.REGISTER_METHOD_NAME3) && ps.length == 0) {
+//                        if (c.getName().equals(cptConfig.registerToClassMethod) && ps.length == 0) {
 //
 //                            //增加方法
 //                            StringBuilder sb = new StringBuilder();
@@ -201,8 +201,8 @@ class RegisterCodeGeneratorApp1 {
 
                     CtMethod[] ms = c2.getDeclaredMethods();
                     //删除旧的方法,检查onCreate方法
-                    String onCreateMethodName = registerSetting.REGISTER_METHOD_NAME3
-                    String addMethodName = registerSetting.ADD_METHOD_NAME
+                    String onCreateMethodName = cptConfig.registerToClassMethod
+                    String addMethodName = cptConfig.registerToClassMethodAdd
                     CtMethod onCreateMethod
                     for (CtMethod c : ms) {
                         if (c.getName().equals(addMethodName)) {
@@ -230,7 +230,7 @@ class RegisterCodeGeneratorApp1 {
                         if(null != k && null != v){
                             def cls1  = k.replaceAll("/", ".")
                             def cls2  = v.replaceAll("/", ".")
-                            sb.append(String.format("com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n",cls1,cls1,cls2))
+                            sb.append(String.format(cptConfig.registerToClassMethodCode,cls1,cls1,cls2))
                         }else{
 //                            println("Service or ServiceImpl not found " + k)
                         }
