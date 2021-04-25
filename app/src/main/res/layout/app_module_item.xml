@@ -19,14 +19,15 @@
         android:id="@+id/moudle_icon"
         android:layout_width="26dp"
         android:layout_height="26dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"/>
+        android:layout_marginLeft="1.66dp"
+        android:layout_marginRight="1.66dp"/>
 
     <Button
         android:id="@+id/moudle_navigation_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="组件主页"
-        android:layout_marginLeft="2dp"/>
+        android:text="主页"
+        android:layout_marginLeft="1.66dp"
+        android:layout_marginRight="1.66dp"/>
 
 </LinearLayout>
