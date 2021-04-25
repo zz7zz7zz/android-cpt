@@ -22,13 +22,13 @@ public final class ServiceManager {
 
     //没有使用插件的情况下，才用反射的方法
     private static void degradeLoadServiceToMap(){
-//        registerService(":app_video","com.module.service.video.IVideoService","com.module.video.VideoServiceImpl");
-//        registerService(":app_shopping","com.module.service.shopping.IShoppingService","com.module.shopping.ShoppingServiceImpl");
-//        registerService(":app_integrate","com.module.service.integrate.IIntegrateService","com.module.integrate.IntegrateServiceImpl");
-//        registerService(":app_game","com.module.service.game.IGameService","com.module.game.GameServiceImpl");
-//        registerService(":app_news","com.module.service.news.INewsService","com.module.news.NewsServiceImpl");
-//        registerService(":app_im","com.module.service.im.IIMService","com.module.im.IMServiceImpl");
-//        registerService(":app","com.module.service.app.IAppService","com.module.main.AppServiceImpl");
+        registerService(":app_video","com.module.service.video.IVideoService","com.module.video.VideoServiceImpl");
+        registerService(":app_shopping","com.module.service.shopping.IShoppingService","com.module.shopping.ShoppingServiceImpl");
+        registerService(":app_integrate","com.module.service.integrate.IIntegrateService","com.module.integrate.IntegrateServiceImpl");
+        registerService(":app_game","com.module.service.game.IGameService","com.module.game.GameServiceImpl");
+        registerService(":app_news","com.module.service.news.INewsService","com.module.news.NewsServiceImpl");
+        registerService(":app_im","com.module.service.im.IIMService","com.module.im.IMServiceImpl");
+        registerService(":app","com.module.service.app.IAppService","com.module.main.AppServiceImpl");
     }
 
     private static void registerService(String name,String serviceName,String serviceImplName){
