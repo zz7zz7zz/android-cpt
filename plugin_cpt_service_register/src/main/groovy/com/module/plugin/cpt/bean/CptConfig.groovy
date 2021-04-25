@@ -1,19 +1,19 @@
 package com.module.plugin.cpt.bean;
 
-
 class CptConfig {
 
-    String applicationName
-
     //1.asm
-    String regiserToClass
-    String regiserToClassMethod
+    String registerToClass
+    String registerToClassMethod
+    String registerToClassMethodCall
+    String registerToClassMethodCallDescriptor
+    String registerToClassTag
 
     //2.javassist
-//    String regiserToClass
-//    String regiserToClassMethod
-    String regiserToClassMethodAdd
-    String regiserToClassMethodCode
+//    String registerToClass
+//    String registerToClassMethod
+    String registerToClassMethodAdd
+    String registerToClassMethodCode
 
     //other:一下两个参数用于在编译过程中，需要用到引用库的绝对路径
     String arouterPath
@@ -23,11 +23,13 @@ class CptConfig {
     @Override
     public String toString() {
         return "CptConfig{" +
-                "applicationName='" + applicationName + '\'' +
-                ", regiserToClass='" + regiserToClass + '\'' +
-                ", regiserToClassMethod='" + regiserToClassMethod + '\'' +
-                ", regiserToClassMethodAdd='" + regiserToClassMethodAdd + '\'' +
-                ", regiserToClassMethodCode='" + regiserToClassMethodCode + '\'' +
+                " registerToClass='" + registerToClass + '\'' +
+                ", registerToClassMethod='" + registerToClassMethod + '\'' +
+                ", registerToClassMethodCall='" + registerToClassMethodCall + '\'' +
+                ", registerToClassMethodCallDescriptor='" + registerToClassMethodCallDescriptor + '\'' +
+                ", registerToClassTag='" + registerToClassTag + '\'' +
+                ", registerToClassMethodAdd='" + registerToClassMethodAdd + '\'' +
+                ", registerToClassMethodCode='" + registerToClassMethodCode + '\'' +
                 ", arouterPath='" + arouterPath + '\'' +
                 ", fragmentPath='" + fragmentPath + '\'' +
                 '}';

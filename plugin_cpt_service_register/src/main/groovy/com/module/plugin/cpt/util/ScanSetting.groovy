@@ -2,9 +2,12 @@ package com.module.plugin.cpt.util;
 
 class ScanSetting {
 
+    //---------------------------------------------------------
+    //服务类后缀
     static final String FLITER_CLASS_NAME_START = 'com/module/service'
     static final String FLITER_CLASS_NAME_END = 'Service.class'
 
+    //服务实现类后缀
     static final String FLITER_CLASS_NAME_SERVICE_IMPL_END = 'ServiceImpl.class'
 
 
@@ -26,8 +29,8 @@ class ScanSetting {
     static final String ADD_METHOD_NAME = 'auto_register_service_2021_04_15'
     String interfaceName = ''
     static final String MODULE_NAME_OF_FIELD = 'MODULE'
-    File fileContainsInitClass
 
+    //---------------------------------------------------------
     //用户定义的服务接口类IxxxService，继承自IService
     ArrayList<String> serviceList = new ArrayList<>()
 

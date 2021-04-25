@@ -1,6 +1,6 @@
 package com.module.plugin.cpt
 
-import com.module.plugin.cpt.bean.CptConfig
+
 import com.module.plugin.cpt.util.ScanSetting
 import javassist.ClassPool
 import javassist.CtClass
@@ -12,22 +12,22 @@ import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
 import java.util.zip.ZipEntry
 
-class RegisterCodeGeneratorLibrary {
+class RegisterCodeGeneratorLibrary1 {
 
     ScanSetting extension
 
-    private RegisterCodeGeneratorLibrary(ScanSetting extension) {
+    private RegisterCodeGeneratorLibrary1(ScanSetting extension) {
         this.extension = extension
     }
 
     static void insertInitCodeTo(ScanSetting registerSetting,String fileName) {
         if (registerSetting != null && !registerSetting.serviceList.isEmpty()) {
-            RegisterCodeGeneratorLibrary processor = new RegisterCodeGeneratorLibrary(registerSetting)
-            File file = TransformApp.fileContainsInitClass
+            RegisterCodeGeneratorLibrary1 processor = new RegisterCodeGeneratorLibrary1(registerSetting)
+            File file = TransformApp.initCodeToClassFile
             if (null != file && file.getName().endsWith('.jar')){
 
                 try {
-                    ClassPool.getDefault().insertClassPath(TransformApp.fileContainsInitClass.absolutePath);
+                    ClassPool.getDefault().insertClassPath(TransformApp.initCodeToClassFile.absolutePath);
                     def className = registerSetting.GENERATE_TO_CLASS_FILE_NAME.replace("\\",".").replace("/",".").replace(".class","")
                     CtClass c2 = ClassPool.getDefault().getCtClass(className);
                     if (c2.isFrozen()){
@@ -94,7 +94,7 @@ println("code:\n"+sb.toString())
 //                    jarOutputStream.write(IOUtils.toByteArray(fixInputStream))
 //                    fixInputStream.close()
 
-                    ClassPool.getDefault().insertClassPath(TransformApp.fileContainsInitClass.absolutePath);
+                    ClassPool.getDefault().insertClassPath(TransformApp.initCodeToClassFile.absolutePath);
                     def className = registerSetting.GENERATE_TO_CLASS_FILE_NAME.replace("\\",".").replace("/",".").replace(".class","")
                     CtClass c2 = ClassPool.getDefault().getCtClass(className);
                     def bytes = c2.toBytecode()

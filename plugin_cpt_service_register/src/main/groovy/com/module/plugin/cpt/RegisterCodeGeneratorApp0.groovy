@@ -1,6 +1,7 @@
-package com.module.plugin.cpt;
+package com.module.plugin.cpt
 
-import com.module.plugin.cpt.util.ScanSetting;
+import com.module.plugin.cpt.bean.CptConfig
+import com.module.plugin.cpt.util.ScanSetting
 
 import org.apache.commons.io.IOUtils
 import org.objectweb.asm.*
@@ -13,25 +14,22 @@ import java.util.zip.ZipEntry
 class RegisterCodeGeneratorApp0 {
 
     ScanSetting extension
+    CptConfig cptConfig
 
-    private RegisterCodeGeneratorApp0(ScanSetting extension) {
+    private RegisterCodeGeneratorApp0(ScanSetting extension,CptConfig cptConfig) {
         this.extension = extension
+        this.cptConfig = cptConfig
     }
 
-    static void insertInitCodeTo(ScanSetting registerSetting) {
+    static void insertInitCodeTo(ScanSetting registerSetting, CptConfig cptConfig) {
         if (registerSetting != null && !registerSetting.serviceList.isEmpty()) {
-            RegisterCodeGeneratorApp0 processor = new RegisterCodeGeneratorApp0(registerSetting)
-            File file = TransformApp.fileContainsInitClass
+            RegisterCodeGeneratorApp0 processor = new RegisterCodeGeneratorApp0(registerSetting,cptConfig)
+            File file = TransformApp.initCodeToClassFile
             if (null != file && file.getName().endsWith('.jar'))
                 processor.insertInitCodeIntoJarFile(file)
         }
     }
 
-    /**
-     * generate code into jar file
-     * @param jarFile the jar file which contains LogisticsCenter.class
-     * @return
-     */
     private File insertInitCodeIntoJarFile(File jarFile) {
         if (jarFile) {
             def optJar = new File(jarFile.getParent(), jarFile.name + ".opt")
@@ -47,7 +45,7 @@ class RegisterCodeGeneratorApp0 {
                 ZipEntry zipEntry = new ZipEntry(entryName)
                 InputStream inputStream = file.getInputStream(jarEntry)
                 jarOutputStream.putNextEntry(zipEntry)
-                if (ScanSetting.GENERATE_TO_CLASS_FILE_NAME == entryName) {
+                if (cptConfig.registerToClass == entryName) {
 
                     println('RegisterCodeGenerator Insert init code to class >> ' + entryName)
 
@@ -94,7 +92,7 @@ class RegisterCodeGeneratorApp0 {
                                   String signature, String[] exceptions) {
             MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions)
             //generate code into this method
-            if (name == ScanSetting.GENERATE_TO_METHOD_NAME) {
+            if (name == cptConfig.registerToClassMethod) {
                 mv = new RouteMethodVisitor(Opcodes.ASM5, mv)
             }
             return mv
@@ -111,11 +109,14 @@ class RegisterCodeGeneratorApp0 {
         void visitInsn(int opcode) {
             //generate code before return
             if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
+
+                def registerToClass = cptConfig.registerToClass.replace(".class","")
+
                 extension.serviceList.each { it ->
 
+                    def moduleName = extension.serviceModuleNameMap.get(it)
                     def originalService = it
                     def originalServiceImpl = extension.serviceImplMap.get(it)
-                    def moduleName = extension.serviceModuleNameMap.get(originalService)
                     def service = it.replaceAll("/", ".")
                     def serviceImpl = null != extension.serviceImplMap.get(it) ? extension.serviceImplMap.get(it).replace("/", ".") : ""
 
@@ -124,6 +125,7 @@ class RegisterCodeGeneratorApp0 {
                     println("RegisterCodeGenerator originalServiceImpl "+originalServiceImpl)
                     println("RegisterCodeGenerator service "+service)
                     println("RegisterCodeGenerator serviceImpl "+serviceImpl)
+                    println("RegisterCodeGenerator registerToClass "+registerToClass)
 
                     if(null != originalServiceImpl){
 
@@ -150,30 +152,19 @@ class RegisterCodeGeneratorApp0 {
 //                                , "(Ljava/lang/String;)V"
 //                                , false)
 
-
-                        println("RegisterCodeGenerator serviceClass "+Type.getType('L'+originalService+';'))
-                        println("RegisterCodeGenerator serviceImplClass "+Type.getType('L'+originalServiceImpl+';'))
-
-                        println("RegisterCodeGenerator serviceClass 2  "+Type.getObjectType(originalService))
-                        println("RegisterCodeGenerator serviceImplClass 2  "+Type.getObjectType(originalServiceImpl))
+                        println("RegisterCodeGenerator serviceClass "+Type.getType('L'+originalService+';') + " serviceImplClass " +Type.getType('L'+originalServiceImpl+';'))
+                        println("RegisterCodeGenerator serviceClass2  "+Type.getObjectType(originalService) + " serviceImplClass " +Type.getObjectType(originalServiceImpl))
 
                         mv.visitLdcInsn(moduleName)
                         mv.visitLdcInsn(Type.getObjectType(originalService))
                         mv.visitLdcInsn(Type.getObjectType(originalServiceImpl))
-                        mv.visitMethodInsn(Opcodes.INVOKESTATIC,
-                                ScanSetting.GENERATE_TO_CLASS_NAME,
-                                "registerService",
-                                 "(Ljava/lang/String;Ljava/lang/Class;Ljava/lang/Class;)V",
-                                false)
-
-
+                        mv.visitMethodInsn(Opcodes.INVOKESTATIC, registerToClass, cptConfig.registerToClassMethodCall, cptConfig.registerToClassMethodCallDescriptor, false)
                     }
-
                 }
 
                 //registerByPlugin 设置为true
                 mv.visitInsn(Opcodes.ICONST_1)
-                mv.visitFieldInsn(Opcodes.PUTSTATIC, ScanSetting.GENERATE_TO_CLASS_NAME, "registerByPlugin", "Z")
+                mv.visitFieldInsn(Opcodes.PUTSTATIC, registerToClass, cptConfig.registerToClassTag, "Z")
             }
             super.visitInsn(opcode)
         }

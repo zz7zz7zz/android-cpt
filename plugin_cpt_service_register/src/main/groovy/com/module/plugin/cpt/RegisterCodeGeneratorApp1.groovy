@@ -2,22 +2,15 @@ package com.module.plugin.cpt
 
 import com.module.plugin.cpt.bean.CptConfig
 import com.module.plugin.cpt.util.ScanSetting
-import org.apache.commons.io.IOUtils
-
-import java.util.jar.JarEntry
-import java.util.jar.JarFile
-import java.util.jar.JarOutputStream
-import java.util.zip.ZipEntry
-
 import javassist.ClassPool
 import javassist.CtClass
 import javassist.CtMethod
 
-class RegisterCodeGeneratorApp {
+class RegisterCodeGeneratorApp1 {
 
     ScanSetting extension
 
-    private RegisterCodeGeneratorApp(ScanSetting extension) {
+    private RegisterCodeGeneratorApp1(ScanSetting extension) {
         this.extension = extension
     }
 
@@ -194,13 +187,13 @@ class RegisterCodeGeneratorApp {
     //4.有onCreate方法则加入方法体，没有则创建;同时创建新的方法，并且被onCreate调用
     static void insertInitCodeToApp(ScanSetting registerSetting, String fileName, CptConfig cptConfig) {
         if (registerSetting != null && !registerSetting.serviceList.isEmpty()) {
-            RegisterCodeGeneratorApp processor = new RegisterCodeGeneratorApp(registerSetting)
-            File file = TransformApp.fileContainsInitClass
+            RegisterCodeGeneratorApp1 processor = new RegisterCodeGeneratorApp1(registerSetting)
+            File file = TransformApp.initCodeToClassFile
             if (null != file && file.getName().endsWith('.jar')){
 
                 try {
-                    ClassPool.getDefault().insertClassPath(TransformApp.fileContainsInitClass.absolutePath);
-                    def className = cptConfig.applicationName.replace("\\",".").replace("/",".").replace(".class","")
+                    ClassPool.getDefault().insertClassPath(TransformApp.initCodeToClassFile.absolutePath);
+                    def className = cptConfig.registerToClass.replace("\\",".").replace("/",".").replace(".class","")
                     CtClass c2 = ClassPool.getDefault().getCtClass(className);
                     if (c2.isFrozen()){
                         c2.defrost()

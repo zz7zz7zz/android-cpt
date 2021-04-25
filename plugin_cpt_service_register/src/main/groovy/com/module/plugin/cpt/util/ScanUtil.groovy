@@ -18,6 +18,20 @@ class ScanUtil {
         return !path.contains("com.android.support") && !path.contains("/android/m2repository")
     }
 
+    static boolean isServiceClass(String entryName) {
+        //可以用正则处理
+        return entryName != null && entryName.startsWith(ScanSetting.FLITER_CLASS_NAME_START) && entryName.endsWith(ScanSetting.FLITER_CLASS_NAME_END) && !entryName.endsWith('$'+ScanSetting.FLITER_CLASS_NAME_END)
+    }
+
+    static boolean isServiceImplClass(String entryName) {
+        return entryName != null && entryName.endsWith(ScanSetting.FLITER_CLASS_NAME_SERVICE_IMPL_END)
+    }
+
+    static boolean isServiceInnerClass(String entryName) {
+        return entryName != null  && entryName.endsWith('Service\$1.class')
+    }
+
+    //---------------------------------------------------
     static void scanJar(File jarFile, File destFile) {
 //        println("----------scanJar------------ " + jarFile.absolutePath)
         if (jarFile) {
@@ -26,7 +40,7 @@ class ScanUtil {
             while (enumeration.hasMoreElements()) {
                 JarEntry jarEntry = (JarEntry) enumeration.nextElement()
                 String entryName = jarEntry.getName()
-                if (ScanUtil.shouldProcessClass(entryName) || ScanUtil.shouldServiceImpl(entryName)) {
+                if (ScanUtil.isServiceClass(entryName) || ScanUtil.isServiceImplClass(entryName)) {
 //                    println("----------scanJar shouldProcessClass ------------ " + (entryName))
                     InputStream inputStream = file.getInputStream(jarEntry)
                     scanClass(inputStream)
@@ -34,7 +48,7 @@ class ScanUtil {
                 } else if (ScanSetting.GENERATE_TO_CLASS_FILE_NAME == entryName) {
                     // mark this jar file contains LogisticsCenter.class
                     // After the scan is complete, we will generate register code into this file
-                    TransformApp.fileContainsInitClass= destFile
+                    TransformApp.initCodeToClassFile= destFile
 
 //                    println("----------scanJar jarFile ------------ " + (null != jarFile ? jarFile.absolutePath : " null"))
 //                    println("----------scanJar fileContainsInitClass ------------ " + (null != destFile ? destFile.absolutePath : " null"))
@@ -42,19 +56,6 @@ class ScanUtil {
             }
             file.close()
         }
-    }
-
-    //-------------------处理Java文件---------------------
-    static boolean shouldProcessClass(String entryName) {
-        return entryName != null && entryName.startsWith(ScanSetting.FLITER_CLASS_NAME_START) && entryName.endsWith(ScanSetting.FLITER_CLASS_NAME_END) && !entryName.endsWith('$'+ScanSetting.FLITER_CLASS_NAME_END)
-    }
-
-    static boolean shouldServiceImpl(String entryName) {
-        return entryName != null && entryName.endsWith(ScanSetting.FLITER_CLASS_NAME_SERVICE_IMPL_END)
-    }
-
-    static boolean shouldProcessClassWithLog(String entryName) {
-        return entryName != null  && entryName.endsWith('Service\$1.class')
     }
 
     static void scanClass(File file) {

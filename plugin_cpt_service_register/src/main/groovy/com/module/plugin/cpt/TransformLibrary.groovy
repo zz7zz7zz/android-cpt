@@ -93,7 +93,7 @@ class TransformLibrary extends Transform {
                     }
 
                      //在默认实现类中各个方法打印日志
-                    if(file.isFile() && ScanUtil.shouldProcessClassWithLog(path)){
+                    if(file.isFile() && ScanUtil.isServiceInnerClass(path)){
                         //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
                         pool.appendClassPath(project.android.bootClasspath[0].toString())
                         pool.insertClassPath(cptConfig.fragmentPath)
@@ -110,10 +110,7 @@ class TransformLibrary extends Transform {
             }
         }
 
-        println("----------------------TransformLibrary Scan code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
-
         println("----------------------TransformLibrary Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
-
     }
 
 
@@ -167,10 +164,6 @@ class TransformLibrary extends Transform {
             return
         }
 
-//        if(ctClass.getName().contains("PatchProxy")){
-//            return
-//        }
-
 //        println("class "+ctClass)
 //        println("className "+ctClass.getName())
 
@@ -190,7 +183,6 @@ class TransformLibrary extends Transform {
             String PROMPT_COMPONENT_NOT_FOUND = "\"Serivce 未找到，可能的原因是:  1.没有将组件代码打包进Apk中; 2.已实现对外提供服务类，但没有添加注解,如 @Route(path = xxx, name = yyy); 3.未实现对外提供服务类; 4.本地组件配置/服务器组件配置，未启用组件\""
             String code = String.format("android.util.Log.e(TAG, %s);",PROMPT_COMPONENT_NOT_FOUND)
             method.insertBefore(code)
-
         }
 
         ctClass.writeFile(fileName)

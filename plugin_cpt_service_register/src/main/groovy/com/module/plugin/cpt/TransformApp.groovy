@@ -5,7 +5,6 @@ import com.android.build.gradle.internal.pipeline.TransformManager
 import com.android.utils.FileUtils
 import com.module.plugin.cpt.bean.CptConfig
 import com.module.plugin.cpt.util.ScanSetting
-import com.module.plugin.cpt.util.ScanUtil
 import javassist.ClassPool
 import org.apache.commons.codec.digest.DigestUtils
 import org.gradle.api.Project
@@ -18,11 +17,12 @@ class TransformApp extends Transform {
 
     static CptConfig cptConfig
     static ArrayList<ScanSetting> registerList
-    static File oldAppFile
-    static String oldAppFileParentPath
-    static File newAppFile
 
-    static File fileContainsInitClass
+    static File oldRegisterClassFile
+    static String oldRegisterClassFileParentPath
+    static File newRegisterClassFile
+
+    static File initCodeToClassFile
 
     TransformApp(Project project) {
         this.project = project
@@ -54,13 +54,13 @@ class TransformApp extends Transform {
 
         println("----------------------TransformApp Scan / Generate code start----------------------")
 
-        //1.扫描一遍jar和class文件
-        ScanService.scanAllClasses(transformInvocation,pool)
+        //1.扫描一遍jar和class文件，找到Service和ServiceImpl
+        ScanService.scanServiceAndServiceImpl(transformInvocation)
+
+        //        transformInvocation.outputProvider.deleteAll()
 
         long startTime = System.currentTimeMillis()
         boolean leftSlash = File.separator == '/'
-
-//        transformInvocation.outputProvider.deleteAll()
 
         transformInvocation.inputs.each { TransformInput input ->
 
@@ -102,7 +102,6 @@ class TransformApp extends Transform {
                     if (!leftSlash) {
                         path = path.replaceAll("\\\\", "/")
                     }
-
                 }
 
                 // copy to dest
@@ -121,17 +120,17 @@ class TransformApp extends Transform {
                 //已成功(Asm方案：在ServiceManager的registerService方法中注入服务)
                 //该实现方案可以把ServiceManager的registerService方法定义为公有的
                 //该实现方案可以把ServiceManager的registerService方法定义为私有的，开发过程中对外不暴露
-                RegisterCodeGeneratorApp0.insertInitCodeTo(ext)
+                RegisterCodeGeneratorApp0.insertInitCodeTo(ext,cptConfig)
 
                 //方案二：
                 //已经成功(Javassist方案: 在App.class中的onCreate()方法中调用另外一个方法auto_register_service_2021_04_15(),该方法被动态加入，该方法中注入服务)
                 //该实现方案可以把ServiceManager的registerService方法定义为公有的
                 //该实现方案可以把ServiceManager的registerService方法定义为私有的，开发过程中对外不暴露，字节码操作时更改为public，但是此时又需要结合asm操作)
-                //RegisterCodeGeneratorApp.insertInitCodeToApp(ext, oldAppFileParentPath,cptConfig)
+                //RegisterCodeGeneratorApp1.insertInitCodeToApp(ext, oldAppFileParentPath,cptConfig)
                 //FileUtils.copyFile(oldAppFile, newAppFile)
 
                 //未成功
-                //RegisterCodeGenerator2.insertInitCodeTo(ext, fileContainsInitClass.parent+"/999.jar")
+                //RegisterCodeGenerator2.insertInitCodeTo(ext, initCodeToClassFile.parent+"/999.jar")
             }
         }
 

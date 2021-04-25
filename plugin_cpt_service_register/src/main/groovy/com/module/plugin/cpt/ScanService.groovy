@@ -5,17 +5,15 @@ import com.android.build.api.transform.Format
 import com.android.build.api.transform.JarInput
 import com.android.build.api.transform.TransformInvocation
 import com.module.plugin.cpt.util.ScanUtil
-import javassist.ClassPool
 import org.apache.commons.codec.digest.DigestUtils
 
 class ScanService {
 
-    static void scanAllClasses(TransformInvocation transformInvocation, ClassPool classPool){
+    static void scanServiceAndServiceImpl(TransformInvocation transformInvocation){
         println("----------------------ScanService scanAllClasses start----------------------")
+        long startTime = System.currentTimeMillis()
+        //        transformInvocation.outputProvider.deleteAll()
         boolean leftSlash = File.separator == '/'
-
-//        transformInvocation.outputProvider.deleteAll()
-
         transformInvocation.inputs.each {
             it.jarInputs.each { JarInput jarInput ->
 
@@ -52,21 +50,21 @@ class ScanService {
                     if (!leftSlash) {
                         path = path.replaceAll("\\\\", "/")
                     }
-                    if(file.isFile() && ScanUtil.shouldProcessClass(path)){
+                    if(file.isFile() && ScanUtil.isServiceClass(path)){
                         ScanUtil.scanClass(file)
-                    }else if(file.isFile() && ScanUtil.shouldServiceImpl(path)){
+                    }else if(file.isFile() && ScanUtil.isServiceImplClass(path)){
                         ScanUtil.scanClass(file)
                     }
 
                     def className = path.replace("\\",".").replace("/",".").replace(".class","")
-                    if (TransformApp.cptConfig.applicationName == className) {
-                        TransformApp.oldAppFile = file
-                        TransformApp.oldAppFileParentPath = directoryInput.file.absolutePath;
-                        TransformApp.newAppFile = new File(dest.absolutePath+File.separator+path);
+                    if (TransformApp.cptConfig.registerToClass == className) {
+                        TransformApp.oldRegisterClassFile = file
+                        TransformApp.oldRegisterClassFileParentPath = directoryInput.file.absolutePath;
+                        TransformApp.newRegisterClassFile = new File(dest.absolutePath+File.separator+path);
 
-//                        println("oldAppFile.absolutePath "+TransformApp.oldAppFile.absolutePath)
-//                        println("oldAppFileParentPath "+TransformApp.oldAppFileParentPath)
-//                        println("newAppFile.absolutePath "+TransformApp.newAppFile.absolutePath)
+//                        println("oldRegisterClassFile.absolutePath "+TransformApp.oldRegisterClassFile.absolutePath)
+//                        println("oldRegisterClassFileParentPath "+TransformApp.oldRegisterClassFileParentPath)
+//                        println("newRegisterClassFile.absolutePath "+TransformApp.newRegisterClassFile.absolutePath)
                     }
                 }
             }
@@ -96,8 +94,8 @@ class ScanService {
             }
         }
 
-        println("---------------- fileContainsInitClass ----------------" + (null != TransformApp.fileContainsInitClass ? TransformApp.fileContainsInitClass.absolutePath : null))
+        println("---------------- initCodeToClassFile ----------------" + (null != TransformApp.initCodeToClassFile ? TransformApp.initCodeToClassFile.absolutePath : null))
 
-        println("----------------------ScanService scanAllClasses end----------------------")
+        println("----------------------ScanService scanAllClasses end----------------------"  + (System.currentTimeMillis() - startTime) + "ms")
     }
 }

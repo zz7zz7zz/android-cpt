@@ -6,8 +6,6 @@ apply plugin: 'com.alibaba.arouter'
 
 apply plugin: 'com.module.plugin.cpt'
 cptConfig{
-    applicationName = cpt_service_register_config.applicationName
-
     //1.asm插入到com.module.service.ServiceManager.class的registerService()方法中，代码效果和配置如下
 //        public final class ServiceManager {
 //
@@ -22,11 +20,11 @@ cptConfig{
 //
 //        }
 
-    regiserToClass = 'com/module/service/ServiceManager.class'
-    regiserToClassMethod = "loadServiceToMap"
-
-
-
+    registerToClass = 'com/module/service/ServiceManager.class'
+    registerToClassMethod = "loadServiceToMap"
+    registerToClassMethodCall = "registerService"
+    registerToClassMethodCallDescriptor = "(Ljava/lang/String;Ljava/lang/Class;Ljava/lang/Class;)V"
+    registerToClassTag = "registerByPlugin"
 
     //2.Javassist 插入到com/module/main/App.class 的onCreate()方法中，代码效果和配置如下
 //     public class App extends BaseApplication {
@@ -42,10 +40,10 @@ cptConfig{
 //         }
 //     }
 
-//    regiserToClass = 'com/module/main/App.class'
-//    regiserToClassMethod = "onCreate"
-//    regiserToClassMethodAdd = "auto_register_service_2021_04_15"
-//    regiserToClassMethodCode = "com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);"
+//    registerToClass = 'com/module/main/App.class'
+//    registerToClassMethod = "onCreate"
+//    registerToClassMethodAdd = "auto_register_service_2021_04_15"
+//    registerToClassMethodCode = "com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);"
 
 }
 
