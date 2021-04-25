@@ -22,6 +22,10 @@ class TransformLibrary extends Transform {
     static CptConfig cptConfig
     static ArrayList<ScanSetting> registerList
 
+    static File oldServiceManagerClassFile
+    static String oldServiceManagerClassFileParentPath
+    static File newServiceManagerClassFileName
+
     TransformLibrary(Project project) {
         this.project = project
     }
@@ -92,6 +96,21 @@ class TransformLibrary extends Transform {
                         path = path.replaceAll("\\\\", "/")
                     }
 
+//                    println("----------TransformLibrary directoryInputs file  " + file.absolutePath)
+                    //创建默认的Service
+                    if(file.isFile() && ScanUtil.isServiceClass(path)){
+                        ScanUtil.scanClass(file)
+                    }else if (ScanUtil.isServiceManagerClass(path)) {
+                        // After the scan is complete, we will generate register code into this file
+                        oldServiceManagerClassFile = file
+                        oldServiceManagerClassFileParentPath = directoryInput.file.absolutePath;
+                        newServiceManagerClassFileName = new File(dest.absolutePath+File.separator+path);
+
+//                        println("oldServiceManagerClassFileName.absolutePath "+TransformLibrary.oldServiceManagerClassFile.absolutePath)
+//                        println("providerFactoryParentPath "+TransformLibrary.oldServiceManagerClassFileParentPath)
+//                        println("newServiceManagerClassFileName.absolutePath "+TransformLibrary.newServiceManagerClassFileName.absolutePath)
+                    }
+
                      //在默认实现类中各个方法打印日志
                     if(file.isFile() && ScanUtil.isServiceInnerClass(path)){
                         //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
@@ -110,6 +129,29 @@ class TransformLibrary extends Transform {
             }
         }
 
+        println("----------------------TransformLibrary Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
+        if (oldServiceManagerClassFile) {
+            registerList.each { ext ->
+//                println('Insert register code to file ' + oldServiceManagerClassFileName.absolutePath)
+
+                if (ext.serviceList.isEmpty()) {
+                    println("No class implements found for interface:" + ext.interfaceName)
+                } else {
+
+//                    ext.serviceList.each {
+//                        println("service: "+it + " serviceImpl: "+ext.serviceImplMap.get(it))
+//                    }
+
+                    //将当前路径加入类池,不然找不到这个类
+                    pool.appendClassPath(oldServiceManagerClassFileParentPath)
+                    //为了能找到android相关的所有类，添加project.android.bootClasspath 加入android.jar，
+                    pool.appendClassPath(project.android.bootClasspath[0].toString())
+
+                    RegisterCodeGeneratorLibrary0.insertCodeTo(ext,oldServiceManagerClassFileParentPath)
+                    FileUtils.copyFile(oldServiceManagerClassFile, newServiceManagerClassFileName)
+                }
+            }
+        }
         println("----------------------TransformLibrary Generate code end----------------------finish, current cost time: " + (System.currentTimeMillis() - startTime) + "ms")
     }
 

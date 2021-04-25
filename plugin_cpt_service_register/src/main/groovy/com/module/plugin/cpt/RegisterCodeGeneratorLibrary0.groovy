@@ -37,31 +37,23 @@ class RegisterCodeGeneratorLibrary0 {
             }
 
 //println("method " + method.getName() + " method.getParameterTypes.length " + method.getParameterTypes().length)
-            if("register".equals(method.getName()) && method.getParameterTypes().length == 0){
+            if("createDefault".equals(method.getName()) && method.getParameterTypes().length == 1){
+                boolean isFirst = true;
                 StringBuilder sb = new StringBuilder();
                 setting.serviceList.each { name ->
                     name = name.replaceAll("/", ".")
-                    sb.append(String.format("map.put(%s.MODULE,%s.class);\n",name,name))
-                }
-//println(sb.toString())
-                method.insertBefore(sb.toString())
-            } else if("getService".equals(method.getName()) && method.getParameterTypes().length == 2){
-                boolean isFrist = true;
-                StringBuilder sb = new StringBuilder();
-                setting.serviceList.each { name ->
-                    name = name.replaceAll("/", ".")
-                    if(!isFrist){
+                    if(!isFirst){
                         sb.append("else ")
                     }
                     sb.append(String.format("if(%s.class.equals(clazz)){\n" +
-                            "     %s ret =  com.alibaba.android.arouter.launcher.ARouter.getInstance().build(%s.PROVIDER_MAIN).navigation();\n" +
-                                 "return null != ret ? ret : (isCreatedDefault ? %s.DEFAULT : null);\n"+
-                            "}",name,name,name,name))
+                                 "return %s.DEFAULT;\n"+
+                            "}",name,name))
 
-                    isFrist = false;
+                    isFirst = false;
                 }
 //println(sb.toString())
                 method.insertBefore(sb.toString())
+                break
             }
 
         }

@@ -1,6 +1,7 @@
 package com.module.plugin.cpt.util
 
-import com.module.plugin.cpt.TransformApp;
+import com.module.plugin.cpt.TransformApp
+import com.module.plugin.cpt.TransformLibrary;
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.ClassWriter
@@ -29,6 +30,10 @@ class ScanUtil {
 
     static boolean isServiceInnerClass(String entryName) {
         return entryName != null  && entryName.endsWith('Service\$1.class')
+    }
+
+    static boolean isServiceManagerClass(String entryName) {
+        return ScanSetting.GENERATE_TO_CLASS_FILE_NAME == entryName
     }
 
     //---------------------------------------------------
@@ -82,7 +87,27 @@ class ScanUtil {
                    String superName, String[] interfaces) {
 //println(String.format("ScanClassVisitor visit version %d access %d name %s signature %s superName %s",version,access,name,signature,superName))
             super.visit(version, access, name, signature, superName, interfaces)
+
+            //App工程
             TransformApp.registerList.each { ext ->
+                if (ext.interfaceName && interfaces != null) {
+                    interfaces.each { itName ->
+//println("ScanClassVisitor cmpInterface "+ext.interfaceName + " interface " + itName + " name " + name)
+                        if (itName == ext.interfaceName) {
+                            //fix repeated inject init code when Multi-channel packaging
+                            if (!ext.serviceList.contains(name)) {
+                                ext.serviceList.add(name)
+                                serviceName = name
+                            }
+                        }else{
+                            ext.allMap.put(itName,name)
+                        }
+                    }
+                }
+            }
+
+            //Libray工程
+            TransformLibrary.registerList.each { ext ->
                 if (ext.interfaceName && interfaces != null) {
                     interfaces.each { itName ->
 //println("ScanClassVisitor cmpInterface "+ext.interfaceName + " interface " + itName + " name " + name)
@@ -105,7 +130,14 @@ class ScanUtil {
 //println(String.format("ScanClassVisitor visitField 1 serviceName %s access %d name %s descriptor %s signature %s value %s",serviceName,access,name,descriptor,signature,value))
             if(name == ScanSetting.MODULE_NAME_OF_FIELD){
                 if(null != serviceName){
+                    //App工程
                     TransformApp.registerList.each { ext ->
+                        ext.serviceModuleNameMap.put(serviceName,value)
+//                        println(String.format("ScanClassVisitor visitField 2 serviceName %s value %s",serviceName,value))
+                    }
+
+                    //Libray工程
+                    TransformLibrary.registerList.each { ext ->
                         ext.serviceModuleNameMap.put(serviceName,value)
 //                        println(String.format("ScanClassVisitor visitField 2 serviceName %s value %s",serviceName,value))
                     }

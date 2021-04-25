@@ -44,24 +44,27 @@ public final class ServiceManager {
     }
 
     private static<T> T createDefault(Class<? extends T> clazz){
-        if(com.module.service.video.IVideoService.class.equals(clazz)){
-              return (T)com.module.service.video.IVideoService.DEFAULT;
-        }else if(com.module.service.shopping.IShoppingService.class.equals(clazz)){
-              return (T)com.module.service.shopping.IShoppingService.DEFAULT;
-        }else if(com.module.service.app.IAppService.class.equals(clazz)){
-              return (T)com.module.service.app.IAppService.DEFAULT;
-        }else if(com.module.service.integrate.IIntegrateService.class.equals(clazz)){
-              return (T)com.module.service.integrate.IIntegrateService.DEFAULT;
-        }else if(com.module.service.game.IGameService.class.equals(clazz)){
-              return (T)com.module.service.game.IGameService.DEFAULT;
-        }else if(com.module.service.news.INewsService.class.equals(clazz)){
-              return (T)com.module.service.news.INewsService.DEFAULT;
-        }else if(com.module.service.im.IIMService.class.equals(clazz)){
-              return (T)com.module.service.im.IIMService.DEFAULT;
-        }
         return null;
     }
 
+    private static<T> T degradeCreateDefault(Class<? extends T> clazz){
+        if(com.module.service.app.IAppService.class.equals(clazz)){
+            return (T)com.module.service.app.IAppService.DEFAULT;
+        }else if(com.module.service.game.IGameService.class.equals(clazz)){
+            return (T)com.module.service.game.IGameService.DEFAULT;
+        }else if(com.module.service.im.IIMService.class.equals(clazz)){
+            return (T)com.module.service.im.IIMService.DEFAULT;
+        }else if(com.module.service.integrate.IIntegrateService.class.equals(clazz)){
+            return (T)com.module.service.integrate.IIntegrateService.DEFAULT;
+        }else if(com.module.service.news.INewsService.class.equals(clazz)){
+            return (T)com.module.service.news.INewsService.DEFAULT;
+        }else if(com.module.service.shopping.IShoppingService.class.equals(clazz)){
+            return (T)com.module.service.shopping.IShoppingService.DEFAULT;
+        }else if(com.module.service.video.IVideoService.class.equals(clazz)){
+            return (T)com.module.service.video.IVideoService.DEFAULT;
+        }
+        return null;
+    }
 
     public static void init(){
         loadServiceToMap();
@@ -109,6 +112,10 @@ public final class ServiceManager {
 
                 if(null == ret && isCreatedDefault){
                     ret = (T)createDefault(clazz);
+
+                    if(null == ret){
+                        ret = (T)degradeCreateDefault(clazz);
+                    }
                 }
 
                 ((IService)(ret)).init(BaseApplication.getInstance());
