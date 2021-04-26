@@ -38,14 +38,14 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
         initAllComponents(ComponentConfig.allComponents);
 
-        findViewById(R.id.components_local).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.app_config_local).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 initServices(ComponentConfig.localComponents);
                 initView();
             }
         });
-        findViewById(R.id.components_remote).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.app_config_remote).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -61,6 +61,13 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
 
                     }
                 });
+            }
+        });
+        findViewById(R.id.app_config_switch).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = findViewById(R.id.app_config);
+                view.setVisibility(view.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
             }
         });
 

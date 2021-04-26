@@ -25,10 +25,19 @@
         android:background="#999999"/>
 
 
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/app_config_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="显示/隐藏"
+        android:layout_marginLeft="1dp"/>
+
     <ScrollView
+        android:id="@+id/app_config"
         android:layout_width="182dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="55dp"
         android:layout_marginBottom="120dp"
         android:background="#aabbcc">
         <LinearLayout
@@ -42,13 +51,13 @@
                 android:text="I am from module: app"
                 android:layout_marginTop="5dp" />
             <Button
-                android:id="@+id/components_local"
+                android:id="@+id/app_config_local"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="本地组件配置"
                 android:layout_marginLeft="1dp"/>
             <Button
-                android:id="@+id/components_remote"
+                android:id="@+id/app_config_remote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="服务器组件配置"
