@@ -9,10 +9,10 @@ import com.module.service.IService;
 
 public interface IAppService extends IService {
 
-    //---------------------------------------------------
+    //------------------------- 1 -------------------------
     static final String TAG = "IAppService";
 
-    //---------------------------------------------------
+    //------------------------- 2 -------------------------
     public static final String MODULE   = ":app";
 
     public static final String ACTIVITY_MAIN = "/app/A";
@@ -20,8 +20,8 @@ public interface IAppService extends IService {
     public static final String FRAGMENT_MAIN = "/app/F";
 
     public static final String PROVIDER_MAIN = "/app/P";
-    //---------------------------------------------------
 
+    //------------------------- 3 -------------------------
     static IAppService DEFAULT = new IAppService() {
         @Override
         public void onComponentEnter(Context context) {
@@ -63,4 +63,7 @@ public interface IAppService extends IService {
 
         }
     };
+
+    //------------------------- 4.对位提供的方法在以下进行定义 -------------------------
+
 }

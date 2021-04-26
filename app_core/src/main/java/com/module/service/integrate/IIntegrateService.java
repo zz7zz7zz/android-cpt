@@ -9,11 +9,10 @@ import com.module.service.IService;
 
 public interface IIntegrateService extends IService {
 
-    //---------------------------------------------------
-
+    //------------------------- 1 -------------------------
     static final String TAG = "IIntegrateService";
 
-    //---------------------------------------------------
+    //------------------------- 2 -------------------------
     public static final String MODULE   = ":app_integrate";
 
     public static final String ACTIVITY_MAIN = "/app_integrate/A";
@@ -21,8 +20,8 @@ public interface IIntegrateService extends IService {
     public static final String FRAGMENT_MAIN = "/app_integrate/F";
 
     public static final String PROVIDER_MAIN = "/app_integrate/P";
-    //---------------------------------------------------
 
+    //------------------------- 3 -------------------------
     static IIntegrateService DEFAULT = new IIntegrateService() {
         @Override
         public String getIntegrateTasks() {
@@ -70,6 +69,7 @@ public interface IIntegrateService extends IService {
         }
     };
 
-    //---------------------------------------------------
+    //------------------------- 4.对位提供的方法在以下进行定义 -------------------------
     String getIntegrateTasks();
+
 }

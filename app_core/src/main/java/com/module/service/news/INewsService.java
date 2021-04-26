@@ -9,11 +9,10 @@ import com.module.service.IService;
 
 public interface INewsService extends IService {
 
-    //---------------------------------------------------
-
+    //------------------------- 1 -------------------------
     static final String TAG = "INewsService";
 
-    //---------------------------------------------------
+    //------------------------- 2 -------------------------
     public static final String MODULE   = ":app_news";
 
     public static final String ACTIVITY_MAIN = "/app_news/A";
@@ -21,8 +20,8 @@ public interface INewsService extends IService {
     public static final String FRAGMENT_MAIN = "/app_news/F";
 
     public static final String PROVIDER_MAIN = "/app_news/P";
-    //---------------------------------------------------
 
+    //------------------------- 3 -------------------------
     static final INewsService DEFAULT = new INewsService() {
         @Override
         public String getNewsList() {
@@ -70,9 +69,7 @@ public interface INewsService extends IService {
         }
     };
 
-    //---------------------------------------------------
+    //------------------------- 4.对位提供的方法在以下进行定义 -------------------------
     String getNewsList();
-
-
 
 }

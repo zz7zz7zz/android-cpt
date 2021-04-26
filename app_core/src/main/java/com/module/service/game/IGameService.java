@@ -9,10 +9,10 @@ import com.module.service.IService;
 
 public interface IGameService extends IService {
 
-    //---------------------------------------------------
+    //------------------------- 1 -------------------------
     static final String TAG = "IGameService";
 
-    //---------------------------------------------------
+    //------------------------- 2 -------------------------
     public static final String MODULE   = ":app_game";
 
     public static final String ACTIVITY_MAIN = "/app_game/A";
@@ -20,8 +20,8 @@ public interface IGameService extends IService {
     public static final String FRAGMENT_MAIN = "/app_game/F";
 
     public static final String PROVIDER_MAIN = "/app_game/P";
-    //---------------------------------------------------
 
+    //------------------------- 3 -------------------------
     static IGameService DEFAULT = new IGameService() {
         @Override
         public void startGame(String msg) {
@@ -69,7 +69,7 @@ public interface IGameService extends IService {
         }
     };
 
-    //---------------------------------------------------
+    //------------------------- 4.对位提供的方法在以下进行定义 -------------------------
     void startGame(String msg);
 
       //方法一：使用匿名对象，每个对象手动添加代码

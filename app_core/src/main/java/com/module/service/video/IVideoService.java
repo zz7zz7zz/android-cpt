@@ -9,11 +9,10 @@ import com.module.service.IService;
 
 public interface IVideoService extends IService {
 
-    //---------------------------------------------------
-
+    //------------------------- 1 -------------------------
     static final String TAG = "IVideoService";
 
-    //---------------------------------------------------
+    //------------------------- 2 -------------------------
     public static final String MODULE   = ":app_video";
 
     public static final String ACTIVITY_MAIN = "/app_video/A";
@@ -21,7 +20,8 @@ public interface IVideoService extends IService {
     public static final String FRAGMENT_MAIN = "/app_video/F";
 
     public static final String PROVIDER_MAIN = "/app_video/P";
-    //---------------------------------------------------
+
+    //------------------------- 3 -------------------------
     static IVideoService DEFAULT = new IVideoService() {
         @Override
         public void playVideo(Context context, String msg) {
@@ -69,6 +69,7 @@ public interface IVideoService extends IService {
         }
     };
 
-    //---------------------------------------------------
+    //------------------------- 4.对位提供的方法在以下进行定义 -------------------------
     void playVideo(Context context, String msg);
+
 }

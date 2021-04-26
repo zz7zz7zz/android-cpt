@@ -9,11 +9,10 @@ import com.module.service.IService;
 
 public interface IIMService extends IService {
 
-    //---------------------------------------------------
-
+    //------------------------- 1 -------------------------
     static final String TAG = "IIMService";
 
-    //---------------------------------------------------
+    //------------------------- 2 -------------------------
     public static final String MODULE   = ":app_im";
 
     public static final String ACTIVITY_MAIN = "/app_im/A";
@@ -21,8 +20,8 @@ public interface IIMService extends IService {
     public static final String FRAGMENT_MAIN = "/app_im/F";
 
     public static final String PROVIDER_MAIN = "/app_im/P";
-    //---------------------------------------------------
 
+    //------------------------- 3 -------------------------
     static IIMService DEFAULT = new IIMService() {
         @Override
         public String getMessage() {
@@ -75,8 +74,9 @@ public interface IIMService extends IService {
         }
     };
 
-    //---------------------------------------------------
+    //------------------------- 4.对位提供的方法在以下进行定义 -------------------------
     String getMessage();
 
     void sendMessage(String msg);
+
 }

@@ -9,11 +9,10 @@ import com.module.service.IService;
 
 public interface IShoppingService extends IService {
 
-    //---------------------------------------------------
-
+    //------------------------- 1 -------------------------
     static final String TAG = "IShoppingService";
 
-    //---------------------------------------------------
+    //------------------------- 2 -------------------------
     public static final String MODULE   = ":app_shopping";
 
     public static final String ACTIVITY_MAIN = "/app_shopping/A";
@@ -21,8 +20,8 @@ public interface IShoppingService extends IService {
     public static final String FRAGMENT_MAIN = "/app_shopping/F";
 
     public static final String PROVIDER_MAIN = "/app_shopping/P";
-    //---------------------------------------------------
 
+    //------------------------- 3 -------------------------
     static IShoppingService DEFAULT = new IShoppingService() {
         @Override
         public String getGoodInfo() {
@@ -70,6 +69,7 @@ public interface IShoppingService extends IService {
         }
     };
 
-    //---------------------------------------------------
+    //------------------------- 4.对位提供的方法在以下进行定义 -------------------------
     String getGoodInfo();
+
 }
