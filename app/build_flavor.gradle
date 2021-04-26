@@ -15,7 +15,7 @@ android {
                 if(!isModuleApplication.toBoolean()){
                     dependencies {
                         for (String module in libs) {
-                            weixinApi project(module)
+                            weixinImplementation project(module)
                         }
                     }
                 }
@@ -33,7 +33,7 @@ android {
                 if(!isModuleApplication.toBoolean()){
                     dependencies {
                         for (String module in libs) {
-                            taobaboApi project(module)
+                            taobaoImplementation project(module)
                         }
                     }
                 }
@@ -51,7 +51,7 @@ android {
                 if(!isModuleApplication.toBoolean()){
                     dependencies {
                         for (String module in libs) {
-                            toutiaoApi project(module)
+                            toutiaoImplementation project(module)
                         }
                     }
                 }

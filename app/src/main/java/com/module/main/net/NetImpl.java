@@ -23,7 +23,7 @@ public class NetImpl {
             @Override
             public void run() {
                 try{
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                     ComponentConfig.setServerComponents(Arrays.asList(":app_video",":app_im",":app_shopping"));
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
