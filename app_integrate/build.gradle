@@ -39,9 +39,13 @@ android {
         main{
             if(isModuleApplication.toBoolean()){
                 manifest.srcFile 'src/main/debug/AndroidManifest_debug.xml'
+                java.srcDirs = ['src/main/java','src/main/debug/java']
+                res.srcDirs = ['src/main/res','src/main/debug/res']
+                assets.srcDirs = ['src/main/assets','src/main/debug/assets']
+                jniLibs.srcDirs = ['src/main/jniLibs','../repository_so/signature','src/main/debug/jniLibs']
             }else{
                 manifest.srcFile 'src/main/AndroidManifest.xml'
-
+                jniLibs.srcDirs = ['../repository_so/signature']
                 java{
                     exclude '**/debug/**'
                 }

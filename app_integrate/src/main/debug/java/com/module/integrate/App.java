@@ -1,4 +1,4 @@
-package debug;
+package com.module.integrate;
 
 import com.module.BaseApplication;
 
