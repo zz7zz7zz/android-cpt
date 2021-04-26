@@ -11,7 +11,7 @@ public interface IShoppingService extends IService {
 
     //---------------------------------------------------
 
-    static final String TAG = "IShoppingSerivce";
+    static final String TAG = "IShoppingService";
 
     //---------------------------------------------------
     public static final String MODULE   = ":app_shopping";

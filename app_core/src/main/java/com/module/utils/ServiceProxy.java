@@ -39,7 +39,7 @@ public class ServiceProxy {
     }
 
 
-    public static final String PROMPT_COMPONENT_NOT_FOUND = "Serivce 未找到，可能的原因是: \n" +
+    public static final String PROMPT_COMPONENT_NOT_FOUND = "Service 未找到，可能的原因是: \n" +
             "1.没有将组件代码打包进Apk中; \n" +
             "2.已实现对外提供服务类，但没有添加注解,如 @Route(path = \"xxx\", name = \"yyy\");\n" +
             "3.未实现对外提供服务类; \n"+

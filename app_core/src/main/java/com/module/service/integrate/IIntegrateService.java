@@ -11,7 +11,7 @@ public interface IIntegrateService extends IService {
 
     //---------------------------------------------------
 
-    static final String TAG = "IIntegrateSerivce";
+    static final String TAG = "IIntegrateService";
 
     //---------------------------------------------------
     public static final String MODULE   = ":app_integrate";

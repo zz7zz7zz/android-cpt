@@ -11,7 +11,7 @@ public interface INewsService extends IService {
 
     //---------------------------------------------------
 
-    static final String TAG = "INewsSerivce";
+    static final String TAG = "INewsService";
 
     //---------------------------------------------------
     public static final String MODULE   = ":app_news";

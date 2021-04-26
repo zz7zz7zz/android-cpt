@@ -11,7 +11,7 @@ public interface IIMService extends IService {
 
     //---------------------------------------------------
 
-    static final String TAG = "IIMSerivce";
+    static final String TAG = "IIMService";
 
     //---------------------------------------------------
     public static final String MODULE   = ":app_im";

@@ -10,7 +10,7 @@ import com.module.service.IService;
 public interface IGameService extends IService {
 
     //---------------------------------------------------
-    static final String TAG = "IGameSerivce";
+    static final String TAG = "IGameService";
 
     //---------------------------------------------------
     public static final String MODULE   = ":app_game";
