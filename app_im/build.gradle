@@ -39,7 +39,7 @@ android {
 //                jniLibs.srcDirs = ['../repository_so/signature']
 //            }
 //        }
-
+//
 //        packagingOptions {
 //            pickFirst 'lib/x86/libsignature.so'
 //            pickFirst 'lib/armeabi-v7a/libsignature.so'

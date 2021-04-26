@@ -33,13 +33,13 @@ android {
             }
         }
 
-        sourceSets {
-            main {
-                // let gradle pack the shared library into apk
-                jniLibs.srcDirs = ['../repository_so/signature']
-            }
-        }
-
+//        sourceSets {
+//            main {
+//                // let gradle pack the shared library into apk
+//                jniLibs.srcDirs = ['../repository_so/signature']
+//            }
+//        }
+//
 //        packagingOptions {
 //            pickFirst 'lib/x86/libsignature.so'
 //            pickFirst 'lib/armeabi-v7a/libsignature.so'
@@ -64,9 +64,13 @@ android {
         main{
             if(isModuleApplication.toBoolean()){
                 manifest.srcFile 'src/main/debug/AndroidManifest_debug.xml'
+                java.srcDirs = ['src/main/java','src/main/debug/java']
+                res.srcDirs = ['src/main/res','src/main/debug/res']
+                assets.srcDirs = ['src/main/assets','src/main/debug/assets']
+                jniLibs.srcDirs = ['src/main/jniLibs','../repository_so/signature','src/main/debug/jniLibs']
             }else{
                 manifest.srcFile 'src/main/AndroidManifest.xml'
-
+                jniLibs.srcDirs = ['../repository_so/signature']
                 java{
                     exclude '**/debug/**'
                 }
