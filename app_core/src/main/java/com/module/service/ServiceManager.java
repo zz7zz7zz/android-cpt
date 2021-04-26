@@ -47,6 +47,7 @@ public final class ServiceManager {
         return null;
     }
 
+    //没有使用插件的情况下，才用手动遍历的方法
     private static<T> T degradeCreateDefault(Class<? extends T> clazz){
         if(com.module.service.app.IAppService.class.equals(clazz)){
             return (T)com.module.service.app.IAppService.DEFAULT;
