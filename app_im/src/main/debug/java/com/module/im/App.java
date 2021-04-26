@@ -1,4 +1,4 @@
-package debug;
+package com.module.im;
 
 import com.module.BaseApplication;
 
