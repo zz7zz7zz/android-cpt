@@ -3,7 +3,7 @@
 package="com.module.video">
 
 <application
-    android:name="debug.App"
+    android:name="com.module.video.App"
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/video_name"

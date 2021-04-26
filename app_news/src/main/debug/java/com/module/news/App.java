@@ -1,4 +1,4 @@
-package debug;
+package com.module.news;
 
 import com.module.BaseApplication;
 

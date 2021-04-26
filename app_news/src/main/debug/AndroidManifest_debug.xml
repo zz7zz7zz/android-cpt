@@ -3,7 +3,7 @@
 package="com.module.news">
 
 <application
-    android:name="debug.App"
+    android:name="com.module.news.App"
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/news_name"
