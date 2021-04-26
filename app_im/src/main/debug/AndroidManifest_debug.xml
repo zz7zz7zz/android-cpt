@@ -9,7 +9,7 @@
         android:label="@string/im_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CPT">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".IMMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

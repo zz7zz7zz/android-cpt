@@ -10,20 +10,20 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/moudle_name"
+        android:id="@+id/common_tab_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="20dp"/>
 
     <ImageView
-        android:id="@+id/moudle_icon"
+        android:id="@+id/common_tab_icon"
         android:layout_width="26dp"
         android:layout_height="26dp"
         android:layout_marginLeft="1.66dp"
         android:layout_marginRight="1.66dp"/>
 
     <Button
-        android:id="@+id/moudle_navigation_main"
+        android:id="@+id/common_tab_navigation_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="主页"

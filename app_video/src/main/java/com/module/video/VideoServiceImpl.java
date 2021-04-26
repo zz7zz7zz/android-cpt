@@ -25,9 +25,9 @@ public class VideoServiceImpl implements IVideoService {
     public View getComponentTabView(Context context, boolean isCreatedIfNull) {
         View ret = (null != viewWeakReference) ? viewWeakReference.get() : null;
         if(null == ret && isCreatedIfNull){
-            ret = LayoutInflater.from(context).inflate(R.layout.tab_item,null);
-            ((TextView)(ret.findViewById(R.id.moudle_name))).setText(getComponentName(context));
-            ((ImageView)(ret.findViewById(R.id.moudle_icon))).setBackgroundResource(getComponentIconResId(context));
+            ret = LayoutInflater.from(context).inflate(R.layout.common_tab,null);
+            ((TextView)(ret.findViewById(R.id.common_tab_name))).setText(getComponentName(context));
+            ((ImageView)(ret.findViewById(R.id.common_tab_icon))).setBackgroundResource(getComponentIconResId(context));
             viewWeakReference = new WeakReference<>(ret);
         }
         return ret;

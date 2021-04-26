@@ -107,9 +107,9 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             final IService service = allComponentSerices.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_all,false);
-            ((TextView)(view.findViewById(R.id.moudle_name))).setText(service.getComponentName(getApplicationContext()));
-            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(service.getComponentIconResId(getApplicationContext()));
-            ((Button)(view.findViewById(R.id.moudle_navigation_main))).setOnClickListener(new View.OnClickListener() {
+            ((TextView)(view.findViewById(R.id.common_tab_name))).setText(service.getComponentName(getApplicationContext()));
+            ((ImageView)(view.findViewById(R.id.common_tab_icon))).setBackgroundResource(service.getComponentIconResId(getApplicationContext()));
+            ((Button)(view.findViewById(R.id.common_tab_navigation_main))).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     service.startComponentMainActivity(AppMainActivity.this);
@@ -195,9 +195,9 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
             final IService service = services.get(i);
 
             View view = LayoutInflater.from(this).inflate(R.layout.app_module_item,app_modules_valid,false);
-            ((TextView)(view.findViewById(R.id.moudle_name))).setText(service.getComponentName(getApplicationContext()));
-            ((ImageView)(view.findViewById(R.id.moudle_icon))).setBackgroundResource(service.getComponentIconResId(getApplicationContext()));
-            ((Button)(view.findViewById(R.id.moudle_navigation_main))).setOnClickListener(new View.OnClickListener() {
+            ((TextView)(view.findViewById(R.id.common_tab_name))).setText(service.getComponentName(getApplicationContext()));
+            ((ImageView)(view.findViewById(R.id.common_tab_icon))).setBackgroundResource(service.getComponentIconResId(getApplicationContext()));
+            ((Button)(view.findViewById(R.id.common_tab_navigation_main))).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     service.startComponentMainActivity(AppMainActivity.this);

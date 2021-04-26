@@ -9,7 +9,7 @@ package="com.module.integrate">
     android:label="@string/integrate_name"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
-    android:theme="@style/Theme.CPT">
+    android:theme="@style/Theme.AppCompat.NoActionBar">
     <activity android:name=".IntegrateMainActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

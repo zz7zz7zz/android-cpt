@@ -9,7 +9,7 @@ package="com.module.news">
     android:label="@string/news_name"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
-    android:theme="@style/Theme.CPT">
+    android:theme="@style/Theme.AppCompat.NoActionBar">
     <activity android:name=".NewsMainActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
