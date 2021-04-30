@@ -104,7 +104,7 @@ class TransformLibrary extends Transform {
                         // After the scan is complete, we will generate register code into this file
                         oldServiceManagerClassFile = file
                         oldServiceManagerClassFileParentPath = directoryInput.file.absolutePath;
-                        newServiceManagerClassFileName = new File(dest.absolutePath+File.separator+path);
+                        newServiceManagerClassFileName = new File(dest.absolutePath+File.separator+path)
 
 //                        println("oldServiceManagerClassFileName.absolutePath "+TransformLibrary.oldServiceManagerClassFile.absolutePath)
 //                        println("providerFactoryParentPath "+TransformLibrary.oldServiceManagerClassFileParentPath)
