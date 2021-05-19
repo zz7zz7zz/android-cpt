@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion       androidConfig.compileSdkVersion
+    buildToolsVersion       androidConfig.buildToolsVersion
+
+    defaultConfig {
+
+        minSdkVersion       androidConfig.minSdkVersion
+        targetSdkVersion    androidConfig.targetSdkVersion
+        versionCode         androidConfig.versionCode
+        versionName         androidConfig.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    dependenciesConfig.each {k,v -> implementation v}
+    
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation project(path: ':lib_analysis:lib_analysis_core')
+
+    //库组件的动态配置
+//    println("startParameter "+project.gradle.startParameter.toString())
+//    println("taskNames "+project.gradle.startParameter.taskNames.toString())
+    boolean handled = false
+    for (String task : project.gradle.startParameter.taskNames) {
+        task = task.toLowerCase()
+        for (def config : libAnalysisConfig){
+            if(task.contains(config.key)){
+                handled = true
+                for (def v : config.value){
+                    implementation project(path: v)
+                }
+                break
+            }
+        }
+    }
+    if(!handled){
+        for (def v : libAnalysisConfig.defaultCfg){
+            implementation project(path: v)
+        }
+    }
+}
