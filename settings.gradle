@@ -28,7 +28,9 @@ include ':lib_multimedia:lib_video'
 //--------3.3广告
 include ':lib_ad'
 //--------3.4网络，数据库，工具类，自定义控件类
-include ':lib_network'
+include ':lib_network:lib_net_http'
+include ':lib_network:lib_net_mqtt'
+include ':lib_network:lib_net_socket'
 include ':lib_database'
 include ':lib_util'
 include ':lib_widget'
