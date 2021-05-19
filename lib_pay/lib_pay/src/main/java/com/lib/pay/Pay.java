@@ -1,7 +1,5 @@
 package com.lib.pay;
 
-import android.text.TextUtils;
-
 import com.lib.pay.core.service.IPayResult;
 import com.lib.pay.core.service.IPayService;
 import com.lib.pay.core.service.PayOrder;

@@ -1,4 +1,4 @@
-package com.lib.net;
+package com.lib.player;
 
 import org.junit.Test;
 
