@@ -7,10 +7,12 @@ android {
         if(productConfig.weixin.toBoolean()){
             weixin {
                 dimension "product"
-                applicationId       applicationIdConfig.weixin
+                applicationId       applicationIdConfig.moyu
 
                 def libs = appModuleConfig.get("weixin")
                 buildConfigField "String[]" , "modules", libsToString(libs)
+
+                resValue "string", "app_name", "微信" //分包应用名字
 
                 if(!isModuleApplication.toBoolean()){
                     dependencies {
@@ -30,6 +32,8 @@ android {
                 def libs = appModuleConfig.get("taobao")
                 buildConfigField "String[]" , "modules", libsToString(libs)
 
+                resValue "string", "app_name", "淘宝" //分包应用名字
+
                 if(!isModuleApplication.toBoolean()){
                     dependencies {
                         for (String module in libs) {
@@ -47,6 +51,8 @@ android {
 
                 def libs = appModuleConfig.get("toutiao")
                 buildConfigField "String[]" , "modules", libsToString(libs)
+
+                resValue "string", "app_name", "头条" //分包应用名字
 
                 if(!isModuleApplication.toBoolean()){
                     dependencies {
