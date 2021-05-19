@@ -26,7 +26,9 @@ include ':lib_multimedia:lib_image'
 include ':lib_multimedia:lib_audio'
 include ':lib_multimedia:lib_video'
 //--------3.3广告
-include ':lib_ad'
+include ':lib_ad:lib_ad_facebook'
+include ':lib_ad:lib_ad_google'
+include ':lib_ad:lib_ad_huawei'
 //--------3.4网络，数据库，工具类，自定义控件类
 include ':lib_network:lib_net_http'
 include ':lib_network:lib_net_mqtt'
@@ -35,7 +37,10 @@ include ':lib_database'
 include ':lib_util'
 include ':lib_widget'
 //--------3.5数据分析
-include ':lib_analysis'
+include ':lib_analysis:lib_analysis_bugly'
+include ':lib_analysis:lib_analysis_sensorsdata'
+include ':lib_analysis:lib_analysis_umeng'
+include ':lib_analysis:lib_analysis_server'
 
 //-----4 插件层----
 include ':plugin_cpt_service_register'
