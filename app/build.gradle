@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
 }
-apply from: '../flavor_app.gradle'
+apply from: '../setting_flavor_app.gradle'
 apply plugin: 'com.alibaba.arouter'
 
 if(!isOptimizeCompiler){

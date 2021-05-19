@@ -1,0 +1,7 @@
+ext  {
+
+    //1.bugly 配置
+    buglyAppId  = "446a897c3f"
+    buglyAppKey = "8660b602-6226-4ae6-a6e8-7134d86252e0"
+
+}

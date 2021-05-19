@@ -75,6 +75,13 @@ ext {
             defaultCfg: [':lib_pay:lib_pay_impl_wechat',':lib_pay:lib_pay_impl_google',':lib_pay:lib_pay_impl_huawei',':lib_pay:lib_pay_impl_ali']
     ]
 
+    //支付库组件的依赖配置
+    libAnalysisConfig = [
+            weixin: [':lib_analysis:lib_analysis_bugly'],
+            taobao: [':lib_analysis:lib_analysis_bugly'],
+            defaultCfg: [':lib_analysis:lib_analysis_bugly']
+    ]
+
     //#配置五：产品蔟
     productConfig = [
         weixin: true,

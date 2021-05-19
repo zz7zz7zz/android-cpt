@@ -37,6 +37,8 @@ include ':lib_database'
 include ':lib_util'
 include ':lib_widget'
 //--------3.5数据分析
+include ':lib_analysis:lib_analysis'
+include ':lib_analysis:lib_analysis_core'
 include ':lib_analysis:lib_analysis_bugly'
 include ':lib_analysis:lib_analysis_sensorsdata'
 include ':lib_analysis:lib_analysis_umeng'
