@@ -97,6 +97,7 @@ dependencies {
     //基类组件库
     implementation project(':app_core')
     implementation project(path: ':lib_pay:lib_pay')
+    implementation project(path: ':lib_analysis:lib_analysis')
 
     //ARouter引用
 //    compile 'com.alibaba:arouter-api:1.5.1'
