@@ -4,47 +4,48 @@ plugins {
 apply from: '../flavor_app.gradle'
 apply plugin: 'com.alibaba.arouter'
 
-apply plugin: 'com.module.plugin.cpt'
-cptConfig{
-    //1.asm插入到com.module.service.ServiceManager.class的registerService()方法中，代码效果和配置如下
-//        public final class ServiceManager {
-//
-//         private static void loadServiceToMap(){
-//            registerByPlugin = false;
-//
-//            registerService(":app_im",com.module.service.im.IIMService.class,com.module.im.IMServiceImpl.class);
-//            registerService(":app_video",com.module.service.video.IVideoService.class,com.module.video.VideoServiceImpl.class);
-//            //...
-//            registerByPlugin = true;
-//         }
-//
-//        }
+if(!isOptimizeCompiler){
+    apply plugin: 'com.module.plugin.cpt'
+    cptConfig{
+        //1.asm插入到com.module.service.ServiceManager.class的registerService()方法中，代码效果和配置如下
+    //        public final class ServiceManager {
+    //
+    //         private static void loadServiceToMap(){
+    //            registerByPlugin = false;
+    //
+    //            registerService(":app_im",com.module.service.im.IIMService.class,com.module.im.IMServiceImpl.class);
+    //            registerService(":app_video",com.module.service.video.IVideoService.class,com.module.video.VideoServiceImpl.class);
+    //            //...
+    //            registerByPlugin = true;
+    //         }
+    //
+    //        }
 
-    registerToClass = 'com/module/service/ServiceManager.class'
-    registerToClassMethod = "loadServiceToMap"
-    registerToClassMethodCall = "registerService"
-    registerToClassMethodCallDescriptor = "(Ljava/lang/String;Ljava/lang/Class;Ljava/lang/Class;)V"
-    registerToClassTag = "registerByPlugin"
+        registerToClass = 'com/module/service/ServiceManager.class'
+        registerToClassMethod = "loadServiceToMap"
+        registerToClassMethodCall = "registerService"
+        registerToClassMethodCallDescriptor = "(Ljava/lang/String;Ljava/lang/Class;Ljava/lang/Class;)V"
+        registerToClassTag = "registerByPlugin"
 
-    //2.Javassist 插入到com/module/main/App.class 的onCreate()方法中，代码效果和配置如下
-//     public class App extends BaseApplication {
-//         public void onCreate() {
-//            auto_register_service_2021_04_15();
-//            super.onCreate();
-//         }
-//
-//         private void auto_register_service_2021_04_15()(){
-//            com.module.service.ServiceManager.registerService(":app_im",com.module.service.im.IIMService.class,com.module.im.IMServiceImpl.class);
-//            com.module.service.ServiceManager.registerService(":app_video",com.module.service.video.IVideoService.class,com.module.video.VideoServiceImpl.class);
-//            //...
-//         }
-//     }
+        //2.Javassist 插入到com/module/main/App.class 的onCreate()方法中，代码效果和配置如下
+    //     public class App extends BaseApplication {
+    //         public void onCreate() {
+    //            auto_register_service_2021_04_15();
+    //            super.onCreate();
+    //         }
+    //
+    //         private void auto_register_service_2021_04_15()(){
+    //            com.module.service.ServiceManager.registerService(":app_im",com.module.service.im.IIMService.class,com.module.im.IMServiceImpl.class);
+    //            com.module.service.ServiceManager.registerService(":app_video",com.module.service.video.IVideoService.class,com.module.video.VideoServiceImpl.class);
+    //            //...
+    //         }
+    //     }
 
-//    registerToClass = 'com/module/main/App.class'
-//    registerToClassMethod = "onCreate"
-//    registerToClassMethodAdd = "auto_register_service_2021_04_15"
-//    registerToClassMethodCode = "com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n"
-
+    //    registerToClass = 'com/module/main/App.class'
+    //    registerToClassMethod = "onCreate"
+    //    registerToClassMethodAdd = "auto_register_service_2021_04_15"
+    //    registerToClassMethodCode = "com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n"
+    }
 }
 
 android {

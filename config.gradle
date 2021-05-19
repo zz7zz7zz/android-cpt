@@ -24,6 +24,9 @@ ext {
     //发布阶段 isModuleApplication false，组件作为Library被App工程所依赖
     isModuleApplication = false
 
+    //优化编译，true则不执行某些插件，false则执行插件（现在很多插件都需要执行代码植入，比较耗时）
+    isOptimizeCompiler = false
+
     //#配置一 ：--------编译版本相关--------
     androidConfig = [
             compileSdkVersion : 30,
