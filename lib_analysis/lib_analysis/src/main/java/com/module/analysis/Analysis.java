@@ -40,7 +40,7 @@ public class Analysis {
             service.init(context,channel,appVersionName,pkgName);
         }
 
-        IAnalysisService service = AnalysisServiceManager.getService(IAnalysisConsts.ANALYSIS_LOCAL);
+        service = AnalysisServiceManager.getService(IAnalysisConsts.ANALYSIS_LOCAL);
         if(null != service){
             service.init(context,channel,appVersionName,pkgName);
         }
