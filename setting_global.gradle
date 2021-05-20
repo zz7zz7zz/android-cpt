@@ -77,9 +77,9 @@ ext {
 
     //支付库组件的依赖配置
     libAnalysisConfig = [
-            weixin: [':lib_analysis:lib_analysis_bugly'],
+            weixin: [':lib_analysis:lib_analysis_bugly',':lib_analysis:lib_analysis_umeng'],
             taobao: [':lib_analysis:lib_analysis_bugly'],
-            defaultCfg: [':lib_analysis:lib_analysis_bugly']
+            defaultCfg: [':lib_analysis:lib_analysis_bugly',':lib_analysis:lib_analysis_umeng']
     ]
 
     //#配置五：产品蔟

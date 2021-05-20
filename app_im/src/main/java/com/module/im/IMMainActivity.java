@@ -9,6 +9,8 @@ import com.lib.pay.Pay;
 import com.lib.pay.core.service.IPayConsts;
 import com.lib.pay.core.service.IPayResult;
 import com.lib.pay.core.service.PayOrder;
+import com.module.BaseApplication;
+import com.module.analysis.Analysis;
 import com.module.service.ServiceManager;
 import com.module.service.game.IGameService;
 import com.module.service.integrate.IIntegrateService;
@@ -33,6 +35,8 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
         communicateWithOtherComponents2();
 
         pay();
+
+        analysis();
     }
 
     private void communicateWithOtherComponents1(){
@@ -131,5 +135,9 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
     @Override
     public void onPayFailed(int errCode, String errMessage) {
         Log.e(TAG,String.format("------------- onPayFailed errCode %d errMessage %s ",errCode,errMessage));
+    }
+
+    private void analysis(){
+        Analysis.getInstance().init(getApplicationContext(), BaseApplication.getInstance().getChannel(),BaseApplication.getInstance().getVersionName(),BaseApplication.getInstance().getPackageName());
     }
 }

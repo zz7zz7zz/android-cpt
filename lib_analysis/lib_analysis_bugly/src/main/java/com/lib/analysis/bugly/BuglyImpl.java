@@ -49,9 +49,20 @@ public class BuglyImpl implements IAnalysisService {
     }
 
     @Override
-    public void setUserId(Context context, String userId) {
+    public void agreePrivacyPolicy(Context context, String channel, String appVersionName, String pkgName) {
+
+    }
+
+    @Override
+    public void bindUserId(Context context, String userId) {
         CrashReport.setUserId(userId);
         CrashReport.putUserData(context, "userId", userId);
+    }
+
+    @Override
+    public void unBindUserId(Context context, String userId) {
+        CrashReport.setUserId("");
+        CrashReport.putUserData(context, "userId", "");
     }
 
     private static String getProcessName(int pid) {

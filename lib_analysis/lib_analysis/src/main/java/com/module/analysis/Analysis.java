@@ -35,7 +35,7 @@ public class Analysis {
     public void bindUserId(Context context,String userId){
         IAnalysisService service = AnalysisServiceManager.getService(IAnalysisConsts.ANALYSIS_BUGLY);
         if(null != service){
-            service.setUserId(context,userId);
+            service.bindUserId(context,userId);
         }
     }
 

@@ -27,7 +27,7 @@ public abstract class BaseApplication extends Application {
     }
 
 
-    public static Application getInstance(){
+    public static BaseApplication getInstance(){
         return INS;
     }
 
