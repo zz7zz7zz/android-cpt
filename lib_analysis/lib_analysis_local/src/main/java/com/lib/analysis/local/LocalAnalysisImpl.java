@@ -53,9 +53,11 @@ public class LocalAnalysisImpl extends IAnalysisService.AdapterAnalysisService {
             Log.appenderOpen(Xlog.LEVEL_INFO, Xlog.AppednerModeAsync, cachePath, logPath, "douyu.log", 0);
         }
 
-        Log.v("LocalAnalysisImpl","I am first log ");
-        Log.v("LocalAnalysisImpl","I am first log 2 ");
-        Log.v("LocalAnalysisImpl","I am first log 3");
+//        Log.v("LocalAnalysisImpl","I am first log ");
+//        Log.v("LocalAnalysisImpl","I am first log 2 ");
+//        Log.i("LocalAnalysisImpl","I am first log 3");
+//        Log.d("LocalAnalysisImpl","I am first log 4");
+//        Log.e("LocalAnalysisImpl","I am first log 5");
     }
 
     @Override
