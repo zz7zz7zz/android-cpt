@@ -57,6 +57,11 @@ public class UmengAnalysisImpl implements IAnalysisService {
         MobclickAgent.onProfileSignOff();
     }
 
+    @Override
+    public void close(Context context) {
+
+    }
+
     public static String[] getTestDeviceInfo(Context context){
         String[] deviceInfo = new String[2];
         try {

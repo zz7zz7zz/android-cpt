@@ -51,4 +51,9 @@ public class SensorsdataAnalysisImpl implements IAnalysisService {
     public void unBindUserId(Context context, String userId) {
         SensorsDataAPI.sharedInstance().login("");
     }
+
+    @Override
+    public void close(Context context) {
+
+    }
 }

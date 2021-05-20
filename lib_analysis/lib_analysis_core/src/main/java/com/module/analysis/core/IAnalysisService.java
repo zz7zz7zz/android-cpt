@@ -11,4 +11,6 @@ public interface IAnalysisService {
     void bindUserId(Context context, String userId);
 
     void unBindUserId(Context context, String userId);
+
+    void close(Context context);
 }

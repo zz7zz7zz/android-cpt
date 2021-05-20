@@ -65,6 +65,11 @@ public class BuglyAnalysisImpl implements IAnalysisService {
         CrashReport.putUserData(context, "userId", "");
     }
 
+    @Override
+    public void close(Context context) {
+
+    }
+
     private static String getProcessName(int pid) {
         BufferedReader reader = null;
         try {
