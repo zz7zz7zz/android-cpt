@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.module.analysis.Analysis;
 import com.module.service.ServiceManager;
 import com.module.main.config.ComponentConfig;
 import com.module.main.net.NetImpl;
@@ -86,6 +87,8 @@ public class AppMainActivity extends AppCompatActivity implements View.OnClickLi
         }
         services = null;
         currentService = null;
+
+        Analysis.getInstance().close();
     }
 
     private void initAllComponents(List<String> components){

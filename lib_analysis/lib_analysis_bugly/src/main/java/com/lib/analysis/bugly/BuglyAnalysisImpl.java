@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Handler;
 
-public class BuglyAnalysisImpl implements IAnalysisService {
+public class BuglyAnalysisImpl extends IAnalysisService.AdapterAnalysisService {
 
     @Override
     public void init(Context context,String channel,String appVersionName,String pkgName) {
@@ -66,7 +66,7 @@ public class BuglyAnalysisImpl implements IAnalysisService {
     }
 
     @Override
-    public void close(Context context) {
+    public void close() {
 
     }
 

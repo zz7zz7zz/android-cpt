@@ -264,7 +264,7 @@ dependencies {
 
     //基类库
     implementation project(':app_core')
-
+    implementation project(path: ':lib_analysis:lib_analysis')
 //    annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 }
 

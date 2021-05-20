@@ -1,10 +1,10 @@
-package com.lib.analysis.local;
+package com.lib.analysis.server;
 
 import android.content.Context;
 
 import com.module.analysis.core.IAnalysisService;
 
-public class ServerAnalysisImpl implements IAnalysisService {
+public class ServerAnalysisImpl extends IAnalysisService.AdapterAnalysisService {
 
     @Override
     public void init(Context context, String channel, String appVersionName, String pkgName) {
@@ -27,7 +27,7 @@ public class ServerAnalysisImpl implements IAnalysisService {
     }
 
     @Override
-    public void close(Context context) {
+    public void close() {
 
     }
 
