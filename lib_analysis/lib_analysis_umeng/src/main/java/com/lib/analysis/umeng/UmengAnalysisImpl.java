@@ -10,7 +10,7 @@ import com.umeng.commonsdk.statistics.common.DeviceConfig;
 
 import org.json.JSONException;
 
-public class UmengImpl implements IAnalysisService {
+public class UmengAnalysisImpl implements IAnalysisService {
 
     @Override
     public void init(Context context, String channel, String appVersionName, String pkgName) {

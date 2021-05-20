@@ -7,7 +7,7 @@ import com.sensorsdata.analytics.android.sdk.SAConfigOptions;
 import com.sensorsdata.analytics.android.sdk.SensorsAnalyticsAutoTrackEventType;
 import com.sensorsdata.analytics.android.sdk.SensorsDataAPI;
 
-public class SensorsdataImpl implements IAnalysisService {
+public class SensorsdataAnalysisImpl implements IAnalysisService {
     @Override
     public void init(Context context, String channel, String appVersionName, String pkgName) {
         String SA_SERVER_URL = BuildConfig.sa_server_url;

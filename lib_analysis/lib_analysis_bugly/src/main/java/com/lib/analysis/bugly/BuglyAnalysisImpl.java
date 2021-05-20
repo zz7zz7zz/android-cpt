@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Handler;
 
-public class BuglyImpl implements IAnalysisService {
+public class BuglyAnalysisImpl implements IAnalysisService {
 
     @Override
     public void init(Context context,String channel,String appVersionName,String pkgName) {
