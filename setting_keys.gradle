@@ -6,4 +6,7 @@ ext  {
 
     //2.umeng 配置
     umengAppKey = "60a5caaa53b672649906a208"
+
+    //3.神策 配置
+    sa_server_url  = "http://sensorsdata.duomiyuanplay.com:8106/sa?project="
 }

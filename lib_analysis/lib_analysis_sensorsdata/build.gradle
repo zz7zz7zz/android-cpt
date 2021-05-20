@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
 }
+apply from: '../../setting_keys.gradle'
 
 android {
     compileSdkVersion       androidConfig.compileSdkVersion
@@ -15,6 +16,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        buildConfigField "String", "sa_server_url", "\"$sa_server_url\""
     }
 
     buildTypes {
@@ -36,4 +39,7 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation project(path: ':lib_analysis:lib_analysis_core')
+    implementation 'com.sensorsdata.analytics.android:SensorsAnalyticsSDK:5.2.1'
 }

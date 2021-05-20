@@ -19,6 +19,9 @@ buildscript {
 
         //动态注册Service
         classpath 'com.module.plugin:cpt:0.0.1'
+
+        //添加神策分析 android-gradle-plugin2 依赖
+        classpath 'com.sensorsdata.analytics.android:android-gradle-plugin2:3.3.4'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

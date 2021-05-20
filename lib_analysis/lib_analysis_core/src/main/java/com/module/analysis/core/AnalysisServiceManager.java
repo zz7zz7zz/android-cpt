@@ -34,7 +34,8 @@ public final class AnalysisServiceManager {
     //没有使用插件的情况下，才用反射的方法
     private static void degradeLoadServiceToMap(){
         registerService(IAnalysisConsts.ANALYSIS_BUGLY,"com.lib.analysis.bugly.BuglyImpl");
-        registerService(IAnalysisConsts.ANALYSIS_BUGLY,"com.lib.analysis.umeng.UmengImpl");
+        registerService(IAnalysisConsts.ANALYSIS_UMENG,"com.lib.analysis.umeng.UmengImpl");
+        registerService(IAnalysisConsts.ANALYSIS_SENSORSDATA,"com.lib.analysis.sensorsdata.SensorsdataImpl");
     }
 
     private static void registerService(String name,String serviceImplName){

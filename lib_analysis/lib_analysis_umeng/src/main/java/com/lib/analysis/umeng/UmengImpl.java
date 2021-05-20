@@ -19,24 +19,26 @@ public class UmengImpl implements IAnalysisService {
 
         UMConfigure.preInit(context,BuildConfig.umengAppKey,channel);
 
-        UMConfigure.init(context,BuildConfig.umengAppKey,channel,UMConfigure.DEVICE_TYPE_PHONE,null);
+        //如果用户没有同意隐私协议
+//        if(){
+//                    UMConfigure.init(context,BuildConfig.umengAppKey,channel,UMConfigure.DEVICE_TYPE_PHONE,null);
+//        }
 
         // 选用AUTO页面采集模式
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
 
-
-        //------------------------测试是否接入成功 start --------------------------
-        try {
-            String[] deviceInfo = getTestDeviceInfo(context);
-            org.json.JSONObject json = new org.json.JSONObject();
-            json.put("device_id", deviceInfo[0]);
-            json.put("mac", deviceInfo[1]);
-            Log.v("umeng",json.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        MobclickAgent.onEvent(context,"integration_testing");
-        //------------------------测试是否接入成功 end --------------------------
+//        //------------------------测试是否接入成功 start --------------------------
+//        try {
+//            String[] deviceInfo = getTestDeviceInfo(context);
+//            org.json.JSONObject json = new org.json.JSONObject();
+//            json.put("device_id", deviceInfo[0]);
+//            json.put("mac", deviceInfo[1]);
+//            Log.v("umeng",json.toString());
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        MobclickAgent.onEvent(context,"integration_testing");
+//        //------------------------测试是否接入成功 end --------------------------
     }
 
     @Override

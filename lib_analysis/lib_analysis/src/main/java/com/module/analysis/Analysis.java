@@ -30,6 +30,15 @@ public class Analysis {
             service.init(context,channel,appVersionName,pkgName);
         }
 
+        service = AnalysisServiceManager.getService(IAnalysisConsts.ANALYSIS_UMENG);
+        if(null != service){
+            service.init(context,channel,appVersionName,pkgName);
+        }
+
+        service = AnalysisServiceManager.getService(IAnalysisConsts.ANALYSIS_SENSORSDATA);
+        if(null != service){
+            service.init(context,channel,appVersionName,pkgName);
+        }
     }
 
     public void bindUserId(Context context,String userId){
@@ -37,7 +46,19 @@ public class Analysis {
         if(null != service){
             service.bindUserId(context,userId);
         }
+
+        service = AnalysisServiceManager.getService(IAnalysisConsts.ANALYSIS_UMENG);
+        if(null != service){
+            service.bindUserId(context,userId);
+        }
+
+        service = AnalysisServiceManager.getService(IAnalysisConsts.ANALYSIS_SENSORSDATA);
+        if(null != service){
+            service.bindUserId(context,userId);
+        }
     }
 
+    public void unBindUser(Context context,String userId){
 
+    }
 }
