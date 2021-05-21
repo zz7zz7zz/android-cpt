@@ -2,6 +2,7 @@ package com.lib.pay.core.service;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public final class PayServiceManager {
@@ -11,6 +12,7 @@ public final class PayServiceManager {
 
     private static boolean registerByPlugin = false;
     private static final HashMap<String, Object> sMap = new HashMap<>();//实例对象
+    private static ArrayList<String> blackList = null;
 
     static {
         loadServiceToMap();
@@ -45,6 +47,10 @@ public final class PayServiceManager {
     }
 
     public static IPayService getService(String component){
+        if (null != blackList && blackList.contains(component)) {
+            return null;
+        }
+
         try{
             IPayService ret = (IPayService)sMap.get(component);
             if(null == ret){
@@ -62,6 +68,10 @@ public final class PayServiceManager {
             return ret;
         }catch (Exception e){
             e.printStackTrace();
+            if(null == blackList){
+                blackList = new ArrayList<>();
+            }
+            blackList.add(component);
         }
         return null;
     }

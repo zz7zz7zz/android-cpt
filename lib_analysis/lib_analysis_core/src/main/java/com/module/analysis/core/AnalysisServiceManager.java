@@ -2,6 +2,7 @@ package com.module.analysis.core;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public final class AnalysisServiceManager {
@@ -11,6 +12,7 @@ public final class AnalysisServiceManager {
 
     private static boolean registerByPlugin = false;
     private static final HashMap<String, Object> sMap = new HashMap<>();//实例对象
+    private static ArrayList<String> blackList = null;
 
     static {
         loadServiceToMap();
@@ -46,6 +48,9 @@ public final class AnalysisServiceManager {
     }
 
     public static IAnalysisService getService(String component){
+        if (null != blackList && blackList.contains(component)) {
+            return null;
+        }
         try{
             IAnalysisService ret = (IAnalysisService)sMap.get(component);
             if(null == ret){
@@ -63,6 +68,10 @@ public final class AnalysisServiceManager {
             return ret;
         }catch (Exception e){
             e.printStackTrace();
+            if(null == blackList){
+                blackList = new ArrayList<>();
+            }
+            blackList.add(component);
         }
         return null;
     }
