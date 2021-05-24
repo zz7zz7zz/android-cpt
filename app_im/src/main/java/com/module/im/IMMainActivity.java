@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.app.base.net.http.RetrofitMgr;
 import com.lib.pay.Pay;
 import com.lib.pay.core.service.IPayConsts;
 import com.lib.pay.core.service.IPayResult;
 import com.lib.pay.core.service.PayOrder;
 import com.module.BaseApplication;
 import com.module.analysis.Analysis;
+import com.module.im.api.ImApi;
 import com.module.im.proto.ChatMessageText;
 import com.module.service.ServiceManager;
 import com.module.service.game.IGameService;
@@ -42,6 +44,8 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
         analysis();
 
         protoBuffer();
+
+
     }
 
     private void communicateWithOtherComponents1(){
@@ -157,5 +161,7 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
             e.printStackTrace();
         }
         Log.v(TAG,"resp "+chatMessageText2.toString());
+
+//        RetrofitMgr.getInstance().getRetrofit().create(ImApi.class).getMessage(chatMessageText).enqueue();
     }
 }

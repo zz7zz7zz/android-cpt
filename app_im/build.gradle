@@ -103,8 +103,15 @@ dependencies {
 
     //基类组件库
     implementation project(':app_core')
+    implementation project(':app_base')
     implementation project(path: ':lib_pay:lib_pay')
     implementation project(path: ':lib_analysis:lib_analysis')
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-wire:2.9.0'
+//    implementation 'com.squareup.retrofit2:converter-protobuf:2.9.0'
 
     //ARouter引用
 //    compile 'com.alibaba:arouter-api:1.5.1'

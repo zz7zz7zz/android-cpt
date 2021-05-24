@@ -2,6 +2,10 @@ plugins {
     id 'com.android.library'
 }
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion       androidConfig.compileSdkVersion
     buildToolsVersion       androidConfig.buildToolsVersion
@@ -41,13 +45,22 @@ android {
 
 dependencies {
 
-    dependenciesConfig.each {k,v -> implementation v}
+    implementation project(path: ':lib_network:lib_net_http')
+    dependenciesConfig.each { k, v -> implementation v}
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     api 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-wire:2.9.0'
+//    implementation 'com.squareup.retrofit2:converter-protobuf:2.9.0'
 
     //ARouter引用
 //    compile 'com.alibaba:arouter-api:1.5.1'

@@ -96,7 +96,8 @@ ext {
 
     //支付库组件的依赖配置
     libAnalysisConfig = [
-            weixin: [':lib_analysis:lib_analysis_bugly',':lib_analysis:lib_analysis_umeng',':lib_analysis:lib_analysis_sensorsdata',':lib_analysis:lib_analysis_local',':lib_analysis:lib_analysis_server'],
+//            weixin: [':lib_analysis:lib_analysis_bugly',':lib_analysis:lib_analysis_umeng',':lib_analysis:lib_analysis_sensorsdata',':lib_analysis:lib_analysis_local',':lib_analysis:lib_analysis_server'],
+            weixin: [':lib_analysis:lib_analysis_local'],
             taobao: [':lib_analysis:lib_analysis_bugly'],
             defaultCfg: [':lib_analysis:lib_analysis_bugly',':lib_analysis:lib_analysis_umeng',':lib_analysis:lib_analysis_sensorsdata',':lib_analysis:lib_analysis_local',':lib_analysis:lib_analysis_server']
     ]
