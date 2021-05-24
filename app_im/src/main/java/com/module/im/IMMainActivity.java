@@ -11,12 +11,15 @@ import com.lib.pay.core.service.IPayResult;
 import com.lib.pay.core.service.PayOrder;
 import com.module.BaseApplication;
 import com.module.analysis.Analysis;
+import com.module.im.proto.ChatMessageText;
 import com.module.service.ServiceManager;
 import com.module.service.game.IGameService;
 import com.module.service.integrate.IIntegrateService;
 import com.module.service.news.INewsService;
 import com.module.service.shopping.IShoppingService;
 import com.module.service.video.IVideoService;
+
+import java.io.IOException;
 
 public class IMMainActivity extends AppCompatActivity implements IPayResult {
 
@@ -37,6 +40,8 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
         pay();
 
         analysis();
+
+        protoBuffer();
     }
 
     private void communicateWithOtherComponents1(){
@@ -139,5 +144,18 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
 
     private void analysis(){
         Analysis.getInstance().init(getApplicationContext(), BaseApplication.getInstance().getChannel(),BaseApplication.getInstance().getVersionName(),BaseApplication.getInstance().getPackageName());
+    }
+
+    private void protoBuffer(){
+        ChatMessageText chatMessageText = new ChatMessageText("abcdefg");
+        byte[] bytes = ChatMessageText.ADAPTER.encode(chatMessageText);
+
+        ChatMessageText chatMessageText2 = null;
+        try {
+            chatMessageText2 = ChatMessageText.ADAPTER.decode(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.v(TAG,"resp "+chatMessageText2.toString());
     }
 }

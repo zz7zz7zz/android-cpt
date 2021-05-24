@@ -4,6 +4,8 @@ if(isModuleApplication.toBoolean()){
     apply plugin: 'com.android.library'
 }
 
+apply plugin: 'com.squareup.wire'
+
 android {
     compileSdkVersion       androidConfig.compileSdkVersion
     buildToolsVersion       androidConfig.buildToolsVersion
@@ -84,6 +86,12 @@ android {
     }
 
     resourcePrefix 'im_'
+}
+
+wire {
+    java {
+        android = true
+    }
 }
 
 dependencies {
