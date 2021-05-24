@@ -5,6 +5,11 @@ if(isModuleApplication.toBoolean()){
 }
 
 apply plugin: 'com.squareup.wire'
+wire {
+    java {
+        android = true
+    }
+}
 
 android {
     compileSdkVersion       androidConfig.compileSdkVersion
@@ -86,12 +91,6 @@ android {
     }
 
     resourcePrefix 'im_'
-}
-
-wire {
-    java {
-        android = true
-    }
 }
 
 dependencies {
