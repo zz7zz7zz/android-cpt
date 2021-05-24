@@ -48,8 +48,10 @@ if(!isOptimizeCompiler){
     }
 }
 
-// 应用 com.sensorsdata.analytics.android 插件
-apply plugin: 'com.sensorsdata.analytics.android'
+if(isContainSensorsdata()){
+    // 应用 com.sensorsdata.analytics.android 插件
+    apply plugin: 'com.sensorsdata.analytics.android'
+}
 
 android {
     compileSdkVersion       androidConfig.compileSdkVersion

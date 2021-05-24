@@ -18,6 +18,25 @@ def getBuildTime() {
     return new Date().format("yyyy.MM.dd_HH.mm.ss")
 }
 
+def isContainSensorsdataSDK(){
+    boolean ret = false
+    for (String task : project.gradle.startParameter.taskNames) {
+        task = task.toLowerCase()
+        for (def config : libAnalysisConfig){
+            if(task.contains(config.key)){
+                for (def v : config.value){
+                    if(v.contains('lib_analysis_sensorsdata')){
+                        ret = true
+                        break
+                    }
+                }
+                break
+            }
+        }
+    }
+    return ret
+}
+
 ext {
 
     //开发阶段 isModuleApplication true，组件可作为Application单独运行
@@ -143,6 +162,7 @@ ext {
     //组件化编译相关:
     getBuildTime = this.&getBuildTime
     libsToString = this.&libsToString
+    isContainSensorsdata = this.&isContainSensorsdataSDK
     cpt_service_register_config = [
             arouterPath  : "/Users/long/.gradle/caches/transforms-2/files-2.1/c734ae58d954bef0f67be11fa375b6b1/jetified-arouter-api-1.5.1/jars/classes.jar",
             fragmentPath : "C:\\Users\\Administrator\\.gradle\\caches\\transforms-2\\files-2.1\\b327ae01db253a9ac8bf626c6a2d36c4\\fragment-1.1.0\\jars\\classes.jar"
