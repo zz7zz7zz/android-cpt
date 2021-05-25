@@ -5,14 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.app.base.net.http.RetrofitMgr;
+import com.app.base.net.http.Http;
 import com.lib.pay.Pay;
 import com.lib.pay.core.service.IPayConsts;
 import com.lib.pay.core.service.IPayResult;
 import com.lib.pay.core.service.PayOrder;
-import com.module.BaseApplication;
-import com.module.analysis.Analysis;
 import com.module.im.api.ImApi;
+import com.module.im.api.FiddlerResponse;
 import com.module.im.proto.ChatMessageText;
 import com.module.service.ServiceManager;
 import com.module.service.game.IGameService;
@@ -24,7 +23,6 @@ import com.module.service.video.IVideoService;
 import java.io.IOException;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -168,29 +166,41 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
         }
         Log.v(TAG,"resp "+chatMessageText2.toString());
 
-//        RetrofitMgr.getInstance().getRetrofit().create(ImApi.class).getMessage(chatMessageText).enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+        Log.v(TAG,"protoBuffer "+ Thread.currentThread().getName());
+//         Http.getInstance().getRetrofit().create(ImApi.class).getChatSession().enqueue(new Callback<List<ChatMessageText>>() {
+//             @Override
+//             public void onResponse(Call<List<ChatMessageText>> call, Response<List<ChatMessageText>> response) {
 //
+//             }
+//
+//             @Override
+//             public void onFailure(Call<List<ChatMessageText>> call, Throwable t) {
+//
+//             }
+//         });
+
+//        Http.getInstance().getRetrofit().create(ImApi.class).getChatSession().enqueue(new Callback<ChatMessageText>() {
+//            @Override
+//            public void onResponse(Call<ChatMessageText> call, Response<ChatMessageText> response) {
+//                Log.v(TAG,"onResponse "+ Thread.currentThread().getName());
 //            }
 //
 //            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//
+//            public void onFailure(Call<ChatMessageText> call, Throwable t) {
+//                Log.v(TAG,"onFailure "+ Thread.currentThread().getName());
 //            }
 //        });
 
-        Log.v(TAG,"protoBuffer "+ Thread.currentThread().getName());
-        RetrofitMgr.getInstance().getRetrofit().create(ImApi.class).getChatSession().enqueue(new Callback<List<ChatMessageText>>() {
+        Http.getInstance().getRetrofit().create(ImApi.class).testFiddlerApi().enqueue(new Callback<List<FiddlerResponse>>() {
             @Override
-            public void onResponse(Call<List<ChatMessageText>> call, Response<List<ChatMessageText>> response) {
-
-                Log.v(TAG,"onResponse "+ Thread.currentThread().getName());
-
+            public void onResponse(Call<List<FiddlerResponse>> call, Response<List<FiddlerResponse>> response) {
+                Log.v(TAG,"onResponse "+ response.body().toString());
+                Log.v(TAG,"onSuccess "+ Thread.currentThread().getName());
             }
 
             @Override
-            public void onFailure(Call<List<ChatMessageText>> call, Throwable t) {
+            public void onFailure(Call<List<FiddlerResponse>> call, Throwable t) {
                 Log.v(TAG,"onFailure "+ Thread.currentThread().getName());
             }
         });
