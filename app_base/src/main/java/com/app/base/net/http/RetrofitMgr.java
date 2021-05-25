@@ -13,6 +13,7 @@ import retrofit2.converter.wire.WireConverterFactory;
 
 public class RetrofitMgr {
 
+
     private OkHttpClient okHttpClient;
     private Retrofit retrofit;
 
@@ -55,7 +56,7 @@ public class RetrofitMgr {
         mBuilder.baseUrl(baseUrl);
         mBuilder.callFactory(factory);
         mBuilder.addConverterFactory(WireConverterFactory.create());
-        mBuilder.addConverterFactory(GsonConverterFactory.create());
+//        mBuilder.addConverterFactory(GsonConverterFactory.create());
         return mBuilder.build();
     }
 

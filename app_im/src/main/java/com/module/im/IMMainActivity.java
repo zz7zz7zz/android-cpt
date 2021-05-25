@@ -22,6 +22,12 @@ import com.module.service.shopping.IShoppingService;
 import com.module.service.video.IVideoService;
 
 import java.io.IOException;
+import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class IMMainActivity extends AppCompatActivity implements IPayResult {
 
@@ -147,7 +153,7 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
     }
 
     private void analysis(){
-        Analysis.getInstance().init(getApplicationContext(), BaseApplication.getInstance().getChannel(),BaseApplication.getInstance().getVersionName(),BaseApplication.getInstance().getPackageName());
+//        Analysis.getInstance().init(getApplicationContext(), BaseApplication.getInstance().getChannel(),BaseApplication.getInstance().getVersionName(),BaseApplication.getInstance().getPackageName());
     }
 
     private void protoBuffer(){
@@ -162,6 +168,32 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
         }
         Log.v(TAG,"resp "+chatMessageText2.toString());
 
-//        RetrofitMgr.getInstance().getRetrofit().create(ImApi.class).getMessage(chatMessageText).enqueue();
+//        RetrofitMgr.getInstance().getRetrofit().create(ImApi.class).getMessage(chatMessageText).enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//
+//            }
+//        });
+
+        Log.v(TAG,"protoBuffer "+ Thread.currentThread().getName());
+        RetrofitMgr.getInstance().getRetrofit().create(ImApi.class).getChatSession().enqueue(new Callback<List<ChatMessageText>>() {
+            @Override
+            public void onResponse(Call<List<ChatMessageText>> call, Response<List<ChatMessageText>> response) {
+
+                Log.v(TAG,"onResponse "+ Thread.currentThread().getName());
+
+            }
+
+            @Override
+            public void onFailure(Call<List<ChatMessageText>> call, Throwable t) {
+                Log.v(TAG,"onFailure "+ Thread.currentThread().getName());
+            }
+        });
+
     }
 }
