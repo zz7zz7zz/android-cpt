@@ -3,10 +3,10 @@ package com.app.base.net.http;
 import com.lib.net.http.Http;
 import com.lib.net.http.config.DefaultHttpConfig;
 
-public class NetHttp {
+public final class NetHttp {
 
     private static boolean isInitialized = false;
-    public static void init(){
+    private static void init(){
         Http.getInstance().init(new DefaultHttpConfig() {
             @Override
             public String getBaseUrl() {
