@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.app.base.net.http.Http;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
 import com.lib.pay.Pay;
 import com.lib.pay.core.service.IPayConsts;
 import com.lib.pay.core.service.IPayResult;
@@ -19,6 +22,7 @@ import com.module.service.integrate.IIntegrateService;
 import com.module.service.news.INewsService;
 import com.module.service.shopping.IShoppingService;
 import com.module.service.video.IVideoService;
+import com.squareup.wire.WireTypeAdapterFactory;
 
 import java.io.IOException;
 import java.util.List;
@@ -167,42 +171,68 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
         Log.v(TAG,"resp "+chatMessageText2.toString());
         Log.v(TAG,"protoBuffer "+ Thread.currentThread().getName());
 
-//         Http.getInstance().getRetrofit().create(ImApi.class).getChatSession().enqueue(new Callback<List<ChatMessageText>>() {
-//             @Override
-//             public void onResponse(Call<List<ChatMessageText>> call, Response<List<ChatMessageText>> response) {
-//
-//             }
-//
-//             @Override
-//             public void onFailure(Call<List<ChatMessageText>> call, Throwable t) {
-//
-//             }
-//         });
+        //GSON 与 protobuffer 对象互转
+        Gson gson = new GsonBuilder().registerTypeAdapterFactory(new WireTypeAdapterFactory()).create();
+        TypeAdapter typeAdapter = gson.getAdapter(ChatMessageText.class);
+        String strJson = typeAdapter.toJson(chatMessageText);
+        Log.v(TAG,"Obj->Json "+strJson);
+        try {
+            ChatMessageText chatMessageText3 = (ChatMessageText) typeAdapter.fromJson(strJson);
+            Log.v(TAG,"Json->Obj "+chatMessageText3.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Http.create(ImApi.class).testFiddlerApi().enqueue(new Callback<List<FiddlerResponse>>() {
-            @Override
-            public void onResponse(Call<List<FiddlerResponse>> call, Response<List<FiddlerResponse>> response) {
-                Log.v(TAG,"testFiddlerApi onResponse "+ response.body().toString());
-                Log.v(TAG,"testFiddlerApi onSuccess "+ Thread.currentThread().getName());
-            }
+//        Http.create(ImApi.class).testFiddlerApi().enqueue(new Callback<List<FiddlerResponse>>() {
+//            @Override
+//            public void onResponse(Call<List<FiddlerResponse>> call, Response<List<FiddlerResponse>> response) {
+//                Log.v(TAG,"testFiddlerApi onResponse "+ response.body().toString());
+//                Log.v(TAG,"testFiddlerApi onSuccess "+ Thread.currentThread().getName());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<FiddlerResponse>> call, Throwable t) {
+//                Log.v(TAG,"testFiddlerApi onFailure "+ Thread.currentThread().getName());
+//            }
+//        });
+//
+//        Http.create(ImApi.class).testFiddlerApi2().enqueue(new Callback<ChatMessageText>() {
+//            @Override
+//            public void onResponse(Call<ChatMessageText> call, Response<ChatMessageText> response) {
+//                Log.v(TAG,"testFiddlerApi2 onResponse "+ response.body().toString());
+//                Log.v(TAG,"testFiddlerApi2 onResponse "+ Thread.currentThread().getName());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ChatMessageText> call, Throwable t) {
+//                Log.v(TAG,"testFiddlerApi2 onFailure "+ t.getMessage());
+//                Log.v(TAG,"testFiddlerApi2 onFailure "+ Thread.currentThread().getName());
+//            }
+//        });
 
-            @Override
-            public void onFailure(Call<List<FiddlerResponse>> call, Throwable t) {
-                Log.v(TAG,"testFiddlerApi onFailure "+ Thread.currentThread().getName());
-            }
-        });
+//        Http.create(ImApi.class).getChatSession().enqueue(new Callback<ChatMessageText>() {
+//            @Override
+//            public void onResponse(Call<ChatMessageText> call, Response<ChatMessageText> response) {
+//                Log.v(TAG,"getChatSession onResponse "+ response.body().toString());
+//                Log.v(TAG,"getChatSession onResponse "+ Thread.currentThread().getName());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ChatMessageText> call, Throwable t) {
+//                Log.v(TAG,"getChatSession onFailure "+ Thread.currentThread().getName());
+//            }
+//        });
 
-        Http.create(ImApi.class).testFiddlerApi2().enqueue(new Callback<ChatMessageText>() {
+        Http.create(ImApi.class).getChatSession(chatMessageText).enqueue(new Callback<ChatMessageText>() {
             @Override
             public void onResponse(Call<ChatMessageText> call, Response<ChatMessageText> response) {
-                Log.v(TAG,"testFiddlerApi2 onResponse "+ response.body().toString());
-                Log.v(TAG,"testFiddlerApi2 onResponse "+ Thread.currentThread().getName());
+                Log.v(TAG,"getChatSession onResponse "+ response.body().toString());
+                Log.v(TAG,"getChatSession onResponse "+ Thread.currentThread().getName());
             }
 
             @Override
             public void onFailure(Call<ChatMessageText> call, Throwable t) {
-                Log.v(TAG,"testFiddlerApi2 onFailure "+ t.getMessage());
-                Log.v(TAG,"testFiddlerApi2 onFailure "+ Thread.currentThread().getName());
+                Log.v(TAG,"getChatSession onFailure "+ Thread.currentThread().getName());
             }
         });
 

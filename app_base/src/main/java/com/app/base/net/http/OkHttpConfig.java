@@ -27,9 +27,6 @@ public class OkHttpConfig {
               public Response intercept(@NotNull Chain chain) throws IOException {
                   Request request = chain.request();
                   request = request.newBuilder()
-//                          .addHeader("one","1")
-//                          .addHeader("two","2")
-//                          .addHeader("three","3")
                           .addHeader("Charset","UTF-8")
                           .addHeader("Content-Type","application/octet-stream")
                           .addHeader("Accept","application/octet-stream")

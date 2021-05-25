@@ -111,6 +111,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:converter-wire:2.9.0'
+
+    //https://github.com/square/wire/blob/master/wire-library/docs/wire_json.md
+    implementation 'com.squareup.wire:wire-gson-support:4.0.0-alpha.2'
+//    implementation 'com.squareup.wire:wire-moshi-adapter:4.0.0-alpha.2'
+
 //    implementation 'com.squareup.retrofit2:converter-protobuf:2.9.0'
 
     //ARouter引用

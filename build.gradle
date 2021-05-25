@@ -16,8 +16,10 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.3"
 
+        //Kotlin插件
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
+        //ARoutr 自动注册插件
         classpath "com.alibaba:arouter-register:1.0.2"
 
         //动态注册Service
@@ -27,7 +29,7 @@ buildscript {
         classpath 'com.sensorsdata.analytics.android:android-gradle-plugin2:3.3.4'
 
         //protobuffer 编译插件 https://github.com/square/wire
-        classpath("com.squareup.wire:wire-gradle-plugin:3.7.0")
+        classpath("com.squareup.wire:wire-gradle-plugin:4.0.0-alpha.2")
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
