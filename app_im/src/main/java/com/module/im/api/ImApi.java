@@ -20,4 +20,7 @@ public interface ImApi {
     @GET("/content/GetArticles?clientId=6582AA488E3B4A2F30D03E2B4BB2921313CB79E5350F8EF88AA56C5C3B1C72D8")
     Call<List<FiddlerResponse>> testFiddlerApi();
 
+    @GET("/content/GetArticles?clientId=6582AA488E3B4A2F30D03E2B4BB2921313CB79E5350F8EF88AA56C5C3B1C72D8")
+    Call<ChatMessageText> testFiddlerApi2();
+
 }

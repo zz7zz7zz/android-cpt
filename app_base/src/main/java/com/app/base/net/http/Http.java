@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 import cn.douyuu.base.biz.network.SSLTrustManager;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.wire.WireConverterFactory;
@@ -26,7 +25,7 @@ public class Http {
         retrofit = getDefaultRetrofit(okHttpConfig.getBaseUrl(),okHttpClient);
     }
 
-    public static Http getInstance() {
+    private static Http getInstance() {
         if(null == INS){
             synchronized (Http.class){
                 if(null == INS){
@@ -67,7 +66,11 @@ public class Http {
         return mBuilder.build();
     }
 
-    public Retrofit getRetrofit() {
+    private Retrofit getRetrofit() {
         return retrofit;
+    }
+
+    public static<T> T create(Class<? extends T> clazz){
+        return getInstance().getRetrofit().create(clazz);
     }
 }

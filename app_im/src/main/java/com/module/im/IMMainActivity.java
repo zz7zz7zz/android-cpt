@@ -165,9 +165,8 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
             e.printStackTrace();
         }
         Log.v(TAG,"resp "+chatMessageText2.toString());
-
-
         Log.v(TAG,"protoBuffer "+ Thread.currentThread().getName());
+
 //         Http.getInstance().getRetrofit().create(ImApi.class).getChatSession().enqueue(new Callback<List<ChatMessageText>>() {
 //             @Override
 //             public void onResponse(Call<List<ChatMessageText>> call, Response<List<ChatMessageText>> response) {
@@ -180,28 +179,30 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
 //             }
 //         });
 
-//        Http.getInstance().getRetrofit().create(ImApi.class).getChatSession().enqueue(new Callback<ChatMessageText>() {
-//            @Override
-//            public void onResponse(Call<ChatMessageText> call, Response<ChatMessageText> response) {
-//                Log.v(TAG,"onResponse "+ Thread.currentThread().getName());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ChatMessageText> call, Throwable t) {
-//                Log.v(TAG,"onFailure "+ Thread.currentThread().getName());
-//            }
-//        });
-
-        Http.getInstance().getRetrofit().create(ImApi.class).testFiddlerApi().enqueue(new Callback<List<FiddlerResponse>>() {
+        Http.create(ImApi.class).testFiddlerApi().enqueue(new Callback<List<FiddlerResponse>>() {
             @Override
             public void onResponse(Call<List<FiddlerResponse>> call, Response<List<FiddlerResponse>> response) {
-                Log.v(TAG,"onResponse "+ response.body().toString());
-                Log.v(TAG,"onSuccess "+ Thread.currentThread().getName());
+                Log.v(TAG,"testFiddlerApi onResponse "+ response.body().toString());
+                Log.v(TAG,"testFiddlerApi onSuccess "+ Thread.currentThread().getName());
             }
 
             @Override
             public void onFailure(Call<List<FiddlerResponse>> call, Throwable t) {
-                Log.v(TAG,"onFailure "+ Thread.currentThread().getName());
+                Log.v(TAG,"testFiddlerApi onFailure "+ Thread.currentThread().getName());
+            }
+        });
+
+        Http.create(ImApi.class).testFiddlerApi2().enqueue(new Callback<ChatMessageText>() {
+            @Override
+            public void onResponse(Call<ChatMessageText> call, Response<ChatMessageText> response) {
+                Log.v(TAG,"testFiddlerApi2 onResponse "+ response.body().toString());
+                Log.v(TAG,"testFiddlerApi2 onResponse "+ Thread.currentThread().getName());
+            }
+
+            @Override
+            public void onFailure(Call<ChatMessageText> call, Throwable t) {
+                Log.v(TAG,"testFiddlerApi2 onFailure "+ t.getMessage());
+                Log.v(TAG,"testFiddlerApi2 onFailure "+ Thread.currentThread().getName());
             }
         });
 
