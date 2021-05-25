@@ -1,4 +1,4 @@
-package com.app.base.net.http;
+package com.lib.net.http.config;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSocketFactory;

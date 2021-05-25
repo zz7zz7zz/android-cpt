@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.app.base.net.http.Http;
+import com.app.base.net.http.NetHttp;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
@@ -183,7 +183,7 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
             e.printStackTrace();
         }
 
-        Http.create(ImApi.class).testFiddlerApi().enqueue(new Callback<List<FiddlerResponse>>() {
+        NetHttp.create(ImApi.class).testFiddlerApi().enqueue(new Callback<List<FiddlerResponse>>() {
             @Override
             public void onResponse(Call<List<FiddlerResponse>> call, Response<List<FiddlerResponse>> response) {
                 Log.v(TAG,"testFiddlerApi onResponse "+ response.body().toString());
@@ -196,7 +196,7 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
             }
         });
 //
-//        Http.create(ImApi.class).testFiddlerApi2().enqueue(new Callback<ChatMessageText>() {
+//        NetHttp.create(ImApi.class).testFiddlerApi2().enqueue(new Callback<ChatMessageText>() {
 //            @Override
 //            public void onResponse(Call<ChatMessageText> call, Response<ChatMessageText> response) {
 //                Log.v(TAG,"testFiddlerApi2 onResponse "+ response.body().toString());
@@ -210,7 +210,7 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
 //            }
 //        });
 
-//        Http.create(ImApi.class).getChatSession().enqueue(new Callback<ChatMessageText>() {
+//        NetHttp.create(ImApi.class).getChatSession().enqueue(new Callback<ChatMessageText>() {
 //            @Override
 //            public void onResponse(Call<ChatMessageText> call, Response<ChatMessageText> response) {
 //                Log.v(TAG,"getChatSession onResponse "+ response.body().toString());
@@ -223,7 +223,7 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
 //            }
 //        });
 
-//        Http.create(ImApi.class).getChatSession(chatMessageText).enqueue(new Callback<ChatMessageText>() {
+//        NetHttp.create(ImApi.class).getChatSession(chatMessageText).enqueue(new Callback<ChatMessageText>() {
 //            @Override
 //            public void onResponse(Call<ChatMessageText> call, Response<ChatMessageText> response) {
 //                Log.v(TAG,"getChatSession onResponse "+ response.body().toString());

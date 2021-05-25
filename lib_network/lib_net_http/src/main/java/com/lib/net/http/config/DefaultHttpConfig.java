@@ -1,8 +1,10 @@
-package com.app.base.net.http;
+package com.lib.net.http.config;
 
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+
+import com.lib.net.http.config.IHttpConfig;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,10 +30,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 
-public class DefaultHttpConfig implements IHttpConfig{
+public abstract class DefaultHttpConfig implements IHttpConfig {
 
     public String getBaseUrl() {
-//        return "http://test-mqapp.duomiyuanplay.com";
         return "http://fiddler2.com";
     }
 

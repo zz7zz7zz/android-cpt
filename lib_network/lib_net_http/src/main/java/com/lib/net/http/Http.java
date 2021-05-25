@@ -1,6 +1,8 @@
-package com.app.base.net.http;
+package com.lib.net.http;
 
 import android.os.Build;
+
+import com.lib.net.http.config.IHttpConfig;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,21 +15,19 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.wire.WireConverterFactory;
 
-public class Http {
+public final class Http {
 
-    private IHttpConfig   httpConfig;
+    private IHttpConfig httpConfig;
     private OkHttpClient  okHttpClient;
     private Retrofit      retrofit;
 
     private static volatile Http INS;
 
     private Http(){
-        httpConfig = new DefaultHttpConfig();
-        okHttpClient = getDefaultOkHttpClient();
-        retrofit = getDefaultRetrofit(httpConfig.getBaseUrl(),okHttpClient);
+
     }
 
-    private static Http getInstance() {
+    public static Http getInstance() {
         if(null == INS){
             synchronized (Http.class){
                 if(null == INS){
@@ -39,7 +39,7 @@ public class Http {
     }
 
     public void init(IHttpConfig config){
-        httpConfig = null != config ? config : new DefaultHttpConfig();
+        httpConfig = config;
         okHttpClient = getDefaultOkHttpClient();
         retrofit = getDefaultRetrofit(httpConfig.getBaseUrl(),okHttpClient);
     }
@@ -86,7 +86,12 @@ public class Http {
         return retrofit;
     }
 
-    public static<T> T create(Class<? extends T> clazz){
-        return getInstance().getRetrofit().create(clazz);
+    public <T> T create(Class<? extends T> clazz){
+        Retrofit retrofit = Http.getInstance().getRetrofit();
+        if(null != retrofit){
+            return getInstance().getRetrofit().create(clazz);
+        }else{
+            throw new IllegalStateException("You Should Init Http before request, Like Http.getInstance().init(config); in Application onCreate()");
+        }
     }
 }
