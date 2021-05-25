@@ -14,6 +14,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.security.GeneralSecurityException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -62,23 +63,10 @@ public abstract class DefaultHttpConfig implements IHttpConfig {
         return new SSLSocketFactoryCompat(sslTrustManager);
     }
 
-    public Interceptor[] getInterceptors() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        Interceptor commonHeaderParam = new Interceptor() {
-              @NotNull
-              @Override
-              public Response intercept(@NotNull Chain chain) throws IOException {
-                  Request request = chain.request();
-                  request = request.newBuilder()
-                          .addHeader("Charset","UTF-8")
-                          .addHeader("Content-Type","application/octet-stream")
-                          .addHeader("Accept","application/octet-stream")
-                          .build();
-                  return chain.proceed(request);
-              }
-        };
-        return new Interceptor[] {interceptor,commonHeaderParam};
+    public ArrayList<Interceptor> getInterceptors() {
+        ArrayList<Interceptor> ret = new ArrayList<>();
+        ret.add(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
+        return ret;
     }
 
     //-----------------------------------------------------------------------------------------

@@ -4,6 +4,7 @@ import android.os.Build;
 
 import com.lib.net.http.config.IHttpConfig;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLSocketFactory;
@@ -51,11 +52,10 @@ public final class Http {
         builder.writeTimeout(httpConfig.getWriteTimeout(), TimeUnit.SECONDS);
         builder.retryOnConnectionFailure(false); //错误重连
 
-        Interceptor[] interceptors= httpConfig.getInterceptors();
-        if(null != interceptors && interceptors.length>0){
-            for (int i = 0; i < interceptors.length; i++) {
-                builder.addInterceptor(interceptors[i]); //添加自定义拦截器
-            }
+        ArrayList<Interceptor> interceptors= httpConfig.getInterceptors();
+        int size = (null != interceptors) ? interceptors.size() : 0;
+        for (int i = 0; i < size; i++) {
+            builder.addInterceptor(interceptors.get(i)); //添加自定义拦截器
         }
 
         if(null != httpConfig.getHostnameVerifier()){

@@ -56,7 +56,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     api 'androidx.multidex:multidex:2.0.1'
-
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 
     //ARouter引用
 //    compile 'com.alibaba:arouter-api:1.5.1'

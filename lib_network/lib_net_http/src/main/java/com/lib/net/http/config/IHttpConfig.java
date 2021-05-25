@@ -1,5 +1,7 @@
 package com.lib.net.http.config;
 
+import java.util.ArrayList;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
@@ -16,7 +18,7 @@ public interface IHttpConfig {
 
     int getWriteTimeout();
 
-    Interceptor[] getInterceptors();
+    ArrayList<Interceptor> getInterceptors();
 
     HostnameVerifier getHostnameVerifier();
 
