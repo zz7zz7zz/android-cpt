@@ -52,7 +52,7 @@ public class IMServiceImpl implements IIMService {
 
     @Override
     public String getMessage() {
-        return "I am From Im Module";
+        return "IHttpConfig am From Im Module";
     }
 
     @Override

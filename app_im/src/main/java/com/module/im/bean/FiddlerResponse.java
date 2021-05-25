@@ -1,4 +1,4 @@
-package com.module.im.api;
+package com.module.im.bean;
 
 public class FiddlerResponse {
 

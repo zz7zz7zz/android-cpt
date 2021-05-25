@@ -14,7 +14,7 @@ import com.lib.pay.core.service.IPayConsts;
 import com.lib.pay.core.service.IPayResult;
 import com.lib.pay.core.service.PayOrder;
 import com.module.im.api.ImApi;
-import com.module.im.api.FiddlerResponse;
+import com.module.im.bean.FiddlerResponse;
 import com.module.im.proto.ChatMessageText;
 import com.module.service.ServiceManager;
 import com.module.service.game.IGameService;
@@ -183,18 +183,18 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
             e.printStackTrace();
         }
 
-//        Http.create(ImApi.class).testFiddlerApi().enqueue(new Callback<List<FiddlerResponse>>() {
-//            @Override
-//            public void onResponse(Call<List<FiddlerResponse>> call, Response<List<FiddlerResponse>> response) {
-//                Log.v(TAG,"testFiddlerApi onResponse "+ response.body().toString());
-//                Log.v(TAG,"testFiddlerApi onSuccess "+ Thread.currentThread().getName());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<FiddlerResponse>> call, Throwable t) {
-//                Log.v(TAG,"testFiddlerApi onFailure "+ Thread.currentThread().getName());
-//            }
-//        });
+        Http.create(ImApi.class).testFiddlerApi().enqueue(new Callback<List<FiddlerResponse>>() {
+            @Override
+            public void onResponse(Call<List<FiddlerResponse>> call, Response<List<FiddlerResponse>> response) {
+                Log.v(TAG,"testFiddlerApi onResponse "+ response.body().toString());
+                Log.v(TAG,"testFiddlerApi onSuccess "+ Thread.currentThread().getName());
+            }
+
+            @Override
+            public void onFailure(Call<List<FiddlerResponse>> call, Throwable t) {
+                Log.v(TAG,"testFiddlerApi onFailure "+ Thread.currentThread().getName());
+            }
+        });
 //
 //        Http.create(ImApi.class).testFiddlerApi2().enqueue(new Callback<ChatMessageText>() {
 //            @Override
@@ -223,18 +223,18 @@ public class IMMainActivity extends AppCompatActivity implements IPayResult {
 //            }
 //        });
 
-        Http.create(ImApi.class).getChatSession(chatMessageText).enqueue(new Callback<ChatMessageText>() {
-            @Override
-            public void onResponse(Call<ChatMessageText> call, Response<ChatMessageText> response) {
-                Log.v(TAG,"getChatSession onResponse "+ response.body().toString());
-                Log.v(TAG,"getChatSession onResponse "+ Thread.currentThread().getName());
-            }
-
-            @Override
-            public void onFailure(Call<ChatMessageText> call, Throwable t) {
-                Log.v(TAG,"getChatSession onFailure "+ Thread.currentThread().getName());
-            }
-        });
+//        Http.create(ImApi.class).getChatSession(chatMessageText).enqueue(new Callback<ChatMessageText>() {
+//            @Override
+//            public void onResponse(Call<ChatMessageText> call, Response<ChatMessageText> response) {
+//                Log.v(TAG,"getChatSession onResponse "+ response.body().toString());
+//                Log.v(TAG,"getChatSession onResponse "+ Thread.currentThread().getName());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ChatMessageText> call, Throwable t) {
+//                Log.v(TAG,"getChatSession onFailure "+ Thread.currentThread().getName());
+//            }
+//        });
 
     }
 }

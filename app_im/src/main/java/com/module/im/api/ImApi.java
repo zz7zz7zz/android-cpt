@@ -1,5 +1,6 @@
 package com.module.im.api;
 
+import com.module.im.bean.FiddlerResponse;
 import com.module.im.proto.ChatMessageText;
 
 import java.util.List;
