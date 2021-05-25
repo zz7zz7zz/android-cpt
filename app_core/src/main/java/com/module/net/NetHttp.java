@@ -1,4 +1,4 @@
-package com.app.base.net.http;
+package com.module.net;
 
 import com.lib.net.http.Http;
 import com.lib.net.http.config.DefaultHttpConfig;
