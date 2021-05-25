@@ -48,7 +48,7 @@ if(!isOptimizeCompiler){
     }
 }
 
-if(isContainSensorsdata()){
+if(isContainSensorsdataSDK()){
     // 应用 com.sensorsdata.analytics.android 插件
     apply plugin: 'com.sensorsdata.analytics.android'
 }
