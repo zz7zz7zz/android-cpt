@@ -44,7 +44,7 @@ class RegisterCodeGeneratorApp1 {
 //                                registerSetting.serviceImplMap.each { k,v ->
 //                                    def cls1  = k.replaceAll("/", ".")
 //                                    def cls2  = v.replaceAll("/", ".")
-//                                    sb.append(String.format("com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n",cls1,cls1,cls2))
+//                                    sb.append(String.format("com.module.core.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n",cls1,cls1,cls2))
 //                                }
 ////                              sb.append("registerByPlugin = true;")
 //                                c.insertBefore(sb.toString())
@@ -93,7 +93,7 @@ class RegisterCodeGeneratorApp1 {
 //                            registerSetting.serviceImplMap.each { k,v ->
 //                                def cls1  = k.replaceAll("/", ".")
 //                                def cls2  = v.replaceAll("/", ".")
-//                                sb.append(String.format("com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n",cls1,cls1,cls2))
+//                                sb.append(String.format("com.module.core.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n",cls1,cls1,cls2))
 //                            }
 ////                            sb.append("registerByPlugin = true;")
 //                            sb.append("}")
@@ -158,7 +158,7 @@ class RegisterCodeGeneratorApp1 {
 //                            registerSetting.serviceImplMap.each { k,v ->
 //                                def cls1  = k.replaceAll("/", ".")
 //                                def cls2  = v.replaceAll("/", ".")
-//                                sb.append(String.format("com.module.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n",cls1,cls1,cls2))
+//                                sb.append(String.format("com.module.core.service.ServiceManager.registerService(%s.MODULE,%s.class,%s.class);\n",cls1,cls1,cls2))
 //                            }
 ////                            sb.append("registerByPlugin = true;")
 //                            sb.append("}")

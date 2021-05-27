@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.service.video.IVideoService;
+import com.module.core.service.video.IVideoService;
 
 import java.lang.ref.WeakReference;
 

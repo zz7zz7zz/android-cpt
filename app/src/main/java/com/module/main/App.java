@@ -2,7 +2,7 @@ package com.module.main;
 
 import android.text.TextUtils;
 
-import com.module.BaseApplication;
+import com.module.core.BaseApplication;
 import com.module.main.config.ComponentConfig;
 
 public class App extends BaseApplication {

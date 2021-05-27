@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.service.integrate.IIntegrateService;
+import com.module.core.service.integrate.IIntegrateService;
 
 import java.lang.ref.WeakReference;
 

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.service.game.IGameService;
+import com.module.core.service.game.IGameService;
 
 import java.lang.ref.WeakReference;
 

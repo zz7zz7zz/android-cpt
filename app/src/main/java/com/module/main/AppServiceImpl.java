@@ -6,7 +6,7 @@ import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.service.app.IAppService;
+import com.module.core.service.app.IAppService;
 
 /**
  * 可能用的到也可能用不到

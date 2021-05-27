@@ -19,10 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.module.analysis.Analysis;
-import com.module.service.ServiceManager;
+import com.module.core.service.ServiceManager;
 import com.module.main.config.ComponentConfig;
 import com.module.main.net.NetImpl;
-import com.module.service.IService;
+import com.module.core.service.IService;
 
 import java.util.List;
 import java.util.ArrayList;

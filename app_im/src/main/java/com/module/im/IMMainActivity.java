@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.module.net.NetHttp;
+import com.module.core.net.NetHttp;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
@@ -16,12 +16,12 @@ import com.lib.pay.core.service.PayOrder;
 import com.module.im.api.ImApi;
 import com.module.im.bean.FiddlerResponse;
 import com.module.im.proto.ChatMessageText;
-import com.module.service.ServiceManager;
-import com.module.service.game.IGameService;
-import com.module.service.integrate.IIntegrateService;
-import com.module.service.news.INewsService;
-import com.module.service.shopping.IShoppingService;
-import com.module.service.video.IVideoService;
+import com.module.core.service.ServiceManager;
+import com.module.core.service.game.IGameService;
+import com.module.core.service.integrate.IIntegrateService;
+import com.module.core.service.news.INewsService;
+import com.module.core.service.shopping.IShoppingService;
+import com.module.core.service.video.IVideoService;
 import com.squareup.wire.WireTypeAdapterFactory;
 
 import java.io.IOException;

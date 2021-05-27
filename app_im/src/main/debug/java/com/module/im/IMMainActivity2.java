@@ -9,12 +9,12 @@ import com.lib.pay.Pay;
 import com.lib.pay.core.service.IPayConsts;
 import com.lib.pay.core.service.IPayResult;
 import com.lib.pay.core.service.PayOrder;
-import com.module.service.ServiceManager;
-import com.module.service.game.IGameService;
-import com.module.service.integrate.IIntegrateService;
-import com.module.service.news.INewsService;
-import com.module.service.shopping.IShoppingService;
-import com.module.service.video.IVideoService;
+import com.module.core.service.ServiceManager;
+import com.module.core.service.game.IGameService;
+import com.module.core.service.integrate.IIntegrateService;
+import com.module.core.service.news.INewsService;
+import com.module.core.service.shopping.IShoppingService;
+import com.module.core.service.video.IVideoService;
 
 public class IMMainActivity2 extends AppCompatActivity implements IPayResult {
 

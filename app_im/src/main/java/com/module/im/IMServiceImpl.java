@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.service.im.IIMService;
+import com.module.core.service.im.IIMService;
 
 import java.lang.ref.WeakReference;
 

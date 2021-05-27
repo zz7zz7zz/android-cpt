@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.service.news.INewsService;
+import com.module.core.service.news.INewsService;
 
 import java.lang.ref.WeakReference;
 

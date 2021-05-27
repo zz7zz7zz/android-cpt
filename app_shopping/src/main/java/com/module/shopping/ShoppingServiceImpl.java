@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.module.service.shopping.IShoppingService;
+import com.module.core.service.shopping.IShoppingService;
 
 import java.lang.ref.WeakReference;
 
